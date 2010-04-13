@@ -54,8 +54,8 @@ namespace libminecraft
 
             server::Packet * const Protocol::read()
             {
-                NetworkTypes::Byte packet_id;
-                Stream::getByte(stream, packet_id);
+                MCTypes::Byte packet_id;
+                Stream::getSignedByte(stream, packet_id);
 
                 if (!stream.good())
                     throw NetworkException("Connection closed while awaiting next packet");

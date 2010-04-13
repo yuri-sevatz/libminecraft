@@ -29,7 +29,7 @@ namespace libminecraft
     {
         namespace server
         {
-            const NetworkTypes::Byte PlayerPosPkt::id = Packet::POS;
+            const MCTypes::Byte PlayerPosPkt::id = Packet::POS;
 
             PlayerPosPkt::PlayerPosPkt() :
                     Packet(Packet::POS)
@@ -38,7 +38,7 @@ namespace libminecraft
 
             void PlayerPosPkt::read(std::istream &stream)
             {
-                Stream::getByte(stream, player_id);
+                Stream::getSignedByte(stream, player_id);
                 Stream::getSignedByte(stream, delta_x);
                 Stream::getSignedByte(stream, delta_y);
                 Stream::getSignedByte(stream, delta_z);
@@ -46,9 +46,9 @@ namespace libminecraft
 
             void PlayerPosPkt::write(std::ostream &stream) const
             {
-                Stream::putByte(stream, PlayerPosPkt::id);
+                Stream::putSignedByte(stream, PlayerPosPkt::id);
 
-                Stream::putByte(stream, player_id);
+                Stream::putSignedByte(stream, player_id);
                 Stream::putSignedByte(stream, delta_x);
                 Stream::putSignedByte(stream, delta_y);
                 Stream::putSignedByte(stream, delta_z);

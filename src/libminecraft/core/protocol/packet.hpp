@@ -25,7 +25,7 @@
 #include <istream>
 #include <ostream>
 
-#include "networktypes.hpp"
+#include "mctypes.hpp"
 
 #include "../../exceptions/networkexception.hpp"
 #include "../../exceptions/protocolexception.hpp"

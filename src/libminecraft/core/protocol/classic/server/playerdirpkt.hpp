@@ -35,11 +35,11 @@ namespace libminecraft
             class PlayerDirPkt : public Packet
             {
             public:
-                static const NetworkTypes::Byte id;
+                static const MCTypes::Byte id;
 
-                NetworkTypes::Byte player_id;
-                NetworkTypes::Byte yaw;
-                NetworkTypes::Byte pitch;
+                MCTypes::Byte player_id;
+                MCTypes::Byte yaw;
+                MCTypes::Byte pitch;
 
                 PlayerDirPkt();
                 virtual void read(std::istream &is);

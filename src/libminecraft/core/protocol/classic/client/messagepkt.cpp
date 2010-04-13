@@ -29,7 +29,7 @@ namespace libminecraft
     {
         namespace client
         {
-            const NetworkTypes::Byte MessagePkt::id;
+            const MCTypes::Byte MessagePkt::id;
 
             MessagePkt::MessagePkt() :
                     Packet(Packet::MESSAGE), unused(0xFF)
@@ -39,16 +39,16 @@ namespace libminecraft
 
             void MessagePkt::read(std::istream &stream)
             {
-                Stream::getByte(stream, unused);
+                Stream::getSignedByte(stream, unused);
                 Stream::getString(stream, message);
             }
 
             void MessagePkt::write(std::ostream &stream) const
             {
                 // Try sending our auth string...
-                Stream::putByte(stream, MessagePkt::id); // Byte (packet id)
+                Stream::putSignedByte(stream, MessagePkt::id); // Byte (packet id)
 
-                Stream::putByte(stream, unused);
+                Stream::putSignedByte(stream, unused);
                 Stream::putString(stream, message);
             }
 

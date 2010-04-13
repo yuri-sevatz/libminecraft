@@ -29,7 +29,7 @@ namespace libminecraft
     {
         namespace server
         {
-            const NetworkTypes::Byte MessagePkt::id = Packet::MESSAGE;
+            const MCTypes::Byte MessagePkt::id = Packet::MESSAGE;
 
             MessagePkt::MessagePkt() :
                     Packet(Packet::MESSAGE)
@@ -38,15 +38,15 @@ namespace libminecraft
 
             void MessagePkt::read(std::istream &stream)
             {
-                Stream::getByte(stream, player_id);
+                Stream::getSignedByte(stream, player_id);
                 Stream::getString(stream, message);
             }
 
             void MessagePkt::write(std::ostream &stream) const
             {
-                Stream::putByte(stream, MessagePkt::id);
+                Stream::putSignedByte(stream, MessagePkt::id);
 
-                Stream::putByte(stream, player_id);
+                Stream::putSignedByte(stream, player_id);
                 Stream::putString(stream, message);
             }
 

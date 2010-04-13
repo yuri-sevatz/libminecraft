@@ -24,9 +24,9 @@ namespace libminecraft
             {
             }
 
-            NetworkTypes::Byte Protocol::next()
+            MCTypes::Byte Protocol::next()
             {
-                return (NetworkTypes::Byte) stream.peek();
+                return (MCTypes::Byte) stream.peek();
             }
         }
     }

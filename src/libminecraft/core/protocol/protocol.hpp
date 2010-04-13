@@ -22,6 +22,8 @@
 #ifndef LIBMINECRAFT_PROTOCOL_HPP
 #define LIBMINECRAFT_PROTOCOL_HPP
 
+#include "mctypes.hpp"
+
 namespace libminecraft
 {
     class Protocol

@@ -68,7 +68,7 @@ namespace libminecraft
     }
 
     // static
-    void Stream::getSignedShort(std::istream &stream, NetworkTypes::SShort &sshort)
+    void Stream::getSignedShort(std::istream &stream, MCTypes::Short &sshort)
     {
 #ifdef BOOST_LITTLE_ENDIAN
         // Shorts received in network order.
@@ -79,7 +79,7 @@ namespace libminecraft
 #endif
     }
 
-    void Stream::putSignedShort(std::ostream &stream, const NetworkTypes::SShort &sshort)
+    void Stream::putSignedShort(std::ostream &stream, const MCTypes::Short &sshort)
     {
 #ifdef BOOST_LITTLE_ENDIAN
         // Shorts sent in network order.

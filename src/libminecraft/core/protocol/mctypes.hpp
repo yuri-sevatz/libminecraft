@@ -19,23 +19,24 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_NETWORKTYPES_HPP
-#define LIBMINECRAFT_NETWORKTYPES_HPP
+#ifndef LIBMINECRAFT_MCTYPES_HPP
+#define LIBMINECRAFT_MCTYPES_HPP
 
-#include <inttypes.h>
-#include <string>
+#include "../../support/java/jtypes.hpp"
 
-class NetworkTypes
+namespace libminecraft
 {
-public:
-    typedef bool Bool;
-    typedef uint8_t Byte;
-    typedef int8_t SByte;
-    typedef int16_t SShort;
-    typedef int32_t SInteger;
-    typedef int64_t SLong;
-    typedef double SDouble;
-    typedef std::wstring String;
-};
+    class MCTypes
+    {
+    public:
+        typedef JTypes::jbool Bool;
+        typedef JTypes::jbyte Byte;
+        typedef JTypes::jshort Short;
+        typedef JTypes::jint Int;
+        typedef JTypes::jlong Long;
+        typedef JTypes::jdouble Double;
+        typedef JTypes::jstring String;
+    };
+}
 
-#endif // LIBMINECRAFT_NETWORKTYPES_HPP
+#endif // LIBMINECRAFT_MCTYPES_HPP

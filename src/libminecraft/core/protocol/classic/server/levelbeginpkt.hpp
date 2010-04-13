@@ -33,7 +33,7 @@ namespace libminecraft
             class LevelBeginPkt : public Packet
             {
             public:
-                static const NetworkTypes::Byte id;
+                static const MCTypes::Byte id;
 
                 LevelBeginPkt();
                 virtual void read(std::istream &stream);

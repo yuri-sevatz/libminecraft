@@ -22,11 +22,11 @@
 #ifndef LIBMINECRAFT_MAP_HPP
 #define LIBMINECRAFT_MAP_HPP
 
+#include "../protocol/mctypes.hpp"
 #include "mapcell.hpp"
 #include "../../exceptions/mapexception.hpp"
 
 #include <vector>
-#include <inttypes.h>
 #include <istream>
 
 namespace libminecraft
@@ -41,8 +41,8 @@ namespace libminecraft
         typedef std::vector<Map2D> Map3D;
 
         // The types used in the grid
-        typedef int16_t size_block;
-        typedef int16_t size_plot;
+        typedef MCTypes::Short size_block;
+        typedef MCTypes::Short size_plot;
 
         static const size_plot CELL_SIZE;
         static const size_plot CELL_CENTER;

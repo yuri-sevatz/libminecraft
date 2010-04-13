@@ -29,7 +29,7 @@ namespace libminecraft
     {
         namespace server
         {
-            const NetworkTypes::Byte PlayerSpawnPkt::id = Packet::SPAWN;
+            const MCTypes::Byte PlayerSpawnPkt::id = Packet::SPAWN;
 
             PlayerSpawnPkt::PlayerSpawnPkt() :
                     Packet(Packet::SPAWN)
@@ -38,26 +38,26 @@ namespace libminecraft
 
             void PlayerSpawnPkt::read(std::istream &stream)
             {
-                Stream::getByte(stream, player_id);
+                Stream::getSignedByte(stream, player_id);
                 Stream::getString(stream, player_name);
                 Stream::getSignedShort(stream, x);
                 Stream::getSignedShort(stream, y);
                 Stream::getSignedShort(stream, z);
-                Stream::getByte(stream, yaw);
-                Stream::getByte(stream, pitch);
+                Stream::getSignedByte(stream, yaw);
+                Stream::getSignedByte(stream, pitch);
             }
 
             void PlayerSpawnPkt::write(std::ostream &stream) const
             {
-                Stream::putByte(stream, PlayerSpawnPkt::id);
+                Stream::putSignedByte(stream, PlayerSpawnPkt::id);
 
-                Stream::putByte(stream, player_id);
+                Stream::putSignedByte(stream, player_id);
                 Stream::putString(stream, player_name);
                 Stream::putSignedShort(stream, x);
                 Stream::putSignedShort(stream, y);
                 Stream::putSignedShort(stream, z);
-                Stream::putByte(stream, yaw);
-                Stream::putByte(stream, pitch);
+                Stream::putSignedByte(stream, yaw);
+                Stream::putSignedByte(stream, pitch);
 
             }
 

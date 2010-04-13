@@ -29,7 +29,7 @@ namespace libminecraft
     {
         namespace server
         {
-            const NetworkTypes::Byte DisconnectPkt::id = Packet::DISCONNECT;
+            const MCTypes::Byte DisconnectPkt::id = Packet::DISCONNECT;
 
             DisconnectPkt::DisconnectPkt() :
                     Packet(Packet::DISCONNECT)
@@ -43,7 +43,7 @@ namespace libminecraft
 
             void DisconnectPkt::write(std::ostream &stream) const
             {
-                Stream::putByte(stream, DisconnectPkt::id);
+                Stream::putSignedByte(stream, DisconnectPkt::id);
 
                 Stream::putString(stream, reason);
             }

@@ -35,12 +35,12 @@ namespace libminecraft
             class PlayerPosPkt : public Packet
             {
             public:
-                static const NetworkTypes::Byte id;
+                static const MCTypes::Byte id;
 
-                NetworkTypes::Byte player_id;
-                NetworkTypes::SByte delta_x;
-                NetworkTypes::SByte delta_y;
-                NetworkTypes::SByte delta_z;
+                MCTypes::Byte player_id;
+                MCTypes::Byte delta_x;
+                MCTypes::Byte delta_y;
+                MCTypes::Byte delta_z;
 
                 PlayerPosPkt();
                 virtual void read(std::istream &is);

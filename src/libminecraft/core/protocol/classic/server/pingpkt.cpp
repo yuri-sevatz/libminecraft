@@ -29,7 +29,7 @@ namespace libminecraft
     {	
         namespace server
         {
-            const NetworkTypes::Byte PingPkt::id = Packet::PING;
+            const MCTypes::Byte PingPkt::id = Packet::PING;
 
             PingPkt::PingPkt() :
                     Packet(Packet::PING)
@@ -43,7 +43,7 @@ namespace libminecraft
 
             void PingPkt::write(std::ostream &stream) const
             {
-                Stream::putByte(stream, PingPkt::id);
+                Stream::putSignedByte(stream, PingPkt::id);
             }
 
             void PingPkt::toReadable(std::ostream &os) const

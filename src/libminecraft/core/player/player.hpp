@@ -25,30 +25,30 @@
 #include "../map/map.hpp"
 
 #include <string>
-#include <inttypes.h>
+#include "../protocol/mctypes.hpp"
 
 namespace libminecraft
 {
     class Player
     {
     public:
-        typedef uint8_t t_id;
-        typedef uint8_t t_pitch;
-        typedef uint8_t t_yaw;
+        typedef MCTypes::Byte t_id;
+        typedef MCTypes::Byte t_pitch;
+        typedef MCTypes::Byte t_yaw;
 
     public:
         // Compass constants
         // North = -Z
         static const t_yaw YAW_NORTH = 0;
         static const t_yaw YAW_EAST = 64;
-        static const t_yaw YAW_SOUTH = 128;
-        static const t_yaw YAW_WEST = 192;
+        static const t_yaw YAW_SOUTH = -128;
+        static const t_yaw YAW_WEST = -64;
 
         // Pitch constants.
-        static const t_pitch PITCH_UP = 192;
+        static const t_pitch PITCH_UP = -64;
         static const t_pitch PITCH_DOWN = 64;
         static const t_pitch PITCH_NORMAL = 0;
-        static const t_pitch PITCH_INVERT = 128;
+        static const t_pitch PITCH_INVERT = -128;
 
         // Instance variables.
         t_id id;

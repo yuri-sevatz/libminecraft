@@ -33,12 +33,12 @@ namespace libminecraft
             class SetBlockPkt : public Packet
             {
             public:
-                static const NetworkTypes::Byte id;
+                static const MCTypes::Byte id;
 
-                NetworkTypes::SShort x;
-                NetworkTypes::SShort y;
-                NetworkTypes::SShort z;
-                NetworkTypes::Byte type;
+                MCTypes::Short x;
+                MCTypes::Short y;
+                MCTypes::Short z;
+                MCTypes::Byte type;
 
                 SetBlockPkt();
                 virtual void read(std::istream &is);

@@ -29,7 +29,7 @@ namespace libminecraft
     {
         namespace server
         {
-            const NetworkTypes::Byte PlayerDespawnPkt::id = Packet::DESPAWN;
+            const MCTypes::Byte PlayerDespawnPkt::id = Packet::DESPAWN;
 
             PlayerDespawnPkt::PlayerDespawnPkt() :
                     Packet(Packet::DESPAWN)
@@ -38,14 +38,14 @@ namespace libminecraft
 
             void PlayerDespawnPkt::read(std::istream &stream)
             {
-                Stream::getByte(stream, player_id);
+                Stream::getSignedByte(stream, player_id);
             }
 
             void PlayerDespawnPkt::write(std::ostream &stream) const
             {
-                Stream::putByte(stream, PlayerDespawnPkt::id);
+                Stream::putSignedByte(stream, PlayerDespawnPkt::id);
 
-                Stream::putByte(stream, player_id);
+                Stream::putSignedByte(stream, player_id);
             }
 
             void PlayerDespawnPkt::toReadable(std::ostream &os) const

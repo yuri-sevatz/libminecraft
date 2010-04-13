@@ -35,11 +35,11 @@ namespace libminecraft
             class LevelChunkPkt : public Packet
             {
             public:
-                static const NetworkTypes::Byte id;
+                static const MCTypes::Byte id;
 
-                NetworkTypes::SShort length;
-                std::vector<NetworkTypes::Byte> data;
-                NetworkTypes::Byte percent;
+                MCTypes::Short length;
+                std::vector<MCTypes::Byte> data;
+                MCTypes::Byte percent;
 
                 LevelChunkPkt();
                 virtual void read(std::istream &stream);

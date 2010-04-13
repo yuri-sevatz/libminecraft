@@ -24,8 +24,6 @@
 
 #include "../packet.hpp"
 
-#include "../../networktypes.hpp"
-
 namespace libminecraft
 {
     namespace classic

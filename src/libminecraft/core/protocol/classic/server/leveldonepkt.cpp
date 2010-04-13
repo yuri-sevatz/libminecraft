@@ -30,7 +30,7 @@ namespace libminecraft
     {
         namespace server
         {
-            const NetworkTypes::Byte LevelDonePkt::id = Packet::LEVELDONE;
+            const MCTypes::Byte LevelDonePkt::id = Packet::LEVELDONE;
 
             LevelDonePkt::LevelDonePkt() :
                     Packet(Packet::LEVELDONE)
@@ -47,7 +47,7 @@ namespace libminecraft
 
             void LevelDonePkt::write(std::ostream &stream) const
             {
-                Stream::putByte(stream, LevelDonePkt::id);
+                Stream::putSignedByte(stream, LevelDonePkt::id);
                 Stream::putSignedShort(stream, size_x);
                 Stream::putSignedShort(stream, size_y);
                 Stream::putSignedShort(stream, size_z);

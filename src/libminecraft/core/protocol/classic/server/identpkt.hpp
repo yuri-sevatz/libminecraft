@@ -35,12 +35,12 @@ namespace libminecraft
             class IdentPkt : public Packet
             {
             public:
-                static const NetworkTypes::Byte id;
+                static const MCTypes::Byte id;
 
-                NetworkTypes::Byte srv_version;
+                MCTypes::Byte srv_version;
                 std::string srv_name;
                 std::string srv_motd;
-                NetworkTypes::Byte user_type;
+                MCTypes::Byte user_type;
             public:
                 IdentPkt();
                 virtual void read(std::istream &stream);

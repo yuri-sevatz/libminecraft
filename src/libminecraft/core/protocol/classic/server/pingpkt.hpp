@@ -33,7 +33,7 @@ namespace libminecraft
             class PingPkt : public Packet
             {
             public:
-                static const NetworkTypes::Byte id;
+                static const MCTypes::Byte id;
 
                 PingPkt();
                 virtual void read(std::istream &is);

@@ -29,7 +29,7 @@ namespace libminecraft
     {
         namespace client
         {
-            const NetworkTypes::Byte PosDirPkt::id = Packet::POSDIR;
+            const MCTypes::Byte PosDirPkt::id = Packet::POSDIR;
 
             PosDirPkt::PosDirPkt() :
                     Packet(Packet::POSDIR)
@@ -39,24 +39,24 @@ namespace libminecraft
 
             void PosDirPkt::read(std::istream &stream)
             {
-                Stream::getByte(stream, player_id);
+                Stream::getSignedByte(stream, player_id);
                 Stream::getSignedShort(stream, x);
                 Stream::getSignedShort(stream, y);
                 Stream::getSignedShort(stream, z);
-                Stream::getByte(stream, yaw);
-                Stream::getByte(stream, pitch);
+                Stream::getSignedByte(stream, yaw);
+                Stream::getSignedByte(stream, pitch);
             }
 
             void PosDirPkt::write(std::ostream &stream) const
             {
-                Stream::putByte(stream, PosDirPkt::id); // Byte (packet id)
+                Stream::putSignedByte(stream, PosDirPkt::id); // Byte (packet id)
 
-                Stream::putByte(stream, player_id);
+                Stream::putSignedByte(stream, player_id);
                 Stream::putSignedShort(stream, x);
                 Stream::putSignedShort(stream, y);
                 Stream::putSignedShort(stream, z);
-                Stream::putByte(stream, yaw);
-                Stream::putByte(stream, pitch);
+                Stream::putSignedByte(stream, yaw);
+                Stream::putSignedByte(stream, pitch);
             }
 
             void PosDirPkt::toReadable(std::ostream &os) const

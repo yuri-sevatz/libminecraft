@@ -25,8 +25,6 @@
 #include "../protocol.hpp"
 #include <iostream>
 
-#include "../networktypes.hpp"
-
 namespace libminecraft
 {
     namespace classic
@@ -36,7 +34,7 @@ namespace libminecraft
         public:
             public:
             // Constants...
-            static const NetworkTypes::Byte proto_version = 0x07;
+            static const MCTypes::Byte proto_version = 0x07;
         
         protected:
             // A single stream exists in the classic protocol for a session.

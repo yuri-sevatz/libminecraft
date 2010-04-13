@@ -29,7 +29,7 @@ namespace libminecraft
     {
         namespace server
         {
-            const NetworkTypes::Byte PlayerOpPkt::id = Packet::USEROP;
+            const MCTypes::Byte PlayerOpPkt::id = Packet::USEROP;
 
             PlayerOpPkt::PlayerOpPkt() :
                     Packet(Packet::USEROP)
@@ -39,13 +39,13 @@ namespace libminecraft
 
             void PlayerOpPkt::read(std::istream &stream)
             {
-                Stream::getByte(stream, type);
+                Stream::getSignedByte(stream, type);
             }
 
             void PlayerOpPkt::write(std::ostream &stream) const
             {
-                Stream::putByte(stream, PlayerOpPkt::id);
-                Stream::putByte(stream, type);
+                Stream::putSignedByte(stream, PlayerOpPkt::id);
+                Stream::putSignedByte(stream, type);
             }
 
             void PlayerOpPkt::toReadable(std::ostream &os) const

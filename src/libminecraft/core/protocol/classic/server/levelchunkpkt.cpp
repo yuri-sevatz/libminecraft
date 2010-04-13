@@ -31,7 +31,7 @@ namespace libminecraft
     {
         namespace server
         {
-            const NetworkTypes::Byte LevelChunkPkt::id = Packet::LEVELCHUNK;
+            const MCTypes::Byte LevelChunkPkt::id = Packet::LEVELCHUNK;
 
             LevelChunkPkt::LevelChunkPkt() :
                     Packet(Packet::LEVELCHUNK)
@@ -57,7 +57,7 @@ namespace libminecraft
                     stream.ignore(1024 - length);
 
                 // Read the percentage complete...
-                Stream::getByte(stream, percent);
+                Stream::getSignedByte(stream, percent);
             }
 
             void LevelChunkPkt::write(std::ostream &os) const

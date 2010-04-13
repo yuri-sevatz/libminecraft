@@ -33,7 +33,7 @@ namespace libminecraft
             class DisconnectPkt : public Packet
             {
             public:
-                static const NetworkTypes::Byte id;
+                static const MCTypes::Byte id;
 
                 std::string reason;
 

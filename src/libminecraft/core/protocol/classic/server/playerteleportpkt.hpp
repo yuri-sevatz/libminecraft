@@ -35,14 +35,14 @@ namespace libminecraft
             class PlayerTeleportPkt : public Packet
             {
             public:
-                static const NetworkTypes::Byte id;
+                static const MCTypes::Byte id;
 
-                NetworkTypes::Byte player_id;
-                NetworkTypes::SShort x;
-                NetworkTypes::SShort y;
-                NetworkTypes::SShort z;
-                NetworkTypes::Byte yaw;
-                NetworkTypes::Byte pitch;
+                MCTypes::Byte player_id;
+                MCTypes::Short x;
+                MCTypes::Short y;
+                MCTypes::Short z;
+                MCTypes::Byte yaw;
+                MCTypes::Byte pitch;
 
                 PlayerTeleportPkt();
                 virtual void read(std::istream &is);

@@ -1,8 +1,8 @@
 /*
- * playeroppkt.hpp
+ * jtypes.hpp
  * This file is part of LibMinecraft.
  *
- * Created by Yuri Sevatz on 03/2011.
+ * Created by Yuri Sevatz on 04/2011.
  * Copyright (c) 2011 Yuri Sevatz. All rights reserved
  *
  * LibMinecraft is free software: you can redistribute it and/or modify
@@ -19,31 +19,30 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_CLASSIC_SERVER_PLAYEROPPKT_HPP
-#define LIBMINECRAFT_CLASSIC_SERVER_PLAYEROPPKT_HPP
+#ifndef SUPPORT_JAVA_JTYPES_HPP
+#define SUPPORT_JAVA_JTYPES_HPP
 
-#include "packet.hpp"
+#include <inttypes.h>
+#include <string>
 
-namespace libminecraft
+// C++ compatible Java types
+// Based on the recommendation from:
+// http://gcc.gnu.org/java/papers/native++.html
+class JTypes
 {
-    namespace classic
-    {
-        namespace server
-        {
-            class PlayerOpPkt : public Packet
-            {
-            public:
-                static const MCTypes::Byte id;
+public:
+    typedef bool jbool;
+    typedef int8_t jbyte;
+    typedef int16_t jshort;
+    typedef int32_t jint;
+    typedef int64_t jlong;
 
-                MCTypes::Byte type;
+    // These two definitions MIGHT be wrong if not conforming to:
+    typedef float jfloat; // Single-precision 32-bit IEEE 754 floating point
+    typedef double jdouble; // Double-precision 64-bit IEEE 754 floating point
 
-                PlayerOpPkt();
-                virtual void read(std::istream &is);
-                virtual void write(std::ostream &os) const;
-                virtual void toReadable(std::ostream &os) const;
-            };
-        }
-    }
-}
+    typedef wchar_t jchar;
+    typedef std::wstring jstring;
+};
 
-#endif // LIBMINECRAFT_CLASSIC_SERVER_PLAYEROPPKT_HPP
+#endif // SUPPORT_JAVA_JTYPES_HPP

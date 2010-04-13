@@ -35,15 +35,15 @@ namespace libminecraft
             class PlayerSpawnPkt : public Packet
             {
             public:
-                static const NetworkTypes::Byte id;
+                static const MCTypes::Byte id;
 
-                NetworkTypes::Byte player_id;
+                MCTypes::Byte player_id;
                 std::string player_name;
-                NetworkTypes::SShort x;
-                NetworkTypes::SShort y;
-                NetworkTypes::SShort z;
-                NetworkTypes::Byte yaw;
-                NetworkTypes::Byte pitch;
+                MCTypes::Short x;
+                MCTypes::Short y;
+                MCTypes::Short z;
+                MCTypes::Byte yaw;
+                MCTypes::Byte pitch;
 
                 PlayerSpawnPkt();
                 virtual void read(std::istream &is);

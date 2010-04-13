@@ -31,7 +31,7 @@ namespace libminecraft
     {
         namespace client
         {
-            const NetworkTypes::Byte IdentPkt::id = Packet::IDENT;
+            const MCTypes::Byte IdentPkt::id = Packet::IDENT;
 
             IdentPkt::IdentPkt() :
                     Packet(Packet::IDENT), version(classic::Protocol::proto_version), unused(0x00)
@@ -41,20 +41,20 @@ namespace libminecraft
 
             void IdentPkt::read(std::istream &stream)
             {
-                Stream::getByte(stream, version);
+                Stream::getSignedByte(stream, version);
                 Stream::getString(stream, username);
                 Stream::getString(stream, key);
-                Stream::getByte(stream, unused);
+                Stream::getSignedByte(stream, unused);
             }
 
             void IdentPkt::write(std::ostream &stream) const
             {
-                Stream::putByte(stream, IdentPkt::id); // Byte (packet id)
+                Stream::putSignedByte(stream, IdentPkt::id); // Byte (packet id)
 
-                Stream::putByte(stream, version);
+                Stream::putSignedByte(stream, version);
                 Stream::putString(stream, username);
                 Stream::putString(stream, key);
-                Stream::putByte(stream, unused);
+                Stream::putSignedByte(stream, unused);
             }
 
             void IdentPkt::toReadable(std::ostream &os) const

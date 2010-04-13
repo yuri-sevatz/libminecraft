@@ -29,7 +29,7 @@ namespace libminecraft
     {
         namespace server
         {
-            const NetworkTypes::Byte PlayerDirPkt::id = Packet::DIR;
+            const MCTypes::Byte PlayerDirPkt::id = Packet::DIR;
 
             PlayerDirPkt::PlayerDirPkt() :
                     Packet(Packet::DIR)
@@ -38,18 +38,18 @@ namespace libminecraft
 
             void PlayerDirPkt::read(std::istream &stream)
             {
-                Stream::getByte(stream, player_id);
-                Stream::getByte(stream, yaw);
-                Stream::getByte(stream, pitch);
+                Stream::getSignedByte(stream, player_id);
+                Stream::getSignedByte(stream, yaw);
+                Stream::getSignedByte(stream, pitch);
             }
 
             void PlayerDirPkt::write(std::ostream &stream) const
             {
-                Stream::putByte(stream, PlayerDirPkt::id);
+                Stream::putSignedByte(stream, PlayerDirPkt::id);
 
-                Stream::putByte(stream, player_id);
-                Stream::putByte(stream, yaw);
-                Stream::putByte(stream, pitch);
+                Stream::putSignedByte(stream, player_id);
+                Stream::putSignedByte(stream, yaw);
+                Stream::putSignedByte(stream, pitch);
             }
 
             void PlayerDirPkt::toReadable(std::ostream &os) const

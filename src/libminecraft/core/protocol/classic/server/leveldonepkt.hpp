@@ -33,11 +33,11 @@ namespace libminecraft
             class LevelDonePkt : public Packet
             {
             public:
-                static const NetworkTypes::Byte id;
+                static const MCTypes::Byte id;
 
-                NetworkTypes::SShort size_x;
-                NetworkTypes::SShort size_y;
-                NetworkTypes::SShort size_z;
+                MCTypes::Short size_x;
+                MCTypes::Short size_y;
+                MCTypes::Short size_z;
             public:
                 LevelDonePkt();
                 virtual void read(std::istream &stream);

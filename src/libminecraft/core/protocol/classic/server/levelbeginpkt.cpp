@@ -29,7 +29,7 @@ namespace libminecraft
     {
         namespace server
         {
-            const NetworkTypes::Byte LevelBeginPkt::id = Packet::LEVELBEGIN;
+            const MCTypes::Byte LevelBeginPkt::id = Packet::LEVELBEGIN;
 
             LevelBeginPkt::LevelBeginPkt()
                 : Packet(Packet::LEVELBEGIN)
@@ -43,7 +43,7 @@ namespace libminecraft
 
             void LevelBeginPkt::write(std::ostream &stream) const
             {
-                Stream::putByte(stream, LevelBeginPkt::id);
+                Stream::putSignedByte(stream, LevelBeginPkt::id);
             }
 
             void LevelBeginPkt::toReadable(std::ostream &os) const

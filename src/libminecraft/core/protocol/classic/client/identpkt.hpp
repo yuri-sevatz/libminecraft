@@ -35,12 +35,12 @@ namespace libminecraft
             class IdentPkt : public Packet
             {
             public:
-                static const NetworkTypes::Byte id;
+                static const MCTypes::Byte id;
 
-                NetworkTypes::Byte version;
+                MCTypes::Byte version;
                 std::string username;
                 std::string key;
-                NetworkTypes::Byte unused;
+                MCTypes::Byte unused;
 
             public:
                 IdentPkt();

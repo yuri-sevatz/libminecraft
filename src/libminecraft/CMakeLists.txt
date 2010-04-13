@@ -170,7 +170,7 @@ set(${PROJECT_NAME}_sources_core_protocol_classic
 set(${PROJECT_NAME}_headers_core_protocol
     ${${PROJECT_NAME}_headers_core_protocol_classic}
     ${${PROJECT_NAME}_headers_core_protocol_mainline}
-    core/protocol/networktypes.hpp
+    core/protocol/mctypes.hpp
     core/protocol/protocol.hpp
     core/protocol/packet.hpp
     core/protocol/stream.hpp
@@ -241,11 +241,20 @@ set(${PROJECT_NAME}_sources_support_fsm
 
 )
 
+set(${PROJECT_NAME}_headers_support_java
+    support/fsm/java/jtypes.hpp
+)
+set(${PROJECT_NAME}_sources_support_java
+    
+)
+
 set(${PROJECT_NAME}_headers_support
     ${${PROJECT_NAME}_headers_support_fsm}
+    ${${PROJECT_NAME}_headers_support_java}
 )
 set(${PROJECT_NAME}_sources_support
     ${${PROJECT_NAME}_sources_support_fsm}
+    ${${PROJECT_NAME}_sources_support_java}
 )
 
 set(${PROJECT_NAME}_headers_utils

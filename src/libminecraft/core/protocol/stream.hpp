@@ -25,7 +25,7 @@
 #include <istream>
 #include <ostream>
 
-#include "networktypes.hpp"
+#include "mctypes.hpp"
 
 namespace libminecraft
 {
@@ -34,32 +34,20 @@ namespace libminecraft
     public:
         static const size_t M_STRING_LEN;
 
-        static void getByte(std::istream & stream, NetworkTypes::Byte & byte);
-        static void putByte(std::ostream & stream, const NetworkTypes::Byte & byte);
-        static void getSignedByte(std::istream & stream, NetworkTypes::SByte & sbyte);
-        static void putSignedByte(std::ostream & stream, const NetworkTypes::SByte & sbyte);
-        static void getSignedShort(std::istream & stream, NetworkTypes::SShort & sshort);
-        static void putSignedShort(std::ostream & stream, const NetworkTypes::SShort & sshort);
+        static void getSignedByte(std::istream & stream, MCTypes::Byte & sbyte);
+        static void putSignedByte(std::ostream & stream, const MCTypes::Byte & sbyte);
+        static void getSignedShort(std::istream & stream, MCTypes::Short & sshort);
+        static void putSignedShort(std::ostream & stream, const MCTypes::Short & sshort);
         static void getString(std::istream & stream, std::string & str);
         static void putString(std::ostream & stream, const std::string & str);
     };
 
-    inline void Stream::getByte(std::istream &stream, NetworkTypes::Byte &byte)
-    {
-        stream.get(*((char *)&byte));
-    }
-
-    inline void Stream::putByte(std::ostream &stream, const NetworkTypes::Byte &byte)
-    {
-        stream.put(*((const char *)&byte));
-    }
-
-    inline void Stream::getSignedByte(std::istream &stream, NetworkTypes::SByte &sbyte)
+    inline void Stream::getSignedByte(std::istream &stream, MCTypes::Byte &sbyte)
     {
         stream.get(*((char *)&sbyte));
     }
 
-    inline void Stream::putSignedByte(std::ostream &stream, const NetworkTypes::SByte &sbyte)
+    inline void Stream::putSignedByte(std::ostream &stream, const MCTypes::Byte &sbyte)
     {
         stream.put(*((const char *)&sbyte));
     }

@@ -33,9 +33,9 @@ namespace libminecraft
             class PlayerDespawnPkt : public Packet
             {
             public:
-                static const NetworkTypes::Byte id;
+                static const MCTypes::Byte id;
 
-                NetworkTypes::Byte player_id;
+                MCTypes::Byte player_id;
 
                 PlayerDespawnPkt();
                 virtual void read(std::istream &is);

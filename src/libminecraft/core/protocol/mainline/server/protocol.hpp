@@ -4,7 +4,6 @@
 #include "../protocol.hpp"
 #include "packet.hpp"
 #include "../../stream.hpp"
-#include "../../networktypes.hpp"
 
 #include <assert.h>
 
@@ -40,14 +39,14 @@ namespace libminecraft
                 void read(Packet & packet);
 
                 // Check the next type of packet on the wire
-                NetworkTypes::Byte next();
+                MCTypes::Byte next();
             };
 
             // Since the RTTI type of the packet is likely known in the calling context,
             // then there's a good chance that the type of the packet can be resolved at compile time.
             inline void Protocol::write(const Packet & packet)
             {
-                Stream::putByte(stream, Protocol::transmap.at(&typeid(packet)));
+                Stream::putSignedByte(stream, Protocol::transmap.at(&typeid(packet)));
                 packet.write(stream);
             }
 
@@ -56,8 +55,8 @@ namespace libminecraft
             inline void Protocol::read(Packet & packet)
             {
                 // Skip the buffered id.
-                NetworkTypes::Byte next;
-                Stream::getByte(stream, next);
+                MCTypes::Byte next;
+                Stream::getSignedByte(stream, next);
                 // Do a quick type check before write, for silly programmers (me? xD)
                 assert(Protocol::transmap.at(&typeid(packet)) == next);
                 packet.read(stream);

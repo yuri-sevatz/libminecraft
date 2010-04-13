@@ -29,7 +29,7 @@ namespace libminecraft
     {
         namespace server
         {
-            const NetworkTypes::Byte PlayerPosDirPkt::id = Packet::POSDIR;
+            const MCTypes::Byte PlayerPosDirPkt::id = Packet::POSDIR;
 
             PlayerPosDirPkt::PlayerPosDirPkt() :
                     Packet(Packet::POSDIR)
@@ -38,24 +38,24 @@ namespace libminecraft
 
             void PlayerPosDirPkt::read(std::istream &stream)
             {
-                Stream::getByte(stream, player_id);
+                Stream::getSignedByte(stream, player_id);
                 Stream::getSignedByte(stream, delta_x);
                 Stream::getSignedByte(stream, delta_y);
                 Stream::getSignedByte(stream, delta_z);
-                Stream::getByte(stream, yaw);
-                Stream::getByte(stream, pitch);
+                Stream::getSignedByte(stream, yaw);
+                Stream::getSignedByte(stream, pitch);
             }
 
             void PlayerPosDirPkt::write(std::ostream &stream) const
             {
-                Stream::putByte(stream, PlayerPosDirPkt::id);
+                Stream::putSignedByte(stream, PlayerPosDirPkt::id);
 
-                Stream::putByte(stream, player_id);
+                Stream::putSignedByte(stream, player_id);
                 Stream::putSignedByte(stream, delta_x);
                 Stream::putSignedByte(stream, delta_y);
                 Stream::putSignedByte(stream, delta_z);
-                Stream::putByte(stream, yaw);
-                Stream::putByte(stream, pitch);
+                Stream::putSignedByte(stream, yaw);
+                Stream::putSignedByte(stream, pitch);
             }
 
             void PlayerPosDirPkt::toReadable(std::ostream &os) const

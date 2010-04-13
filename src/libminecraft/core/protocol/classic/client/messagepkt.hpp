@@ -35,9 +35,9 @@ namespace libminecraft
             class MessagePkt : public Packet
             {
             public:
-                static const NetworkTypes::Byte id = Packet::MESSAGE;
+                static const MCTypes::Byte id = Packet::MESSAGE;
 
-                NetworkTypes::Byte unused;
+                MCTypes::Byte unused;
                 std::string message;
 
             public:

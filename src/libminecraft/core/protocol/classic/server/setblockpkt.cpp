@@ -29,7 +29,7 @@ namespace libminecraft
     {
         namespace server
         {
-            const NetworkTypes::Byte SetBlockPkt::id = Packet::BLOCK;
+            const MCTypes::Byte SetBlockPkt::id = Packet::BLOCK;
 
             SetBlockPkt::SetBlockPkt() :
                     Packet(Packet::BLOCK)
@@ -41,17 +41,17 @@ namespace libminecraft
                 Stream::getSignedShort(stream, x);
                 Stream::getSignedShort(stream, y);
                 Stream::getSignedShort(stream, z);
-                Stream::getByte(stream, type);
+                Stream::getSignedByte(stream, type);
             }
 
             void SetBlockPkt::write(std::ostream &stream) const
             {
-                Stream::putByte(stream, SetBlockPkt::id);
+                Stream::putSignedByte(stream, SetBlockPkt::id);
 
                 Stream::putSignedShort(stream, x);
                 Stream::putSignedShort(stream, y);
                 Stream::putSignedShort(stream, z);
-                Stream::putByte(stream, type);
+                Stream::putSignedByte(stream, type);
             }
 
             void SetBlockPkt::toReadable(std::ostream &os) const
