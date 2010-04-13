@@ -116,6 +116,7 @@ namespace libminecraft
         void RemoteSession::setBlock(Map::size_block x, Map::size_block y, Map::size_block z, MapCell::BlockType type)
         {
             assert(world.map.isValidBlock(x, y, z));
+            assert(type >= MapCell::BLANK && type <= MapCell::OBSIDIAN);
 
             _world.map.grid[x][y][z].type = type;
             client::SetBlockPkt blkpkt;

@@ -151,12 +151,16 @@ namespace libminecraft
                     break;
                 }
 
-                if (blockpkt->type > MapCell::OBSIDIAN)
+                if (blockpkt->type < MapCell::BLANK || blockpkt->type > MapCell::OBSIDIAN)
                 {
                     owner.session.listener->onProtocolWarning("Invalid block type requested during block update");
                     break;
                 }
-                owner.session._world.map.grid.at(blockpkt->x).at(blockpkt->y).at(blockpkt->z).type = MapCell::GetCellType(packet->type);
+                MapCell::BlockType old_type = owner.session._world.map.grid.at(blockpkt->x).at(blockpkt->y).at(blockpkt->z).type;
+                MapCell::BlockType type = MapCell::GetCellType(packet->type);
+                owner.session._world.map.grid.at(blockpkt->x).at(blockpkt->y).at(blockpkt->z).type = type;
+
+                owner.session.listener->onBlockUpdate(type, old_type, blockpkt->x, blockpkt->y, blockpkt->z);
             }
                 break;
             case server::Packet::TELEPORT:
