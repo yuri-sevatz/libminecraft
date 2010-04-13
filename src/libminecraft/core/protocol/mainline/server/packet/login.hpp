@@ -1,5 +1,5 @@
 /*
- * protocol.cpp
+ * login.hpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 04/2011.
@@ -19,16 +19,10 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "protocol.hpp"
+#ifndef LIBMINECRAFT_MAINLINE_SERVER_PACKET_LOGIN_HPP
+#define LIBMINECRAFT_MAINLINE_SERVER_PACKET_LOGIN_HPP
 
-#include <typeinfo>
-
-#include <boost/assign/list_of.hpp>
-
-#include "packet.hpp"
-#include "packet/ping.hpp"
-
-#include "../../stream.hpp"
+#include "../packet.hpp"
 
 namespace libminecraft
 {
@@ -36,19 +30,16 @@ namespace libminecraft
     {
         namespace server
         {
-            const std::map<const std::type_info *, Protocol::TransType> Protocol::transmap =
-                    boost::assign::map_list_of
-                        (&typeid(packet::Ping), Protocol::PING);
-
-            Protocol::Protocol(std::iostream & stream)
-                : mainline::Protocol(stream)
+            namespace packet
             {
-            }
-
-            MCTypes::Byte Protocol::next()
-            {
-                return (MCTypes::Byte) stream.peek();
+                class Login
+                {
+                public:
+                    Login();
+                };
             }
         }
     }
 }
+
+#endif // LIBMINECRAFT_MAINLINE_SERVER_PACKET_LOGIN_HPP
