@@ -1,0 +1,8 @@
+#Ignore QtCreator Files
+libminecraft.creator
+libminecraft.creator.user*
+libminecraft.files
+libminecraft.config
+libminecraft.includes
+.*
+!.gitignore
