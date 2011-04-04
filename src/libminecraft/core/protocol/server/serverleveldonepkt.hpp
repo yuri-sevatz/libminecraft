@@ -19,10 +19,12 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SERVERLEVELDONEPKT_HPP
-#define SERVERLEVELDONEPKT_HPP
+#ifndef LIBMINECRAFT_SERVERLEVELDONEPKT_HPP
+#define LIBMINECRAFT_SERVERLEVELDONEPKT_HPP
 
 #include "serverpkt.hpp"
+
+#include "../minecrafttypes.hpp"
 
 namespace libminecraft
 {
@@ -30,11 +32,18 @@ namespace libminecraft
     class ServerLevelDonePkt : public ServerPkt
     {
     public:
+        static const MinecraftTypes::Byte id;
+
+        MinecraftTypes::SShort size_x;
+        MinecraftTypes::SShort size_y;
+        MinecraftTypes::SShort size_z;
+    public:
         ServerLevelDonePkt();
-        static MinecraftPacket * const Read(std::istream &stream);
-        virtual void Write(std::ostream & stream) const;
+        virtual void read(std::istream &stream);
+        virtual void write(std::ostream &os) const;
+        virtual void toReadable(std::ostream &os) const;
     };
 
 }
 
-#endif // SERVERLEVELDONEPKT_HPP
+#endif // LIBMINECRAFT_SERVERLEVELDONEPKT_HPP

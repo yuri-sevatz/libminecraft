@@ -1,9 +1,9 @@
 /*
- * clistate.hpp
+ * cligame.hpp
  * This file is part of LibMinecraft.
  *
- * Created by Yuri Sevatz on 11/2010.
- * Copyright (c) 2010 Yuri Sevatz. All rights reserved
+ * Created by Yuri Sevatz on 03/2011.
+ * Copyright (c) 2011 Yuri Sevatz. All rights reserved
  *
  * LibMinecraft is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,20 +19,23 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CLISTATE_HPP
-#define CLISTATE_HPP
+#ifndef LIBMINECRAFT_CLIGAME_HPP
+#define LIBMINECRAFT_CLIGAME_HPP
 
-#include "../../../support/fsm/actionstate.hpp"
+#include "../clistate.hpp"
+
+#include "../../../exceptions/protocolexception.hpp"
 
 namespace libminecraft
 {
-    // Forward-declare the owner.  We only need pointers to this.
-    class ClientStateMachine;
-
-    class CliState : public ActionState<ClientStateMachine>
+    class CliGame : public CliState
     {
-
+    public:
+        CliGame();
+        virtual void Enter(t_owner &owner) const;
+        virtual void Update(t_owner &owner) const;
+        virtual void Exit(t_owner &owner) const;
     };
 }
 
-#endif // CLISTATE_HPP
+#endif // LIBMINECRAFT_CLIGAME_HPP

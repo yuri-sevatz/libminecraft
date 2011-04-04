@@ -22,47 +22,41 @@
 #include "serveridentpkt.hpp"
 
 #include "../baseprotocol.hpp"
-#include "../minecraftstring.hpp"
+#include "../minecraftstream.hpp"
 
 namespace libminecraft
 {
+    const MinecraftTypes::Byte ServerIdentPkt::id = ServerPkt::IDENT;
+
     ServerIdentPkt::ServerIdentPkt()
         : ServerPkt(ServerPkt::IDENT)
     {
 
     }
 
-    MinecraftPacket * const ServerIdentPkt::Read(std::istream & stream)
+    void ServerIdentPkt::read(std::istream & stream)
     {
-        ServerIdentPkt * const pkt = new ServerIdentPkt();
-
-        stream >> pkt->srv_version;
-
-        MinecraftString::Read(stream, pkt->srv_name);
-        MinecraftString::Read(stream, pkt->srv_motd);
-
-        unsigned char op_byte = 0x00;
-        stream >> op_byte;
-        if (op_byte == 0x64)
-            pkt->is_op = true;
-
-        if (!stream.good())
-        {
-            delete pkt;
-            throw NetworkException("Connection closed while parsing server ident header");
-        }
-
-        if (pkt->srv_version != BaseProtocol::proto_version)
-        {
-            delete pkt;
-            throw ProtocolException("Unable to negotiate protocol version");
-        }
-
-        return pkt;
+        MinecraftStream::getByte(stream, srv_version);
+        MinecraftStream::getString(stream, srv_name);
+        MinecraftStream::getString(stream, srv_motd);
+        MinecraftStream::getByte(stream, user_type);
     }
 
-    void ServerIdentPkt::Write(std::ostream &stream) const
+    void ServerIdentPkt::write(std::ostream &stream) const
     {
-        throw ProtocolException("XXX: Not Implemented");
+        MinecraftStream::putByte(stream, ServerIdentPkt::id);
+
+        MinecraftStream::putByte(stream, srv_version);
+        MinecraftStream::putString(stream, srv_name);
+        MinecraftStream::putString(stream, srv_motd);
+        MinecraftStream::putByte(stream, user_type);
+    }
+
+    void ServerIdentPkt::toReadable(std::ostream &os) const
+    {
+        os << "Version: " << (unsigned int) srv_version << "\n";
+        os << "Name: " << srv_name << "\n";
+        os << "Motd: " << srv_motd << "\n";
+        os << "User Type: " << (unsigned int) user_type << std::endl;
     }
 }

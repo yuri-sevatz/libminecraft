@@ -24,7 +24,7 @@
 #include <exception>
 
 #include "../clientstatemachine.hpp"
-#include "../../minecraftsession.hpp"
+#include "../../../session/minecraftsession.hpp"
 
 namespace libminecraft
 {

@@ -19,8 +19,8 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SUPPORT_FSM_ABSTRACTSTATE_HPP
-#define SUPPORT_FSM_ABSTRACTSTATE_HPP
+#ifndef SUPPORT_ABSTRACTSTATE_HPP
+#define SUPPORT_ABSTRACTSTATE_HPP
 
 template <class O>
 class AbstractState
@@ -32,4 +32,4 @@ public:
     virtual void Exit(O & owner) const = 0;
 };
 
-#endif // SUPPORT_FSM_ABSTRACTSTATE_HPP
+#endif // SUPPORT_ABSTRACTSTATE_HPP

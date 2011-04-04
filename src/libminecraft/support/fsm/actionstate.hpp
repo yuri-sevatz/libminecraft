@@ -19,8 +19,8 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SUPPORT_FSM_ACTIONSTATE_HPP
-#define SUPPORT_FSM_ACTIONSTATE_HPP
+#ifndef SUPPORT_ACTIONSTATE_HPP
+#define SUPPORT_ACTIONSTATE_HPP
 
 #include "abstractstate.hpp"
 
@@ -32,4 +32,4 @@ public:
 };
 
 
-#endif // ACTIONSTATE_HPP
+#endif // SUPPORT_ACTIONSTATE_HPP

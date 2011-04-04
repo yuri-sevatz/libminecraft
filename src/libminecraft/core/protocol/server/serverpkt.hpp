@@ -19,8 +19,8 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SERVERPKT_HPP
-#define SERVERPKT_HPP
+#ifndef LIBMINECRAFT_SERVERPKT_HPP
+#define LIBMINECRAFT_SERVERPKT_HPP
 
 #include "../minecraftpacket.hpp"
 
@@ -42,7 +42,7 @@ namespace libminecraft
             TELEPORT = 0x08,
             POSDIR = 0x09,
             POS = 0x0a,
-            ORI = 0x0b,
+            DIR = 0x0b,
             DESPAWN = 0x0c,
             MESSAGE = 0x0d,
             DISCONNECT = 0x0e,
@@ -56,4 +56,4 @@ namespace libminecraft
     };
 }
 
-#endif // SERVERPKT_HPP
+#endif // LIBMINECRAFT_SERVERPKT_HPP

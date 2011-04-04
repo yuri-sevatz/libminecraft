@@ -23,9 +23,16 @@
 #include <iostream>
 
 #include "../clientstatemachine.hpp"
-#include "../../minecraftsession.hpp"
+#include "../../../session/remotesession.hpp"
 
 #include "../../protocol/server/serverlevelchunkpkt.hpp"
+#include "../../protocol/server/serverleveldonepkt.hpp"
+
+#include <boost/iostreams/filtering_stream.hpp>
+#include <boost/iostreams/filter/gzip.hpp>
+
+
+#include "../../protocol/client/clientmessagepkt.hpp"
 
 namespace libminecraft
 {
@@ -48,18 +55,32 @@ namespace libminecraft
         {
         case ServerPkt::LEVELCHUNK:
             {
-                //owner.session.gz_data.append();
                 ServerLevelChunkPkt * const lvlchunk = (ServerLevelChunkPkt * const) packet;
-                //std::cerr << lvlchunk->data.size() << std::endl;
-                //std::cerr << (unsigned int) lvlchunk->percent << std::endl;
-                //throw MinecraftException("Unable to Parse Level Chunk (yet)");
+
+                std::copy(
+                        lvlchunk->data.begin(),
+                        lvlchunk->data.end(),
+                        std::ostream_iterator<unsigned char>(owner.session.gz_data)
+                );
             }
             break;
         case ServerPkt::LEVELDONE:
-            //owner.ChangeState(owner.States.CLI_NEGOTIATING);
-            throw MinecraftException("Level Loading Done - Next State Not Implemented");
+            {
+                ServerLevelDonePkt * const lvldone = (ServerLevelDonePkt * const) packet;
+
+                // Create a decompression input streambuf and stream from the compressed map stream.
+                boost::iostreams::filtering_istream in;
+                in.push(boost::iostreams::gzip_decompressor());
+                in.push(owner.session.gz_data);
+
+                // Stream the decompressed map data into the map.
+                owner.session._world.map = Map(lvldone->size_x, lvldone->size_y, lvldone->size_z, in);
+
+                // Welcome to the server!
+                owner.ChangeState(owner.States.CLI_GAME);
+            }
             break;
-        case ServerPkt::BLOCK:
+        case ServerPkt::PING:
             break;
         default:
             delete packet;

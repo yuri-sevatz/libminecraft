@@ -19,8 +19,8 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SUPPORT_FSM_ACTIONSTATEMACHINE_HPP
-#define SUPPORT_FSM_ACTIONSTATEMACHINE_HPP
+#ifndef SUPPORT_ACTIONSTATEMACHINE_HPP
+#define SUPPORT_ACTIONSTATEMACHINE_HPP
 
 #include "abstractstatemachine.hpp"
 
@@ -45,4 +45,4 @@ class ActionStateMachine : public AbstractStateMachine<O,S>
     }
 };
 
-#endif // SUPPORT_FSM_ACTIONSTATEMACHINE_HPP
+#endif // SUPPORT_ACTIONSTATEMACHINE_HPP

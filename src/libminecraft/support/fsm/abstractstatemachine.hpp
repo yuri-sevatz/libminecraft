@@ -19,8 +19,8 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SUPPORT_FSM_ABSTRACTSTATEMACHINE_HPP
-#define SUPPORT_FSM_ABSTRACTSTATEMACHINE_HPP
+#ifndef SUPPORT_ABSTRACTSTATEMACHINE_HPP
+#define SUPPORT_ABSTRACTSTATEMACHINE_HPP
 
 // Class o is the "owner" of the state machine.
 // Class s is the "state" of the state machine.
@@ -64,4 +64,4 @@ public:
     }
 };
 
-#endif // SUPPORT_FSM_ABSTRACTSTATEMACHINE_HPP
+#endif // SUPPORT_ABSTRACTSTATEMACHINE_HPP

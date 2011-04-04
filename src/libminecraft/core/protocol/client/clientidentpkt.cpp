@@ -22,31 +22,43 @@
 #include "clientidentpkt.hpp"
 #include "../baseprotocol.hpp"
 
-#include "../minecraftstring.hpp"
+#include "../minecraftstream.hpp"
+
+#include "../minecrafttypes.hpp"
 
 namespace libminecraft
 {
+    const MinecraftTypes::Byte ClientIdentPkt::id = ClientPkt::IDENT;
+
     ClientIdentPkt::ClientIdentPkt() :
-            ClientPkt(ClientPkt::IDENT)
+            ClientPkt(ClientPkt::IDENT), version(BaseProtocol::proto_version), unused(0x00)
     {
 
     }
 
-    MinecraftPacket * const ClientIdentPkt::Read(std::istream &stream)
+    void ClientIdentPkt::read(std::istream &stream)
     {
-        throw ProtocolException("XXX: Reading Client Ident Packet Not Implemented.");
+        MinecraftStream::getByte(stream, version);
+        MinecraftStream::getString(stream, username);
+        MinecraftStream::getString(stream, key);
+        MinecraftStream::getByte(stream, unused);
     }
 
-    void ClientIdentPkt::Write(std::ostream &stream) const
+    void ClientIdentPkt::write(std::ostream &stream) const
     {
-        // Try sending our auth string...
-        const unsigned char id = 0x00;
-        stream << id; // Byte (packet id)
-        stream << BaseProtocol::proto_version; // Byte
-        MinecraftString::Write(stream, username); // String
-        MinecraftString::Write(stream, key); // String
-        const unsigned char byte = 0x00;
-        stream << byte; // Byte (unused byte).
-        stream.flush();
+        MinecraftStream::putByte(stream, ClientIdentPkt::id); // Byte (packet id)
+
+        MinecraftStream::putByte(stream, version);
+        MinecraftStream::putString(stream, username);
+        MinecraftStream::putString(stream, key);
+        MinecraftStream::putByte(stream, unused);
+    }
+
+    void ClientIdentPkt::toReadable(std::ostream &os) const
+    {
+        os << "Version: " << (unsigned int) version << "\n";
+        os << "Username: " << username << "\n";
+        os << "Key: " << key << "\n";
+        os << "Unused: " << (unsigned int) unused << std::endl;
     }
 }

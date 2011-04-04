@@ -1,9 +1,9 @@
 /*
- * minecraftstring.hpp
+ * serverplayerdisconnectpkt.hpp
  * This file is part of LibMinecraft.
  *
- * Created by Yuri Sevatz on 11/2010.
- * Copyright (c) 2010 Yuri Sevatz. All rights reserved
+ * Created by Yuri Sevatz on 03/2011.
+ * Copyright (c) 2011 Yuri Sevatz. All rights reserved
  *
  * LibMinecraft is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,23 +19,27 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MINECRAFTSTRING_HPP
-#define MINECRAFTSTRING_HPP
+#ifndef LIBMINECRAFT_SERVERPLAYERDISCONNECTPKT_HPP
+#define LIBMINECRAFT_SERVERPLAYERDISCONNECTPKT_HPP
 
-#include <istream>
-#include <ostream>
-#include <string>
+#include "serverpkt.hpp"
+
+#include "../minecrafttypes.hpp"
 
 namespace libminecraft
 {
+    class ServerPlayerDisconnectPkt : public ServerPkt
+    {
+    public:
+        static const MinecraftTypes::Byte id;
 
-class MinecraftString
-{
-public:
-    static void Read(std::istream & stream, std::string & str);
-    static void Write(std::ostream & stream, const std::string & str);
-};
+        std::string reason;
 
+        ServerPlayerDisconnectPkt();
+        virtual void read(std::istream &is);
+        virtual void write(std::ostream &os) const;
+        virtual void toReadable(std::ostream &os) const;
+    };
 }
 
-#endif // MINECRAFTSTRING_HPP
+#endif // LIBMINECRAFT_SERVERPLAYERDISCONNECTPKT_HPP

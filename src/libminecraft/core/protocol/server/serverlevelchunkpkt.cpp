@@ -21,11 +21,13 @@
 
 #include "serverlevelchunkpkt.hpp"
 
-#include <inttypes.h>
-#include <iostream>
+#include "../minecraftstream.hpp"
+
+#include <ios>
 
 namespace libminecraft
 {
+    const MinecraftTypes::Byte ServerLevelChunkPkt::id = ServerPkt::LEVELCHUNK;
 
     ServerLevelChunkPkt::ServerLevelChunkPkt() :
             ServerPkt(ServerPkt::LEVELCHUNK)
@@ -33,41 +35,40 @@ namespace libminecraft
 
     }
 
-    MinecraftPacket * const ServerLevelChunkPkt::Read(std::istream &stream)
+    void ServerLevelChunkPkt::read(std::istream &stream)
     {
-        ServerLevelChunkPkt * const pkt = new ServerLevelChunkPkt();
+        MinecraftStream::getSignedShort(stream, length);
 
-        uint16_t length = 0;
-        stream.read((char*) &length, 2);
-
-        std::cerr << length << std::endl;
-        std::cerr << stream.gcount() << std::endl;
-        std::cerr << (unsigned int) stream.peek() << std::endl;
-
-        if (length > 1024)
-        {
-            delete pkt;
+        if (length < 0 || length > 1024)
             throw ProtocolException("Invalid chunk size detected while receiving map");
-        }
 
         // Make room for length bytes.
-        pkt->data.resize(length);
+        data.resize(length);
 
         // Save the data.
-        stream.read((char *) &(pkt->data.front()), length);
+        stream.read((char *) &(data.front()), length);
 
         // Ignore the trailing characters in the byte array.
         if (length < 1024)
             stream.ignore(1024 - length);
 
         // Read the percentage complete...
-        stream >> pkt->percent;
-
-        return pkt;
+        MinecraftStream::getByte(stream, percent);
     }
 
-    void ServerLevelChunkPkt::Write(std::ostream &stream) const
+    void ServerLevelChunkPkt::write(std::ostream &os) const
     {
         throw ProtocolException("XXX: Not Implemented");
+    }
+
+    void ServerLevelChunkPkt::toReadable(std::ostream &os) const
+    {
+        os << "Length: " << length << "\n";
+/*
+        os << "Data: " << std::ios::hex;
+        os.write((const char *) &data.front(), data.size());
+        os << std::ios::dec << "\n";
+*/
+        os << "Percent: " << (unsigned int) percent << std::endl;
     }
 }

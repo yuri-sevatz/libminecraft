@@ -19,10 +19,12 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SERVERLEVELCHUNKPKT_HPP
-#define SERVERLEVELCHUNKPKT_HPP
+#ifndef LIBMINECRAFT_SERVERLEVELCHUNKPKT_HPP
+#define LIBMINECRAFT_SERVERLEVELCHUNKPKT_HPP
 
 #include "serverpkt.hpp"
+
+#include "../minecrafttypes.hpp"
 
 #include <vector>
 
@@ -31,14 +33,17 @@ namespace libminecraft
     class ServerLevelChunkPkt : public ServerPkt
     {
     public:
-        // Up to 1024 bytes.
-        std::vector<unsigned char> data;
-        unsigned char percent;
+        static const MinecraftTypes::Byte id;
+
+        MinecraftTypes::SShort length;
+        std::vector<MinecraftTypes::Byte> data;
+        MinecraftTypes::Byte percent;
 
         ServerLevelChunkPkt();
-        static MinecraftPacket * const Read(std::istream &stream);
-        virtual void Write(std::ostream & stream) const;
+        virtual void read(std::istream &stream);
+        virtual void write(std::ostream &os) const;
+        virtual void toReadable(std::ostream &os) const;
     };
 }
 
-#endif // SERVERLEVELCHUNKPKT_HPP
+#endif // LIBMINECRAFT_SERVERLEVELCHUNKPKT_HPP

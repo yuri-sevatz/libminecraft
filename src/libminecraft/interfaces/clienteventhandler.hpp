@@ -19,85 +19,130 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CLIENTEVENTHANDLER_HPP
-#define CLIENTEVENTHANDLER_HPP
+#ifndef LIBMINECRAFT_CLIENTEVENTHANDLER_HPP
+#define LIBMINECRAFT_CLIENTEVENTHANDLER_HPP
 
 #include <string>
 
-#include "core/player/player.hpp"
-#include "core/map/map.hpp"
-#include "core/map/mapcell.hpp"
-#include "core/minecraftworld.hpp"
+#include "../core/player/player.hpp"
+#include "../core/map/map.hpp"
+#include "../core/map/mapcell.hpp"
+#include "../core/minecraftworld.hpp"
+
+#include "../session/minecraftsession.hpp"
 
 namespace libminecraft
 {
     // The main client interface.  Implement this to respond to events in the minecraft world.
     class ClientEventHandler
     {
-        // Access to the world
-        const MinecraftWorld & world;
+    public:
+        MinecraftSession & self;
+    protected:
+        // Build your event handler around a sesion,
+        // so that it can respond to events.
+        ClientEventHandler(MinecraftSession & session);
+    private:
+        // Disabled default constructor
+        ClientEventHandler();
 
     public:
-        // When a message is received from a player.
-        // Note: Messages from yourself appear here too.
-        virtual void OnMessage(const Player & player, std::string message) = 0;
 
-        // When an entity, other than yourself, has a position and orientation update
-        virtual void OnEntitySync(const Player & player) = 0;
+    /*
+     * "You" Functions
+     */
 
-        // When an entity, other than yourself, moves.
-        virtual void OnEntityMove(const Player & player) = 0;
+        // You enter a new world.
+        // Note: You don't yet have a position.  Wait until ClientSpawn().
+        virtual void onClientWorldEnter() = 0;
 
-        // When an entity, other than yourself, turns.
-        virtual void OnEntityTurn(const Player & player) = 0;
+        // You spawn in the world.
+        virtual void onClientSpawn() = 0;
 
-        // When an entity, other than yourself, spawns.
-        virtual void OnEntitySpawn(const Player & player) = 0;
+        // Your op status is updated.
+        // Old playertype provided for convenience.
+        virtual void onClientOp(MinecraftWorld::t_playertype old_playertype) = 0;
 
-        // When an entity, other than yourself, despawns.
-        virtual void OnEntityDespawn(const Player & player) = 0;
+        // You are teleported.
+        // Old position and old direction provided for convenience.
+        virtual void onClientTeleport(Map::size_plot old_x, Map::size_plot old_y, Map::size_plot old_z, Player::t_yaw old_yaw, Player::t_pitch old_pitch) = 0;
 
-        // When an entity, other than yourself, teleports.
-        virtual void OnEntityTeleport(const Player & player) = 0;
+        // You are leaving the world.
+        // Note: The world will be destroyed after execution of this function.
+        virtual void onClientWorldExit() = 0;
 
-        // When you are kicked and disconnected from the server.
-        virtual void OnKick(std::string reason) = 0;
+        // You are being kicked from the server.
+        // Note: The world will be destroyed after execution of this function.
+        virtual void onClientKick(const std::string & reason) = 0;
+
+    /*
+     * Global Functions
+     */
+
+        // A block is updated on the map
+        virtual void onBlockUpdate(MapCell::BlockType type, MapCell::BlockType old_type, Map::size_block x, Map::size_block y, Map::size_block z) = 0;
+
+        // When an message is received.
+        // Note: You can do player lookup manually based on the id if you so choose.
+        //       Also consider parsing for a [name:] field, since 90% of opensource
+        //       servers fail at setting the sending player's id properly.
+        virtual void onMessage(Player::t_id id, const std::string & message) = 0;
+
+        /* Because some of the opensource servers out there are actually so bad
+           that we actually can't depend on using the id to provide the correct sender.
+           Use previous function instead */
+        // virtual void onPlayerMessage(const Player & player, std::string message) = 0;
+
+    /*
+     * Other Player Functions
+     */
+
+        // Another player spawns
+        virtual void onPlayerSpawn(const Player & player) = 0;
+
+        // Another player looks
+        // Old direction provided for convenience.
+        virtual void onPlayerLook(const Player & player, Player::t_yaw delta_yaw, Player::t_pitch delta_pitch) = 0;
+
+        // Another player moves
+        // Deltas provided for convenience.
+        virtual void onPlayerMove(const Player & player, Map::size_plot delta_x, Map::size_plot delta_y, Map::size_plot delta_z) = 0;
+
+        // Another player moves and looks
+        // Deltas and old direction provided for convenience.
+        virtual void onPlayerMoveAndLook(const Player & player, Map::size_plot delta_x, Map::size_plot delta_y, Map::size_plot delta_z, Player::t_yaw delta_yaw, Player::t_pitch deltas_pitch) = 0;
+
+        // Another player teleports.
+        // Old position and old direction provided for convenience.
+        virtual void onPlayerTeleport(const Player & player, Map::size_plot old_x, Map::size_plot old_y, Map::size_plot old_z, Player::t_yaw old_yaw, Player::t_pitch old_pitch) = 0;
+
+        // Another player despawns
+        virtual void onPlayerDespawn(const Player & player) = 0;
+
+    /*
+     * Error Functions
+     */
 
         // When the network connection is terminated for unknown reasons.
         // This can occur at any time.
-        // Furthermore, any allocated world(s) will be deallocated,
-        // after execution of this function.
-        virtual void OnNetworkError(std::string reason) = 0;
+        // Note: The world will be destroyed after execution of this function.
+        virtual void onNetworkError(const char * reason) = 0;
 
         // When an error in the protocol communicated by the server occurs
         // This can occur at any time - usually due to updates or improper client/server protocol.
-        // Furthermore, any allocated world(s) will be deallocated,
-        // after this function is executed.
-        virtual void OnProtocolError(std::string reason) = 0;
+        // Note: The world will be destroyed after execution of this function.
+        virtual void onProtocolError(const char * reason) = 0;
 
         // When a login error occues.
         // This will only occur when first connecting to a server,
-        // usually due to invalid login credentials.
-        virtual void OnLoginError(std::string reason) = 0;
+        // possibly due to invalid login credentials.
+        virtual void onLoginError(const char * reason) = 0;
 
-        // Occurs when your op status is updated.
-        // This may or may not be different than the value previously saved.
-        virtual void OnOpUpdate() = 0;
-
-        // Occurs when a block is updated on the map.
-        // This may or may not be different than the value previously saved.
-        virtual void OnBlockUpdate(MapCell::BlockType type, Map::size_block x, Map::size_block y, Map::size_block z) = 0;
-
-        // Occurs when you are teleported to a new location in the same world.
-        virtual void OnTeleport() = 0;
-
-        // Occurs when you enter a new world.
-        virtual void OnWorldEnter() = 0;
-
-        // Occurs when you are about to part from a world.
-        // Note: The world will be deallocated after execution of this function.
-        virtual void OnWorldExit() = 0;
+        // When a warning is provided.
+        // This can occur at any time.  The explanation for the warning is provided.
+        // Usually this is due to opensource server software incorrect implementation.
+        virtual void onProtocolWarning(const char * reason) = 0;
     };
 }
 
-#endif // CLIENTEVENTHANDLER_HPP
+#endif // LIBMINECRAFT_CLIENTEVENTHANDLER_HPP

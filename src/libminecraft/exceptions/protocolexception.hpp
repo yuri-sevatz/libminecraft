@@ -19,8 +19,8 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PROTOCOLEXCEPTION_HPP
-#define PROTOCOLEXCEPTION_HPP
+#ifndef LIBMINECRAFT_PROTOCOLEXCEPTION_HPP
+#define LIBMINECRAFT_PROTOCOLEXCEPTION_HPP
 
 #include "minecraftexception.hpp"
 
@@ -34,4 +34,4 @@ namespace libminecraft
     };
 }
 
-#endif // PROTOCOLEXCEPTION_HPP
+#endif // LIBMINECRAFT_PROTOCOLEXCEPTION_HPP

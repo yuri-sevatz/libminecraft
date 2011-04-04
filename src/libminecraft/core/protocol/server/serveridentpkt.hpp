@@ -19,28 +19,32 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SERVERIDENTPKT_HPP
-#define SERVERIDENTPKT_HPP
+#ifndef LIBMINECRAFT_SERVERIDENTPKT_HPP
+#define LIBMINECRAFT_SERVERIDENTPKT_HPP
 
 #include "serverpkt.hpp"
 
+#include "../minecrafttypes.hpp"
+
 #include <string>
-#include <inttypes.h>
 
 namespace libminecraft
 {
     class ServerIdentPkt : public ServerPkt
     {
     public:
+        static const MinecraftTypes::Byte id;
+
+        MinecraftTypes::Byte srv_version;
         std::string srv_name;
         std::string srv_motd;
-        uint8_t srv_version;
-        bool is_op;
+        MinecraftTypes::Byte user_type;
     public:
         ServerIdentPkt();
-        static MinecraftPacket * const Read(std::istream &stream);
-        virtual void Write(std::ostream &stream) const;
+        virtual void read(std::istream &stream);
+        virtual void write(std::ostream &stream) const;
+        virtual void toReadable(std::ostream &os) const;
     };
 }
 
-#endif // SERVERIDENTPKT_HPP
+#endif // LIBMINECRAFT_SERVERIDENTPKT_HPP

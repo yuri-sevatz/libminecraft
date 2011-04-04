@@ -21,19 +21,28 @@
 
 #include "serverpingpkt.hpp"
 
+#include "../minecraftstream.hpp"
+
 namespace libminecraft
 {
+    const MinecraftTypes::Byte ServerPingPkt::id = ServerPkt::PING;
+
     ServerPingPkt::ServerPingPkt() :
             ServerPkt(ServerPkt::PING)
     {
     }
 
-    MinecraftPacket * const ServerPingPkt::Read(std::istream &stream)
+    void ServerPingPkt::read(std::istream &stream)
     {
-        return new ServerPingPkt();
+
     }
 
-    void ServerPingPkt::Write(std::ostream &stream) const
+    void ServerPingPkt::write(std::ostream &stream) const
+    {
+        MinecraftStream::putByte(stream, ServerPingPkt::id);
+    }
+
+    void ServerPingPkt::toReadable(std::ostream &os) const
     {
 
     }

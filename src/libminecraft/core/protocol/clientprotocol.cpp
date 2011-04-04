@@ -21,12 +21,25 @@
 
 #include "clientprotocol.hpp"
 
+#include "minecraftstream.hpp"
+#include "minecrafttypes.hpp"
+
 // Each packet type knows how to parse itself from a stream.
 #include "server/serveridentpkt.hpp"
 #include "server/serverpingpkt.hpp"
 #include "server/serverlevelbeginpkt.hpp"
 #include "server/serverlevelchunkpkt.hpp"
 #include "server/serverleveldonepkt.hpp"
+#include "server/servermessagepkt.hpp"
+#include "server/serverplayerdespawnpkt.hpp"
+#include "server/serverplayerdisconnectpkt.hpp"
+#include "server/serverplayerdirpkt.hpp"
+#include "server/serverplayeroppkt.hpp"
+#include "server/serverplayerposdirpkt.hpp"
+#include "server/serverplayerspawnpkt.hpp"
+#include "server/serverplayerteleportpkt.hpp"
+#include "server/serversetblockpkt.hpp"
+#include "server/serverplayerpospkt.hpp"
 
 namespace libminecraft
 {
@@ -38,56 +51,91 @@ namespace libminecraft
 
     ServerPkt * const ClientProtocol::Read()
     {
-        unsigned char packet_id;
-        stream >> packet_id;
+        MinecraftTypes::Byte packet_id;
+        MinecraftStream::getByte(stream, packet_id);
 
         if (!stream.good())
             throw NetworkException("Connection closed while awaiting next packet");
 
-        MinecraftPacket * packet;
-
-        std::cerr << "ID: " << (unsigned int) packet_id << std::endl;
+        ServerPkt * packet;
 
         switch (packet_id)
         {
         case ServerPkt::IDENT:
-            std::cerr << "IDENT" << std::endl;
-            packet = ServerIdentPkt::Read(stream);
+            packet = new ServerIdentPkt();
             break;
         case ServerPkt::PING:
-            std::cerr << "PING" << std::endl;
-            packet = ServerPingPkt::Read(stream);
+            packet = new ServerPingPkt();
             break;
         case ServerPkt::LEVELBEGIN:
-            std::cerr << "LEVELBEGIN" << std::endl;
-            packet = ServerLevelBeginPkt::Read(stream);
+            packet = new ServerLevelBeginPkt();
             break;
         case ServerPkt::LEVELCHUNK:
-            std::cerr << "LEVELCHUNK" << std::endl;
-            packet = ServerLevelChunkPkt::Read(stream);
+            packet = new ServerLevelChunkPkt();
             break;
         case ServerPkt::LEVELDONE:
-            std::cerr << "LEVELDONE" << std::endl;
-            packet = ServerLevelDonePkt::Read(stream);
+            packet = new ServerLevelDonePkt();
+            break;
+        case ServerPkt::SPAWN:
+            packet = new ServerPlayerSpawnPkt();
+            break;
+        case ServerPkt::MESSAGE:
+            packet = new ServerMessagePkt();
+            break;
+        case ServerPkt::POS:
+            packet = new ServerPlayerPosPkt();
+            break;
+        case ServerPkt::DIR:
+            packet = new ServerPlayerDirPkt();
+            break;
+        case ServerPkt::POSDIR:
+            packet = new ServerPlayerPosDirPkt();
+            break;
+        case ServerPkt::TELEPORT:
+            packet = new ServerPlayerTeleportPkt();
+            break;
+        case ServerPkt::BLOCK:
+            packet = new ServerSetBlockPkt();
+            break;
+        case ServerPkt::DESPAWN:
+            packet = new ServerPlayerDespawnPkt();
+            break;
+        case ServerPkt::USEROP:
+            packet = new ServerPlayerOpPkt();
+            break;
+        case ServerPkt::DISCONNECT:
+            packet = new ServerPlayerDisconnectPkt();
             break;
         default:
-            delete packet;
+            // Debugging Only
+            //std::cerr << "UNKNOWN: " << (unsigned int) packet_id << std::endl;
             throw ProtocolException("Unknown minecraft packet received from server");
         }
 
-        // Make sure that the data was read properly...
-        if (!stream.good())
+        try
+        {
+            packet->read(stream);
+
+            // Make sure that the data was read properly...
+            if (!stream.good())
+                throw NetworkException("Connection to server closed unexpectedly");
+        }
+        catch (MinecraftException ex)
         {
             delete packet;
-            throw NetworkException("Connection to server closed unexpectedly");
+            throw ex;
         }
+
+        // Debugging?
+        //packet->toReadable(std::cerr);
 
         return (ServerPkt * const) packet;
     }
 
     void ClientProtocol::Write(ClientPkt &packet)
     {
-        packet.Write(stream);
+        packet.write(stream);
+        stream.flush();
 
         if (!stream.good())
             throw NetworkException("Connection closed while writing outbound minecraft data");

@@ -19,38 +19,59 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MINECRAFTWORLD_HPP
-#define MINECRAFTWORLD_HPP
-
-#include <map>
+#ifndef LIBMINECRAFT_MINECRAFTWORLD_HPP
+#define LIBMINECRAFT_MINECRAFTWORLD_HPP
 
 #include "player/player.hpp"
-
 #include "map/map.hpp"
+
+#include <map>
+#include <inttypes.h>
+
 
 namespace libminecraft
 {
     class MinecraftWorld
     {
-    private:
-        // Has a Map - modifiable is for internal use only.
-        Map _map;
+        // Allow private access to the states...
+        friend class CliNegotiating;
+        friend class CliConnecting;
+        friend class CliLoadingMap;
+        friend class CliGame;
+
+    public:
+        // Definitions.
+        typedef uint8_t t_playertype;
+
+        // Has a Map
+        Map map;
 
         // Has a list of entities...
-        std::map<unsigned char, Player> _entities;
+        std::map<uint8_t, Player> entities;
+
+        // You
+        Player player;
+
+        // Your op status
+        t_playertype playertype;
+
     public:
-        // Reference to map, for external use.
-        const Map & map;
-        const std::map<unsigned char, Player> & entities;
-
-        //const Player & player;
-
-    public:
-
-
-
         MinecraftWorld();
+
+        bool addPlayer(Player & player);
+        bool hasPlayer(uint8_t player_id) const;
+        bool removePlayer(uint8_t player_id);
+        bool removePlayer(Player & player);
+
+        Player * const getPlayer(uint8_t player_id);
+        const Player * const getPlayer(uint8_t player_id) const;
+        const Player * const getPlayer(const std::string & name) const;
     };
+
+    inline bool MinecraftWorld::removePlayer(Player & player)
+    {
+        return removePlayer(player.id);
+    }
 }
 
-#endif // MINECRAFTWORLD_HPP
+#endif // LIBMINECRAFT_MINECRAFTWORLD_HPP

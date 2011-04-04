@@ -19,14 +19,13 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SERVERPROTOCOL_HPP
-#define SERVERPROTOCOL_HPP
+#ifndef LIBMINECRAFT_SERVERPROTOCOL_HPP
+#define LIBMINECRAFT_SERVERPROTOCOL_HPP
 
 #include "baseprotocol.hpp"
+
 #include "server/serverpkt.hpp"
 #include "client/clientpkt.hpp"
-
-#include <iostream>
 
 namespace libminecraft
 {
@@ -44,4 +43,4 @@ namespace libminecraft
     };
 }
 
-#endif // SERVERPROTOCOL_HPP
+#endif // LIBMINECRAFT_SERVERPROTOCOL_HPP

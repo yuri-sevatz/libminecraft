@@ -19,20 +19,25 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SERVERPINGPKT_HPP
-#define SERVERPINGPKT_HPP
+#ifndef LIBMINECRAFT_SERVERPINGPKT_HPP
+#define LIBMINECRAFT_SERVERPINGPKT_HPP
 
 #include "serverpkt.hpp"
+
+#include "../minecrafttypes.hpp"
 
 namespace libminecraft
 {
     class ServerPingPkt : public ServerPkt
     {
     public:
+        static const MinecraftTypes::Byte id;
+
         ServerPingPkt();
-        static MinecraftPacket * const Read(std::istream &stream);
-        virtual void Write(std::ostream & stream) const;
+        virtual void read(std::istream &is);
+        virtual void write(std::ostream &os) const;
+        virtual void toReadable(std::ostream &os) const;
     };
 }
 
-#endif // SERVERPINGPKT_HPP
+#endif // LIBMINECRAFT_SERVERPINGPKT_HPP

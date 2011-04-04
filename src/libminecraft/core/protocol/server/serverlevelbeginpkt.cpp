@@ -21,22 +21,29 @@
 
 #include "serverlevelbeginpkt.hpp"
 
+#include "../minecraftstream.hpp"
+
 namespace libminecraft
 {
+    const MinecraftTypes::Byte ServerLevelBeginPkt::id = ServerPkt::LEVELBEGIN;
+
     ServerLevelBeginPkt::ServerLevelBeginPkt()
         : ServerPkt(ServerPkt::LEVELBEGIN)
     {
     }
 
-    MinecraftPacket * const ServerLevelBeginPkt::Read(std::istream &stream)
+    void ServerLevelBeginPkt::read(std::istream &stream)
     {
-        // Nothing to do.  Notification Packet only.
-        return new ServerLevelBeginPkt();
+
     }
 
-    void ServerLevelBeginPkt::Write(std::ostream &stream) const
+    void ServerLevelBeginPkt::write(std::ostream &stream) const
     {
-        const unsigned char id = 0x02;
-        stream << 0x02;
+        MinecraftStream::putByte(stream, ServerLevelBeginPkt::id);
+    }
+
+    void ServerLevelBeginPkt::toReadable(std::ostream &os) const
+    {
+
     }
 }

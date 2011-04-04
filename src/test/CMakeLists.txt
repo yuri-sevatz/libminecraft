@@ -1,10 +1,11 @@
 project(testmine)
 
 set(${PROJECT_NAME}_headers
-
+   	myminecraftclient.hpp
 )
 set(${PROJECT_NAME}_sources
     main.cpp
+   	myminecraftclient.cpp
 )
 
 add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_headers} ${${PROJECT_NAME}_sources} )

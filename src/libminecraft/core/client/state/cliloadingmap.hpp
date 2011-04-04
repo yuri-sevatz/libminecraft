@@ -19,10 +19,10 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CLILOADINGMAP_HPP
-#define CLILOADINGMAP_HPP
+#ifndef LIBMINECRAFT_CLILOADINGMAP_HPP
+#define LIBMINECRAFT_CLILOADINGMAP_HPP
 
-#include "clistate.hpp"
+#include "../clistate.hpp"
 
 #include "../../../exceptions/protocolexception.hpp"
 
@@ -38,4 +38,4 @@ namespace libminecraft
     };
 }
 
-#endif // CLILOADINGMAP_HPP
+#endif // LIBMINECRAFT_CLILOADINGMAP_HPP

@@ -19,20 +19,24 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SERVERLEVELBEGINPKT_HPP
-#define SERVERLEVELBEGINPKT_HPP
+#ifndef LIBMINECRAFT_SERVERLEVELBEGINPKT_HPP
+#define LIBMINECRAFT_SERVERLEVELBEGINPKT_HPP
 
 #include "serverpkt.hpp"
+#include "../minecrafttypes.hpp"
 
 namespace libminecraft
 {
     class ServerLevelBeginPkt : public ServerPkt
     {
     public:
+        static const MinecraftTypes::Byte id;
+
         ServerLevelBeginPkt();
-        static MinecraftPacket * const Read(std::istream &stream);
-        virtual void Write(std::ostream & stream) const;
+        virtual void read(std::istream &stream);
+        virtual void write(std::ostream &os) const;
+        virtual void toReadable(std::ostream &os) const;
     };
 }
 
-#endif // SERVERLEVELBEGINPKT_HPP
+#endif // LIBMINECRAFT_SERVERLEVELBEGINPKT_HPP

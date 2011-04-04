@@ -19,8 +19,8 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LOGINEXCEPTION_HPP
-#define LOGINEXCEPTION_HPP
+#ifndef LIBMINECRAFT_LOGINEXCEPTION_HPP
+#define LIBMINECRAFT_LOGINEXCEPTION_HPP
 
 #include "minecraftexception.hpp"
 
@@ -34,4 +34,4 @@ namespace libminecraft
     };
 }
 
-#endif // LIBMINECRAFT_EXCEPTIONS_LOGINEXCEPTION_HPP
+#endif // LIBMINECRAFT_LOGINEXCEPTION_HPP

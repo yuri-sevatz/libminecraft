@@ -23,7 +23,8 @@
 #include <iostream>
 
 #include "../clientstatemachine.hpp"
-#include "../../minecraftsession.hpp"
+#include "../../../session/remotesession.hpp"
+#include "../../../interfaces/clienteventhandler.hpp"
 
 #include "../../protocol/client/clientidentpkt.hpp"
 #include "../../protocol/server/serveridentpkt.hpp"
@@ -61,10 +62,18 @@ namespace libminecraft
                 throw LoginException("Login Error - did not receive OK from server");
             }
 
+            if (srvident->srv_version != BaseProtocol::proto_version)
+            {
+                // Some opensource servers report a silly protocol version that doesn't exist o_o
+                // Continue anyways.
+                owner.session.listener->onProtocolWarning("Invalid Server Version Detected - Attempting anyway.");
+                //throw ProtocolException("Unable to negotiate protocol version");
+            }
+
             // Read the facts of life...
             owner.session.server_name = srvident->srv_name;
             owner.session.server_motd = srvident->srv_motd;
-            owner.session.is_op = srvident->is_op;
+            owner.session._world.playertype = srvident->user_type;
 
             // Free our packet.
             delete srvident;

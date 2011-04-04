@@ -19,8 +19,8 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef BASEPROTOCOL_HPP
-#define BASEPROTOCOL_HPP
+#ifndef LIBMINECRAFT_BASEPROTOCOL_HPP
+#define LIBMINECRAFT_BASEPROTOCOL_HPP
 
 #include <iostream>
 
@@ -42,4 +42,4 @@ namespace libminecraft
     };
 }
 
-#endif // BASEPROTOCOL_HPP
+#endif // LIBMINECRAFT_BASEPROTOCOL_HPP

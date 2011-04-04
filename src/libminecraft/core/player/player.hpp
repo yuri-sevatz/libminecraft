@@ -19,17 +19,50 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PLAYER_HPP
-#define PLAYER_HPP
+#ifndef LIBMINECRAFT_PLAYER_HPP
+#define LIBMINECRAFT_PLAYER_HPP
+
+#include "../map/map.hpp"
 
 #include <string>
+#include <inttypes.h>
 
-class Player
+namespace libminecraft
 {
-public:
-    unsigned char id;
-    const std::string name;
-    Player();
-};
+    class Player
+    {
+    public:
+        typedef uint8_t t_id;
+        typedef uint8_t t_pitch;
+        typedef uint8_t t_yaw;
 
-#endif // PLAYER_HPP
+    public:
+        // Compass constants
+        // North = -Z
+        static const t_yaw YAW_NORTH = 0;
+        static const t_yaw YAW_EAST = 64;
+        static const t_yaw YAW_SOUTH = 128;
+        static const t_yaw YAW_WEST = 192;
+
+        // Pitch constants.
+        static const t_pitch PITCH_UP = 192;
+        static const t_pitch PITCH_DOWN = 64;
+        static const t_pitch PITCH_NORMAL = 0;
+        static const t_pitch PITCH_INVERT = 128;
+
+        // Instance variables.
+        t_id id;
+        std::string name;
+        t_pitch pitch;
+        t_yaw yaw;
+
+        Map::size_plot x;
+        Map::size_plot y;
+        Map::size_plot z;
+
+        Player();
+    };
+
+}
+
+#endif // LIBMINECRAFT_PLAYER_HPP

@@ -19,10 +19,10 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CLIAUTHENTICATING_HPP
-#define CLIAUTHENTICATING_HPP
+#ifndef LIBMINECRAFT_CLINEGOTIATING_HPP
+#define LIBMINECRAFT_CLINEGOTIATING_HPP
 
-#include "clistate.hpp"
+#include "../clistate.hpp"
 
 #include "../../../exceptions/loginexception.hpp"
 #include "../../../exceptions/protocolexception.hpp"
@@ -39,4 +39,4 @@ namespace libminecraft
     };
 }
 
-#endif // CLIAUTHENTICATING_HPP
+#endif // LIBMINECRAFT_CLINEGOTIATING_HPP

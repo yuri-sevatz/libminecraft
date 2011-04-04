@@ -19,8 +19,8 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MINECRAFTPACKET_HPP
-#define MINECRAFTPACKET_HPP
+#ifndef LIBMINECRAFT_MINECRAFTPACKET_HPP
+#define LIBMINECRAFT_MINECRAFTPACKET_HPP
 
 #include <istream>
 #include <ostream>
@@ -35,14 +35,20 @@ namespace libminecraft
     public:
         // Write the packet to a stream.
         // Throws NetworkException if there is an issue.
-        virtual void Write(std::ostream & stream) const = 0;
+
 
         // Read the packet from a stream.
         // Network Exception, or ProtocolException can occur.
         // No data will be returned in the event of an exception,
         // and no leaked memory should occur.
-        static MinecraftPacket * const Read(std::istream & stream);
+        // Note: For derrived class to implement.
+        // static MinecraftPacket * const Read(std::istream & stream);
+
+        // Convert the packet to human readable output
+        virtual void read(std::istream &is) = 0;
+        virtual void write(std::ostream &os) const = 0;
+        virtual void toReadable(std::ostream &os) const = 0;
     };
 }
 
-#endif // MINECRAFTPACKET_HPP
+#endif // LIBMINECRAFT_MINECRAFTPACKET_HPP

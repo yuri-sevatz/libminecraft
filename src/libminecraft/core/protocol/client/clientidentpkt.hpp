@@ -19,10 +19,12 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CLIENTIDENTPKT_HPP
-#define CLIENTIDENTPKT_HPP
+#ifndef LIBMINECRAFT_CLIENTIDENTPKT_HPP
+#define LIBMINECRAFT_CLIENTIDENTPKT_HPP
 
 #include "clientpkt.hpp"
+
+#include "../minecrafttypes.hpp"
 
 #include <string>
 
@@ -31,13 +33,19 @@ namespace libminecraft
     class ClientIdentPkt : public ClientPkt
     {
     public:
+        static const MinecraftTypes::Byte id;
+
+        MinecraftTypes::Byte version;
         std::string username;
         std::string key;
+        MinecraftTypes::Byte unused;
+
     public:
         ClientIdentPkt();
-        static MinecraftPacket * const Read(std::istream &stream);
-        virtual void Write(std::ostream & stream) const;
+        virtual void read(std::istream &stream);
+        virtual void write(std::ostream &os) const;
+        virtual void toReadable(std::ostream &os) const;
     };
 }
 
-#endif // CLIENTIDENTPKT_HPP
+#endif // LIBMINECRAFT_CLIENTIDENTPKT_HPP

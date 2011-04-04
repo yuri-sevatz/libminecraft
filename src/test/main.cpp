@@ -19,10 +19,13 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "../libminecraft/libminecraft.hpp"
+#include <libminecraft/session/remotesession.hpp>
 
+#include <iostream>
 #include <string>
 #include <cstdlib>
+
+#include "myminecraftclient.hpp"
 
 void print_usage(char * my_name)
 {
@@ -42,16 +45,18 @@ int main(int argc, char * argv[])
     std::string hostname(argv[1]);
     std::string port(argv[2]);
 
-    libminecraft::MinecraftSession session(hostname, port);
+    // Create the session.
+    libminecraft::RemoteSession session(hostname, port);
 
+    // Instantiate our client, give it the session.
+    MyMinecraftClient client(session);
+
+    // get the username and key.
     std::string username(argv[3]);
     std::string key(argv[4]);
 
-    // May throw network exception
-    // May throw protocol exception
-    session.Connect(username, key);
+    // Connect... (blocks)
+    session.connect(username, key);
 
     return EXIT_SUCCESS;
 }
-
-

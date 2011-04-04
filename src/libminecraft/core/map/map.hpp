@@ -19,14 +19,15 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MAP_HPP
-#define MAP_HPP
+#ifndef LIBMINECRAFT_MAP_HPP
+#define LIBMINECRAFT_MAP_HPP
 
 #include "mapcell.hpp"
 #include "../../exceptions/mapexception.hpp"
 
 #include <vector>
 #include <inttypes.h>
+#include <istream>
 
 namespace libminecraft
 {
@@ -40,27 +41,65 @@ namespace libminecraft
         typedef std::vector<Map2D> Map3D;
 
         // The types used in the grid
-        typedef uint16_t size_block;
-        typedef float size_plot;
+        typedef int16_t size_block;
+        typedef int16_t size_plot;
+
+        static const size_plot CELL_SIZE;
+        static const size_plot CELL_CENTER;
+        static const size_plot EYE_HEIGHT;
 
         // The size in world blocks.
-        const size_block x_blocks;
-        const size_block y_blocks;
-        const size_block z_blocks;
-/*
-        // The size of the world, on the cartesian plane
-        const size_plot x_plot;
-        const size_plot y_plot;
-        const size_plot z_plot;
-*/
+        size_block x_blocks;
+        size_block y_blocks;
+        size_block z_blocks;
 
-    private:
+        // The size of the world, on the cartesian plane
+        size_plot x_plot;
+        size_plot y_plot;
+        size_plot z_plot;
+
         Map3D grid;
 
     public:
-        // XXX: Add support for zlib streams.
-        Map(size_block x, size_block y, size_block z, const std::vector<uint16_t> & data);
+        // Build an empty map...
+        Map();
+        // Build a Map...
+        Map(size_block x, size_block y, size_block z, std::istream &stream);
+
+        static size_block toBlock(size_plot pos);
+        static size_plot toPlot(size_block pos);
+
+        bool isValidBlockX(size_block x) const;
+        bool isValidBlockY(size_block y) const;
+        bool isValidBlockZ(size_block z) const;
+
+        bool isValidBlock(size_block x, size_block y, size_block z) const;
     };
+
+    inline Map::size_block Map::toBlock(size_plot pos)
+    {
+        return pos >> 5;
+    }
+
+    inline Map::size_plot Map::toPlot(size_block pos)
+    {
+        return pos << 5;
+    }
+
+    inline bool Map::isValidBlockX(Map::size_block x) const
+    {
+        return (x >= 0 && x <= x_blocks);
+    }
+
+    inline bool Map::isValidBlockY(Map::size_block y) const
+    {
+        return (y >= 0 && y <= y_blocks);
+    }
+
+    inline bool Map::isValidBlockZ(Map::size_block z) const
+    {
+        return (z >= 0 && z <= z_blocks);
+    }
 }
 
-#endif // MAP_HPP
+#endif // LIBMINECRAFT_MAP_HPP

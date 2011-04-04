@@ -20,23 +20,41 @@
  */
 
 #include "serverleveldonepkt.hpp"
+#include "../minecraftstream.hpp"
+
+#include <iostream>
 
 namespace libminecraft
 {
+    const MinecraftTypes::Byte ServerLevelDonePkt::id = ServerPkt::LEVELDONE;
+
     ServerLevelDonePkt::ServerLevelDonePkt() :
             ServerPkt(ServerPkt::LEVELDONE)
     {
     }
 
-    MinecraftPacket * const ServerLevelDonePkt::Read(std::istream &stream)
+    void ServerLevelDonePkt::read(std::istream &stream)
     {
-        // Nothing happens - empty packet.
-        return new ServerLevelDonePkt();
+        // Read final size
+        MinecraftStream::getSignedShort(stream, size_x);
+        MinecraftStream::getSignedShort(stream, size_y);
+        MinecraftStream::getSignedShort(stream, size_z);
     }
 
-    void ServerLevelDonePkt::Write(std::ostream &stream) const
+    void ServerLevelDonePkt::write(std::ostream &stream) const
     {
-        const unsigned char id = 0x04;
-        stream << id;
+        MinecraftStream::putByte(stream, ServerLevelDonePkt::id);
+        MinecraftStream::putSignedShort(stream, size_x);
+        MinecraftStream::putSignedShort(stream, size_y);
+        MinecraftStream::putSignedShort(stream, size_z);
     }
+
+    void ServerLevelDonePkt::toReadable(std::ostream &os) const
+    {
+        os << "Size X: " << size_x << "\n";
+        os << "Size Y: " << size_y << "\n";
+        os << "Size Z: " << size_z << std::endl;
+    }
+
+
 }

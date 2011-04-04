@@ -19,27 +19,28 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CLIENTSTATEMACHINE_HPP
-#define CLIENTSTATEMACHINE_HPP
+#ifndef LIBMINECRAFT_CLIENTSTATEMACHINE_HPP
+#define LIBMINECRAFT_CLIENTSTATEMACHINE_HPP
 
 #include "../../support/fsm/actionstatemachine.hpp"
 
 // Include all the states...
-#include "state/clistate.hpp"
+#include "clistate.hpp"
 
 #include "state/clidisconnected.hpp"
 #include "state/cliconnecting.hpp"
 #include "state/clinegotiating.hpp"
 #include "state/cliloadingmap.hpp"
-//#include "state/cligame.hpp"
-
+#include "state/cligame.hpp"
 
 namespace libminecraft
 {
-    class MinecraftSession;
+    class RemoteSession;
 
     class ClientStateMachine : public ActionStateMachine<ClientStateMachine, const CliState>
     {
+        // Forward-declare remote session.
+
     public:
         // Create a container for all states statically for const references.
         // This way, all the states have access to protected/private content.
@@ -49,13 +50,13 @@ namespace libminecraft
             CliConnecting CLI_CONNECTING;
             CliNegotiating CLI_NEGOTIATING;
             CliLoadingMap CLI_LOADINGMAP;
-            //CliGame CLI_GAME;
+            CliGame CLI_GAME;
         } States;
 
-        ClientStateMachine(MinecraftSession & session);
+        ClientStateMachine(RemoteSession & session);
 
-        MinecraftSession & session;
+        RemoteSession & session;
     };
 }
 
-#endif // CLIENTSTATEMACHINE_HPP
+#endif // LIBMINECRAFT_CLIENTSTATEMACHINE_HPP

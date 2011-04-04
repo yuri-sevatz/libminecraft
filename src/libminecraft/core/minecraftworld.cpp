@@ -23,11 +23,65 @@
 
 namespace libminecraft
 {
-    MinecraftWorld::MinecraftWorld() :
-            _map(0, 0, 0, std::vector<uint16_t>() /* empty */),
-            map(_map),
-            entities(_entities)
+    MinecraftWorld::MinecraftWorld()
     {
 
+    }
+
+    bool MinecraftWorld::addPlayer(Player & player)
+    {
+        if (entities.find(player.id) != entities.end())
+            return false;
+
+        entities.insert(std::pair<uint8_t, Player>(player.id, player));
+        return true;
+    }
+
+    bool MinecraftWorld::hasPlayer(uint8_t player_id) const
+    {
+        return (entities.find(player_id) != entities.end());
+    }
+
+    bool MinecraftWorld::removePlayer(uint8_t player_id)
+    {
+        std::map<uint8_t, Player>::iterator p_player = entities.find(player_id);
+
+        if (p_player == entities.end())
+            return false;
+
+        entities.erase(p_player);
+        return true;
+    }
+
+    Player * const MinecraftWorld::getPlayer(uint8_t player_id)
+    {
+        std::map<uint8_t, Player>::iterator p_player = entities.find(player_id);
+
+        if (p_player != entities.end())
+            return &p_player->second;
+
+        return NULL;
+    }
+
+    const Player * const MinecraftWorld::getPlayer(uint8_t player_id) const
+    {
+        std::map<uint8_t, Player>::const_iterator p_player = entities.find(player_id);
+
+        if (p_player != entities.end())
+            return &p_player->second;
+
+        return NULL;
+    }
+
+    const Player * const MinecraftWorld::getPlayer(const std::string &name) const
+    {
+        for (std::map<uint8_t, Player>::const_iterator p_player = entities.begin();
+                p_player != entities.end(); p_player++)
+        {
+            if (name == p_player->second.name)
+                return &p_player->second;
+        }
+
+        return NULL;
     }
 }

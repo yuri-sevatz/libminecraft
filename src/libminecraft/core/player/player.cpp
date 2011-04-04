@@ -21,6 +21,9 @@
 
 #include "player.hpp"
 
-Player::Player()
+namespace libminecraft
 {
+    Player::Player() : pitch(0), yaw(0)
+    {
+    }
 }

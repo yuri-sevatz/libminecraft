@@ -19,10 +19,10 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CLIDISCONECTED_HPP
-#define CLIDISCONECTED_HPP
+#ifndef LIBMINECRAFT_CLIDISCONECTED_HPP
+#define LIBMINECRAFT_CLIDISCONECTED_HPP
 
-#include "clistate.hpp"
+#include "../clistate.hpp"
 
 #include "../../../exceptions/networkexception.hpp"
 
@@ -38,4 +38,4 @@ namespace libminecraft
     };
 }
 
-#endif // CLIDISCONECTED_HPP
+#endif // LIBMINECRAFT_CLIDISCONECTED_HPP

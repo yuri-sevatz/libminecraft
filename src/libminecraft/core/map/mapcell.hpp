@@ -19,8 +19,8 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MAPCELL_HPP
-#define MAPCELL_HPP
+#ifndef LIBMINECRAFT_MAPCELL_HPP
+#define LIBMINECRAFT_MAPCELL_HPP
 
 #include <inttypes.h>
 
@@ -124,8 +124,8 @@ namespace libminecraft
 
     public:
         MapCell(MapCell::BlockType t);
-        static BlockType GetCellType(unsigned char num);
+        static BlockType GetCellType(int8_t num);
     };
 }
 
-#endif // MAPCELL_HPP
+#endif // LIBMINECRAFT_MAPCELL_HPP

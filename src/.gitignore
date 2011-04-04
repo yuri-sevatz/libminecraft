@@ -1,0 +1,8 @@
+#Ignore QtCreator Files
+*.creator
+*.creator.user
+*.files
+*.config
+*.includes
+.*
+!.gitignore

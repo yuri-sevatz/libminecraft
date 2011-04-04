@@ -26,7 +26,7 @@ namespace libminecraft
     // Declare/Initialize the Default States
     const ClientStateMachine::StatesDefs ClientStateMachine::States;
 
-    ClientStateMachine::ClientStateMachine(MinecraftSession & session) :
+    ClientStateMachine::ClientStateMachine(RemoteSession & session) :
             ActionStateMachine<ClientStateMachine, const CliState>(*this, States.CLI_DISCONNECTED),
             session(session)
     {

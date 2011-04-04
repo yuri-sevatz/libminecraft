@@ -19,8 +19,8 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MAPEXCEPTION_HPP
-#define MAPEXCEPTION_HPP
+#ifndef LIBMINECRAFT_MAPEXCEPTION_HPP
+#define LIBMINECRAFT_MAPEXCEPTION_HPP
 
 #include "minecraftexception.hpp"
 
@@ -35,4 +35,4 @@ namespace libminecraft
 
 }
 
-#endif // MAPEXCEPTION_HPP
+#endif // LIBMINECRAFT_MAPEXCEPTION_HPP

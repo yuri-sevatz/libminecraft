@@ -19,8 +19,8 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CLIENTPKT_HPP
-#define CLIENTPKT_HPP
+#ifndef LIBMINECRAFT_CLIENTPKT_HPP
+#define LIBMINECRAFT_CLIENTPKT_HPP
 
 #include "../minecraftpacket.hpp"
 
@@ -45,4 +45,4 @@ namespace libminecraft
     };
 }
 
-#endif // CLIENTPKT_HPP
+#endif // LIBMINECRAFT_CLIENTPKT_HPP

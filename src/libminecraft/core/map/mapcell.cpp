@@ -94,10 +94,10 @@ namespace libminecraft
 
     }
 
-    MapCell::BlockType MapCell::GetCellType(unsigned char num)
+    MapCell::BlockType MapCell::GetCellType(int8_t num)
     {
         // If the val is allowed in the classic version...
-        if (num < 50)
+        if (num >= 0 && num < 50)
             return (MapCell::BlockType) num;
         else
             throw MapException("Invalid Block Type Detected");

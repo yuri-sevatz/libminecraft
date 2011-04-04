@@ -19,8 +19,8 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef NETWORKEXCEPTION_HPP
-#define NETWORKEXCEPTION_HPP
+#ifndef LIBMINECRAFT_NETWORKEXCEPTION_HPP
+#define LIBMINECRAFT_NETWORKEXCEPTION_HPP
 
 #include "minecraftexception.hpp"
 
@@ -34,4 +34,4 @@ namespace libminecraft
     };
 }
 
-#endif // NETWORKEXCEPTION_HPP
+#endif // LIBMINECRAFT_NETWORKEXCEPTION_HPP
