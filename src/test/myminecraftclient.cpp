@@ -40,7 +40,7 @@ void MyMinecraftClient::onClientSpawn()
 
 void MyMinecraftClient::onMessage(Player::t_id id, const std::string & message)
 {
-    std::cout << "onMessage(" << (unsigned int) id << ", " << message << std::endl;
+    std::cout << "onMessage(" << (unsigned int) id << ", " << message << ")" << std::endl;
 
     // Remove any silly opensource server color codes.
     // We won't trust the id, since most of them use the wrong one!
