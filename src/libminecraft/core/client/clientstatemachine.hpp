@@ -35,28 +35,31 @@
 
 namespace libminecraft
 {
-    class RemoteSession;
-
-    class ClientStateMachine : public ActionStateMachine<ClientStateMachine, const CliState>
+    namespace classic
     {
-        // Forward-declare remote session.
+        class RemoteSession;
 
-    public:
-        // Create a container for all states statically for const references.
-        // This way, all the states have access to protected/private content.
-        static const struct StatesDefs
+        class ClientStateMachine : public ActionStateMachine<ClientStateMachine, const CliState>
         {
-            CliDisconnected CLI_DISCONNECTED;
-            CliConnecting CLI_CONNECTING;
-            CliNegotiating CLI_NEGOTIATING;
-            CliLoadingMap CLI_LOADINGMAP;
-            CliGame CLI_GAME;
-        } States;
+            // Forward-declare remote session.
 
-        ClientStateMachine(RemoteSession & session);
+        public:
+            // Create a container for all states statically for const references.
+            // This way, all the states have access to protected/private content.
+            static const struct StatesDefs
+            {
+                CliDisconnected CLI_DISCONNECTED;
+                CliConnecting CLI_CONNECTING;
+                CliNegotiating CLI_NEGOTIATING;
+                CliLoadingMap CLI_LOADINGMAP;
+                CliGame CLI_GAME;
+            } States;
 
-        RemoteSession & session;
-    };
+            ClientStateMachine(RemoteSession & session);
+
+            RemoteSession & session;
+        };
+    }
 }
 
 #endif // LIBMINECRAFT_CLIENTSTATEMACHINE_HPP

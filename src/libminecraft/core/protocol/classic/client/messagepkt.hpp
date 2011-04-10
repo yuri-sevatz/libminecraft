@@ -1,5 +1,5 @@
 /*
- * cligame.hpp
+ * messagepkt.hpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 03/2011.
@@ -19,26 +19,35 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_CLIGAME_HPP
-#define LIBMINECRAFT_CLIGAME_HPP
+#ifndef LIBMINECRAFT_CLASSIC_CLIENT_MESSAGEPKT_HPP
+#define LIBMINECRAFT_CLASSIC_CLIENT_MESSAGEPKT_HPP
 
-#include "../clistate.hpp"
+#include "packet.hpp"
 
-#include "../../../exceptions/protocolexception.hpp"
+#include <string>
 
 namespace libminecraft
 {
     namespace classic
     {
-        class CliGame : public CliState
+        namespace client
         {
-        public:
-            CliGame();
-            virtual void Enter(t_owner &owner) const;
-            virtual void Update(t_owner &owner) const;
-            virtual void Exit(t_owner &owner) const;
-        };
+            class MessagePkt : public Packet
+            {
+            public:
+                static const NetworkTypes::Byte id = Packet::MESSAGE;
+
+                NetworkTypes::Byte unused;
+                std::string message;
+
+            public:
+                MessagePkt();
+                virtual void read(std::istream &stream);
+                virtual void write(std::ostream &os) const;
+                virtual void toReadable(std::ostream &os) const;
+            };
+        }
     }
 }
 
-#endif // LIBMINECRAFT_CLIGAME_HPP
+#endif // LIBMINECRAFT_CLIENTMESSAGEPKT_HPP

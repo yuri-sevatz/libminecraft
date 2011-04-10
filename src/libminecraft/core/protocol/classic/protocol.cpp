@@ -1,9 +1,9 @@
 /*
- * clinegotiating.hpp
+ * protocol.cpp
  * This file is part of LibMinecraft.
  *
- * Created by Yuri Sevatz on 11/2010.
- * Copyright (c) 2010 Yuri Sevatz. All rights reserved
+ * Created by Yuri Sevatz on 04/2011.
+ * Copyright (c) 2011 Yuri Sevatz. All rights reserved
  *
  * LibMinecraft is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,27 +19,16 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_CLINEGOTIATING_HPP
-#define LIBMINECRAFT_CLINEGOTIATING_HPP
-
-#include "../clistate.hpp"
-
-#include "../../../exceptions/loginexception.hpp"
-#include "../../../exceptions/protocolexception.hpp"
+#include "protocol.hpp"
 
 namespace libminecraft
 {
     namespace classic
     {
-        class CliNegotiating : public CliState
+        Protocol::Protocol(std::iostream & stream) :
+                stream(stream)
         {
-        public:
-            CliNegotiating();
-            virtual void Enter(t_owner &owner) const;
-            virtual void Update(t_owner &owner) const;
-            virtual void Exit(t_owner &owner) const;
-        };
+
+        }
     }
 }
-
-#endif // LIBMINECRAFT_CLINEGOTIATING_HPP

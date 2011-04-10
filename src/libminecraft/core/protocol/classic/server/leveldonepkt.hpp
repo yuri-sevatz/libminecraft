@@ -1,5 +1,5 @@
 /*
- * clinegotiating.hpp
+ * leveldonepkt.hpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 11/2010.
@@ -19,27 +19,33 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_CLINEGOTIATING_HPP
-#define LIBMINECRAFT_CLINEGOTIATING_HPP
+#ifndef LIBMINECRAFT_CLASSIC_SERVER_LEVELDONEPKT_HPP
+#define LIBMINECRAFT_CLASSIC_SERVER_LEVELDONEPKT_HPP
 
-#include "../clistate.hpp"
-
-#include "../../../exceptions/loginexception.hpp"
-#include "../../../exceptions/protocolexception.hpp"
+#include "packet.hpp"
 
 namespace libminecraft
 {
     namespace classic
     {
-        class CliNegotiating : public CliState
+        namespace server
         {
-        public:
-            CliNegotiating();
-            virtual void Enter(t_owner &owner) const;
-            virtual void Update(t_owner &owner) const;
-            virtual void Exit(t_owner &owner) const;
-        };
+            class LevelDonePkt : public Packet
+            {
+            public:
+                static const NetworkTypes::Byte id;
+
+                NetworkTypes::SShort size_x;
+                NetworkTypes::SShort size_y;
+                NetworkTypes::SShort size_z;
+            public:
+                LevelDonePkt();
+                virtual void read(std::istream &stream);
+                virtual void write(std::ostream &os) const;
+                virtual void toReadable(std::ostream &os) const;
+            };
+        }
     }
 }
 
-#endif // LIBMINECRAFT_CLINEGOTIATING_HPP
+#endif // LIBMINECRAFT_CLASSIC_SERVER_LEVELDONEPKT_HPP

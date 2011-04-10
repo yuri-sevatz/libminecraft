@@ -1,5 +1,5 @@
 /*
- * cligame.hpp
+ * SetBlockPkt.hpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 03/2011.
@@ -19,26 +19,34 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_CLIGAME_HPP
-#define LIBMINECRAFT_CLIGAME_HPP
+#ifndef LIBMINECRAFT_CLASSIC_SERVER_SETBLOCKPKT_HPP
+#define LIBMINECRAFT_CLASSIC_SERVER_SETBLOCKPKT_HPP
 
-#include "../clistate.hpp"
-
-#include "../../../exceptions/protocolexception.hpp"
+#include "packet.hpp"
 
 namespace libminecraft
 {
     namespace classic
     {
-        class CliGame : public CliState
+        namespace server
         {
-        public:
-            CliGame();
-            virtual void Enter(t_owner &owner) const;
-            virtual void Update(t_owner &owner) const;
-            virtual void Exit(t_owner &owner) const;
-        };
+            class SetBlockPkt : public Packet
+            {
+            public:
+                static const NetworkTypes::Byte id;
+
+                NetworkTypes::SShort x;
+                NetworkTypes::SShort y;
+                NetworkTypes::SShort z;
+                NetworkTypes::Byte type;
+
+                SetBlockPkt();
+                virtual void read(std::istream &is);
+                virtual void write(std::ostream &os) const;
+                virtual void toReadable(std::ostream &os) const;
+            };
+        }
     }
 }
 
-#endif // LIBMINECRAFT_CLIGAME_HPP
+#endif // LIBMINECRAFT_CLASSIC_SERVER_SETBLOCKPKT_HPP

@@ -1,5 +1,5 @@
 /*
- * cligame.hpp
+ * disconnectpkt.cpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 03/2011.
@@ -19,26 +19,40 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_CLIGAME_HPP
-#define LIBMINECRAFT_CLIGAME_HPP
+#include "disconnectpkt.hpp"
 
-#include "../clistate.hpp"
-
-#include "../../../exceptions/protocolexception.hpp"
+#include "../../stream.hpp"
 
 namespace libminecraft
 {
     namespace classic
     {
-        class CliGame : public CliState
+        namespace server
         {
-        public:
-            CliGame();
-            virtual void Enter(t_owner &owner) const;
-            virtual void Update(t_owner &owner) const;
-            virtual void Exit(t_owner &owner) const;
-        };
+            const NetworkTypes::Byte DisconnectPkt::id = Packet::DISCONNECT;
+
+            DisconnectPkt::DisconnectPkt() :
+                    Packet(Packet::DISCONNECT)
+            {
+            }
+
+            void DisconnectPkt::read(std::istream &stream)
+            {
+                Stream::getString(stream, reason);
+            }
+
+            void DisconnectPkt::write(std::ostream &stream) const
+            {
+                Stream::putByte(stream, DisconnectPkt::id);
+
+                Stream::putString(stream, reason);
+            }
+
+            void DisconnectPkt::toReadable(std::ostream &os) const
+            {
+                os << "Reason: " << reason << std::endl;
+            }
+        }
     }
 }
 
-#endif // LIBMINECRAFT_CLIGAME_HPP

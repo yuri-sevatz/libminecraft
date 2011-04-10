@@ -1,5 +1,5 @@
 /*
- * clinegotiating.hpp
+ * levelbeginpkt.cpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 11/2010.
@@ -19,27 +19,37 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_CLINEGOTIATING_HPP
-#define LIBMINECRAFT_CLINEGOTIATING_HPP
+#include "levelbeginpkt.hpp"
 
-#include "../clistate.hpp"
-
-#include "../../../exceptions/loginexception.hpp"
-#include "../../../exceptions/protocolexception.hpp"
+#include "../../stream.hpp"
 
 namespace libminecraft
 {
     namespace classic
     {
-        class CliNegotiating : public CliState
+        namespace server
         {
-        public:
-            CliNegotiating();
-            virtual void Enter(t_owner &owner) const;
-            virtual void Update(t_owner &owner) const;
-            virtual void Exit(t_owner &owner) const;
-        };
+            const NetworkTypes::Byte LevelBeginPkt::id = Packet::LEVELBEGIN;
+
+            LevelBeginPkt::LevelBeginPkt()
+                : Packet(Packet::LEVELBEGIN)
+            {
+            }
+
+            void LevelBeginPkt::read(std::istream &stream)
+            {
+
+            }
+
+            void LevelBeginPkt::write(std::ostream &stream) const
+            {
+                Stream::putByte(stream, LevelBeginPkt::id);
+            }
+
+            void LevelBeginPkt::toReadable(std::ostream &os) const
+            {
+
+            }
+        }
     }
 }
-
-#endif // LIBMINECRAFT_CLINEGOTIATING_HPP

@@ -1,8 +1,8 @@
 /*
- * cligame.hpp
+ * packet.hpp
  * This file is part of LibMinecraft.
  *
- * Created by Yuri Sevatz on 03/2011.
+ * Created by Yuri Sevatz on 04/2011.
  * Copyright (c) 2011 Yuri Sevatz. All rights reserved
  *
  * LibMinecraft is free software: you can redistribute it and/or modify
@@ -19,26 +19,36 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_CLIGAME_HPP
-#define LIBMINECRAFT_CLIGAME_HPP
+#ifndef LIBMINECRAFT_CLASSIC_CLIENT_PACKET_HPP
+#define LIBMINECRAFT_CLASSIC_CLIENT_PACKET_HPP
 
-#include "../clistate.hpp"
-
-#include "../../../exceptions/protocolexception.hpp"
+#include "../packet.hpp"
 
 namespace libminecraft
 {
     namespace classic
     {
-        class CliGame : public CliState
+        namespace client
         {
-        public:
-            CliGame();
-            virtual void Enter(t_owner &owner) const;
-            virtual void Update(t_owner &owner) const;
-            virtual void Exit(t_owner &owner) const;
-        };
+            // Categorization of MinecraftPacket - packets moving from the client.
+            class Packet : public classic::Packet
+            {
+            public:
+                enum Type
+                {
+                    IDENT = 0x00,
+                    BLOCK = 0x05,
+                    POSDIR = 0x08,
+                    MESSAGE = 0x0d
+                };
+
+                // Type of packet - for faster runtime type detection.
+                const Type type;
+            protected:
+                Packet(Type t);
+            };
+        }
     }
 }
 
-#endif // LIBMINECRAFT_CLIGAME_HPP
+#endif // LIBMINECRAFT_CLASSIC_CLIENT_PACKET_HPP

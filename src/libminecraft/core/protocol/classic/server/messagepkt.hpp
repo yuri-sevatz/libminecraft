@@ -1,9 +1,9 @@
 /*
- * clinegotiating.hpp
+ * messagepkt.hpp
  * This file is part of LibMinecraft.
  *
- * Created by Yuri Sevatz on 11/2010.
- * Copyright (c) 2010 Yuri Sevatz. All rights reserved
+ * Created by Yuri Sevatz on 03/2011.
+ * Copyright (c) 2011 Yuri Sevatz. All rights reserved
  *
  * LibMinecraft is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,27 +19,34 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_CLINEGOTIATING_HPP
-#define LIBMINECRAFT_CLINEGOTIATING_HPP
+#ifndef LIBMINECRAFT_CLASSIC_SERVER_MESSAGEPKT_HPP
+#define LIBMINECRAFT_CLASSIC_SERVER_MESSAGEPKT_HPP
 
-#include "../clistate.hpp"
+#include "packet.hpp"
 
-#include "../../../exceptions/loginexception.hpp"
-#include "../../../exceptions/protocolexception.hpp"
+#include <string>
 
 namespace libminecraft
 {
     namespace classic
     {
-        class CliNegotiating : public CliState
+        namespace server
         {
-        public:
-            CliNegotiating();
-            virtual void Enter(t_owner &owner) const;
-            virtual void Update(t_owner &owner) const;
-            virtual void Exit(t_owner &owner) const;
-        };
+            class MessagePkt : public Packet
+            {
+            public:
+                static const NetworkTypes::Byte id;
+
+                NetworkTypes::Byte player_id;
+                std::string message;
+
+                MessagePkt();
+                virtual void read(std::istream &is);
+                virtual void write(std::ostream &os) const;
+                virtual void toReadable(std::ostream &os) const;
+            };
+        }
     }
 }
 
-#endif // LIBMINECRAFT_CLINEGOTIATING_HPP
+#endif // LIBMINECRAFT_SERVERMESSAGEPKT_HPP

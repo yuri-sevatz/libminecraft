@@ -1,5 +1,5 @@
 /*
- * clinegotiating.hpp
+ * identpkt.hpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 11/2010.
@@ -19,27 +19,36 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_CLINEGOTIATING_HPP
-#define LIBMINECRAFT_CLINEGOTIATING_HPP
+#ifndef LIBMINECRAFT_CLASSIC_SERVER_IDENTPKT_HPP
+#define LIBMINECRAFT_CLASSIC_SERVER_IDENTPKT_HPP
 
-#include "../clistate.hpp"
+#include "packet.hpp"
 
-#include "../../../exceptions/loginexception.hpp"
-#include "../../../exceptions/protocolexception.hpp"
+#include <string>
 
 namespace libminecraft
 {
     namespace classic
     {
-        class CliNegotiating : public CliState
+        namespace server
         {
-        public:
-            CliNegotiating();
-            virtual void Enter(t_owner &owner) const;
-            virtual void Update(t_owner &owner) const;
-            virtual void Exit(t_owner &owner) const;
-        };
+            class IdentPkt : public Packet
+            {
+            public:
+                static const NetworkTypes::Byte id;
+
+                NetworkTypes::Byte srv_version;
+                std::string srv_name;
+                std::string srv_motd;
+                NetworkTypes::Byte user_type;
+            public:
+                IdentPkt();
+                virtual void read(std::istream &stream);
+                virtual void write(std::ostream &stream) const;
+                virtual void toReadable(std::ostream &os) const;
+            };
+        }
     }
 }
 
-#endif // LIBMINECRAFT_CLINEGOTIATING_HPP
+#endif // LIBMINECRAFT_CLASSIC_SERVER_IDENTPKT_HPP

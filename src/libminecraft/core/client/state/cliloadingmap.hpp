@@ -28,14 +28,17 @@
 
 namespace libminecraft
 {
-    class CliLoadingMap : public CliState
+    namespace classic
     {
-    public:
-        CliLoadingMap();
-        virtual void Enter(t_owner &owner) const;
-        virtual void Update(t_owner &owner) const;
-        virtual void Exit(t_owner &owner) const;
-    };
+        class CliLoadingMap : public CliState
+        {
+        public:
+            CliLoadingMap();
+            virtual void Enter(t_owner &owner) const;
+            virtual void Update(t_owner &owner) const;
+            virtual void Exit(t_owner &owner) const;
+        };
+    }
 }
 
 #endif // LIBMINECRAFT_CLILOADINGMAP_HPP

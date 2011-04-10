@@ -1,5 +1,5 @@
 /*
- * cligame.hpp
+ * playeroppkt.cpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 03/2011.
@@ -19,26 +19,41 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_CLIGAME_HPP
-#define LIBMINECRAFT_CLIGAME_HPP
+#include "playeroppkt.hpp"
 
-#include "../clistate.hpp"
-
-#include "../../../exceptions/protocolexception.hpp"
+#include "../../stream.hpp"
 
 namespace libminecraft
 {
     namespace classic
     {
-        class CliGame : public CliState
+        namespace server
         {
-        public:
-            CliGame();
-            virtual void Enter(t_owner &owner) const;
-            virtual void Update(t_owner &owner) const;
-            virtual void Exit(t_owner &owner) const;
-        };
+            const NetworkTypes::Byte PlayerOpPkt::id = Packet::USEROP;
+
+            PlayerOpPkt::PlayerOpPkt() :
+                    Packet(Packet::USEROP)
+            {
+
+            }
+
+            void PlayerOpPkt::read(std::istream &stream)
+            {
+                Stream::getByte(stream, type);
+            }
+
+            void PlayerOpPkt::write(std::ostream &stream) const
+            {
+                Stream::putByte(stream, PlayerOpPkt::id);
+                Stream::putByte(stream, type);
+            }
+
+            void PlayerOpPkt::toReadable(std::ostream &os) const
+            {
+                os << "Op Type: " << (int) type << std::endl;
+            }
+        }
     }
 }
 
-#endif // LIBMINECRAFT_CLIGAME_HPP
+

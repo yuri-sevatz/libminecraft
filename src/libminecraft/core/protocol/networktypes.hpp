@@ -1,9 +1,9 @@
 /*
- * clinegotiating.hpp
+ * minecrafttypes.hpp
  * This file is part of LibMinecraft.
  *
- * Created by Yuri Sevatz on 11/2010.
- * Copyright (c) 2010 Yuri Sevatz. All rights reserved
+ * Created by Yuri Sevatz on 03/2011.
+ * Copyright (c) 2011 Yuri Sevatz. All rights reserved
  *
  * LibMinecraft is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,27 +19,17 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_CLINEGOTIATING_HPP
-#define LIBMINECRAFT_CLINEGOTIATING_HPP
+#ifndef LIBMINECRAFT_NETWORKTYPES_HPP
+#define LIBMINECRAFT_NETWORKTYPES_HPP
 
-#include "../clistate.hpp"
+#include <inttypes.h>
 
-#include "../../../exceptions/loginexception.hpp"
-#include "../../../exceptions/protocolexception.hpp"
-
-namespace libminecraft
+class NetworkTypes
 {
-    namespace classic
-    {
-        class CliNegotiating : public CliState
-        {
-        public:
-            CliNegotiating();
-            virtual void Enter(t_owner &owner) const;
-            virtual void Update(t_owner &owner) const;
-            virtual void Exit(t_owner &owner) const;
-        };
-    }
-}
+public:
+    typedef uint8_t Byte;
+    typedef int8_t SByte;
+    typedef int16_t SShort;
+};
 
-#endif // LIBMINECRAFT_CLINEGOTIATING_HPP
+#endif // LIBMINECRAFT_NETWORKTYPES_HPP

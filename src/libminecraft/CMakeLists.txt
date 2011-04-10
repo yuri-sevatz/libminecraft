@@ -56,74 +56,115 @@ set(${PROJECT_NAME}_sources_core_player
     core/player/player.cpp
 )
 
-set(${PROJECT_NAME}_headers_core_protocol_client
-    core/protocol/client/clientidentpkt.hpp
-    core/protocol/client/clientmessagepkt.hpp
-    core/protocol/client/clientpkt.hpp
-    core/protocol/client/clientposdirpkt.hpp
-    core/protocol/client/clientsetblockpkt.hpp
-)
-set(${PROJECT_NAME}_sources_core_protocol_client
-    core/protocol/client/clientidentpkt.cpp
-    core/protocol/client/clientmessagepkt.cpp
-    core/protocol/client/clientpkt.cpp
-    core/protocol/client/clientposdirpkt.cpp
-    core/protocol/client/clientsetblockpkt.cpp
-)
-set(${PROJECT_NAME}_headers_core_protocol_server
-    core/protocol/server/serveridentpkt.hpp
-    core/protocol/server/serverlevelbeginpkt.hpp
-    core/protocol/server/serverlevelchunkpkt.hpp
-    core/protocol/server/serverleveldonepkt.hpp
-    core/protocol/server/servermessagepkt.hpp
-    core/protocol/server/serverplayerdespawnpkt.hpp
-    core/protocol/server/serverplayerdisconnectpkt.hpp
-    core/protocol/server/serverplayerdirpkt.hpp
-    core/protocol/server/serverplayeroppkt.hpp
-    core/protocol/server/serverplayerpospkt.hpp
-    core/protocol/server/serverplayerposdirpkt.hpp
-    core/protocol/server/serverplayerspawnpkt.hpp
-    core/protocol/server/serverplayerteleportpkt.hpp
-    core/protocol/server/serverpingpkt.hpp
-    core/protocol/server/serverpkt.hpp
-    core/protocol/server/serversetblockpkt.hpp
+set(${PROJECT_NAME}_headers_core_protocol_mainline_client
 
 )
-set(${PROJECT_NAME}_sources_core_protocol_server
-    core/protocol/server/serveridentpkt.cpp
-    core/protocol/server/serverlevelbeginpkt.cpp
-    core/protocol/server/serverlevelchunkpkt.cpp
-    core/protocol/server/serverleveldonepkt.cpp
-    core/protocol/server/servermessagepkt.cpp
-    core/protocol/server/serverplayerdespawnpkt.cpp
-    core/protocol/server/serverplayerdisconnectpkt.cpp
-    core/protocol/server/serverplayerdirpkt.cpp
-    core/protocol/server/serverplayeroppkt.cpp
-    core/protocol/server/serverplayerpospkt.cpp
-    core/protocol/server/serverplayerposdirpkt.cpp
-    core/protocol/server/serverplayerspawnpkt.cpp
-    core/protocol/server/serverplayerteleportpkt.cpp
-    core/protocol/server/serverpingpkt.cpp
-    core/protocol/server/serverpkt.cpp
-    core/protocol/server/serversetblockpkt.cpp
+
+set(${PROJECT_NAME}_sources_core_protocol_mainline_client
+
+)
+
+set(${PROJECT_NAME}_headers_core_protocol_mainline_server
+
+)
+
+set(${PROJECT_NAME}_sources_core_protocol_mainline_server
+
+)
+
+set(${PROJECT_NAME}_headers_core_protocol_mainline
+    ${${PROJECT_NAME}_headers_core_protocol_mainline_client}
+    ${${PROJECT_NAME}_headers_core_protocol_mainline_server}
+)
+
+set(${PROJECT_NAME}_sources_core_protocol_mainline
+    ${${PROJECT_NAME}_sources_core_protocol_mainline_client}
+    ${${PROJECT_NAME}_sources_core_protocol_mainline_server}
+)
+
+set(${PROJECT_NAME}_headers_core_protocol_classic_client
+    core/protocol/classic/client/identpkt.hpp
+    core/protocol/classic/client/messagepkt.hpp
+    core/protocol/classic/client/packet.hpp
+    core/protocol/classic/client/posdirpkt.hpp
+    core/protocol/classic/client/protocol.hpp
+    core/protocol/classic/client/setblockpkt.hpp
+)
+
+set(${PROJECT_NAME}_sources_core_protocol_classic_client
+    core/protocol/classic/client/identpkt.cpp
+    core/protocol/classic/client/messagepkt.cpp
+    core/protocol/classic/client/packet.cpp
+    core/protocol/classic/client/posdirpkt.cpp
+    core/protocol/classic/client/protocol.cpp
+    core/protocol/classic/client/setblockpkt.cpp
+)
+
+set(${PROJECT_NAME}_headers_core_protocol_classic_server
+    core/protocol/classic/server/disconnectpkt.hpp
+    core/protocol/classic/server/identpkt.hpp
+    core/protocol/classic/server/levelbeginpkt.hpp
+    core/protocol/classic/server/levelchunkpkt.hpp
+    core/protocol/classic/server/leveldonepkt.hpp
+    core/protocol/classic/server/messagepkt.hpp
+    core/protocol/classic/server/packet.hpp
+    core/protocol/classic/server/playerdespawnpkt.hpp
+    core/protocol/classic/server/playerdirpkt.hpp
+    core/protocol/classic/server/playeroppkt.hpp
+    core/protocol/classic/server/playerpospkt.hpp
+    core/protocol/classic/server/playerposdirpkt.hpp
+    core/protocol/classic/server/playerspawnpkt.hpp
+    core/protocol/classic/server/playerteleportpkt.hpp
+    core/protocol/classic/server/pingpkt.hpp
+    core/protocol/classic/server/protocol.hpp
+    core/protocol/classic/server/setblockpkt.hpp
+)
+
+set(${PROJECT_NAME}_sources_core_protocol_classic_server
+    core/protocol/classic/server/disconnectpkt.cpp
+    core/protocol/classic/server/identpkt.cpp
+    core/protocol/classic/server/levelbeginpkt.cpp
+    core/protocol/classic/server/levelchunkpkt.cpp
+    core/protocol/classic/server/leveldonepkt.cpp
+    core/protocol/classic/server/messagepkt.cpp
+    core/protocol/classic/server/packet.cpp
+    core/protocol/classic/server/playerdespawnpkt.cpp
+    core/protocol/classic/server/playerdirpkt.cpp
+    core/protocol/classic/server/playeroppkt.cpp
+    core/protocol/classic/server/playerpospkt.cpp
+    core/protocol/classic/server/playerposdirpkt.cpp
+    core/protocol/classic/server/playerspawnpkt.cpp
+    core/protocol/classic/server/playerteleportpkt.cpp
+    core/protocol/classic/server/pingpkt.cpp
+    core/protocol/classic/server/protocol.cpp
+    core/protocol/classic/server/setblockpkt.cpp
+)
+
+set(${PROJECT_NAME}_headers_core_protocol_classic
+    ${${PROJECT_NAME}_headers_core_protocol_classic_client}
+    ${${PROJECT_NAME}_headers_core_protocol_classic_server}
+    core/protocol/classic/packet.hpp
+    core/protocol/classic/protocol.hpp
+)
+
+set(${PROJECT_NAME}_sources_core_protocol_classic
+    ${${PROJECT_NAME}_sources_core_protocol_classic_client}
+    ${${PROJECT_NAME}_sources_core_protocol_classic_server}
+    core/protocol/classic/protocol.cpp
 )
 
 set(${PROJECT_NAME}_headers_core_protocol
-    ${${PROJECT_NAME}_headers_core_protocol_client}
-    ${${PROJECT_NAME}_headers_core_protocol_server}
-    core/protocol/baseprotocol.hpp
-    core/protocol/clientprotocol.hpp
-    core/protocol/minecraftpacket.hpp
-    core/protocol/minecraftstream.hpp
-    core/protocol/serverprotocol.hpp
+    ${${PROJECT_NAME}_headers_core_protocol_classic}
+    ${${PROJECT_NAME}_headers_core_protocol_mainline}
+    core/protocol/networktypes.hpp
+    core/protocol/protocol.hpp
+    core/protocol/packet.hpp
+    core/protocol/stream.hpp
 )
 set(${PROJECT_NAME}_sources_core_protocol
-    ${${PROJECT_NAME}_sources_core_protocol_client}
-    ${${PROJECT_NAME}_sources_core_protocol_server}
-    core/protocol/baseprotocol.cpp
-    core/protocol/clientprotocol.cpp
-    core/protocol/minecraftstream.cpp
-    core/protocol/serverprotocol.cpp
+    ${${PROJECT_NAME}_sources_core_protocol_classic}
+    ${${PROJECT_NAME}_sources_core_protocol_mainline}
+    core/protocol/stream.cpp
 )
 
 set(${PROJECT_NAME}_headers_core

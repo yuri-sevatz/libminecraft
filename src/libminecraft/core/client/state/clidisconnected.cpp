@@ -23,20 +23,23 @@
 
 namespace libminecraft
 {
-    CliDisconnected::CliDisconnected()
+    namespace classic
     {
-    }
+        CliDisconnected::CliDisconnected()
+        {
+        }
 
-    void CliDisconnected::Enter(t_owner &owner) const
-    {
+        void CliDisconnected::Enter(t_owner &owner) const
+        {
 
-    }
-    void CliDisconnected::Update(t_owner &owner) const
-    {
-        throw NetworkException("No connection to network - nothing to do.");
-    }
-    void CliDisconnected::Exit(t_owner &owner) const
-    {
+        }
+        void CliDisconnected::Update(t_owner &owner) const
+        {
+            throw NetworkException("No connection to network - nothing to do.");
+        }
+        void CliDisconnected::Exit(t_owner &owner) const
+        {
 
+        }
     }
 }

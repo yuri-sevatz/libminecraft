@@ -1,5 +1,5 @@
 /*
- * clinegotiating.hpp
+ * protocol.hpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 11/2010.
@@ -19,27 +19,34 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_CLINEGOTIATING_HPP
-#define LIBMINECRAFT_CLINEGOTIATING_HPP
+#ifndef LIBMINECRAFT_CLASSIC_SERVER_PROTOCOL_HPP
+#define LIBMINECRAFT_CLASSIC_SERVER_PROTOCOL_HPP
 
-#include "../clistate.hpp"
+#include "../protocol.hpp"
 
-#include "../../../exceptions/loginexception.hpp"
-#include "../../../exceptions/protocolexception.hpp"
+#include "packet.hpp"
+#include "../client/packet.hpp"
 
 namespace libminecraft
 {
     namespace classic
     {
-        class CliNegotiating : public CliState
+        namespace server
         {
-        public:
-            CliNegotiating();
-            virtual void Enter(t_owner &owner) const;
-            virtual void Update(t_owner &owner) const;
-            virtual void Exit(t_owner &owner) const;
-        };
+            class Protocol : public classic::Protocol
+            {
+            public:
+                Protocol(std::iostream &stream);
+
+                // Returns a reference to the next client packet read from a client.
+                // This memory is not freed.
+                client::Packet * const read();
+
+                // Write data from the server.
+                void write(server::Packet & packet);
+            };
+        }
     }
 }
 
-#endif // LIBMINECRAFT_CLINEGOTIATING_HPP
+#endif // LIBMINECRAFT_CLASSIC_SERVER_PROTOCOL_HPP

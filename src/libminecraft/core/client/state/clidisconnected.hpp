@@ -28,14 +28,17 @@
 
 namespace libminecraft
 {
-    class CliDisconnected : public CliState
+    namespace classic
     {
-    public:
-        CliDisconnected();
-        virtual void Enter(t_owner &owner) const;
-        virtual void Update(t_owner &owner) const;
-        virtual void Exit(t_owner &owner) const;
-    };
+        class CliDisconnected : public CliState
+        {
+        public:
+            CliDisconnected();
+            virtual void Enter(t_owner &owner) const;
+            virtual void Update(t_owner &owner) const;
+            virtual void Exit(t_owner &owner) const;
+        };
+    }
 }
 
 #endif // LIBMINECRAFT_CLIDISCONECTED_HPP

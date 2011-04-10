@@ -1,5 +1,5 @@
 /*
- * cligame.hpp
+ * playerpospkt.cpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 03/2011.
@@ -19,26 +19,36 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_CLIGAME_HPP
-#define LIBMINECRAFT_CLIGAME_HPP
+#ifndef LIBMINECRAFT_CLASSIC_SERVER_PLAYERPOSPKT_HPP
+#define LIBMINECRAFT_CLASSIC_SERVER_PLAYERPOSPKT_HPP
 
-#include "../clistate.hpp"
+#include "packet.hpp"
 
-#include "../../../exceptions/protocolexception.hpp"
+#include <string>
 
 namespace libminecraft
 {
     namespace classic
     {
-        class CliGame : public CliState
+        namespace server
         {
-        public:
-            CliGame();
-            virtual void Enter(t_owner &owner) const;
-            virtual void Update(t_owner &owner) const;
-            virtual void Exit(t_owner &owner) const;
-        };
+            class PlayerPosPkt : public Packet
+            {
+            public:
+                static const NetworkTypes::Byte id;
+
+                NetworkTypes::Byte player_id;
+                NetworkTypes::SByte delta_x;
+                NetworkTypes::SByte delta_y;
+                NetworkTypes::SByte delta_z;
+
+                PlayerPosPkt();
+                virtual void read(std::istream &is);
+                virtual void write(std::ostream &os) const;
+                virtual void toReadable(std::ostream &os) const;
+            };
+        }
     }
 }
 
-#endif // LIBMINECRAFT_CLIGAME_HPP
+#endif // LIBMINECRAFT_CLASSIC_SERVER_PLAYERPOSPKT_HPP

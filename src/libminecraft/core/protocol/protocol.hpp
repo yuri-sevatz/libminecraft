@@ -1,5 +1,5 @@
 /*
- * clinegotiating.hpp
+ * baseprotocol.hpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 11/2010.
@@ -19,27 +19,15 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_CLINEGOTIATING_HPP
-#define LIBMINECRAFT_CLINEGOTIATING_HPP
-
-#include "../clistate.hpp"
-
-#include "../../../exceptions/loginexception.hpp"
-#include "../../../exceptions/protocolexception.hpp"
+#ifndef LIBMINECRAFT_PROTOCOL_HPP
+#define LIBMINECRAFT_PROTOCOL_HPP
 
 namespace libminecraft
 {
-    namespace classic
+    class Protocol
     {
-        class CliNegotiating : public CliState
-        {
-        public:
-            CliNegotiating();
-            virtual void Enter(t_owner &owner) const;
-            virtual void Update(t_owner &owner) const;
-            virtual void Exit(t_owner &owner) const;
-        };
-    }
+
+    };
 }
 
-#endif // LIBMINECRAFT_CLINEGOTIATING_HPP
+#endif // LIBMINECRAFT_PROTOCOL_HPP

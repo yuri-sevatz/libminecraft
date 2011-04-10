@@ -26,13 +26,16 @@
 
 namespace libminecraft
 {
-    // Forward-declare the owner.  We only need pointers to this.
-    class ClientStateMachine;
-
-    class CliState : public ActionState<ClientStateMachine>
+    namespace classic
     {
+        // Forward-declare the owner.  We only need pointers to this.
+        class ClientStateMachine;
 
-    };
+        class CliState : public ActionState<ClientStateMachine>
+        {
+
+        };
+    }
 }
 
 #endif // LIBMINECRAFT_CLISTATE_HPP

@@ -28,14 +28,17 @@
 
 namespace libminecraft
 {
-    class CliConnecting : public CliState
+    namespace classic
     {
-    public:
-        CliConnecting();
-        virtual void Enter(t_owner &owner) const;
-        virtual void Update(t_owner &owner) const;
-        virtual void Exit(t_owner &owner) const;
-    };
+        class CliConnecting : public CliState
+        {
+        public:
+            CliConnecting();
+            virtual void Enter(t_owner &owner) const;
+            virtual void Update(t_owner &owner) const;
+            virtual void Exit(t_owner &owner) const;
+        };
+    }
 }
 
 #endif // LIBMINECRAFT_CLICONNECTING_HPP

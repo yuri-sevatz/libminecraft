@@ -1,5 +1,5 @@
 /*
- * cligame.hpp
+ * playerdespawnpkt.cpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 03/2011.
@@ -19,26 +19,40 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_CLIGAME_HPP
-#define LIBMINECRAFT_CLIGAME_HPP
+#include "playerdespawnpkt.hpp"
 
-#include "../clistate.hpp"
-
-#include "../../../exceptions/protocolexception.hpp"
+#include "../../stream.hpp"
 
 namespace libminecraft
 {
     namespace classic
     {
-        class CliGame : public CliState
+        namespace server
         {
-        public:
-            CliGame();
-            virtual void Enter(t_owner &owner) const;
-            virtual void Update(t_owner &owner) const;
-            virtual void Exit(t_owner &owner) const;
-        };
+            const NetworkTypes::Byte PlayerDespawnPkt::id = Packet::DESPAWN;
+
+            PlayerDespawnPkt::PlayerDespawnPkt() :
+                    Packet(Packet::DESPAWN)
+            {
+            }
+
+            void PlayerDespawnPkt::read(std::istream &stream)
+            {
+                Stream::getByte(stream, player_id);
+            }
+
+            void PlayerDespawnPkt::write(std::ostream &stream) const
+            {
+                Stream::putByte(stream, PlayerDespawnPkt::id);
+
+                Stream::putByte(stream, player_id);
+            }
+
+            void PlayerDespawnPkt::toReadable(std::ostream &os) const
+            {
+                os << "Player ID: " << (unsigned int) player_id << std::endl;
+            }
+        }
     }
 }
 
-#endif // LIBMINECRAFT_CLIGAME_HPP

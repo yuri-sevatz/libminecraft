@@ -28,22 +28,25 @@
 
 namespace libminecraft
 {
-    CliConnecting::CliConnecting()
+    namespace classic
     {
-    }
+        CliConnecting::CliConnecting()
+        {
+        }
 
-    void CliConnecting::Enter(t_owner &owner) const
-    {
-        std::cerr << "Connecting..." << std::endl;
-    }
-    void CliConnecting::Update(t_owner &owner) const
-    {
-        // Since boost asio iostream FAILS at error support...
-        // then we move into the next state and we handle connecting problems there :/
-        owner.ChangeState(owner.States.CLI_NEGOTIATING);
-    }
-    void CliConnecting::Exit(t_owner &owner) const
-    {
+        void CliConnecting::Enter(t_owner &owner) const
+        {
+            std::cerr << "Connecting..." << std::endl;
+        }
+        void CliConnecting::Update(t_owner &owner) const
+        {
+            // Since boost asio iostream FAILS at error support...
+            // then we move into the next state and we handle connecting problems there :/
+            owner.ChangeState(owner.States.CLI_NEGOTIATING);
+        }
+        void CliConnecting::Exit(t_owner &owner) const
+        {
 
+        }
     }
 }
