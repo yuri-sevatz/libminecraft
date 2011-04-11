@@ -46,7 +46,7 @@ int main(int argc, char * argv[])
     std::string port(argv[2]);
 
     // Create the session.
-    libminecraft::RemoteSession session(hostname, port);
+    libminecraft::classic::RemoteSession session(hostname, port);
 
     // Instantiate our client, give it the session.
     MyMinecraftClient client(session);
