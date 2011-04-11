@@ -64,22 +64,36 @@ set(${PROJECT_NAME}_sources_core_protocol_mainline_client
 
 )
 
-set(${PROJECT_NAME}_headers_core_protocol_mainline_server
+set(${PROJECT_NAME}_headers_core_protocol_mainline_server_packet
+	core/protocol/mainline/server/packet/ping.hpp
+)
 
+set(${PROJECT_NAME}_sources_core_protocol_mainline_server_packet
+	core/protocol/mainline/server/packet/ping.cpp
+)
+
+set(${PROJECT_NAME}_headers_core_protocol_mainline_server
+    ${${PROJECT_NAME}_headers_core_protocol_mainline_server_packet}
+	core/protocol/mainline/server/packet.hpp
+	core/protocol/mainline/server/protocol.hpp
 )
 
 set(${PROJECT_NAME}_sources_core_protocol_mainline_server
-
+    ${${PROJECT_NAME}_sources_core_protocol_mainline_server_packet}
+	core/protocol/mainline/server/protocol.cpp
 )
 
 set(${PROJECT_NAME}_headers_core_protocol_mainline
     ${${PROJECT_NAME}_headers_core_protocol_mainline_client}
     ${${PROJECT_NAME}_headers_core_protocol_mainline_server}
+    core/protocol/mainline/packet.hpp
+    core/protocol/mainline/protocol.hpp
 )
 
 set(${PROJECT_NAME}_sources_core_protocol_mainline
     ${${PROJECT_NAME}_sources_core_protocol_mainline_client}
     ${${PROJECT_NAME}_sources_core_protocol_mainline_server}
+    core/protocol/mainline/protocol.cpp
 )
 
 set(${PROJECT_NAME}_headers_core_protocol_classic_client
