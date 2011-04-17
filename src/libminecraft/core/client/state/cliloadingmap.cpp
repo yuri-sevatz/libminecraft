@@ -25,14 +25,12 @@
 #include "../clientstatemachine.hpp"
 #include "../../../session/remotesession.hpp"
 
-#include "../../protocol/classic/server/levelchunkpkt.hpp"
-#include "../../protocol/classic/server/leveldonepkt.hpp"
+#include "../../protocol/classic/server/packet/levelbegin.hpp"
+#include "../../protocol/classic/server/packet/levelchunk.hpp"
+#include "../../protocol/classic/server/packet/leveldone.hpp"
 
 #include <boost/iostreams/filtering_stream.hpp>
 #include <boost/iostreams/filter/gzip.hpp>
-
-
-#include "../../protocol/classic/client/messagepkt.hpp"
 
 namespace libminecraft
 {
@@ -46,28 +44,32 @@ namespace libminecraft
         void CliLoadingMap::Enter(t_owner &owner) const
         {
             std::cerr << "Loading Map..." << std::endl;
+
+            // Grab the packet out of the stream (it has no payload in classic)
+            server::packet::LevelBegin beginpkt;
+            owner.session.client.read(beginpkt);
         }
         void CliLoadingMap::Update(t_owner &owner) const
         {
             // Read some map data...
-            server::Packet * const packet = owner.session.proto.read();
-
-            switch (packet->type)
+            switch (owner.session.client.next())
             {
             case server::Packet::LEVELCHUNK:
                 {
-                    server::LevelChunkPkt * const lvlchunk = (server::LevelChunkPkt * const) packet;
+                    server::packet::LevelChunk lvlchunk;
+                    owner.session.client.read(lvlchunk);
 
                     std::copy(
-                            lvlchunk->data.begin(),
-                            lvlchunk->data.end(),
+                            lvlchunk.data.begin(),
+                            lvlchunk.data.end(),
                             std::ostream_iterator<unsigned char>(owner.session.gz_data)
-                    );
+                            );
                 }
                 break;
             case server::Packet::LEVELDONE:
                 {
-                    server::LevelDonePkt * const lvldone = (server::LevelDonePkt * const) packet;
+                    server::packet::LevelDone lvldone;
+                    owner.session.client.read(lvldone);
 
                     // Create a decompression input streambuf and stream from the compressed map stream.
                     boost::iostreams::filtering_istream in;
@@ -75,21 +77,16 @@ namespace libminecraft
                     in.push(owner.session.gz_data);
 
                     // Stream the decompressed map data into the map.
-                    owner.session._world.map = Map(lvldone->size_x, lvldone->size_y, lvldone->size_z, in);
+                    owner.session._world.map = Map(lvldone.size_x, lvldone.size_y, lvldone.size_z, in);
 
                     // Welcome to the server!
                     owner.ChangeState(owner.States.CLI_GAME);
                 }
                 break;
-            case server::Packet::PING:
-                break;
             default:
-                delete packet;
-                std::cerr << packet->type << std::endl;
+                std::cerr << (int) owner.session.client.next() << std::endl;
                 throw ProtocolException("Unexpected packet received during map data");
             }
-
-            delete packet;
         }
         void CliLoadingMap::Exit(t_owner &owner) const
         {

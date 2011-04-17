@@ -22,21 +22,16 @@
 #ifndef LIBMINECRAFT_MAINLINE_PROTOCOL_HPP
 #define LIBMINECRAFT_MAINLINE_PROTOCOL_HPP
 
-#include <iostream>
-
 #include "../protocol.hpp"
 
 namespace libminecraft
 {
     namespace mainline
     {
-        class Protocol : public libminecraft::Protocol
+        template<class TProtocol, class TPacket, typename TPacketID>
+        class Protocol : public libminecraft::Protocol<TProtocol, TPacket, TPacketID>
         {
-        protected:
-            // A single stream exists in the classic protocol for a session.
-            std::iostream & stream;
-        public:
-            Protocol(std::iostream & stream);
+            static const MCTypes::Byte version = 0x0A;
         };
     }
 }

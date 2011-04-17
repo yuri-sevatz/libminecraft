@@ -2,8 +2,8 @@
  * protocol.hpp
  * This file is part of LibMinecraft.
  *
- * Created by Yuri Sevatz on 11/2010.
- * Copyright (c) 2010 Yuri Sevatz. All rights reserved
+ * Created by Yuri Sevatz on 04/2011.
+ * Copyright (c) 2011 Yuri Sevatz. All rights reserved
  *
  * LibMinecraft is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,9 +23,7 @@
 #define LIBMINECRAFT_CLASSIC_CLIENT_PROTOCOL_HPP
 
 #include "../protocol.hpp"
-
 #include "packet.hpp"
-#include "../server/packet.hpp"
 
 namespace libminecraft
 {
@@ -33,19 +31,9 @@ namespace libminecraft
     {
         namespace client
         {
-            // This class is responsible for the embodiment of all Client I/O parsing/writing.
-            // Meant to separate the "reacting" code from the logic of a minecraft client.
-            class Protocol : public classic::Protocol
+            class Protocol : public classic::Protocol<Protocol,Packet,Packet::PacketID>
             {
-            public:
-                Protocol(std::iostream &stream);
 
-                // Returns a reference to the next client packet read from a server.
-                // This memory is not freed.
-                server::Packet * const read();
-
-                // Write data from the client
-                void write(client::Packet & packet);
             };
         }
     }

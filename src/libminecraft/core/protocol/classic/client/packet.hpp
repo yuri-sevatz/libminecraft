@@ -34,18 +34,13 @@ namespace libminecraft
             class Packet : public classic::Packet
             {
             public:
-                enum Type
+                enum PacketID
                 {
                     IDENT = 0x00,
                     BLOCK = 0x05,
                     POSDIR = 0x08,
-                    MESSAGE = 0x0d
+                    MESSAGE = 0x0D,
                 };
-
-                // Type of packet - for faster runtime type detection.
-                const Type type;
-            protected:
-                Packet(Type t);
             };
         }
     }

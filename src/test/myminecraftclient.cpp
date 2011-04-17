@@ -27,7 +27,7 @@
 #include <libminecraft/utils/mcstring.hpp>
 
 
-MyMinecraftClient::MyMinecraftClient(MinecraftSession & session) : ClientEventHandler(session)
+MyMinecraftClient::MyMinecraftClient(classic::MinecraftSession & session) : classic::ClientEventHandler(session)
 {
     followtarget = NULL;
 }
@@ -40,7 +40,7 @@ void MyMinecraftClient::onClientSpawn()
 
 void MyMinecraftClient::onMessage(Player::t_id id, const std::string & message)
 {
-    std::cout << "onMessage(" << (unsigned int) id << ", " << message << ")" << std::endl;
+    std::cout << "onMessage(" << (int) id << ", " << message << ")" << std::endl;
 
     // Remove any silly opensource server color codes.
     // We won't trust the id, since most of them use the wrong one!
@@ -113,7 +113,7 @@ void MyMinecraftClient::onLoginError(const char * reason)
     std::cout << "LoginError: " << reason << std::endl;
 }
 
-void MyMinecraftClient::onClientOp(MinecraftWorld::t_playertype old_playertype)
+void MyMinecraftClient::onClientOp(classic::MinecraftWorld::t_playertype old_playertype)
 {
     std::cout << "onClientOp: " << self.world.playertype << std::endl;
 }

@@ -24,13 +24,16 @@
 
 namespace libminecraft
 {
-    MinecraftSession::MinecraftSession(const MinecraftWorld & cli_world) : world(cli_world)
+    namespace classic
     {
+        MinecraftSession::MinecraftSession(const MinecraftWorld & cli_world) : world(cli_world)
+        {
 
-    }
+        }
 
-    void MinecraftSession::registerHandler(ClientEventHandler & listener)
-    {
-        this->listener = &listener;
+        void MinecraftSession::registerHandler(ClientEventHandler & listener)
+        {
+            this->listener = &listener;
+        }
     }
 }

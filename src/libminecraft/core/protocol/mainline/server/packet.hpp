@@ -32,6 +32,13 @@ namespace libminecraft
         {
             class Packet : public mainline::Packet
             {
+            public:
+                enum PacketID
+                {
+                    PING = 0x00,
+                    LOGIN = 0x01,
+                    IDENT = 0x02,
+                };
             };
         }
     }

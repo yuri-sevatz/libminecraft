@@ -25,9 +25,9 @@
 #include "../interfaces/clienteventhandler.hpp"
 
 #include "../core/protocol/stream.hpp"
-#include "../core/protocol/classic/client/messagepkt.hpp"
-#include "../core/protocol/classic/client/posdirpkt.hpp"
-#include "../core/protocol/classic/client/setblockpkt.hpp"
+#include "../core/protocol/classic/client/packet/message.hpp"
+#include "../core/protocol/classic/client/packet/posdir.hpp"
+#include "../core/protocol/classic/client/packet/setblock.hpp"
 
 namespace libminecraft
 {
@@ -37,7 +37,7 @@ namespace libminecraft
                                      const std::string &service) : MinecraftSession(_world),
         // Connection attributes.
         stream(hostname, service),
-        proto(stream),
+        client(stream),
         fsm(*this),
         gz_data(std::ios_base::out | std::ios_base::in | std::ios_base::binary)
         {
@@ -91,25 +91,23 @@ namespace libminecraft
             _world.player.z = z;
             _world.player.pitch = pitch;
             _world.player.yaw = yaw;
-            client::PosDirPkt mvpkt;
+            client::packet::PosDir mvpkt;
             mvpkt.x = x;
             mvpkt.y = y;
             mvpkt.z = z;
             mvpkt.yaw = yaw;
             mvpkt.pitch = pitch;
-            mvpkt.write(stream);
-            mvpkt.write(stream);
-            stream.flush();
+            client.write(mvpkt);
+            client.write(mvpkt);
         }
 
         void RemoteSession::sendMessage(const std::string & message)
         {
-            for (size_t offset = 0; offset < message.length(); offset += Stream::M_STRING_LEN)
+            for (size_t offset = 0; offset < message.length(); offset += MCTypes::MAX_STRING_LENGTH)
             {
-                client::MessagePkt msgpkt;
+                client::packet::Message msgpkt;
                 msgpkt.message = message.substr(offset, 64);
-                msgpkt.write(stream);
-                stream.flush();
+                client.write(msgpkt);
             }
         }
 
@@ -119,28 +117,26 @@ namespace libminecraft
             assert(type >= MapCell::BLANK && type <= MapCell::OBSIDIAN);
 
             _world.map.grid[x][y][z].type = type;
-            client::SetBlockPkt blkpkt;
+            client::packet::SetBlock blkpkt;
             blkpkt.x = x;
             blkpkt.y = y;
             blkpkt.z = z;
             blkpkt.mode = 0x01;
             blkpkt.type = type;
-            blkpkt.write(stream);
-            stream.flush();
+            client.write(blkpkt);
         }
 
         void RemoteSession::clearBlock(Map::size_block x, Map::size_block y, Map::size_block z)
         {
             assert(world.map.isValidBlock(x, y, z));
 
-            client::SetBlockPkt blkpkt;
+            client::packet::SetBlock blkpkt;
             blkpkt.x = x;
             blkpkt.y = y;
             blkpkt.z = z;
             blkpkt.mode = 0x00;
             blkpkt.type = MapCell::DIRT;
-            blkpkt.write(stream);
-            stream.flush();
+            client.write(blkpkt);
         }
     }
 }

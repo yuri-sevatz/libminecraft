@@ -1,9 +1,9 @@
 /*
- * clientprotocol.cpp
+ * protocol.cpp
  * This file is part of LibMinecraft.
  *
- * Created by Yuri Sevatz on 11/2010.
- * Copyright (c) 2010 Yuri Sevatz. All rights reserved
+ * Created by Yuri Sevatz on 04/2011.
+ * Copyright (c) 2011 Yuri Sevatz. All rights reserved
  *
  * LibMinecraft is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,128 +21,28 @@
 
 #include "protocol.hpp"
 
-#include "../../stream.hpp"
+#include "packet/ident.hpp"
+#include "packet/message.hpp"
+#include "packet/posdir.hpp"
+#include "packet/setblock.hpp"
 
-// Each packet type knows how to parse itself from a stream.
-#include "../server/disconnectpkt.hpp"
-#include "../server/identpkt.hpp"
-#include "../server/pingpkt.hpp"
-#include "../server/levelbeginpkt.hpp"
-#include "../server/levelchunkpkt.hpp"
-#include "../server/leveldonepkt.hpp"
-#include "../server/messagepkt.hpp"
-#include "../server/playerdespawnpkt.hpp"
-#include "../server/playerdirpkt.hpp"
-#include "../server/playeroppkt.hpp"
-#include "../server/playerposdirpkt.hpp"
-#include "../server/playerspawnpkt.hpp"
-#include "../server/playerteleportpkt.hpp"
-#include "../server/setblockpkt.hpp"
-#include "../server/playerpospkt.hpp"
+#include <boost/assign/list_of.hpp>
 
 namespace libminecraft
 {
+    template<> const std::map<const std::type_info *, classic::client::Packet::PacketID>
+            Protocol<classic::client::Protocol, classic::client::Packet, classic::client::Packet::PacketID>::msgmap =
+                boost::assign::map_list_of
+                    (&typeid(classic::client::packet::Ident), classic::client::Packet::IDENT)
+                    (&typeid(classic::client::packet::Message), classic::client::Packet::MESSAGE)
+                    (&typeid(classic::client::packet::PosDir), classic::client::Packet::POSDIR)
+                    (&typeid(classic::client::packet::SetBlock), classic::client::Packet::BLOCK);
+
     namespace classic
     {
         namespace client
         {
-            Protocol::Protocol(std::iostream &stream) :
-                    classic::Protocol(stream)
-            {
-                
-            }
 
-            server::Packet * const Protocol::read()
-            {
-                MCTypes::Byte packet_id;
-                Stream::getSignedByte(stream, packet_id);
-
-                if (!stream.good())
-                    throw NetworkException("Connection closed while awaiting next packet");
-
-                server::Packet * packet;
-
-                switch (packet_id)
-                {
-                case server::Packet::IDENT:
-                    packet = new server::IdentPkt();
-                    break;
-                case server::Packet::PING:
-                    packet = new server::PingPkt();
-                    break;
-                case server::Packet::LEVELBEGIN:
-                    packet = new server::LevelBeginPkt();
-                    break;
-                case server::Packet::LEVELCHUNK:
-                    packet = new server::LevelChunkPkt();
-                    break;
-                case server::Packet::LEVELDONE:
-                    packet = new server::LevelDonePkt();
-                    break;
-                case server::Packet::SPAWN:
-                    packet = new server::PlayerSpawnPkt();
-                    break;
-                case server::Packet::MESSAGE:
-                    packet = new server::MessagePkt();
-                    break;
-                case server::Packet::POS:
-                    packet = new server::PlayerPosPkt();
-                    break;
-                case server::Packet::DIR:
-                    packet = new server::PlayerDirPkt();
-                    break;
-                case server::Packet::POSDIR:
-                    packet = new server::PlayerPosDirPkt();
-                    break;
-                case server::Packet::TELEPORT:
-                    packet = new server::PlayerTeleportPkt();
-                    break;
-                case server::Packet::BLOCK:
-                    packet = new server::SetBlockPkt();
-                    break;
-                case server::Packet::DESPAWN:
-                    packet = new server::PlayerDespawnPkt();
-                    break;
-                case server::Packet::USEROP:
-                    packet = new server::PlayerOpPkt();
-                    break;
-                case server::Packet::DISCONNECT:
-                    packet = new server::DisconnectPkt();
-                    break;
-                default:
-                    // Debugging Only
-                    //std::cerr << "UNKNOWN: " << (unsigned int) packet_id << std::endl;
-                    throw ProtocolException("Unknown minecraft packet received from server");
-                }
-
-                try
-                {
-                    packet->read(stream);
-
-                    // Make sure that the data was read properly...
-                    if (!stream.good())
-                        throw NetworkException("Connection to server closed unexpectedly");
-                }
-                catch (MinecraftException ex)
-                {
-                    delete packet;
-                    throw ex;
-                }
-
-                // Debugging?
-                //packet->toReadable(std::cerr);
-
-                return packet;
-            }
-
-            void Protocol::write(client::Packet &packet)
-            {
-                packet.write(stream);
-                stream.flush();
-
-                if (!stream.good())
-                    throw NetworkException("Connection closed while writing outbound minecraft data");
-            }
         }
     }
 }

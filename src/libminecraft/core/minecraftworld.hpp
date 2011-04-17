@@ -19,59 +19,61 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_MINECRAFTWORLD_HPP
-#define LIBMINECRAFT_MINECRAFTWORLD_HPP
+#ifndef LIBMINECRAFT_CLASSIC_MINECRAFTWORLD_HPP
+#define LIBMINECRAFT_CLASSIC_MINECRAFTWORLD_HPP
 
+#include "protocol/classic/mctypes.hpp"
 #include "player/player.hpp"
 #include "map/map.hpp"
 
 #include <map>
-#include <inttypes.h>
-
 
 namespace libminecraft
 {
-    class MinecraftWorld
+    namespace classic
     {
-        // Allow private access to the states...
-        friend class CliNegotiating;
-        friend class CliConnecting;
-        friend class CliLoadingMap;
-        friend class CliGame;
+        class MinecraftWorld
+        {
+            // Allow private access to the states...
+            friend class CliNegotiating;
+            friend class CliConnecting;
+            friend class CliLoadingMap;
+            friend class CliGame;
 
-    public:
-        // Definitions.
-        typedef uint8_t t_playertype;
+        public:
+            // Definitions.
+            typedef MCTypes::Byte t_playertype;
 
-        // Has a Map
-        Map map;
+            // Has a Map
+            Map map;
 
-        // Has a list of entities...
-        std::map<uint8_t, Player> entities;
+            // Has a list of entities...
+            std::map<Player::t_id, Player> entities;
 
-        // You
-        Player player;
+            // You
+            Player player;
 
-        // Your op status
-        t_playertype playertype;
+            // Your op status
+            t_playertype playertype;
 
-    public:
-        MinecraftWorld();
+        public:
+            MinecraftWorld();
 
-        bool addPlayer(Player & player);
-        bool hasPlayer(uint8_t player_id) const;
-        bool removePlayer(uint8_t player_id);
-        bool removePlayer(Player & player);
+            bool addPlayer(Player & player);
+            bool hasPlayer(Player::t_id player_id) const;
+            bool removePlayer(Player::t_id player_id);
+            bool removePlayer(Player & player);
 
-        Player * const getPlayer(uint8_t player_id);
-        const Player * const getPlayer(uint8_t player_id) const;
-        const Player * const getPlayer(const std::string & name) const;
-    };
+            Player * const getPlayer(Player::t_id player_id);
+            const Player * const getPlayer(Player::t_id player_id) const;
+            const Player * const getPlayer(const std::string & name) const;
+        };
 
-    inline bool MinecraftWorld::removePlayer(Player & player)
-    {
-        return removePlayer(player.id);
+        inline bool MinecraftWorld::removePlayer(Player & player)
+        {
+            return removePlayer(player.id);
+        }
     }
 }
 
-#endif // LIBMINECRAFT_MINECRAFTWORLD_HPP
+#endif // LIBMINECRAFT_CLASSIC_MINECRAFTWORLD_HPP

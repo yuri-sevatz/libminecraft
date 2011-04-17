@@ -1,5 +1,5 @@
 /*
- * clidisconnected
+ * clidisconnected.hpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 11/2010.

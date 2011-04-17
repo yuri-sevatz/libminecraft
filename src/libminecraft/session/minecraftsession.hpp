@@ -20,8 +20,8 @@
  */
 
 
-#ifndef LIBMINECRAFT_MINECRAFTSESSION_HPP
-#define LIBMINECRAFT_MINECRAFTSESSION_HPP
+#ifndef LIBMINECRAFT_CLASSIC_MINECRAFTSESSION_HPP
+#define LIBMINECRAFT_CLASSIC_MINECRAFTSESSION_HPP
 
 #include "../core/map/map.hpp"
 #include "../core/map/mapcell.hpp"
@@ -29,59 +29,62 @@
 
 namespace libminecraft
 {
-    // Forward-declare listener class (has circular dependency).
-    class ClientEventHandler;
-
-    // Abstract minecraftsession class.
-    // Allows us to define actions without defining context, or really "what happens after".
-    // Note: This means we can make things like local/remote clients, client AND server-side NPC's, etc.
-    class MinecraftSession
+    namespace classic
     {
-        friend class ClientEventHandler;
-        friend class CliConnecting;
-        friend class CliDisconnected;
-        friend class CliGame;
-        friend class CliLoadingMap;
-        friend class CliNegotiating;
+        // Forward-declare listener class (has circular dependency).
+        class ClientEventHandler;
 
-    protected:
-        ClientEventHandler * listener;
+        // Abstract minecraftsession class.
+        // Allows us to define actions without defining context, or really "what happens after".
+        // Note: This means we can make things like local/remote clients, client AND server-side NPC's, etc.
+        class MinecraftSession
+        {
+            friend class ClientEventHandler;
+            friend class CliConnecting;
+            friend class CliDisconnected;
+            friend class CliGame;
+            friend class CliLoadingMap;
+            friend class CliNegotiating;
 
-    public:
-        // Read access to the world...
-        const MinecraftWorld & world;
+        protected:
+            ClientEventHandler * listener;
 
-    protected:
-        // A session can only be created with a constant reference to a world.
-        // To be thought of as "The client world".
-        // It is a read-only entity.
-        MinecraftSession(const MinecraftWorld & cli_world);
+        public:
+            // Read access to the world...
+            const MinecraftWorld & world;
 
-    private:
-        void registerHandler(ClientEventHandler & listener);
+        protected:
+            // A session can only be created with a constant reference to a world.
+            // To be thought of as "The client world".
+            // It is a read-only entity.
+            MinecraftSession(const MinecraftWorld & cli_world);
 
-    public:
-        // Set a block.
-        virtual void setBlock(Map::size_block x, Map::size_block y, Map::size_block z, MapCell::BlockType type) = 0;
+        private:
+            void registerHandler(ClientEventHandler & listener);
 
-        // Clear a block.
-        virtual void clearBlock(Map::size_block x, Map::size_block y, Map::size_block z) = 0;
+        public:
+            // Set a block.
+            virtual void setBlock(Map::size_block x, Map::size_block y, Map::size_block z, MapCell::BlockType type) = 0;
 
-        // Move.
-        virtual void move(Map::size_plot x, Map::size_plot y, Map::size_plot z) = 0;
+            // Clear a block.
+            virtual void clearBlock(Map::size_block x, Map::size_block y, Map::size_block z) = 0;
 
-        // Look.
-        virtual void look(Player::t_pitch pitch, Player::t_yaw yaw) = 0;
+            // Move.
+            virtual void move(Map::size_plot x, Map::size_plot y, Map::size_plot z) = 0;
 
-        // Move and look.
-        virtual void moveAndLook(Map::size_plot x, Map::size_plot y, Map::size_plot z, Player::t_pitch pitch, Player::t_yaw yaw) = 0;
+            // Look.
+            virtual void look(Player::t_pitch pitch, Player::t_yaw yaw) = 0;
 
-        // Send a message.
-        virtual void sendMessage(const std::string & message) = 0;
+            // Move and look.
+            virtual void moveAndLook(Map::size_plot x, Map::size_plot y, Map::size_plot z, Player::t_pitch pitch, Player::t_yaw yaw) = 0;
 
-        // End the session.
-        virtual void disconnect() = 0;
-    };
+            // Send a message.
+            virtual void sendMessage(const std::string & message) = 0;
+
+            // End the session.
+            virtual void disconnect() = 0;
+        };
+    }
 }
 
-#endif // LIBMINECRAFT_MINECRAFTSESSION_HPP
+#endif // LIBMINECRAFT_CLASSIC_MINECRAFTSESSION_HPP

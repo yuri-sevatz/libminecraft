@@ -56,129 +56,163 @@ set(${PROJECT_NAME}_sources_core_player
     core/player/player.cpp
 )
 
-set(${PROJECT_NAME}_headers_core_protocol_mainline_client
-
+set(${PROJECT_NAME}_headers_core_protocol_classic_client_packet
+    core/protocol/classic/client/packet/ident.hpp
+    core/protocol/classic/client/packet/message.hpp
+    core/protocol/classic/client/packet/posdir.hpp
+    core/protocol/classic/client/packet/setblock.hpp
 )
 
-set(${PROJECT_NAME}_sources_core_protocol_mainline_client
-
-)
-
-set(${PROJECT_NAME}_headers_core_protocol_mainline_server_packet
-	core/protocol/mainline/server/packet/ping.hpp
-)
-
-set(${PROJECT_NAME}_sources_core_protocol_mainline_server_packet
-	core/protocol/mainline/server/packet/ping.cpp
-)
-
-set(${PROJECT_NAME}_headers_core_protocol_mainline_server
-    ${${PROJECT_NAME}_headers_core_protocol_mainline_server_packet}
-	core/protocol/mainline/server/packet.hpp
-	core/protocol/mainline/server/protocol.hpp
-)
-
-set(${PROJECT_NAME}_sources_core_protocol_mainline_server
-    ${${PROJECT_NAME}_sources_core_protocol_mainline_server_packet}
-	core/protocol/mainline/server/protocol.cpp
-)
-
-set(${PROJECT_NAME}_headers_core_protocol_mainline
-    ${${PROJECT_NAME}_headers_core_protocol_mainline_client}
-    ${${PROJECT_NAME}_headers_core_protocol_mainline_server}
-    core/protocol/mainline/packet.hpp
-    core/protocol/mainline/protocol.hpp
-)
-
-set(${PROJECT_NAME}_sources_core_protocol_mainline
-    ${${PROJECT_NAME}_sources_core_protocol_mainline_client}
-    ${${PROJECT_NAME}_sources_core_protocol_mainline_server}
-    core/protocol/mainline/protocol.cpp
+set(${PROJECT_NAME}_sources_core_protocol_classic_client_packet
+    core/protocol/classic/client/packet/ident.cpp
+    core/protocol/classic/client/packet/message.cpp
+    core/protocol/classic/client/packet/posdir.cpp
+    core/protocol/classic/client/packet/setblock.cpp
 )
 
 set(${PROJECT_NAME}_headers_core_protocol_classic_client
-    core/protocol/classic/client/identpkt.hpp
-    core/protocol/classic/client/messagepkt.hpp
+    ${${PROJECT_NAME}_headers_core_protocol_classic_client_packet}
     core/protocol/classic/client/packet.hpp
-    core/protocol/classic/client/posdirpkt.hpp
     core/protocol/classic/client/protocol.hpp
-    core/protocol/classic/client/setblockpkt.hpp
 )
 
 set(${PROJECT_NAME}_sources_core_protocol_classic_client
-    core/protocol/classic/client/identpkt.cpp
-    core/protocol/classic/client/messagepkt.cpp
-    core/protocol/classic/client/packet.cpp
-    core/protocol/classic/client/posdirpkt.cpp
+    ${${PROJECT_NAME}_sources_core_protocol_classic_client_packet}
     core/protocol/classic/client/protocol.cpp
-    core/protocol/classic/client/setblockpkt.cpp
+)
+
+set(${PROJECT_NAME}_headers_core_protocol_classic_server_packet
+    core/protocol/classic/server/packet/disconnect.hpp
+    core/protocol/classic/server/packet/ident.hpp
+    core/protocol/classic/server/packet/levelbegin.hpp
+    core/protocol/classic/server/packet/levelchunk.hpp
+    core/protocol/classic/server/packet/leveldone.hpp
+    core/protocol/classic/server/packet/message.hpp
+    core/protocol/classic/server/packet/playerdespawn.hpp
+    core/protocol/classic/server/packet/playerdir.hpp
+    core/protocol/classic/server/packet/playerop.hpp
+    core/protocol/classic/server/packet/playerpos.hpp
+    core/protocol/classic/server/packet/playerposdir.hpp
+    core/protocol/classic/server/packet/playerspawn.hpp
+    core/protocol/classic/server/packet/playerteleport.hpp
+    core/protocol/classic/server/packet/ping.hpp
+    core/protocol/classic/server/packet/setblock.hpp
+)
+
+set(${PROJECT_NAME}_sources_core_protocol_classic_server_packet
+    core/protocol/classic/server/packet/disconnect.cpp
+    core/protocol/classic/server/packet/ident.cpp
+    core/protocol/classic/server/packet/levelbegin.cpp
+    core/protocol/classic/server/packet/levelchunk.cpp
+    core/protocol/classic/server/packet/leveldone.cpp
+    core/protocol/classic/server/packet/message.cpp
+    core/protocol/classic/server/packet/playerdespawn.cpp
+    core/protocol/classic/server/packet/playerdir.cpp
+    core/protocol/classic/server/packet/playerop.cpp
+    core/protocol/classic/server/packet/playerpos.cpp
+    core/protocol/classic/server/packet/playerposdir.cpp
+    core/protocol/classic/server/packet/playerspawn.cpp
+    core/protocol/classic/server/packet/playerteleport.cpp
+    core/protocol/classic/server/packet/ping.cpp
+    core/protocol/classic/server/packet/setblock.cpp
 )
 
 set(${PROJECT_NAME}_headers_core_protocol_classic_server
-    core/protocol/classic/server/disconnectpkt.hpp
-    core/protocol/classic/server/identpkt.hpp
-    core/protocol/classic/server/levelbeginpkt.hpp
-    core/protocol/classic/server/levelchunkpkt.hpp
-    core/protocol/classic/server/leveldonepkt.hpp
-    core/protocol/classic/server/messagepkt.hpp
+    ${${PROJECT_NAME}_headers_core_protocol_classic_server_packet}
     core/protocol/classic/server/packet.hpp
-    core/protocol/classic/server/playerdespawnpkt.hpp
-    core/protocol/classic/server/playerdirpkt.hpp
-    core/protocol/classic/server/playeroppkt.hpp
-    core/protocol/classic/server/playerpospkt.hpp
-    core/protocol/classic/server/playerposdirpkt.hpp
-    core/protocol/classic/server/playerspawnpkt.hpp
-    core/protocol/classic/server/playerteleportpkt.hpp
-    core/protocol/classic/server/pingpkt.hpp
     core/protocol/classic/server/protocol.hpp
-    core/protocol/classic/server/setblockpkt.hpp
 )
 
 set(${PROJECT_NAME}_sources_core_protocol_classic_server
-    core/protocol/classic/server/disconnectpkt.cpp
-    core/protocol/classic/server/identpkt.cpp
-    core/protocol/classic/server/levelbeginpkt.cpp
-    core/protocol/classic/server/levelchunkpkt.cpp
-    core/protocol/classic/server/leveldonepkt.cpp
-    core/protocol/classic/server/messagepkt.cpp
-    core/protocol/classic/server/packet.cpp
-    core/protocol/classic/server/playerdespawnpkt.cpp
-    core/protocol/classic/server/playerdirpkt.cpp
-    core/protocol/classic/server/playeroppkt.cpp
-    core/protocol/classic/server/playerpospkt.cpp
-    core/protocol/classic/server/playerposdirpkt.cpp
-    core/protocol/classic/server/playerspawnpkt.cpp
-    core/protocol/classic/server/playerteleportpkt.cpp
-    core/protocol/classic/server/pingpkt.cpp
+    ${${PROJECT_NAME}_sources_core_protocol_classic_server_packet}
     core/protocol/classic/server/protocol.cpp
-    core/protocol/classic/server/setblockpkt.cpp
 )
 
 set(${PROJECT_NAME}_headers_core_protocol_classic
     ${${PROJECT_NAME}_headers_core_protocol_classic_client}
     ${${PROJECT_NAME}_headers_core_protocol_classic_server}
+    core/protocol/classic/client.hpp
+    core/protocol/classic/mctypes.hpp
     core/protocol/classic/packet.hpp
     core/protocol/classic/protocol.hpp
+    core/protocol/classic/stream.hpp
 )
 
 set(${PROJECT_NAME}_sources_core_protocol_classic
     ${${PROJECT_NAME}_sources_core_protocol_classic_client}
     ${${PROJECT_NAME}_sources_core_protocol_classic_server}
-    core/protocol/classic/protocol.cpp
+    core/protocol/classic/client.cpp
+    core/protocol/classic/stream.cpp
+)
+
+set(${PROJECT_NAME}_headers_core_protocol_mainline_client_packet
+    core/protocol/mainline/client/packet/ident.hpp
+)
+
+set(${PROJECT_NAME}_sources_core_protocol_mainline_client_packet
+    core/protocol/mainline/client/packet/ident.cpp
+)
+
+set(${PROJECT_NAME}_headers_core_protocol_mainline_client
+    ${${PROJECT_NAME}_headers_core_protocol_mainline_client_packet}
+    core/protocol/mainline/client/packet.hpp
+    core/protocol/mainline/client/protocol.hpp
+)
+
+set(${PROJECT_NAME}_sources_core_protocol_mainline_client
+    ${${PROJECT_NAME}_sources_core_protocol_mainline_client_packet}
+    core/protocol/mainline/client/protocol.cpp
+)
+
+set(${PROJECT_NAME}_headers_core_protocol_mainline_server_packet
+    core/protocol/mainline/server/packet/ping.hpp
+)
+
+set(${PROJECT_NAME}_sources_core_protocol_mainline_server_packet
+    core/protocol/mainline/server/packet/ping.cpp
+)
+
+set(${PROJECT_NAME}_headers_core_protocol_mainline_server
+    ${${PROJECT_NAME}_headers_core_protocol_mainline_server_packet}
+    core/protocol/mainline/server/packet.hpp
+    core/protocol/mainline/server/protocol.hpp
+)
+
+set(${PROJECT_NAME}_sources_core_protocol_mainline_server
+    ${${PROJECT_NAME}_sources_core_protocol_mainline_server_packet}
+    core/protocol/mainline/server/protocol.cpp
+)
+
+set(${PROJECT_NAME}_headers_core_protocol_mainline
+    ${${PROJECT_NAME}_headers_core_protocol_mainline_client}
+    ${${PROJECT_NAME}_headers_core_protocol_mainline_server}
+    core/protocol/mainline/client.hpp
+    core/protocol/mainline/mctypes.hpp
+    core/protocol/mainline/packet.hpp
+    core/protocol/mainline/protocol.hpp
+    core/protocol/mainline/stream.hpp
+)
+
+set(${PROJECT_NAME}_sources_core_protocol_mainline
+    ${${PROJECT_NAME}_sources_core_protocol_mainline_client}
+    ${${PROJECT_NAME}_sources_core_protocol_mainline_server}
+    core/protocol/mainline/client.cpp
+    core/protocol/mainline/stream.cpp
 )
 
 set(${PROJECT_NAME}_headers_core_protocol
     ${${PROJECT_NAME}_headers_core_protocol_classic}
     ${${PROJECT_NAME}_headers_core_protocol_mainline}
     core/protocol/mctypes.hpp
+    core/protocol/packet.hpp
     core/protocol/protocol.hpp
     core/protocol/packet.hpp
     core/protocol/stream.hpp
 )
+
 set(${PROJECT_NAME}_sources_core_protocol
     ${${PROJECT_NAME}_sources_core_protocol_classic}
     ${${PROJECT_NAME}_sources_core_protocol_mainline}
-    core/protocol/stream.cpp
 )
 
 set(${PROJECT_NAME}_headers_core
@@ -241,8 +275,24 @@ set(${PROJECT_NAME}_sources_support_fsm
 
 )
 
+set(${PROJECT_NAME}_headers_support_io_bigendian
+    support/io/bigendian/stream.hpp
+)
+
+set(${PROJECT_NAME}_sources_support_io_bigendian
+    support/io/bigendian/stream.cpp
+)
+
+set(${PROJECT_NAME}_headers_support_io
+    ${${PROJECT_NAME}_headers_support_io_bigendian}
+    support/io/stream.hpp
+)
+set(${PROJECT_NAME}_sources_support_io
+    ${${PROJECT_NAME}_sources_support_io_bigendian}
+)
+
 set(${PROJECT_NAME}_headers_support_java
-    support/fsm/java/jtypes.hpp
+    support/java/jtypes.hpp
 )
 set(${PROJECT_NAME}_sources_support_java
     
@@ -250,10 +300,12 @@ set(${PROJECT_NAME}_sources_support_java
 
 set(${PROJECT_NAME}_headers_support
     ${${PROJECT_NAME}_headers_support_fsm}
+    ${${PROJECT_NAME}_headers_support_io}
     ${${PROJECT_NAME}_headers_support_java}
 )
 set(${PROJECT_NAME}_sources_support
     ${${PROJECT_NAME}_sources_support_fsm}
+    ${${PROJECT_NAME}_sources_support_io}
     ${${PROJECT_NAME}_sources_support_java}
 )
 

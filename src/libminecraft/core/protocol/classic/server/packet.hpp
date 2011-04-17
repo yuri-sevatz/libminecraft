@@ -30,11 +30,10 @@ namespace libminecraft
     {
         namespace server
         {
-            // Categorization Packet
             class Packet : public classic::Packet
             {
             public:
-                enum Type
+                enum PacketID
                 {
                     IDENT = 0x00,
                     PING = 0x01,
@@ -52,11 +51,6 @@ namespace libminecraft
                     DISCONNECT = 0x0e,
                     USEROP = 0x0f,
                 };
-
-                // Type of packet - for compilers that don't provide runtime type information.
-                const Type type;
-            protected:
-                Packet(Type t);
             };
         }
     }

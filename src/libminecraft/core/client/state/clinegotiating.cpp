@@ -26,9 +26,9 @@
 #include "../../../session/remotesession.hpp"
 #include "../../../interfaces/clienteventhandler.hpp"
 
-#include "../../protocol/classic/client/identpkt.hpp"
-#include "../../protocol/classic/server/identpkt.hpp"
-#include "../../protocol/classic/server/levelbeginpkt.hpp"
+#include "../../protocol/classic/client/packet/ident.hpp"
+#include "../../protocol/classic/server/packet/ident.hpp"
+
 
 namespace libminecraft
 {
@@ -44,63 +44,40 @@ namespace libminecraft
         }
         void CliNegotiating::Update(t_owner &owner) const
         {
-            // Send an ident string.
-            {
-                client::IdentPkt myident;
-                myident.username = owner.session.username;
-                myident.key = owner.session.key;
-                owner.session.proto.write(myident);
-            }
+            client::packet::Ident myident;
+            myident.username = owner.session.username;
+            myident.key = owner.session.key;
+            myident.version = client::Protocol::version;
+            owner.session.client.write(myident);
 
-            std::cerr << "Awaiting server ident..." << std::endl;
+            std::cerr << "Awaiting Response..." << std::endl;
 
-            // Read the server's ident string...
-            {
-                server::IdentPkt * const srvident = (server::IdentPkt *) owner.session.proto.read();
-                if (srvident->type != server::Packet::IDENT)
-                {
-                    delete srvident;
-                    throw LoginException("Login Error - did not receive OK from server");
-                }
+            if (owner.session.client.next() != server::Packet::IDENT)
+                throw LoginException("Login Error - did not receive Ident from server");
 
-                if (srvident->srv_version != classic::Protocol::proto_version)
-                {
-                    // Some opensource servers report a silly protocol version that doesn't exist o_o
-                    // Continue anyways.
-                    owner.session.listener->onProtocolWarning("Invalid Server Version Detected - Attempting anyway.");
-                    //throw ProtocolException("Unable to negotiate protocol version");
-                }
+            server::packet::Ident srvident;
+            owner.session.client.read(srvident);
 
-                // Read the facts of life...
-                owner.session.server_name = srvident->srv_name;
-                owner.session.server_motd = srvident->srv_motd;
-                owner.session._world.playertype = srvident->user_type;
+            const MCTypes::Byte ver_diff = srvident.cmpVersion();
 
-                // Free our packet.
-                delete srvident;
-            }
+            if (ver_diff < 0)
+                throw ProtocolException("Unable to negotiate protocol version");
+            else if (ver_diff > 0)
+                owner.session.listener->onProtocolWarning("Invalid Server Version Detected - Attempting anyway.");
 
-            std::cerr << "Successfully Negotiated Connection..." << std::endl;
-            std::cerr << "Awaiting Map Data..." << std::endl;
+            // Read the facts of life...
+            owner.session.server_name = srvident.srv_name;
+            owner.session.server_motd = srvident.srv_motd;
+            owner.session._world.playertype = srvident.user_type;
 
             // Await map data...
-            {
-                server::LevelBeginPkt * const mapdata = (server::LevelBeginPkt *) owner.session.proto.read();
+            std::cerr << "Awaiting Map Data..." << std::endl;
 
-                if (mapdata->type != server::Packet::LEVELBEGIN)
-                {
-                    delete mapdata;
-                    throw ProtocolException("Unexpected data while waiting for world");
-                }
+            if (owner.session.client.next() != server::Packet::LEVELBEGIN)
+                throw ProtocolException("Unexpected data while waiting for world");
 
-                // Free our packet.
-                delete mapdata;
-
-                // The packet type was a levelbegin... start loading the map.
-                owner.ChangeState(owner.States.CLI_LOADINGMAP);
-            }
-
-
+            // The packet type was a levelbegin... start loading the map.
+            owner.ChangeState(owner.States.CLI_LOADINGMAP);
         }
         void CliNegotiating::Exit(t_owner &owner) const
         {

@@ -22,7 +22,7 @@
 #ifndef SUPPORT_JAVA_JTYPES_HPP
 #define SUPPORT_JAVA_JTYPES_HPP
 
-#include <inttypes.h>
+#include <stdint.h>
 #include <string>
 
 // C++ compatible Java types
@@ -33,9 +33,17 @@ class JTypes
 public:
     typedef bool jbool;
     typedef int8_t jbyte;
+    static const jbyte JBYTE_MAX = 0x7f;
+    static const jbyte JBYTE_MIN = (-JBYTE_MAX - 1);
     typedef int16_t jshort;
+    static const jshort JSHORT_MAX = 0x7fff;
+    static const jshort JSHORT_MIN = (-JSHORT_MAX - 1);
     typedef int32_t jint;
+    static const jint JINT_MAX = 0x7fffffffL;
+    static const jint JINT_MIN = (-JINT_MAX - 1L) ;
     typedef int64_t jlong;
+    static const jlong JLONG_MAX = 0x7fffffffffffffffLL;
+    static const jlong JLONG_MIN = (-JLONG_MAX - 1LL) ;
 
     // These two definitions MIGHT be wrong if not conforming to:
     typedef float jfloat; // Single-precision 32-bit IEEE 754 floating point

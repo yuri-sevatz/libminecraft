@@ -23,25 +23,16 @@
 #define LIBMINECRAFT_CLASSIC_PROTOCOL_HPP
 
 #include "../protocol.hpp"
-#include <iostream>
 
 namespace libminecraft
 {
     namespace classic
     {
-        class Protocol : public libminecraft::Protocol
+        template<class TProtocol, class TPacket, typename TPacketID>
+        class Protocol : public libminecraft::Protocol<TProtocol, TPacket, TPacketID>
         {
         public:
-            public:
-            // Constants...
-            static const MCTypes::Byte proto_version = 0x07;
-        
-        protected:
-            // A single stream exists in the classic protocol for a session.
-            std::iostream & stream;
-        
-        public:
-            Protocol(std::iostream & stream);
+            static const MCTypes::Byte version = 0x07;
         };
     }
 }

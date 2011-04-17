@@ -23,9 +23,7 @@
 #define LIBMINECRAFT_CLASSIC_SERVER_PROTOCOL_HPP
 
 #include "../protocol.hpp"
-
 #include "packet.hpp"
-#include "../client/packet.hpp"
 
 namespace libminecraft
 {
@@ -33,17 +31,9 @@ namespace libminecraft
     {
         namespace server
         {
-            class Protocol : public classic::Protocol
+            class Protocol : public classic::Protocol<Protocol,Packet, Packet::PacketID>
             {
-            public:
-                Protocol(std::iostream &stream);
 
-                // Returns a reference to the next client packet read from a client.
-                // This memory is not freed.
-                client::Packet * const read();
-
-                // Write data from the server.
-                void write(server::Packet & packet);
             };
         }
     }

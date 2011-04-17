@@ -1,5 +1,5 @@
 /*
- * minecraftstream.cpp
+ * stream.cpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 03/2011.
@@ -21,54 +21,10 @@
 
 #include "stream.hpp"
 
-#include <string>
-
-#include <boost/detail/endian.hpp>
-
 namespace libminecraft
 {
-    const size_t Stream::M_STRING_LEN = 64;
-
     // static
-    void Stream::putString(std::ostream & stream, const std::string & str)
-    {
-        // Write Max M_STRING_LEN characters from the string
-        stream.write(str.c_str(), std::min(str.length(), (size_t) M_STRING_LEN));
-
-        // If the string is less than 64 characters long...
-        for (unsigned  i = str.length(); i < M_STRING_LEN; i++)
-        {
-            // Pad with spaces
-            stream.put(0x20);
-        }
-    }
-
-    // static
-    void Stream::getString(std::istream & stream, std::string & str)
-    {
-        // Tmp space.
-        str.resize(M_STRING_LEN);
-        stream.read(&*str.begin(), M_STRING_LEN);
-
-        // Position of the end of the string
-        std::string::reverse_iterator str_end;
-
-        // Find the iterator position of the first non-space character from the right.
-        for (str_end = str.rbegin(); str_end != str.rend(); str_end++)
-        {
-            // Break on the first space.
-            if (*str_end != ' ')
-                break;
-        }
-
-        // str_end points to the last character - convert to forward_iterator.
-        // --> it's automatically incremented to one past this position.
-
-        str.erase(str_end.base(), str.end());
-    }
-
-    // static
-    void Stream::getSignedShort(std::istream &stream, MCTypes::Short &sshort)
+    void Stream::getShort(std::istream &stream, MCTypes::Short &sshort)
     {
 #ifdef BOOST_LITTLE_ENDIAN
         // Shorts received in network order.
@@ -79,7 +35,7 @@ namespace libminecraft
 #endif
     }
 
-    void Stream::putSignedShort(std::ostream &stream, const MCTypes::Short &sshort)
+    void Stream::putShort(std::ostream &stream, const MCTypes::Short &sshort)
     {
 #ifdef BOOST_LITTLE_ENDIAN
         // Shorts sent in network order.

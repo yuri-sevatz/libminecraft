@@ -21,34 +21,24 @@
 
 #include "protocol.hpp"
 
-#include <typeinfo>
+#include "packet/ping.hpp"
+#include "packet/login.hpp"
 
 #include <boost/assign/list_of.hpp>
 
-#include "packet.hpp"
-#include "packet/ping.hpp"
-
-#include "../../stream.hpp"
-
 namespace libminecraft
 {
+    template<> const std::map<const std::type_info *, mainline::server::Packet::PacketID>
+            Protocol<mainline::server::Protocol, mainline::server::Packet, mainline::server::Packet::PacketID>::msgmap =
+                boost::assign::map_list_of
+                    (&typeid(mainline::server::packet::Login), mainline::server::Packet::LOGIN)
+                    (&typeid(mainline::server::packet::Ping), mainline::server::Packet::PING);
+
     namespace mainline
     {
         namespace server
         {
-            const std::map<const std::type_info *, Protocol::TransType> Protocol::transmap =
-                    boost::assign::map_list_of
-                        (&typeid(packet::Ping), Protocol::PING);
 
-            Protocol::Protocol(std::iostream & stream)
-                : mainline::Protocol(stream)
-            {
-            }
-
-            MCTypes::Byte Protocol::next()
-            {
-                return (MCTypes::Byte) stream.peek();
-            }
         }
     }
 }

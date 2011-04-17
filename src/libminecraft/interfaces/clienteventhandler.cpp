@@ -24,11 +24,11 @@
 
 namespace libminecraft
 {
-    ClientEventHandler::ClientEventHandler(MinecraftSession & session) : self(session)
+    namespace classic
     {
-        session.registerHandler(*this);
+        ClientEventHandler::ClientEventHandler(MinecraftSession & session) : self(session)
+        {
+            session.registerHandler(*this);
+        }
     }
 }
-
-
-

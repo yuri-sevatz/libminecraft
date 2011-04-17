@@ -1,5 +1,5 @@
 /*
- * minecraftstream.hpp
+ * stream.hpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 03/2011.
@@ -25,6 +25,7 @@
 #include <istream>
 #include <ostream>
 
+#include "../../support/io/bigendian/stream.hpp"
 #include "mctypes.hpp"
 
 namespace libminecraft
@@ -32,24 +33,30 @@ namespace libminecraft
     class Stream
     {
     public:
-        static const size_t M_STRING_LEN;
-
-        static void getSignedByte(std::istream & stream, MCTypes::Byte & sbyte);
-        static void putSignedByte(std::ostream & stream, const MCTypes::Byte & sbyte);
-        static void getSignedShort(std::istream & stream, MCTypes::Short & sshort);
-        static void putSignedShort(std::ostream & stream, const MCTypes::Short & sshort);
-        static void getString(std::istream & stream, std::string & str);
-        static void putString(std::ostream & stream, const std::string & str);
+        static void getByte(std::istream & stream, MCTypes::Byte & sbyte);
+        static void putByte(std::ostream & stream, const MCTypes::Byte & sbyte);
+        static void getShort(std::istream & stream, MCTypes::Short & sshort);
+        static void putShort(std::ostream & stream, const MCTypes::Short & sshort);
     };
 
-    inline void Stream::getSignedByte(std::istream &stream, MCTypes::Byte &sbyte)
+    inline void Stream::getByte(std::istream &stream, MCTypes::Byte &sbyte)
     {
-        stream.get(*((char *)&sbyte));
+        io::bigendian::stream::getByte(stream, sbyte);
     }
 
-    inline void Stream::putSignedByte(std::ostream &stream, const MCTypes::Byte &sbyte)
+    inline void Stream::putByte(std::ostream &stream, const MCTypes::Byte &sbyte)
     {
-        stream.put(*((const char *)&sbyte));
+        io::bigendian::stream::putByte(stream, sbyte);
+    }
+
+    inline void Stream::getShort(std::istream &stream, MCTypes::Short &sshort)
+    {
+        io::bigendian::stream::getShort(stream, sshort);
+    }
+
+    inline void Stream::putShort(std::ostream &stream, const MCTypes::Short &sshort)
+    {
+        io::bigendian::stream::putShort(stream, sshort);
     }
 }
 

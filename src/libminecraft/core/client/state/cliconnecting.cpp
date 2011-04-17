@@ -21,7 +21,6 @@
 
 #include "cliconnecting.hpp"
 #include <iostream>
-#include <exception>
 
 #include "../clientstatemachine.hpp"
 #include "../../../session/minecraftsession.hpp"

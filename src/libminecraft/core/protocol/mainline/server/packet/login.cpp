@@ -21,6 +21,18 @@
 
 #include "login.hpp"
 
-Login::Login()
+namespace libminecraft
 {
+    namespace mainline
+    {
+        namespace server
+        {
+            namespace packet
+            {
+                Login::Login()
+                {
+                }
+            }
+        }
+    }
 }

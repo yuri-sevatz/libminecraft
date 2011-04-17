@@ -20,14 +20,14 @@
  */
 
 
-#ifndef LIBMINECRAFT_REMOTESESSION_HPP
-#define LIBMINECRAFT_REMOTESESSION_HPP
+#ifndef LIBMINECRAFT_CLASSIC_REMOTESESSION_HPP
+#define LIBMINECRAFT_CLASSIC_REMOTESESSION_HPP
 
 #include "minecraftsession.hpp"
 
 // FSM
 #include "../core/client/clientstatemachine.hpp"
-#include "../core/protocol/classic/client/protocol.hpp"
+#include "../core/protocol/classic/client.hpp"
 
 #include <sstream>
 #include <boost/asio.hpp>
@@ -63,12 +63,13 @@ namespace libminecraft
             ClientStateMachine fsm;
 
 
-        public:
-            // The connection, and stream objects.
+        private:
+            // The connection
             boost::asio::ip::tcp::iostream stream;
-            classic::client::Protocol proto;
-
         public:
+            // The client, uses the client protocol.
+            Client client;
+
             RemoteSession(const std::string &hostname,
                           const std::string &service);
 
@@ -103,4 +104,4 @@ namespace libminecraft
     }
 }
 
-#endif // LIBMINECRAFT_REMOTESESSION_HPP
+#endif // LIBMINECRAFT_CLASSIC_REMOTESESSION_HPP

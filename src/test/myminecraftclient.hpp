@@ -26,10 +26,10 @@
 
 using namespace libminecraft;
 
-class MyMinecraftClient : private ClientEventHandler
+class MyMinecraftClient : private classic::ClientEventHandler
 {
 public:
-    MyMinecraftClient(MinecraftSession & session);
+    MyMinecraftClient(classic::MinecraftSession & session);
 
     const Player * followtarget;
 
@@ -46,7 +46,7 @@ public:
 
         // Your op status is updated.
         // Old playertype provided for convenience.
-        virtual void onClientOp(MinecraftWorld::t_playertype old_playertype);
+        virtual void onClientOp(classic::MinecraftWorld::t_playertype old_playertype);
 
         // You are teleported.
         // Old position and old direction provided for convenience.

@@ -23,6 +23,7 @@
 #define LIBMINECRAFT_MAINLINE_PACKET_HPP
 
 #include "../packet.hpp"
+#include "mctypes.hpp"
 
 namespace libminecraft
 {

@@ -32,9 +32,12 @@ namespace libminecraft
         {
             namespace packet
             {
-                class Login
+                class Login : public Packet
                 {
                 public:
+                    MCTypes::Byte version;
+                    MCTypes::String username;
+
                     Login();
                 };
             }
