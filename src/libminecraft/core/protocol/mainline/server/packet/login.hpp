@@ -35,10 +35,16 @@ namespace libminecraft
                 class Login : public Packet
                 {
                 public:
-                    MCTypes::Byte version;
-                    MCTypes::String username;
+                    MCTypes::Int player_id;
+                    MCTypes::String unknown_a;
+                    MCTypes::String unknown_b;
+                    MCTypes::Long seed;
+                    MCTypes::Byte dimension;
 
                     Login();
+                    virtual void read(std::istream &is);
+                    virtual void write(std::ostream &os) const;
+                    virtual void toReadable(std::ostream &os) const;
                 };
             }
         }

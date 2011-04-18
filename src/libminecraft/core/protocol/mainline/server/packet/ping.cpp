@@ -20,7 +20,8 @@
  */
 
 #include "ping.hpp"
-#include "../../../stream.hpp"
+
+#include "../../stream.hpp"
 
 namespace libminecraft
 {
@@ -34,12 +35,12 @@ namespace libminecraft
                 {
                 }
 
-                void Ping::read(std::istream &is)
+                void Ping::read(std::istream &stream)
                 {
 
                 }
 
-                void Ping::write(std::ostream &os) const
+                void Ping::write(std::ostream &stream) const
                 {
 
                 }

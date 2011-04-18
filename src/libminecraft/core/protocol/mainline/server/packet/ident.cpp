@@ -27,7 +27,7 @@ namespace libminecraft
 {
     namespace mainline
     {
-        namespace client
+        namespace server
         {
             namespace packet
             {
@@ -37,17 +37,17 @@ namespace libminecraft
 
                 void Ident::read(std::istream &stream)
                 {
-                    Stream::getString(stream, username);
+                    Stream::getString(stream, hash);
                 }
 
                 void Ident::write(std::ostream &stream) const
                 {
-                    Stream::putString(stream, username);
+                    Stream::putString(stream, hash);
                 }
 
                 void Ident::toReadable(std::ostream &os) const
                 {
-                    os << "Username: " << username << std::endl;
+                    os << "Hash: " << hash << std::endl;
                 }
             }
         }

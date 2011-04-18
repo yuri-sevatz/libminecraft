@@ -35,6 +35,7 @@ namespace libminecraft
             public:
                 enum PacketID
                 {
+                    LOGIN = 0x01,
                     IDENT = 0x02,
                 };
             };

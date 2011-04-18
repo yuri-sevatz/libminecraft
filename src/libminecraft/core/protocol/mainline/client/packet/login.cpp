@@ -1,5 +1,5 @@
 /*
- * ident.cpp
+ * login.cpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 04/2011.
@@ -19,7 +19,7 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ident.hpp"
+#include "login.hpp"
 
 #include "../../stream.hpp"
 
@@ -31,23 +31,35 @@ namespace libminecraft
         {
             namespace packet
             {
-                Ident::Ident()
+                Login::Login()
                 {
                 }
 
-                void Ident::read(std::istream &stream)
+                void Login::read(std::istream &stream)
                 {
+                    Stream::getByte(stream, version);
                     Stream::getString(stream, username);
+                    Stream::getString(stream, password);
+                    Stream::getLong(stream, seed);
+                    Stream::getByte(stream, dimension);
                 }
 
-                void Ident::write(std::ostream &stream) const
+                void Login::write(std::ostream &stream) const
                 {
+                    Stream::putByte(stream, version);
                     Stream::putString(stream, username);
+                    Stream::putString(stream, password);
+                    Stream::putLong(stream, seed);
+                    Stream::putByte(stream, dimension);
                 }
 
-                void Ident::toReadable(std::ostream &os) const
+                void Login::toReadable(std::ostream &os) const
                 {
-                    os << "Username: " << username << std::endl;
+                    os << "Version: " << version << "\n";
+                    os << "Username: " << username << "\n";
+                    os << "Password: " << password << "\n";
+                    os << "Seed: " << seed << "\n";
+                    os << "Dimension: " << (int) dimension << std::endl;
                 }
             }
         }

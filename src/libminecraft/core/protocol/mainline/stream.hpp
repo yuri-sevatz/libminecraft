@@ -52,52 +52,52 @@ namespace libminecraft
             static void putString(std::ostream & stream, const MCTypes::String & str);
         };
 
-        inline void getBool(std::istream &stream, MCTypes::Bool &tval)
+        inline void Stream::getBool(std::istream &stream, MCTypes::Bool &tval)
         {
             io::bigendian::stream::getBool(stream, tval);
         }
 
-        inline void putBool(std::ostream &stream, const MCTypes::Bool &tval)
+        inline void Stream::putBool(std::ostream &stream, const MCTypes::Bool &tval)
         {
             io::bigendian::stream::putBool(stream, tval);
         }
 
-        inline void getInt(std::istream &stream, MCTypes::Int &tval)
+        inline void Stream::getInt(std::istream &stream, MCTypes::Int &tval)
         {
             io::bigendian::stream::getInt(stream, tval);
         }
 
-        inline void putInt(std::ostream &stream, const MCTypes::Int &tval)
+        inline void Stream::putInt(std::ostream &stream, const MCTypes::Int &tval)
         {
             io::bigendian::stream::putInt(stream, tval);
         }
 
-        inline void getLong(std::istream &stream, MCTypes::Long &tval)
+        inline void Stream::getLong(std::istream &stream, MCTypes::Long &tval)
         {
             io::bigendian::stream::getLong(stream, tval);
         }
 
-        inline void putLong(std::ostream &stream, const MCTypes::Long &tval)
+        inline void Stream::putLong(std::ostream &stream, const MCTypes::Long &tval)
         {
             io::bigendian::stream::putLong(stream, tval);
         }
 
-        inline void getFloat(std::istream &stream, MCTypes::Float &tval)
+        inline void Stream::getFloat(std::istream &stream, MCTypes::Float &tval)
         {
             io::bigendian::stream::getFloat(stream, tval);
         }
 
-        inline void putFloat(std::ostream &stream, const MCTypes::Float &tval)
+        inline void Stream::putFloat(std::ostream &stream, const MCTypes::Float &tval)
         {
             io::bigendian::stream::putFloat(stream, tval);
         }
 
-        inline void getDouble(std::istream &stream, MCTypes::Double &tval)
+        inline void Stream::getDouble(std::istream &stream, MCTypes::Double &tval)
         {
             io::bigendian::stream::getDouble(stream, tval);
         }
 
-        inline void putDouble(std::ostream &stream, const MCTypes::Double &tval)
+        inline void Stream::putDouble(std::ostream &stream, const MCTypes::Double &tval)
         {
             io::bigendian::stream::putDouble(stream, tval);
         }

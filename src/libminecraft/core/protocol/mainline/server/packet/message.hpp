@@ -1,5 +1,5 @@
 /*
- * ident.cpp
+ * message.hpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 04/2011.
@@ -19,37 +19,32 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ident.hpp"
+#ifndef LIBMINECRAFT_MAINLINE_SERVER_PACKET_MESSAGE_HPP
+#define LIBMINECRAFT_MAINLINE_SERVER_PACKET_MESSAGE_HPP
 
-#include "../../stream.hpp"
+#include "../packet.hpp"
 
 namespace libminecraft
 {
     namespace mainline
     {
-        namespace client
+        namespace server
         {
             namespace packet
             {
-                Ident::Ident()
+                class Message : public Packet
                 {
-                }
+                public:
+                    MCTypes::String message;
 
-                void Ident::read(std::istream &stream)
-                {
-                    Stream::getString(stream, username);
-                }
-
-                void Ident::write(std::ostream &stream) const
-                {
-                    Stream::putString(stream, username);
-                }
-
-                void Ident::toReadable(std::ostream &os) const
-                {
-                    os << "Username: " << username << std::endl;
-                }
+                    Message();
+                    virtual void read(std::istream &is);
+                    virtual void write(std::ostream &os) const;
+                    virtual void toReadable(std::ostream &os) const;
+                };
             }
         }
     }
 }
+
+#endif // LIBMINECRAFT_MAINLINE_CLIENT_PACKET_MESSAGE_HPP

@@ -34,6 +34,7 @@ namespace libminecraft
             {
                 class Ident : public Packet
                 {
+                public:
                     MCTypes::String username;
 
                     Ident();

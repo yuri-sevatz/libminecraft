@@ -147,10 +147,14 @@ set(${PROJECT_NAME}_sources_core_protocol_classic
 
 set(${PROJECT_NAME}_headers_core_protocol_mainline_client_packet
     core/protocol/mainline/client/packet/ident.hpp
+    core/protocol/mainline/client/packet/login.hpp
+    core/protocol/mainline/client/packet/message.hpp
 )
 
 set(${PROJECT_NAME}_sources_core_protocol_mainline_client_packet
     core/protocol/mainline/client/packet/ident.cpp
+    core/protocol/mainline/client/packet/login.cpp
+    core/protocol/mainline/client/packet/message.cpp
 )
 
 set(${PROJECT_NAME}_headers_core_protocol_mainline_client
@@ -165,11 +169,17 @@ set(${PROJECT_NAME}_sources_core_protocol_mainline_client
 )
 
 set(${PROJECT_NAME}_headers_core_protocol_mainline_server_packet
+    core/protocol/mainline/server/packet/login.hpp
+    core/protocol/mainline/server/packet/message.hpp
     core/protocol/mainline/server/packet/ping.hpp
+    core/protocol/mainline/server/packet/time.hpp
 )
 
 set(${PROJECT_NAME}_sources_core_protocol_mainline_server_packet
+    core/protocol/mainline/server/packet/login.cpp
+    core/protocol/mainline/server/packet/message.cpp
     core/protocol/mainline/server/packet/ping.cpp
+    core/protocol/mainline/server/packet/time.cpp
 )
 
 set(${PROJECT_NAME}_headers_core_protocol_mainline_server

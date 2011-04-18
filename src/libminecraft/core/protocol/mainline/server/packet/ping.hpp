@@ -34,6 +34,7 @@ namespace libminecraft
             {
                 class Ping : public Packet
                 {
+                public:
                     Ping();
                     virtual void read(std::istream &is);
                     virtual void write(std::ostream &os) const;

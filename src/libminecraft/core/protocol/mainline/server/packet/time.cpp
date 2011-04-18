@@ -1,5 +1,5 @@
 /*
- * ident.cpp
+ * time.cpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 04/2011.
@@ -19,7 +19,7 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ident.hpp"
+#include "time.hpp"
 
 #include "../../stream.hpp"
 
@@ -27,27 +27,27 @@ namespace libminecraft
 {
     namespace mainline
     {
-        namespace client
+        namespace server
         {
             namespace packet
             {
-                Ident::Ident()
+                Time::Time()
                 {
                 }
 
-                void Ident::read(std::istream &stream)
+                void Time::read(std::istream &stream)
                 {
-                    Stream::getString(stream, username);
+                    Stream::getLong(stream, time);
                 }
 
-                void Ident::write(std::ostream &stream) const
+                void Time::write(std::ostream &stream) const
                 {
-                    Stream::putString(stream, username);
+                    Stream::putLong(stream, time);
                 }
 
-                void Ident::toReadable(std::ostream &os) const
+                void Time::toReadable(std::ostream &os) const
                 {
-                    os << "Username: " << username << std::endl;
+                    os << "Time: " << time << std::endl;
                 }
             }
         }

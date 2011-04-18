@@ -22,6 +22,7 @@
 #include "protocol.hpp"
 
 #include "packet/ident.hpp"
+#include "packet/login.hpp"
 
 #include <boost/assign/list_of.hpp>
 
@@ -30,7 +31,8 @@ namespace libminecraft
     template<> const std::map<const std::type_info *, mainline::client::Packet::PacketID>
             Protocol<mainline::client::Protocol, mainline::client::Packet, mainline::client::Packet::PacketID>::msgmap =
                 boost::assign::map_list_of
-                    (&typeid(mainline::client::packet::Ident), mainline::client::Packet::IDENT);
+                    (&typeid(mainline::client::packet::Ident), mainline::client::Packet::IDENT)
+                    (&typeid(mainline::client::packet::Login), mainline::client::Packet::LOGIN);
 
     namespace mainline
     {
