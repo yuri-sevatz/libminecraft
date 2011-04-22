@@ -50,6 +50,12 @@ namespace libminecraft
 
             static void getString(std::istream & stream, MCTypes::String & str);
             static void putString(std::ostream & stream, const MCTypes::String & str);
+
+            static void getUCS2Char(std::istream & stream, MCTypes::UCS2Char & ch);
+            static void putUCS2Char(std::ostream & stream, const MCTypes::UCS2Char & ch);
+
+            static void getUCS2String(std::istream & stream, MCTypes::UCS2String & str);
+            static void putUCS2String(std::ostream & stream, const MCTypes::UCS2String & str);
         };
 
         inline void Stream::getBool(std::istream &stream, MCTypes::Bool &tval)
@@ -100,6 +106,16 @@ namespace libminecraft
         inline void Stream::putDouble(std::ostream &stream, const MCTypes::Double &tval)
         {
             io::bigendian::stream::putDouble(stream, tval);
+        }
+
+        inline void Stream::getUCS2Char(std::istream &stream, MCTypes::UCS2Char &ch)
+        {
+            io::bigendian::stream::getShort(stream, ch);
+        }
+
+        inline void Stream::putUCS2Char(std::ostream &stream, const MCTypes::UCS2Char &ch)
+        {
+            io::bigendian::stream::putShort(stream, ch);
         }
     }
 }
