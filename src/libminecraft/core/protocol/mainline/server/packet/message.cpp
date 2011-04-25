@@ -37,17 +37,20 @@ namespace libminecraft
 
                 void Message::read(std::istream &stream)
                 {
-                    Stream::getString(stream, message);
+                    Stream::getUCS2String(stream, message);
                 }
 
                 void Message::write(std::ostream &stream) const
                 {
-                    Stream::putString(stream, message);
+                    Stream::putUCS2String(stream, message);
                 }
 
                 void Message::toReadable(std::ostream &os) const
                 {
+                    /*
+                      // Unsupported for now!
                     os << "Message: " << message << std::endl;
+                    */
                 }
             }
         }

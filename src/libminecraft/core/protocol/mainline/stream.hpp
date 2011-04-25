@@ -107,16 +107,6 @@ namespace libminecraft
         {
             io::bigendian::stream::putDouble(stream, tval);
         }
-
-        inline void Stream::getUCS2Char(std::istream &stream, MCTypes::UCS2Char &ch)
-        {
-            io::bigendian::stream::getShort(stream, ch);
-        }
-
-        inline void Stream::putUCS2Char(std::ostream &stream, const MCTypes::UCS2Char &ch)
-        {
-            io::bigendian::stream::putShort(stream, ch);
-        }
     }
 }
 

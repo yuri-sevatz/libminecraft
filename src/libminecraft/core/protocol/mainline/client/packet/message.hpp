@@ -35,7 +35,7 @@ namespace libminecraft
                 class Message : public Packet
                 {
                 public:
-                    MCTypes::String message;
+                    MCTypes::UCS2String message;
 
                     Message();
                     virtual void read(std::istream &is);

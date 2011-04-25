@@ -24,6 +24,8 @@
 
 #include "../stream.hpp"
 
+#include <wchar.h>
+
 // Big Endian stream functions for dealing with c++ equivalents of the java types.
 
 namespace io
@@ -56,6 +58,9 @@ namespace io
 
             static void getDouble(std::istream & stream, double & sdouble);
             static void putDouble(std::ostream & stream, const double & sdouble);
+
+            static void getWChar(std::istream & stream, wchar_t & wchar);
+            static void putWChar(std::ostream & stream, const wchar_t & wchar);
 
         private:
             template<typename T>
@@ -118,6 +123,16 @@ namespace io
         inline void stream::putDouble(std::ostream &stream, const double &sdouble)
         {
             stream::generic<double>::putT(stream, sdouble);
+        }
+
+        inline void stream::getWChar(std::istream &stream, wchar_t &wchar)
+        {
+            stream::generic<wchar_t>::getT(stream, wchar);
+        }
+
+        inline void stream::putWChar(std::ostream &stream, const wchar_t &wchar)
+        {
+            stream::generic<wchar_t>::putT(stream, wchar);
         }
     }
 }

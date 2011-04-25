@@ -130,5 +130,6 @@ namespace io
         // Explicit instantiation of our private generically supported types.
         template class stream::generic<float>;
         template class stream::generic<double>;
+        template class stream::generic<wchar_t>;
     }
 }

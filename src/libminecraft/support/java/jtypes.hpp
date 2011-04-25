@@ -49,7 +49,7 @@ public:
     typedef float jfloat; // Single-precision 32-bit IEEE 754 floating point
     typedef double jdouble; // Double-precision 64-bit IEEE 754 floating point
 
-    typedef uint16_t jchar;
+    typedef wchar_t jchar;
     typedef std::basic_string<jchar> jstring;
 };
 
