@@ -37,7 +37,6 @@ namespace libminecraft
                 public:
                     MCTypes::Int player_id;
                     MCTypes::String unknown_a;
-                    MCTypes::String unknown_b;
                     MCTypes::Long seed;
                     MCTypes::Byte dimension;
 

@@ -39,7 +39,6 @@ namespace libminecraft
                 {
                     Stream::getInt(stream, player_id);
                     Stream::getString(stream, unknown_a);
-                    Stream::getString(stream, unknown_b);
                     Stream::getLong(stream, seed);
                     Stream::getByte(stream, dimension);
                 }
@@ -48,7 +47,6 @@ namespace libminecraft
                 {
                     Stream::putInt(stream, player_id);
                     Stream::putString(stream, unknown_a);
-                    Stream::putString(stream, unknown_b);
                     Stream::putLong(stream, seed);
                     Stream::putByte(stream, dimension);
                 }
@@ -56,10 +54,9 @@ namespace libminecraft
                 void Login::toReadable(std::ostream &os) const
                 {
                     os << "Player ID: " << player_id << "\n";
-                    os << "Unknown A:" << unknown_a << "\n";
-                    os << "Unknown B:" << unknown_b << "\n";
-                    os << "Seed:" << seed << "\n";
-                    os << "Dimension:" << (int) dimension << std::endl;
+                    os << "Unknown A: " << unknown_a << "\n";
+                    os << "Seed: " << seed << "\n";
+                    os << "Dimension: " << (int) dimension << std::endl;
                 }
             }
         }

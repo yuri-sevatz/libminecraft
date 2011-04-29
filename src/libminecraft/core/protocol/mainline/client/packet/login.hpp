@@ -37,7 +37,6 @@ namespace libminecraft
                 public:
                     MCTypes::Byte version;
                     MCTypes::String username;
-                    MCTypes::String password;
                     MCTypes::Long seed;
                     MCTypes::Byte dimension;
 

@@ -39,7 +39,6 @@ namespace libminecraft
                 {
                     Stream::getByte(stream, version);
                     Stream::getString(stream, username);
-                    Stream::getString(stream, password);
                     Stream::getLong(stream, seed);
                     Stream::getByte(stream, dimension);
                 }
@@ -48,7 +47,6 @@ namespace libminecraft
                 {
                     Stream::putByte(stream, version);
                     Stream::putString(stream, username);
-                    Stream::putString(stream, password);
                     Stream::putLong(stream, seed);
                     Stream::putByte(stream, dimension);
                 }
@@ -57,7 +55,6 @@ namespace libminecraft
                 {
                     os << "Version: " << version << "\n";
                     os << "Username: " << username << "\n";
-                    os << "Password: " << password << "\n";
                     os << "Seed: " << seed << "\n";
                     os << "Dimension: " << (int) dimension << std::endl;
                 }
