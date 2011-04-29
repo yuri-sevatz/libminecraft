@@ -40,11 +40,6 @@ namespace libminecraft
         class MinecraftSession
         {
             friend class ClientEventHandler;
-            friend class CliConnecting;
-            friend class CliDisconnected;
-            friend class CliGame;
-            friend class CliLoadingMap;
-            friend class CliNegotiating;
 
         protected:
             ClientEventHandler * listener;
