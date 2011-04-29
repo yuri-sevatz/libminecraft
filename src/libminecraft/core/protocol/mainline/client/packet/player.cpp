@@ -1,5 +1,5 @@
 /*
- * message.cpp
+ * player.cpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 04/2011.
@@ -19,7 +19,7 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "message.hpp"
+#include "player.hpp"
 
 #include "../../stream.hpp"
 
@@ -31,8 +31,23 @@ namespace libminecraft
         {
             namespace packet
             {
-                Message::Message()
+                Player::Player()
                 {
+                }
+
+                void Player::read(std::istream &stream)
+                {
+                    Stream::getBool(stream, on_ground);
+                }
+
+                void Player::write(std::ostream &stream) const
+                {
+                    Stream::putBool(stream, on_ground);
+                }
+
+                void Player::toReadable(std::ostream &os) const
+                {
+                    os << "On Ground: " << on_ground << std::endl;
                 }
             }
         }

@@ -21,8 +21,13 @@
 
 #include "protocol.hpp"
 
-#include "packet/ping.hpp"
+#include "packet/equipment.hpp"
+#include "packet/health.hpp"
+#include "packet/ident.hpp"
 #include "packet/login.hpp"
+#include "packet/ping.hpp"
+#include "packet/spawnpoint.hpp"
+#include "packet/time.hpp"
 
 #include <boost/assign/list_of.hpp>
 
@@ -31,8 +36,13 @@ namespace libminecraft
     template<> const std::map<const std::type_info *, mainline::server::Packet::PacketID>
             Protocol<mainline::server::Protocol, mainline::server::Packet, mainline::server::Packet::PacketID>::msgmap =
                 boost::assign::map_list_of
+                    (&typeid(mainline::server::packet::Equipment), mainline::server::Packet::EQUIPMENT)
+                    (&typeid(mainline::server::packet::Health), mainline::server::Packet::HEALTH)
+                    (&typeid(mainline::server::packet::Ident), mainline::server::Packet::IDENT)
                     (&typeid(mainline::server::packet::Login), mainline::server::Packet::LOGIN)
-                    (&typeid(mainline::server::packet::Ping), mainline::server::Packet::PING);
+                    (&typeid(mainline::server::packet::Ping), mainline::server::Packet::PING)
+                    (&typeid(mainline::server::packet::SpawnPoint), mainline::server::Packet::SPAWNPOINT)
+                    (&typeid(mainline::server::packet::Time), mainline::server::Packet::TIME);
 
     namespace mainline
     {

@@ -149,12 +149,16 @@ set(${PROJECT_NAME}_headers_core_protocol_mainline_client_packet
     core/protocol/mainline/client/packet/ident.hpp
     core/protocol/mainline/client/packet/login.hpp
     core/protocol/mainline/client/packet/message.hpp
+    core/protocol/mainline/client/packet/player.hpp
+    core/protocol/mainline/client/packet/use.hpp
 )
 
 set(${PROJECT_NAME}_sources_core_protocol_mainline_client_packet
     core/protocol/mainline/client/packet/ident.cpp
     core/protocol/mainline/client/packet/login.cpp
     core/protocol/mainline/client/packet/message.cpp
+    core/protocol/mainline/client/packet/player.cpp
+    core/protocol/mainline/client/packet/use.cpp
 )
 
 set(${PROJECT_NAME}_headers_core_protocol_mainline_client
@@ -168,17 +172,33 @@ set(${PROJECT_NAME}_sources_core_protocol_mainline_client
     core/protocol/mainline/client/protocol.cpp
 )
 
+set(${PROJECT_NAME}_headers_core_protocol_mainline_packet
+   core/protocol/mainline/packet/message.cpp
+)
+
+set(${PROJECT_NAME}_sources_core_protocol_mainline_packet
+   core/protocol/mainline/packet/message.hpp
+)
+
 set(${PROJECT_NAME}_headers_core_protocol_mainline_server_packet
+    core/protocol/mainline/server/packet/equipment.hpp
+    core/protocol/mainline/server/packet/health.hpp
+    core/protocol/mainline/server/packet/ident.hpp
     core/protocol/mainline/server/packet/login.hpp
     core/protocol/mainline/server/packet/message.hpp
     core/protocol/mainline/server/packet/ping.hpp
+    core/protocol/mainline/server/packet/spawnpoint.hpp
     core/protocol/mainline/server/packet/time.hpp
 )
 
 set(${PROJECT_NAME}_sources_core_protocol_mainline_server_packet
+    core/protocol/mainline/server/packet/equipment.cpp
+    core/protocol/mainline/server/packet/health.cpp
+    core/protocol/mainline/server/packet/ident.cpp
     core/protocol/mainline/server/packet/login.cpp
     core/protocol/mainline/server/packet/message.cpp
     core/protocol/mainline/server/packet/ping.cpp
+    core/protocol/mainline/server/packet/spawnpoint.cpp
     core/protocol/mainline/server/packet/time.cpp
 )
 
@@ -195,6 +215,7 @@ set(${PROJECT_NAME}_sources_core_protocol_mainline_server
 
 set(${PROJECT_NAME}_headers_core_protocol_mainline
     ${${PROJECT_NAME}_headers_core_protocol_mainline_client}
+    ${${PROJECT_NAME}_headers_core_protocol_mainline_packet}
     ${${PROJECT_NAME}_headers_core_protocol_mainline_server}
     core/protocol/mainline/client.hpp
     core/protocol/mainline/mctypes.hpp
@@ -205,6 +226,7 @@ set(${PROJECT_NAME}_headers_core_protocol_mainline
 
 set(${PROJECT_NAME}_sources_core_protocol_mainline
     ${${PROJECT_NAME}_sources_core_protocol_mainline_client}
+    ${${PROJECT_NAME}_sources_core_protocol_mainline_packet}
     ${${PROJECT_NAME}_sources_core_protocol_mainline_server}
     core/protocol/mainline/client.cpp
     core/protocol/mainline/stream.cpp

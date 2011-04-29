@@ -21,19 +21,30 @@
 
 #include "message.hpp"
 
-#include "../../stream.hpp"
+#include "../stream.hpp"
 
 namespace libminecraft
 {
     namespace mainline
     {
-        namespace client
+        namespace packet
         {
-            namespace packet
+            void Message::read(std::istream &stream)
             {
-                Message::Message()
-                {
-                }
+                Stream::getUCS2String(stream, message);
+            }
+
+            void Message::write(std::ostream &stream) const
+            {
+                Stream::putUCS2String(stream, message);
+            }
+
+            void Message::toReadable(std::ostream &os) const
+            {
+                /*
+                    // Unsupported for jchar for now
+                    os << "Message: " << message << std::endl;
+                */
             }
         }
     }

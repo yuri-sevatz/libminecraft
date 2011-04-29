@@ -23,6 +23,7 @@
 #define LIBMINECRAFT_MAINLINE_SERVER_PACKET_MESSAGE_HPP
 
 #include "../packet.hpp"
+#include "../../packet/message.hpp"
 
 namespace libminecraft
 {
@@ -32,15 +33,10 @@ namespace libminecraft
         {
             namespace packet
             {
-                class Message : public Packet
+                class Message : public server::Packet, public mainline::packet::Message
                 {
                 public:
-                    MCTypes::UCS2String message;
-
                     Message();
-                    virtual void read(std::istream &is);
-                    virtual void write(std::ostream &os) const;
-                    virtual void toReadable(std::ostream &os) const;
                 };
             }
         }

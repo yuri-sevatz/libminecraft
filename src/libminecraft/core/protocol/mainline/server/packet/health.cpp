@@ -1,5 +1,5 @@
 /*
- * message.cpp
+ * health.cpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 04/2011.
@@ -19,7 +19,7 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "message.hpp"
+#include "health.hpp"
 
 #include "../../stream.hpp"
 
@@ -27,12 +27,27 @@ namespace libminecraft
 {
     namespace mainline
     {
-        namespace client
+        namespace server
         {
             namespace packet
             {
-                Message::Message()
+                Health::Health()
                 {
+                }
+
+                void Health::read(std::istream &stream)
+                {
+                    Stream::getShort(stream, hp);
+                }
+
+                void Health::write(std::ostream &stream) const
+                {
+                    Stream::putShort(stream, hp);
+                }
+
+                void Health::toReadable(std::ostream &os) const
+                {
+                    os << "Hp: " << os << std::endl;
                 }
             }
         }

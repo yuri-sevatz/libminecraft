@@ -1,5 +1,5 @@
 /*
- * message.cpp
+ * spawnpoint.cpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 04/2011.
@@ -19,7 +19,7 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "message.hpp"
+#include "spawnpoint.hpp"
 
 #include "../../stream.hpp"
 
@@ -27,12 +27,33 @@ namespace libminecraft
 {
     namespace mainline
     {
-        namespace client
+        namespace server
         {
             namespace packet
             {
-                Message::Message()
+                SpawnPoint::SpawnPoint()
                 {
+                }
+
+                void SpawnPoint::read(std::istream &stream)
+                {
+                    Stream::getInt(stream, block_x);
+                    Stream::getInt(stream, block_y);
+                    Stream::getInt(stream, block_z);
+                }
+
+                void SpawnPoint::write(std::ostream &stream) const
+                {
+                    Stream::putInt(stream, block_x);
+                    Stream::putInt(stream, block_y);
+                    Stream::putInt(stream, block_z);
+                }
+
+                void SpawnPoint::toReadable(std::ostream &os) const
+                {
+                    os << "Block X: " << block_x << "\n";
+                    os << "Block Y: " << block_y << "\n";
+                    os << "Block Z: " << block_z << std::endl;
                 }
             }
         }

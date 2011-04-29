@@ -1,5 +1,5 @@
 /*
- * message.cpp
+ * message.hpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 04/2011.
@@ -19,22 +19,28 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "message.hpp"
+#ifndef LIBMINECRAFT_MAINLINE_PACKET_MESSAGE_HPP
+#define LIBMINECRAFT_MAINLINE_PACKET_MESSAGE_HPP
 
-#include "../../stream.hpp"
+#include "../packet.hpp"
 
 namespace libminecraft
 {
     namespace mainline
     {
-        namespace client
+        namespace packet
         {
-            namespace packet
+            class Message : public Packet
             {
-                Message::Message()
-                {
-                }
-            }
+            public:
+                MCTypes::UCS2String message;
+
+                virtual void read(std::istream &is);
+                virtual void write(std::ostream &os) const;
+                virtual void toReadable(std::ostream &os) const;
+            };
         }
     }
 }
+
+#endif // LIBMINECRAFT_MAINLINE_PACKET_MESSAGE_HPP

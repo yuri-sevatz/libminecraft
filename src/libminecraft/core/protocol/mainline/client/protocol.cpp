@@ -23,6 +23,9 @@
 
 #include "packet/ident.hpp"
 #include "packet/login.hpp"
+#include "packet/message.hpp"
+#include "packet/player.hpp"
+#include "packet/use.hpp"
 
 #include <boost/assign/list_of.hpp>
 
@@ -32,7 +35,10 @@ namespace libminecraft
             Protocol<mainline::client::Protocol, mainline::client::Packet, mainline::client::Packet::PacketID>::msgmap =
                 boost::assign::map_list_of
                     (&typeid(mainline::client::packet::Ident), mainline::client::Packet::IDENT)
-                    (&typeid(mainline::client::packet::Login), mainline::client::Packet::LOGIN);
+                    (&typeid(mainline::client::packet::Login), mainline::client::Packet::LOGIN)
+                    (&typeid(mainline::client::packet::Message), mainline::client::Packet::MESSAGE)
+                    (&typeid(mainline::client::packet::Player), mainline::client::Packet::PLAYER)
+                    (&typeid(mainline::client::packet::Use), mainline::client::Packet::USE);
 
     namespace mainline
     {

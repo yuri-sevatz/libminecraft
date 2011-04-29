@@ -38,6 +38,11 @@ namespace libminecraft
                     PING = 0x00,
                     LOGIN = 0x01,
                     IDENT = 0x02,
+                    MESSAGE = 0x03,
+                    TIME = 0x04,
+                    EQUIPMENT = 0x05,
+                    SPAWNPOINT = 0x06,
+                    HEALTH = 0x08,
                 };
             };
         }
