@@ -25,6 +25,7 @@
 #include "packet/health.hpp"
 #include "packet/ident.hpp"
 #include "packet/login.hpp"
+#include "packet/message.hpp"
 #include "packet/ping.hpp"
 #include "packet/spawnpoint.hpp"
 #include "packet/time.hpp"
@@ -40,6 +41,7 @@ namespace libminecraft
                     (&typeid(mainline::server::packet::Health), mainline::server::Packet::HEALTH)
                     (&typeid(mainline::server::packet::Ident), mainline::server::Packet::IDENT)
                     (&typeid(mainline::server::packet::Login), mainline::server::Packet::LOGIN)
+                    (&typeid(mainline::server::packet::Message), mainline::server::Packet::MESSAGE)
                     (&typeid(mainline::server::packet::Ping), mainline::server::Packet::PING)
                     (&typeid(mainline::server::packet::SpawnPoint), mainline::server::Packet::SPAWNPOINT)
                     (&typeid(mainline::server::packet::Time), mainline::server::Packet::TIME);
