@@ -24,10 +24,9 @@
 
 #include <string>
 
-#include "../core/player/player.hpp"
-#include "../core/map/map.hpp"
-#include "../core/map/mapcell.hpp"
-#include "../core/minecraftworld.hpp"
+#include "../core/classic/world/player.hpp"
+#include "../core/classic/world/map.hpp"
+#include "../core/classic/minecraftworld.hpp"
 
 #include "../session/minecraftsession.hpp"
 

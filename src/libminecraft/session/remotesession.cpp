@@ -24,10 +24,10 @@
 
 #include "../interfaces/clienteventhandler.hpp"
 
-#include "../core/protocol/stream.hpp"
-#include "../core/protocol/classic/client/packet/message.hpp"
-#include "../core/protocol/classic/client/packet/posdir.hpp"
-#include "../core/protocol/classic/client/packet/setblock.hpp"
+#include "../core/classic/protocol/stream.hpp"
+#include "../core/classic/protocol/client/packet/message.hpp"
+#include "../core/classic/protocol/client/packet/posdir.hpp"
+#include "../core/classic/protocol/client/packet/setblock.hpp"
 
 namespace libminecraft
 {

@@ -23,9 +23,9 @@
 #ifndef LIBMINECRAFT_CLASSIC_MINECRAFTSESSION_HPP
 #define LIBMINECRAFT_CLASSIC_MINECRAFTSESSION_HPP
 
-#include "../core/map/map.hpp"
-#include "../core/map/mapcell.hpp"
-#include "../core/minecraftworld.hpp"
+#include "../core/classic/world/map.hpp"
+#include "../core/classic/world/map/mapcell.hpp"
+#include "../core/classic/minecraftworld.hpp"
 
 namespace libminecraft
 {

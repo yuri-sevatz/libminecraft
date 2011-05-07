@@ -26,8 +26,8 @@
 #include "minecraftsession.hpp"
 
 // FSM
-#include "../core/client/clientstatemachine.hpp"
-#include "../core/protocol/classic/client.hpp"
+#include "../core/classic/net/clientstatemachine.hpp"
+#include "../core/classic/protocol/client.hpp"
 
 #include <sstream>
 #include <boost/asio.hpp>
