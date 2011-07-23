@@ -19,7 +19,7 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <libminecraft/session/remotesession.hpp>
+#include <libminecraft/classic/session/remote.hpp>
 
 #include <iostream>
 #include <string>
@@ -46,7 +46,7 @@ int main(int argc, char * argv[])
     std::string port(argv[2]);
 
     // Create the session.
-    libminecraft::classic::RemoteSession session(hostname, port);
+    libminecraft::classic::session::Remote session(hostname, port);
 
     // Instantiate our client, give it the session.
     MyMinecraftClient client(session);

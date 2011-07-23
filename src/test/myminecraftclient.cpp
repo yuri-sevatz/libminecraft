@@ -27,7 +27,7 @@
 #include <libminecraft/utils/mcstring.hpp>
 
 
-MyMinecraftClient::MyMinecraftClient(classic::MinecraftSession & session) : classic::ClientEventHandler(session)
+MyMinecraftClient::MyMinecraftClient(Session & session) : Client(session)
 {
     followtarget = NULL;
 }
@@ -50,7 +50,7 @@ void MyMinecraftClient::onMessage(Player::t_id id, const std::string & message)
 
     if (pos != std::string::npos)
     {
-        const Player * player = self.world.getPlayer(cleaned.substr(0, pos));
+        const Player * player = world().getPlayer(cleaned.substr(0, pos));
         if (player && cleaned.length() > pos + 2)
             onPlayerMessage(*player, cleaned.substr(pos + 2, std::string::npos));
     }
@@ -60,7 +60,7 @@ void MyMinecraftClient::onPlayerMove(const Player & player, Map::size_plot delta
 {
     if (followtarget != NULL && &player == followtarget)
     {
-        self.move(self.world.player.x + delta_x, self.world.player.y + delta_y, self.world.player.z + delta_z);
+        move(self.x + delta_x, self.y + delta_y, self.z + delta_z);
     }
 }
 
@@ -113,12 +113,12 @@ void MyMinecraftClient::onLoginError(const char * reason)
     std::cout << "LoginError: " << reason << std::endl;
 }
 
-void MyMinecraftClient::onClientOp(classic::MinecraftWorld::t_playertype old_playertype)
+void MyMinecraftClient::onClientOp(player::Local::t_optype old_playertype)
 {
-    std::cout << "onClientOp: " << self.world.playertype << std::endl;
+    std::cout << "onClientOp: " << self.optype << std::endl;
 }
 
-void MyMinecraftClient::onBlockUpdate(MapCell::BlockType type, MapCell::BlockType old_type, Map::size_block x, Map::size_block y, Map::size_block z)
+void MyMinecraftClient::onBlockUpdate(map::Cell::BlockType type, map::Cell::BlockType old_type, Map::size_block x, Map::size_block y, Map::size_block z)
 {
     std::cout << "onBlockUpdate(" << x << "," << y << "," << z << ")" << std::endl;
 }
@@ -149,13 +149,13 @@ void MyMinecraftClient::processCommand(const Player & player, const std::string 
     {
         std::stringstream ret;
 
-        ret << "(" << self.world.player.x << ","
-                << (self.world.player.y - Map::EYE_HEIGHT) << ","
-                << self.world.player.z << ")";
+        ret << "(" << self.x << ","
+                << (self.y - Map::EYE_HEIGHT) << ","
+                << self.z << ")";
 
         std::cout << ret.str() << std::endl;
 
-        self.sendMessage(ret.str());
+        sendMessage(ret.str());
     }
     else if (message == ".mypos")
     {
@@ -167,7 +167,7 @@ void MyMinecraftClient::processCommand(const Player & player, const std::string 
 
         std::cout << ret.str() << std::endl;
 
-        self.sendMessage(ret.str());
+        sendMessage(ret.str());
     }
     else if (message == ".followme")
     {
@@ -180,39 +180,39 @@ void MyMinecraftClient::processCommand(const Player & player, const std::string 
     else if (message == ".exorcist")
     {
         //self.sendMessage("I am the exorcist - watch me turn my head upside down.");
-        self.look(Player::PITCH_INVERT, self.world.player.yaw);
+        look(Player::PITCH_INVERT, self.yaw);
     }
     else if (message == ".lookfront")
     {
-        self.look(Player::PITCH_NORMAL, self.world.player.yaw);
+        look(Player::PITCH_NORMAL, self.yaw);
     }
     else if (message == ".looksky")
     {
-        self.look(Player::PITCH_UP, self.world.player.yaw);
+        look(Player::PITCH_UP, self.yaw);
     }
     else if (message == ".lookfeet")
     {
-        self.look(Player::PITCH_DOWN, self.world.player.yaw);
+        look(Player::PITCH_DOWN, self.yaw);
     }
     else if (message == ".lookeast")
     {
-        self.look(self.world.player.pitch, Player::YAW_EAST);
+        look(self.pitch, Player::YAW_EAST);
     }
     else if (message == ".lookwest")
     {
-        self.look(self.world.player.pitch, Player::YAW_WEST);
+        look(self.pitch, Player::YAW_WEST);
     }
     else if (message == ".looknorth")
     {
-        self.look(self.world.player.pitch, Player::YAW_NORTH);
+        look(self.pitch, Player::YAW_NORTH);
     }
     else if (message == ".looksouth")
     {
-        self.look(self.world.player.pitch, Player::YAW_SOUTH);
+        look(self.pitch, Player::YAW_SOUTH);
     }
     else if (message.substr(0, 9) == ".message ")
     {
-        self.sendMessage(message.substr(9, std::string::npos));
+        sendMessage(message.substr(9, std::string::npos));
     }
     else if (message == ".findme")
     {
@@ -226,7 +226,7 @@ void MyMinecraftClient::processCommand(const Player & player, const std::string 
 
         //self.sendMessage(ret.str());
 
-        self.move(player.x, player.y, player.z);
+        move(player.x, player.y, player.z);
     }
     else if (message == ".flagme")
     {
@@ -236,7 +236,7 @@ void MyMinecraftClient::processCommand(const Player & player, const std::string 
         Map::size_block y = Map::toBlock(player.y - Map::EYE_HEIGHT) - 1;
         Map::size_block z = Map::toBlock(player.z);
 
-        if (!self.world.map.isValidBlock(x, y, z))
+        if (!world().map.isValidBlock(x, y, z))
             return;
 
         ret << "Flagging: (" << x << ","
@@ -245,38 +245,38 @@ void MyMinecraftClient::processCommand(const Player & player, const std::string 
 
         std::cout << ret.str() << std::endl;
 
-        self.sendMessage(ret.str());
+        sendMessage(ret.str());
 
-        self.move(player.x, player.y, player.z);
+        move(player.x, player.y, player.z);
 
-        const MapCell::BlockType t_type = self.world.map.grid[x][y][z].type;
+        const map::Cell::BlockType t_type = world().map.grid[x][y][z].type;
 
-        if (t_type != MapCell::BLANK && t_type != MapCell::WATER && t_type != MapCell::LAVA)
+        if (t_type != map::Cell::BLANK && t_type != map::Cell::WATER && t_type != map::Cell::LAVA)
         {
             std::cout << "(Cleared)" << std::endl;
-            self.clearBlock(x, y, z);
+            clearBlock(x, y, z);
         }
 
-        self.setBlock(x, y, z, MapCell::BRICK);
+        setBlock(x, y, z, map::Cell::BRICK);
     }
     else if (message == ".mapinfo")
     {
         std::stringstream ret;
 
-        ret << "Blocks: (" << self.world.map.x_blocks << ","
-                << self.world.map.y_blocks << ","
-                << self.world.map.z_blocks << ")";
+        ret << "Blocks: (" << world().map.x_blocks << ","
+                << world().map.y_blocks << ","
+                << world().map.z_blocks << ")";
 
         std::cout << ret.str() << std::endl;
-        self.sendMessage(ret.str());
+        sendMessage(ret.str());
         ret.flush();
-        ret << "Plot: (" << self.world.map.x_plot << ","
-                << self.world.map.y_plot << ","
-                << self.world.map.z_plot << ")";
+        ret << "Plot: (" << world().map.x_plot << ","
+                << world().map.y_plot << ","
+                << world().map.z_plot << ")";
 
     }
     else if (message == ".exit")
     {
-        self.disconnect();
+        disconnect();
     }
 }

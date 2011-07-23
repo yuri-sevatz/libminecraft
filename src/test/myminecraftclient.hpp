@@ -22,14 +22,15 @@
 #ifndef MYMINECRAFTCLIENT_HPP
 #define MYMINECRAFTCLIENT_HPP
 
-#include <libminecraft/interfaces/clienteventhandler.hpp>
+#include <libminecraft/classic/client.hpp>
 
 using namespace libminecraft;
+using namespace libminecraft::classic;
 
-class MyMinecraftClient : private classic::ClientEventHandler
+class MyMinecraftClient : private Client
 {
 public:
-    MyMinecraftClient(classic::MinecraftSession & session);
+    MyMinecraftClient(Session & session);
 
     const Player * followtarget;
 
@@ -46,7 +47,7 @@ public:
 
         // Your op status is updated.
         // Old playertype provided for convenience.
-        virtual void onClientOp(classic::MinecraftWorld::t_playertype old_playertype);
+        virtual void onClientOp(player::Local::t_optype old_op_status);
 
         // You are teleported.
         // Old position and old direction provided for convenience.
@@ -65,7 +66,7 @@ public:
      */
 
         // A block is updated on the map
-        virtual void onBlockUpdate(MapCell::BlockType type, MapCell::BlockType old_type, Map::size_block x, Map::size_block y, Map::size_block z);
+        virtual void onBlockUpdate(map::Cell::BlockType type, map::Cell::BlockType old_type, Map::size_block x, Map::size_block y, Map::size_block z);
 
         // When an message is received.
         // Note: You can do player lookup manually based on the id if you so choose.
