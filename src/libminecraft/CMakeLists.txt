@@ -171,6 +171,7 @@ set(${PROJECT_NAME}_headers_classic
     ${${PROJECT_NAME}_headers_classic_protocol}
     ${${PROJECT_NAME}_headers_classic_session}
     classic/client.hpp
+    classic/mctypes.hpp
     classic/session.hpp
 )
 set(${PROJECT_NAME}_sources_classic
@@ -261,11 +262,47 @@ set(${PROJECT_NAME}_sources_mainline_protocol
     mainline/protocol/stream.cpp
 )
 
+set(${PROJECT_NAME}_headers_mainline_session_remote_state
+    mainline/session/remote/state/connecting.hpp
+    mainline/session/remote/state/disconnected.hpp
+    mainline/session/remote/state/negotiating.hpp
+)
+set(${PROJECT_NAME}_sources_mainline_session_remote_state
+    mainline/session/remote/state/connecting.cpp
+    mainline/session/remote/state/disconnected.cpp
+    mainline/session/remote/state/negotiating.cpp
+)
+
+set(${PROJECT_NAME}_headers_mainline_session_remote
+    ${${PROJECT_NAME}_headers_mainline_session_remote_state}
+    mainline/session/remote/statemachine.hpp
+    mainline/session/remote/state.hpp
+)
+set(${PROJECT_NAME}_sources_mainline_session_remote
+    ${${PROJECT_NAME}_sources_mainline_session_remote_state}
+    mainline/session/remote/statemachine.cpp
+)
+
+set(${PROJECT_NAME}_headers_mainline_session
+    ${${PROJECT_NAME}_headers_mainline_session_remote}
+    mainline/session/remote.hpp
+)
+
+set(${PROJECT_NAME}_sources_mainline_session
+    ${${PROJECT_NAME}_sources_mainline_session_remote}
+    mainline/session/remote.cpp
+)
+
 set(${PROJECT_NAME}_headers_mainline
     ${${PROJECT_NAME}_headers_mainline_protocol}
+    ${${PROJECT_NAME}_headers_mainline_session}
+    mainline/mctypes.hpp
+    mainline/session.hpp
 )
 set(${PROJECT_NAME}_sources_mainline
     ${${PROJECT_NAME}_sources_mainline_protocol}
+    ${${PROJECT_NAME}_sources_mainline_session}
+    mainline/session.cpp
 )
 
 set(${PROJECT_NAME}_headers_shared_exception

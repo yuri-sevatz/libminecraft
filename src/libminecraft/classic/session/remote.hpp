@@ -73,6 +73,7 @@ namespace libminecraft
                 Remote(const std::string &hostname,
                        const std::string &service);
 
+                // Connect to the target server
                 void connect(const std::string &username,
                              const std::string &key);
 
