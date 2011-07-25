@@ -32,6 +32,7 @@ namespace libminecraft
         {
         public:
             static const size_t MAX_STRING_LENGTH = 64;
+            typedef std::string String;
         };
     }
 }

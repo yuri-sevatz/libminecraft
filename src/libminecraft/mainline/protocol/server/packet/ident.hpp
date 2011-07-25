@@ -37,7 +37,7 @@ namespace libminecraft
                     class Ident : public Packet
                     {
                     public:
-                        MCTypes::String hash;
+                        MCTypes::UCS2String hash;
 
                         Ident();
                         virtual void read(std::istream &is);

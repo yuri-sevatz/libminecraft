@@ -52,8 +52,10 @@ namespace libminecraft
                 static void getDouble(std::istream & stream, MCTypes::Double & tval);
                 static void putDouble(std::ostream & stream, const MCTypes::Double & tval);
 
+                /*
                 static void getString(std::istream & stream, MCTypes::String & str);
                 static void putString(std::ostream & stream, const MCTypes::String & str);
+                */
 
                 static void getUCS2Char(std::istream & stream, MCTypes::UCS2Char & ch);
                 static void putUCS2Char(std::ostream & stream, const MCTypes::UCS2Char & ch);

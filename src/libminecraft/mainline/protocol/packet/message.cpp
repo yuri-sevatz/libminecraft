@@ -23,6 +23,8 @@
 
 #include "../stream.hpp"
 
+#include <iostream>
+
 namespace libminecraft
 {
     namespace mainline
@@ -43,10 +45,8 @@ namespace libminecraft
 
                 void Message::toReadable(std::ostream &os) const
                 {
-                    /*
-                        // Unsupported for jchar for now
-                        os << "Message: " << message << std::endl;
-                    */
+                    // Unsupported for UCS2String for now
+                    std::wcout << "Message: " << message << std::endl;
                 }
             }
         }

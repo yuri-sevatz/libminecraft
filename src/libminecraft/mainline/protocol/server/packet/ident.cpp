@@ -23,6 +23,8 @@
 
 #include "../../stream.hpp"
 
+#include <iostream>
+
 namespace libminecraft
 {
     namespace mainline
@@ -39,17 +41,18 @@ namespace libminecraft
 
                     void Ident::read(std::istream &stream)
                     {
-                        Stream::getString(stream, hash);
+                        Stream::getUCS2String(stream, hash);
                     }
 
                     void Ident::write(std::ostream &stream) const
                     {
-                        Stream::putString(stream, hash);
+                        Stream::putUCS2String(stream, hash);
                     }
 
                     void Ident::toReadable(std::ostream &os) const
                     {
-                        os << "Hash: " << hash << std::endl;
+                        // TODO : Removed Hardcoded Streams
+                        std::wcout << "Hash: " << hash << std::endl;
                     }
                 }
             }

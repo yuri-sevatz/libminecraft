@@ -37,8 +37,8 @@ namespace libminecraft
                     class Login : public Packet
                     {
                     public:
-                        MCTypes::Byte version;
-                        MCTypes::String username;
+                        MCTypes::Int version;
+                        MCTypes::UCS2String username;
                         MCTypes::Long seed;
                         MCTypes::Byte dimension;
 

@@ -46,7 +46,6 @@ namespace libminecraft
         static const Long LONG_MAX = JTypes::JLONG_MAX;
         typedef JTypes::jfloat Float;
         typedef JTypes::jdouble Double;
-        typedef std::string String;
     };
 
 }

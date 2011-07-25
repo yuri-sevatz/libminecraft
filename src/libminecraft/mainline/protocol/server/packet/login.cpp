@@ -23,6 +23,8 @@
 
 #include "../../stream.hpp"
 
+#include <iostream>
+
 namespace libminecraft
 {
     namespace mainline
@@ -40,7 +42,7 @@ namespace libminecraft
                     void Login::read(std::istream &stream)
                     {
                         Stream::getInt(stream, player_id);
-                        Stream::getString(stream, unknown_a);
+                        Stream::getUCS2String(stream, unknown_a);
                         Stream::getLong(stream, seed);
                         Stream::getByte(stream, dimension);
                     }
@@ -48,7 +50,7 @@ namespace libminecraft
                     void Login::write(std::ostream &stream) const
                     {
                         Stream::putInt(stream, player_id);
-                        Stream::putString(stream, unknown_a);
+                        Stream::putUCS2String(stream, unknown_a);
                         Stream::putLong(stream, seed);
                         Stream::putByte(stream, dimension);
                     }
@@ -56,7 +58,8 @@ namespace libminecraft
                     void Login::toReadable(std::ostream &os) const
                     {
                         os << "Player ID: " << player_id << "\n";
-                        os << "Unknown A: " << unknown_a << "\n";
+                        // TODO : Removed Hardcoded Streams
+                        std::wcout << "Unknown A: " << unknown_a << "\n";
                         os << "Seed: " << seed << "\n";
                         os << "Dimension: " << (int) dimension << std::endl;
                     }

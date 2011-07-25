@@ -15,6 +15,7 @@ namespace libminecraft
             BOOST_STATIC_ASSERT(sizeof(MCTypes::UCS2Char) >= 2);
 
             // static
+            /*
             void Stream::getString(std::istream & stream, MCTypes::String & str)
             {
                 MCTypes::Short length;
@@ -35,6 +36,7 @@ namespace libminecraft
                 putShort(stream, length);
                 stream.write(str.c_str(), length);
             }
+            */
 
             void Stream::getUCS2String(std::istream &stream, MCTypes::UCS2String &str)
             {
