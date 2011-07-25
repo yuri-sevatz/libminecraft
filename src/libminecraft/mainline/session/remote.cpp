@@ -19,6 +19,8 @@ namespace libminecraft
 
             void Remote::connect(const std::string &username, const std::string &key)
             {
+                this->username = username;
+
                 fsm.ChangeState(fsm.States.CONNECTING);
 
                 // Enter the master loop...

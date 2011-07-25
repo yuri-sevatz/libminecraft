@@ -16,10 +16,12 @@ namespace libminecraft
         {
         class Remote : public Session
             {
+                friend class remote::state::Negotiating;
         private:
-            /*
+
             // The credentials used for the session.
             std::string username;
+            /*
             std::string key;
             */
 
