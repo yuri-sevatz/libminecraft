@@ -4,7 +4,9 @@
 
 #include "../../../protocol/client/packet/ident.hpp"
 #include "../../../protocol/client/packet/login.hpp"
+
 #include "../../../protocol/server/packet/ident.hpp"
+#include "../../../protocol/server/packet/login.hpp"
 
 #include "../../../../shared/exception/login.hpp"
 #include "../../../../shared/exception/protocol.hpp"
@@ -59,15 +61,29 @@ namespace libminecraft
                         else if (srvident.hash == AUTH_PASSOWRD)
                             throw exception::Login("Password-Based Login is Unsupported");
                         else
+                        {
+                            // TODO:
+                            // Copy the hash to a get request to minecraft.net
+
                             throw exception::Login("Hash-Based Login is Unsupported");
+                        }
 
                         // Write the login packet
                         owner.session.proto.write(mylogin);
 
                         if (owner.session.proto.next() != protocol::server::Packet::LOGIN)
-                            throw exception::Login("Authentication Failed");
+                            throw exception::Login("Login Failed");
 
-                        throw exception::Protocol("== End of Current Implementation ==");
+                        protocol::server::packet::Login srvlogin;
+                        owner.session.proto.read(srvlogin);
+
+                        // TODO: Get the player's entity id from the login success packet.
+
+                        // Ignore Map Seed
+                        // Ignore Dimension
+
+                        // Change the state to the loading map state...
+                        owner.ChangeState(owner.States.LOADING);
                     }
 
                     void Negotiating::Exit(t_owner &owner) const

@@ -18,7 +18,6 @@ namespace libminecraft
             {
                 friend class remote::state::Negotiating;
         private:
-
             // The credentials used for the session.
             std::string username;
             /*
@@ -36,9 +35,10 @@ namespace libminecraft
             std::stringstream gz_data;
             */
 
-            /*
             // The "self" in the game, private, writable.
-            game::player::Local _self;
+            game::Player _self;
+
+            /*
             // The actual world, private, writable.
             game::World _world;
             */

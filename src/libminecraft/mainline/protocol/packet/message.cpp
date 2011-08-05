@@ -45,7 +45,7 @@ namespace libminecraft
 
                 void Message::toReadable(std::ostream &os) const
                 {
-                    // Unsupported for UCS2String for now
+                    // TODO: Add os stream support for UCS2String
                     std::wcout << "Message: " << message << std::endl;
                 }
             }

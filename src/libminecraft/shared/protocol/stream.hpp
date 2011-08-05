@@ -36,14 +36,23 @@ namespace libminecraft
         {
         public:
             static void getByte(std::istream & stream, MCTypes::Byte & sbyte);
+            static MCTypes::Byte getByte(std::istream &stream);
             static void putByte(std::ostream & stream, const MCTypes::Byte & sbyte);
             static void getShort(std::istream & stream, MCTypes::Short & sshort);
+            static MCTypes::Short getShort(std::istream &stream);
             static void putShort(std::ostream & stream, const MCTypes::Short & sshort);
         };
 
         inline void Stream::getByte(std::istream &stream, MCTypes::Byte &sbyte)
         {
             io::bigendian::stream::getByte(stream, sbyte);
+        }
+
+        inline MCTypes::Byte Stream::getByte(std::istream &stream)
+        {
+            MCTypes::Byte ret;
+            getByte(stream, ret);
+            return ret;
         }
 
         inline void Stream::putByte(std::ostream &stream, const MCTypes::Byte &sbyte)
@@ -54,6 +63,13 @@ namespace libminecraft
         inline void Stream::getShort(std::istream &stream, MCTypes::Short &sshort)
         {
             io::bigendian::stream::getShort(stream, sshort);
+        }
+
+        inline MCTypes::Short Stream::getShort(std::istream &stream)
+        {
+            MCTypes::Short ret;
+            getShort(stream, ret);
+            return ret;
         }
 
         inline void Stream::putShort(std::ostream &stream, const MCTypes::Short &sshort)

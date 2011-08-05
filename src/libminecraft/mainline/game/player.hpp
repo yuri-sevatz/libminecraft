@@ -1,9 +1,9 @@
 /*
- * message.hpp
+ * player.hpp
  * This file is part of LibMinecraft.
  *
- * Created by Yuri Sevatz on 04/2011.
- * Copyright (c) 2011 Yuri Sevatz. All rights reserved
+ * Created by Yuri Sevatz on 11/2010.
+ * Copyright (c) 2010 Yuri Sevatz. All rights reserved
  *
  * LibMinecraft is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,31 +19,24 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_MAINLINE_PROTOCOL_PACKET_MESSAGE_HPP
-#define LIBMINECRAFT_MAINLINE_PROTOCOL_PACKET_MESSAGE_HPP
+#ifndef LIBMINECRAFT_MAINLINE_GAME_PLAYER_HPP
+#define LIBMINECRAFT_MAINLINE_GAME_PLAYER_HPP
 
-#include "../packet.hpp"
+#include "base.hpp"
 
 namespace libminecraft
 {
     namespace mainline
     {
-        namespace protocol
+        namespace game
         {
-            namespace packet
+            class Player
             {
-                class Message : public virtual Packet
-                {
-                public:
-                    MCTypes::UCS2String message;
-
-                    virtual void read(std::istream &is);
-                    virtual void write(std::ostream &os) const;
-                    virtual void toReadable(std::ostream &os) const;
-                };
-            }
+            public:
+                Player();
+            };
         }
     }
 }
 
-#endif // LIBMINECRAFT_MAINLINE_PROTOCOL_PACKET_MESSAGE_HPP
+#endif // LIBMINECRAFT_MAINLINE_GAME_PLAYER_HPP

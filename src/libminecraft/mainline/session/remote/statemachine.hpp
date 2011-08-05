@@ -9,6 +9,7 @@
 #include "state/connecting.hpp"
 #include "state/disconnected.hpp"
 #include "state/negotiating.hpp"
+#include "state/loading.hpp"
 
 namespace libminecraft
 {
@@ -31,6 +32,7 @@ namespace libminecraft
                         state::Disconnected DISCONNECTED;
                         state::Connecting CONNECTING;
                         state::Negotiating NEGOTIATING;
+                        state::Loading LOADING;
                     } States;
 
                     StateMachine(Remote & session);

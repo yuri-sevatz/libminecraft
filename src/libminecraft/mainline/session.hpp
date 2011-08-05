@@ -1,6 +1,8 @@
 #ifndef LIBMINECRAFT_MAINLINE_SESSION_HPP
 #define LIBMINECRAFT_MAINLINE_SESSION_HPP
 
+#include "game/player.hpp"
+
 namespace libminecraft
 {
     namespace mainline
@@ -12,10 +14,10 @@ namespace libminecraft
             /*
             // Read-only access to the world.
             const game::World & world;
+            */
 
             // The client's gamepiece.
-            const game::player::Local & self;
-            */
+            const game::Player & self;
 
             // Only the Client can set this.
             // To get the client, just call client().
@@ -30,18 +32,12 @@ namespace libminecraft
                 }
             } listener;
 
-            /*
         protected:
             // A session can only be created with the needed information for playable game.
             // This requires:
             //  A World.
             //  A Self.
-            Session(const game::World & world, const game::player::Local & self);
-            */
-
-        // Default constructor
-        protected:
-            Session();
+            Session(/*const game::World & world,*/ const game::Player & self);
 
             // End the session.
             virtual void disconnect() = 0;

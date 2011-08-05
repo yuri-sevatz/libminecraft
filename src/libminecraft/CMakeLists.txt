@@ -182,6 +182,16 @@ set(${PROJECT_NAME}_sources_classic
     classic/session.cpp
 )
 
+
+set(${PROJECT_NAME}_headers_mainline_game
+    mainline/game/base.hpp
+    mainline/game/player.hpp
+)
+
+set(${PROJECT_NAME}_sources_mainline_game
+    mainline/game/player.cpp
+)
+
 set(${PROJECT_NAME}_headers_mainline_protocol_client_packet
     mainline/protocol/client/packet/ident.hpp
     mainline/protocol/client/packet/login.hpp
@@ -208,29 +218,41 @@ set(${PROJECT_NAME}_sources_mainline_protocol_client
 )
 
 set(${PROJECT_NAME}_headers_mainline_protocol_packet
-   mainline/protocol/packet/message.cpp
+    mainline/protocol/packet/message.cpp
+    mainline/protocol/packet/playerposdir.cpp
 )
 set(${PROJECT_NAME}_sources_mainline_protocol_packet
-   mainline/protocol/packet/message.hpp
+    mainline/protocol/packet/message.hpp
+    mainline/protocol/packet/playerposdir.hpp
 )
 
 set(${PROJECT_NAME}_headers_mainline_protocol_server_packet
+    mainline/protocol/server/packet/entityvelocity.hpp
     mainline/protocol/server/packet/equipment.hpp
     mainline/protocol/server/packet/health.hpp
     mainline/protocol/server/packet/ident.hpp
     mainline/protocol/server/packet/login.hpp
     mainline/protocol/server/packet/message.hpp
+    mainline/protocol/server/packet/mobspawn.hpp
+    mainline/protocol/server/packet/movingobjectspawn.hpp
     mainline/protocol/server/packet/ping.hpp
+    mainline/protocol/server/packet/playerposdir.hpp
+    mainline/protocol/server/packet/prechunk.hpp
     mainline/protocol/server/packet/spawnpoint.hpp
     mainline/protocol/server/packet/time.hpp
 )
 set(${PROJECT_NAME}_sources_mainline_protocol_server_packet
+    mainline/protocol/server/packet/entityvelocity.cpp
     mainline/protocol/server/packet/equipment.cpp
     mainline/protocol/server/packet/health.cpp
     mainline/protocol/server/packet/ident.cpp
     mainline/protocol/server/packet/login.cpp
     mainline/protocol/server/packet/message.cpp
+    mainline/protocol/server/packet/mobspawn.cpp
+    mainline/protocol/server/packet/movingobjectspawn.cpp
     mainline/protocol/server/packet/ping.cpp
+    mainline/protocol/server/packet/playerposdir.cpp
+    mainline/protocol/server/packet/prechunk.cpp
     mainline/protocol/server/packet/spawnpoint.cpp
     mainline/protocol/server/packet/time.cpp
 )
@@ -265,11 +287,13 @@ set(${PROJECT_NAME}_sources_mainline_protocol
 set(${PROJECT_NAME}_headers_mainline_session_remote_state
     mainline/session/remote/state/connecting.hpp
     mainline/session/remote/state/disconnected.hpp
+    mainline/session/remote/state/loading.hpp
     mainline/session/remote/state/negotiating.hpp
 )
 set(${PROJECT_NAME}_sources_mainline_session_remote_state
     mainline/session/remote/state/connecting.cpp
     mainline/session/remote/state/disconnected.cpp
+    mainline/session/remote/state/loading.cpp
     mainline/session/remote/state/negotiating.cpp
 )
 
@@ -294,12 +318,14 @@ set(${PROJECT_NAME}_sources_mainline_session
 )
 
 set(${PROJECT_NAME}_headers_mainline
+    ${${PROJECT_NAME}_headers_mainline_game}
     ${${PROJECT_NAME}_headers_mainline_protocol}
     ${${PROJECT_NAME}_headers_mainline_session}
     mainline/mctypes.hpp
     mainline/session.hpp
 )
 set(${PROJECT_NAME}_sources_mainline
+    ${${PROJECT_NAME}_sources_mainline_game}
     ${${PROJECT_NAME}_sources_mainline_protocol}
     ${${PROJECT_NAME}_sources_mainline_session}
     mainline/session.cpp

@@ -54,7 +54,7 @@ namespace libminecraft
 
             void Stream::putUCS2String(std::ostream &stream, const MCTypes::UCS2String &str)
             {
-                const size_t length = std::min(str.length(), (size_t) MCTypes::MAX_UCS2_LENGTH);
+                const size_t length = std::min(str.length(), (size_t) MCTypes::MAX_UCS2STRING_LENGTH);
                 putShort(stream, length);
                 for(MCTypes::UCS2String::const_iterator iter = str.begin(); iter != str.begin() + length; iter++)
                     putUCS2Char(stream, *iter);

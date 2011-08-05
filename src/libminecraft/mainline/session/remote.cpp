@@ -7,7 +7,7 @@ namespace libminecraft
         namespace session
         {
             Remote::Remote(const std::string &hostname,
-                                         const std::string &service) : Session(/*_world, _self*/),
+                                         const std::string &service) : Session(/*_world,*/ _self),
             // Connection attributes.
             stream(hostname, service),
             proto(stream),

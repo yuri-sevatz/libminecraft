@@ -31,8 +31,7 @@ namespace libminecraft
         class MCTypes : public libminecraft::MCTypes
         {
         public:
-            static const size_t MAX_STRING_LENGTH = SHORT_MAX;
-            static const size_t MAX_UCS2_LENGTH = SHORT_MAX;
+            static const size_t MAX_UCS2STRING_LENGTH = SHORT_MAX;
 
             typedef JTypes::jchar UCS2Char;
             typedef JTypes::jstring UCS2String;

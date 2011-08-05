@@ -32,7 +32,7 @@ namespace libminecraft
         {
             namespace server
             {
-                class Packet : public protocol::Packet
+                class Packet : public virtual protocol::Packet
                 {
                 public:
                     enum PacketID
@@ -45,6 +45,11 @@ namespace libminecraft
                         EQUIPMENT = 0x05,
                         SPAWNPOINT = 0x06,
                         HEALTH = 0x08,
+                        PLAYERPOSDIR = 0x0D,
+                        MOVINGOBJECTSPAWN = 0x17,
+                        MOBSPAWN = 0x18,
+                        ENTITYVELOCITY = 0x1C,
+                        PRECHUNK = 0x32,
                     };
                 };
             }
