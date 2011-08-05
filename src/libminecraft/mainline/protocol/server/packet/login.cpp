@@ -58,7 +58,7 @@ namespace libminecraft
                     void Login::toReadable(std::ostream &os) const
                     {
                         os << "Player ID: " << player_id << "\n";
-                        // TODO : Removed Hardcoded Streams
+                        // TODO : Remove Hardcoded Streams
                         std::wcout << "Unknown A: " << unknown_a << "\n";
                         os << "Seed: " << seed << "\n";
                         os << "Dimension: " << (int) dimension << std::endl;

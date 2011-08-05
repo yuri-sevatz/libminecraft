@@ -108,7 +108,7 @@ namespace io
         {
         #ifdef BOOST_LITTLE_ENDIAN
             for (unsigned i = sizeof(t_val) - 1; i != 0; i--)
-                stream.get(*(((char *) &t_val) + i));;
+                stream.get(*(((char *) &t_val) + i));
             stream.get(*((char *) &t_val));
         #else
             stream.read((char *) &t_val, sizeof(t_val));
