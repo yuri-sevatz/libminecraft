@@ -37,7 +37,7 @@ namespace libminecraft
                     class Disconnect : public Packet
                     {
                     public:
-                        MCTypes::String reason;
+                        MCTypes::String64 reason;
 
                         Disconnect();
                         virtual void read(std::istream &is);

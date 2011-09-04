@@ -38,7 +38,7 @@ namespace libminecraft
                     {
                     public:
                         MCTypes::Byte player_id;
-                        MCTypes::String player_name;
+                        MCTypes::String64 player_name;
                         MCTypes::Short x;
                         MCTypes::Short y;
                         MCTypes::Short z;

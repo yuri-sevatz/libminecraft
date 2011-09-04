@@ -40,13 +40,13 @@ namespace libminecraft
                     void Message::read(std::istream &stream)
                     {
                         Stream::getByte(stream, player_id);
-                        Stream::getString(stream, message);
+                        Stream::getString64(stream, message);
                     }
 
                     void Message::write(std::ostream &stream) const
                     {
                         Stream::putByte(stream, player_id);
-                        Stream::putString(stream, message);
+                        Stream::putString64(stream, message);
                     }
 
                     void Message::toReadable(std::ostream &os) const

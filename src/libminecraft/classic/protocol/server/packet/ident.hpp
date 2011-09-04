@@ -38,8 +38,8 @@ namespace libminecraft
                     {
                     public:
                         MCTypes::Byte srv_version;
-                        MCTypes::String srv_name;
-                        MCTypes::String srv_motd;
+                        MCTypes::String64 srv_name;
+                        MCTypes::String64 srv_motd;
                         MCTypes::Byte user_type;
                     public:
                         Ident();

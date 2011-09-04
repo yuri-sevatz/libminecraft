@@ -38,7 +38,7 @@ namespace libminecraft
                     {
                     public:
                         MCTypes::Byte unused;
-                        MCTypes::String message;
+                        MCTypes::String64 message;
 
                     public:
                         Message();

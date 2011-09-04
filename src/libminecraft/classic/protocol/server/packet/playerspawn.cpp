@@ -40,7 +40,7 @@ namespace libminecraft
                     void PlayerSpawn::read(std::istream &stream)
                     {
                         Stream::getByte(stream, player_id);
-                        Stream::getString(stream, player_name);
+                        Stream::getString64(stream, player_name);
                         Stream::getShort(stream, x);
                         Stream::getShort(stream, y);
                         Stream::getShort(stream, z);
@@ -51,7 +51,7 @@ namespace libminecraft
                     void PlayerSpawn::write(std::ostream &stream) const
                     {
                         Stream::putByte(stream, player_id);
-                        Stream::putString(stream, player_name);
+                        Stream::putString64(stream, player_name);
                         Stream::putShort(stream, x);
                         Stream::putShort(stream, y);
                         Stream::putShort(stream, z);

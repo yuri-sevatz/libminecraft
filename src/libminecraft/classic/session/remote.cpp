@@ -99,7 +99,7 @@ namespace libminecraft
 
             void Remote::sendMessage(const std::string & message)
             {
-                for (size_t offset = 0; offset < message.length(); offset += MCTypes::MAX_STRING_LENGTH)
+                for (size_t offset = 0; offset < message.length(); offset += MCTypes::String64_Max_Length)
                 {
                     protocol::client::packet::Message msgpkt;
                     msgpkt.message = message.substr(offset, 64);

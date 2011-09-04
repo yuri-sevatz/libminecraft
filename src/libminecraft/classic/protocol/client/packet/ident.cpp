@@ -42,16 +42,16 @@ namespace libminecraft
                     void Ident::read(std::istream &stream)
                     {
                         Stream::getByte(stream, version);
-                        Stream::getString(stream, username);
-                        Stream::getString(stream, key);
+                        Stream::getString64(stream, username);
+                        Stream::getString64(stream, key);
                         Stream::getByte(stream, unused);
                     }
 
                     void Ident::write(std::ostream &stream) const
                     {
                         Stream::putByte(stream, version);
-                        Stream::putString(stream, username);
-                        Stream::putString(stream, key);
+                        Stream::putString64(stream, username);
+                        Stream::putString64(stream, key);
                         Stream::putByte(stream, unused);
                     }
 

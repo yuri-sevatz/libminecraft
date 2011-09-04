@@ -33,17 +33,17 @@ namespace libminecraft
     public:
         typedef JTypes::jbool Bool;
         typedef JTypes::jbyte Byte;
-        static const Byte BYTE_MIN = JTypes::JBYTE_MIN;
-        static const Byte BYTE_MAX = JTypes::JBYTE_MAX;
+        static const Byte Byte_Min = JTypes::JBYTE_MIN;
+        static const Byte Byte_Max = JTypes::JBYTE_MAX;
         typedef JTypes::jshort Short;
-        static const Short SHORT_MIN = JTypes::JSHORT_MIN;
-        static const Short SHORT_MAX = JTypes::JSHORT_MAX;
+        static const Short Short_Min = JTypes::JSHORT_MIN;
+        static const Short Short_Max = JTypes::JSHORT_MAX;
         typedef JTypes::jint Int;
-        static const Int INT_MIN = JTypes::JINT_MIN;
-        static const Int INT_MAX = JTypes::JINT_MAX;
+        static const Int Int_Min = JTypes::JINT_MIN;
+        static const Int Int_Max = JTypes::JINT_MAX;
         typedef JTypes::jlong Long;
-        static const Long LONG_MIN = JTypes::JLONG_MIN;
-        static const Long LONG_MAX = JTypes::JLONG_MAX;
+        static const Long Long_Min = JTypes::JLONG_MIN;
+        static const Long Long_Max = JTypes::JLONG_MAX;
         typedef JTypes::jfloat Float;
         typedef JTypes::jdouble Double;
     };

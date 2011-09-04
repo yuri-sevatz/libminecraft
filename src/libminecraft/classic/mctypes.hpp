@@ -31,8 +31,8 @@ namespace libminecraft
         class MCTypes : public libminecraft::MCTypes
         {
         public:
-            static const size_t MAX_STRING_LENGTH = 64;
-            typedef std::string String;
+            static const size_t String64_Max_Length = 64;
+            typedef std::string String64;
         };
     }
 }

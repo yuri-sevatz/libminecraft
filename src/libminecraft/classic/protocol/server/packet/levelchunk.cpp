@@ -66,7 +66,7 @@ namespace libminecraft
                     void LevelChunk::write(std::ostream &stream) const
                     {
                         // Write the theoretical max supported by the protocol.
-                        MCTypes::Short length = std::min((size_t) MCTypes::SHORT_MAX, data.size());
+                        MCTypes::Short length = std::min((size_t) MCTypes::Short_Max, data.size());
                         Stream::putShort(stream, length);
                         
                         stream.write((const char *) &(data.front()), length);

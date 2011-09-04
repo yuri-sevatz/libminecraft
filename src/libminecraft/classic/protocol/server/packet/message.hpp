@@ -38,7 +38,7 @@ namespace libminecraft
                     {
                     public:
                         MCTypes::Byte player_id;
-                        MCTypes::String message;
+                        MCTypes::String64 message;
 
                         Message();
                         virtual void read(std::istream &is);

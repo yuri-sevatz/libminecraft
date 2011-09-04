@@ -34,8 +34,8 @@ namespace libminecraft
             class Stream : public libminecraft::protocol::Stream
             {
             public:
-                static void getString(std::istream & stream, MCTypes::String & str);
-                static void putString(std::ostream & stream, const MCTypes::String & str);
+                static void getString64(std::istream & stream, MCTypes::String64 & str);
+                static void putString64(std::ostream & stream, const MCTypes::String64 & str);
             };
         }
     }

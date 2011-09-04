@@ -7,13 +7,13 @@ namespace libminecraft
         namespace protocol
         {
             // static
-            void Stream::putString(std::ostream & stream, const MCTypes::String & str)
+            void Stream::putString64(std::ostream & stream, const MCTypes::String64 & str)
             {
                 // Write Max M_STRING_LEN characters from the string
-                stream.write(str.c_str(), std::min(str.length(), (size_t) MCTypes::MAX_STRING_LENGTH));
+                stream.write(str.c_str(), std::min(str.length(), (size_t) MCTypes::String64_Max_Length));
 
                 // If the string is less than our theoretical max
-                for (unsigned  i = str.length(); i < MCTypes::MAX_STRING_LENGTH; i++)
+                for (unsigned  i = str.length(); i < MCTypes::String64_Max_Length; i++)
                 {
                     // Pad with spaces
                     stream.put(0x20);
@@ -21,11 +21,11 @@ namespace libminecraft
             }
 
             // static
-            void Stream::getString(std::istream & stream, MCTypes::String & str)
+            void Stream::getString64(std::istream & stream, MCTypes::String64 & str)
             {
                 // Tmp space.
-                str.resize(MCTypes::MAX_STRING_LENGTH);
-                stream.read(&*str.begin(), MCTypes::MAX_STRING_LENGTH);
+                str.resize(MCTypes::String64_Max_Length);
+                stream.read(&*str.begin(), MCTypes::String64_Max_Length);
 
                 // Position of the end of the string
                 std::string::reverse_iterator str_end;

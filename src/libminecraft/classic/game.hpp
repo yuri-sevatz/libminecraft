@@ -64,13 +64,13 @@ namespace libminecraft
             void setBlock(Client & client, Map::size_block x, Map::size_block y, Map::size_block z, map::Cell::BlockType type);
             
             // Send a global message
-            void sendMessage(MCTypes::String message);
+            void sendMessage(MCTypes::String64 message);
             
             // Send a message from a player.
-            void sendMessage(Player & player, MCTypes::String message);
+            void sendMessage(Player & player, MCTypes::String64 message);
             
             // Kick a player
-            void kick(Player client, MCTypes::String reason);
+            void kick(Player client, MCTypes::String64 reason);
         };
     }
 }

@@ -40,12 +40,12 @@ namespace libminecraft
 
                     void Disconnect::read(std::istream &stream)
                     {
-                        Stream::getString(stream, reason);
+                        Stream::getString64(stream, reason);
                     }
 
                     void Disconnect::write(std::ostream &stream) const
                     {
-                        Stream::putString(stream, reason);
+                        Stream::putString64(stream, reason);
                     }
 
                     void Disconnect::toReadable(std::ostream &os) const

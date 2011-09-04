@@ -56,7 +56,7 @@ namespace libminecraft
 
                 // Instance variables.
                 t_id id;
-                MCTypes::String name;
+                MCTypes::String64 name;
                 t_pitch pitch;
                 t_yaw yaw;
 

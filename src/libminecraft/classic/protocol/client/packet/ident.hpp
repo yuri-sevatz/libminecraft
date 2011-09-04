@@ -42,8 +42,8 @@ namespace libminecraft
                         static const MCTypes::Byte id;
 
                         MCTypes::Byte version;
-                        MCTypes::String username;
-                        MCTypes::String key;
+                        MCTypes::String64 username;
+                        MCTypes::String64 key;
                         MCTypes::Byte unused;
 
                     public:
