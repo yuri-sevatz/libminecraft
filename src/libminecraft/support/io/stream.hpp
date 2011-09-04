@@ -25,7 +25,7 @@
 #include <istream>
 #include <ostream>
 
-#include <inttypes.h>
+#include <stdint.h>
 
 namespace io
 {

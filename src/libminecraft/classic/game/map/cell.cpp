@@ -100,7 +100,7 @@ namespace libminecraft
 
                 }
 
-                Cell::BlockType Cell::GetCellType(int8_t num)
+                Cell::BlockType Cell::GetCellType(MCTypes::Int num)
                 {
                     // If the val is allowed in the classic version...
                     if (num >= 0 && num < 50)

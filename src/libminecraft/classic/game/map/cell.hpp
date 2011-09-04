@@ -22,7 +22,7 @@
 #ifndef LIBMINECRAFT_CLASSIC_GAME_MAP_CELL_HPP
 #define LIBMINECRAFT_CLASSIC_GAME_MAP_CELL_HPP
 
-#include <inttypes.h>
+#include "../base.hpp"
 
 namespace libminecraft
 {
@@ -130,7 +130,7 @@ namespace libminecraft
 
                 public:
                     Cell(BlockType t);
-                    static BlockType GetCellType(int8_t num);
+                    static BlockType GetCellType(MCTypes::Int num);
                 };
             }
         }
