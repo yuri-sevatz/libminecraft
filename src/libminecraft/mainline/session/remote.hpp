@@ -1,72 +1,59 @@
+/*
+ * remote.hpp
+ * This file is part of LibMinecraft.
+ *
+ * Created by Yuri Sevatz on 10/2011.
+ * Copyright (c) 2011 Yuri Sevatz. All rights reserved
+ *
+ * LibMinecraft is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * LibMinecraft is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #ifndef LIBMINECRAFT_MAINLINE_SESSION_REMOTE_HPP
 #define LIBMINECRAFT_MAINLINE_SESSION_REMOTE_HPP
 
 #include "../session.hpp"
 
-#include "remote/statemachine.hpp"
-#include "../protocol/client.hpp"
-
-#include <boost/asio.hpp>
+#include "remote/connection.hpp"
 
 namespace libminecraft
 {
-    namespace mainline
-    {
-        namespace session
-        {
-        class Remote : public Session
-            {
-                friend class remote::state::Negotiating;
-        private:
-            // The credentials used for the session.
-            std::string username;
-            /*
-            std::string key;
-            */
+namespace mainline
+{
+namespace session
+{
+class Remote : public Session
+{
+private:
+    remote::Connection * const connection;
+public:
+    Remote(const std::string & hostname,
+           const std::string & service,
+           const std::string & username);
+    ~Remote();
 
-            /*
-            // Once connected...
-            std::string server_name;
-            std::string server_motd;
-            */
+    // Connect to the target server
+    void connect();
 
-            /*
-            // Map tmp data...
-            std::stringstream gz_data;
-            */
+protected:
+    virtual const game::Player & getSelf();
 
-            // The "self" in the game, private, writable.
-            game::Player _self;
-
-            /*
-            // The actual world, private, writable.
-            game::World _world;
-            */
-
-            remote::StateMachine fsm;
-
-            // The connection
-            boost::asio::ip::tcp::iostream stream;
-
-            public:
-                // The remote session uses the client protocol.
-                protocol::Client proto;
-
-                Remote(const std::string &hostname,
-                       const std::string &service);
-
-                // Connect to the target server
-                void connect(const std::string &username,
-                             const std::string &key);
-
-                virtual void disconnect();
-
-            private:
-                // The master loop, used for FSM update() calls.
-                void loop();
-            };
-        }
-    }
+private:
+    // The master loop, used for FSM update() calls.
+    void run();
+};
+}
+}
 }
 
 #endif // LIBMINECRAFT_MAINLINE_SESSION_REMOTE_HPP

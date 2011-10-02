@@ -25,7 +25,7 @@ namespace libminecraft
 {
     namespace classic
     {
-        Client::Client(Session & session) : _session(session), self(_session.self)
+    Client::Client(Session & session) : _session(session), self(_session.getSelf()), world(_session.getWorld()), server(_session.getInfo())
         {
             session.listener.address = this;
         }

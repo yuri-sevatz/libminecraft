@@ -1,9 +1,9 @@
 /*
- * statemachine.cpp
+ * connection.cpp
  * This file is part of LibMinecraft.
  *
- * Created by Yuri Sevatz on 11/2010.
- * Copyright (c) 2010 Yuri Sevatz. All rights reserved
+ * Created by Yuri Sevatz on 10/2011.
+ * Copyright (c) 2011 Yuri Sevatz. All rights reserved
  *
  * LibMinecraft is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,26 +19,33 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "statemachine.hpp"
+#include "connection.hpp"
 
 namespace libminecraft
 {
-    namespace classic
-    {
-        namespace session
-        {
-            namespace remote
-            {
-                // Declare/Initialize the Default States
-                const StateMachine::StatesDefs StateMachine::States;
+namespace mainline
+{
+namespace session
+{
+namespace remote
+{
+// Declare/Initialize the Default States
+const Connection::StatesDefs Connection::States;
 
-                StateMachine::StateMachine(Remote & session) :
-                        ActionStateMachine<StateMachine, const State>(*this, States.DISCONNECTED),
-                        session(session)
-                {
+Connection::Connection(Remote & session, const std::string & hostname, const std::string & service, const std::string & username) :
+    ActionStateMachine<Connection, const State>(*this, States.CONNECTING),
+    session(session),
+    // Create the asynchronous connection
+    stream(hostname, service),
+    // Ready the protocol
+    proto(stream),
+    // Credentials
+    username(username)
+{
 
-                }
-            }
-        }
-    }
+}
+
+}
+}
+}
 }

@@ -22,7 +22,7 @@
 #include "loadingmap.hpp"
 #include <iostream>
 
-#include "../statemachine.hpp"
+#include "../connection.hpp"
 #include "../../remote.hpp"
 
 #include "../../../protocol/server/packet/levelbegin.hpp"
@@ -56,50 +56,50 @@ namespace libminecraft
 
                         // Grab the packet out of the stream (it has no payload in classic)
                         protocol::server::packet::LevelBegin beginpkt;
-                        owner.session.proto.read(beginpkt);
+                        owner.proto.read(beginpkt);
                     }
                     void LoadingMap::Update(t_owner &owner) const
                     {
                         // Read some map data...
-                        switch (owner.session.proto.next())
+                        switch (owner.proto.next())
                         {
                         case protocol::server::Packet::LEVELCHUNK:
                             {
                                 protocol::server::packet::LevelChunk lvlchunk;
-                                owner.session.proto.read(lvlchunk);
+                                owner.proto.read(lvlchunk);
 
                                 std::copy(
                                         lvlchunk.data.begin(),
                                         lvlchunk.data.end(),
-                                        std::ostream_iterator<unsigned char>(owner.session.gz_data)
+                                        std::ostream_iterator<unsigned char>(owner.gz_data)
                                         );
                             }
                             break;
                         case protocol::server::Packet::LEVELDONE:
                             {
                                 protocol::server::packet::LevelDone lvldone;
-                                owner.session.proto.read(lvldone);
+                                owner.proto.read(lvldone);
 
                                 // Create a decompression input streambuf and stream from the compressed map stream.
                                 boost::iostreams::filtering_istream in;
                                 in.push(boost::iostreams::gzip_decompressor());
-                                in.push(owner.session.gz_data);
+                                in.push(owner.gz_data);
 
                                 // Stream the decompressed map data into the map.
-                                owner.session._world.map = game::Map(lvldone.size_x, lvldone.size_y, lvldone.size_z, in);
+                                owner._world.map = game::Map(lvldone.size_x, lvldone.size_y, lvldone.size_z, in);
 
                                 // Welcome to the server!
                                 owner.ChangeState(owner.States.INGAME);
                             }
                             break;
                         default:
-                            std::cerr << (int) owner.session.proto.next() << std::endl;
+                            std::cerr << (int) owner.proto.next() << std::endl;
                             throw exception::Protocol("Unexpected packet received during map data");
                         }
                     }
                     void LoadingMap::Exit(t_owner &owner) const
                     {
-                        owner.session.gz_data.clear();
+                        owner.gz_data.clear();
                     }
                 }
             }

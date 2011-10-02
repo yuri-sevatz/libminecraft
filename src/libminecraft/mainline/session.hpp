@@ -11,14 +11,6 @@ namespace libminecraft
 
         class Session
         {
-            /*
-            // Read-only access to the world.
-            const game::World & world;
-            */
-
-            // The client's gamepiece.
-            const game::Player & self;
-
             // Only the Client can set this.
             // To get the client, just call client().
             class
@@ -33,14 +25,14 @@ namespace libminecraft
             } listener;
 
         protected:
-            // A session can only be created with the needed information for playable game.
-            // This requires:
-            //  A World.
-            //  A Self.
-            Session(/*const game::World & world,*/ const game::Player & self);
+            Session();
+
+            virtual const game::Player & getSelf() = 0;
 
             // End the session.
-            virtual void disconnect() = 0;
+            // XXX: Not implemented.  Depends on having a proper threading model (use of connection object between functions and shielding thread objects from external linkage in remote.hpp <= external session class)
+            //      What this actually does/means in the whole "gist" of things for various threaded/non-threaded uses needs to be reevaluated.
+            // virtual void disconnect() = 0;
         };
     }
 }

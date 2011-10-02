@@ -1,4 +1,29 @@
+/*
+ * remote.cpp
+ * This file is part of LibMinecraft.
+ *
+ * Created by Yuri Sevatz on 10/2011.
+ * Copyright (c) 2011 Yuri Sevatz. All rights reserved
+ *
+ * LibMinecraft is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * LibMinecraft is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "remote.hpp"
+
+#include <boost/asio.hpp>
+
+#include "remote/connection.hpp"
 
 namespace libminecraft
 {
@@ -6,44 +31,41 @@ namespace libminecraft
     {
         namespace session
         {
-            Remote::Remote(const std::string &hostname,
-                                         const std::string &service) : Session(/*_world,*/ _self),
-            // Connection attributes.
-            stream(hostname, service),
-            proto(stream),
-            fsm(*this)/*,
-            gz_data(std::ios_base::out | std::ios_base::in | std::ios_base::binary) */
+            Remote::Remote(const std::string &hostname, const std::string &service, const std::string &username) :
+                // Connection object: This provides protocol, parsing, world, etc.
+                connection(new remote::Connection(*this, hostname, service, username)),
+                Session()
             {
 
             }
 
-            void Remote::connect(const std::string &username, const std::string &key)
+            Remote::~Remote()
             {
-                this->username = username;
-
-                fsm.ChangeState(fsm.States.CONNECTING);
-
-                // Enter the master loop...
-                loop();
+                delete connection;
             }
 
-            void Remote::disconnect()
+            const game::Player & Remote::getSelf()
             {
-                fsm.ChangeState(fsm.States.DISCONNECTED);
+                return connection->_self;
             }
 
-            void Remote::loop()
+            void Remote::connect()
+            {
+                run();
+            }
+
+            void Remote::run()
             {
                 try
                 {
                     while(true)
-                        fsm.Update();
+                        connection->Update();
                 }
                 catch (libminecraft::Exception ex)
                 {
                     /* listener().onNetworkError(ex.message); */
                     std::cerr << ex.what() << std::endl;
-                    disconnect(); // Kill the game.
+                    //disconnect(); // Kill the game.
                 }
             }
         }

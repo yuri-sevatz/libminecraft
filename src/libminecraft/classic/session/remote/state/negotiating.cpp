@@ -22,7 +22,7 @@
 #include "negotiating.hpp"
 #include <iostream>
 
-#include "../statemachine.hpp"
+#include "../connection.hpp"
 #include "../../remote.hpp"
 #include "../../../client.hpp"
 
@@ -52,18 +52,18 @@ namespace libminecraft
                     void Negotiating::Update(t_owner &owner) const
                     {
                         protocol::client::packet::Ident myident;
-                        myident.username = owner.session.username;
-                        myident.key = owner.session.key;
+                        myident.username = owner.username;
+                        myident.key = owner.key;
                         myident.version = protocol::client::Protocol::version;
-                        owner.session.proto.write(myident);
+                        owner.proto.write(myident);
 
                         std::cerr << "Awaiting Response..." << std::endl;
 
-                        if (owner.session.proto.next() != protocol::server::Packet::IDENT)
+                        if (owner.proto.next() != protocol::server::Packet::IDENT)
                             throw exception::Login("Login Error - did not receive Ident from server");
 
                         protocol::server::packet::Ident srvident;
-                        owner.session.proto.read(srvident);
+                        owner.proto.read(srvident);
 
                         const MCTypes::Byte ver_diff = srvident.cmpVersion();
 
@@ -73,14 +73,14 @@ namespace libminecraft
                             owner.session.listener().onProtocolWarning("Invalid Server Version Detected - Attempting anyway.");
 
                         // Read the facts of life...
-                        owner.session.server_name = srvident.srv_name;
-                        owner.session.server_motd = srvident.srv_motd;
-                        owner.session._self.optype = srvident.user_type;
+                        owner._server.name = srvident.srv_name;
+                        owner._server.motd = srvident.srv_motd;
+                        owner._self.optype = srvident.user_type;
 
                         // Await map data...
                         std::cerr << "Awaiting Map Data..." << std::endl;
 
-                        if (owner.session.proto.next() != protocol::server::Packet::LEVELBEGIN)
+                        if (owner.proto.next() != protocol::server::Packet::LEVELBEGIN)
                             throw exception::Protocol("Unexpected data while waiting for world");
 
                         // The packet type was a levelbegin... start loading the map.

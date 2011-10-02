@@ -11,22 +11,19 @@ set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 
 # required dependencies
 set(Boost_USE_STATIC_LIBS OFF)
-find_package(Boost REQUIRED iostreams thread system)
-include_directories(${BOOST_INCLUDE_DIRS})
+find_package(Boost COMPONENTS iostreams thread system REQUIRED)
 
 # add your headers and source files here
 # ---------------
 
 set(${PROJECT_NAME}_headers_classic_session_remote_state
     classic/session/remote/state/connecting.hpp
-    classic/session/remote/state/disconnected.hpp
     classic/session/remote/state/ingame.hpp
     classic/session/remote/state/loadingmap.hpp
     classic/session/remote/state/negotiating.hpp
 )
 set(${PROJECT_NAME}_sources_classic_session_remote_state
     classic/session/remote/state/connecting.cpp
-    classic/session/remote/state/disconnected.cpp
     classic/session/remote/state/ingame.cpp
     classic/session/remote/state/loadingmap.cpp
     classic/session/remote/state/negotiating.cpp
@@ -34,21 +31,23 @@ set(${PROJECT_NAME}_sources_classic_session_remote_state
 
 set(${PROJECT_NAME}_headers_classic_session_remote
     ${${PROJECT_NAME}_headers_classic_session_remote_state}
-    classic/session/remote/statemachine.hpp
+    classic/session/remote/connection.hpp
     classic/session/remote/state.hpp
 )
 set(${PROJECT_NAME}_sources_classic_session_remote
     ${${PROJECT_NAME}_sources_classic_session_remote_state}
-    classic/session/remote/statemachine.cpp
+    classic/session/remote/connection.cpp
 )
 
 set(${PROJECT_NAME}_headers_classic_session
     ${${PROJECT_NAME}_headers_classic_session_remote}
+    classic/session/info.hpp
     classic/session/remote.hpp
 )
 
 set(${PROJECT_NAME}_sources_classic_session
     ${${PROJECT_NAME}_sources_classic_session_remote}
+    classic/session/info.cpp
     classic/session/remote.cpp
 )
 
@@ -286,25 +285,23 @@ set(${PROJECT_NAME}_sources_mainline_protocol
 
 set(${PROJECT_NAME}_headers_mainline_session_remote_state
     mainline/session/remote/state/connecting.hpp
-    mainline/session/remote/state/disconnected.hpp
     mainline/session/remote/state/loading.hpp
     mainline/session/remote/state/negotiating.hpp
 )
 set(${PROJECT_NAME}_sources_mainline_session_remote_state
     mainline/session/remote/state/connecting.cpp
-    mainline/session/remote/state/disconnected.cpp
     mainline/session/remote/state/loading.cpp
     mainline/session/remote/state/negotiating.cpp
 )
 
 set(${PROJECT_NAME}_headers_mainline_session_remote
     ${${PROJECT_NAME}_headers_mainline_session_remote_state}
-    mainline/session/remote/statemachine.hpp
+    mainline/session/remote/connection.hpp
     mainline/session/remote/state.hpp
 )
 set(${PROJECT_NAME}_sources_mainline_session_remote
     ${${PROJECT_NAME}_sources_mainline_session_remote_state}
-    mainline/session/remote/statemachine.cpp
+    mainline/session/remote/connection.cpp
 )
 
 set(${PROJECT_NAME}_headers_mainline_session
@@ -431,16 +428,25 @@ set (${PROJECT_NAME}_sources
     ${${PROJECT_NAME}_sources_utils}
 )
 
+# Includes
+# ---------------
+message("Boost_INCLUDE_DIR")
+message(${Boost_INCLUDE_DIR})
+include_directories(${Boost_INCLUDE_DIR})
+
+# Linked Libraries
+# ---------------
+message("Boost_LIBRARY_DIRS")
+message(${Boost_LIBRARY_DIRS})
+#link_directories(${Boost_LIBRARY_DIRS})
 
 # Create the library
 # ---------------
 add_library(${PROJECT_NAME} SHARED ${${PROJECT_NAME}_headers} ${${PROJECT_NAME}_sources})
 
-# linker
-# ---------------
 target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES} )
 
-# install
+# Install
 # ---------------
 install(TARGETS ${PROJECT_NAME}
                 RUNTIME DESTINATION bin

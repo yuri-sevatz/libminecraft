@@ -22,7 +22,7 @@
 #include "connecting.hpp"
 #include <iostream>
 
-#include "../statemachine.hpp"
+#include "../connection.hpp"
 
 namespace libminecraft
 {

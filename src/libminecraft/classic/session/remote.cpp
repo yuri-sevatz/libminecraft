@@ -27,74 +27,84 @@
 #include "../protocol/client/packet/posdir.hpp"
 #include "../protocol/client/packet/setblock.hpp"
 
+#include "remote/connection.hpp"
+
 namespace libminecraft
 {
     namespace classic
     {
         namespace session
-        {         
+        {
             Remote::Remote(const std::string &hostname,
-                                         const std::string &service) : Session(_world, _self),
-            // Connection attributes.
-            stream(hostname, service),
-            proto(stream),
-            fsm(*this),
-            gz_data(std::ios_base::out | std::ios_base::in | std::ios_base::binary)
+                           const std::string &service,
+                           const std::string &username,
+                           const std::string &key) :
+                Session(),
+                // Connection object: This provides protocol, parsing, world, etc.
+                connection(new remote::Connection(*this, hostname, service, username, key))
             {
 
             }
 
-            void Remote::connect(const std::string &username, const std::string &key)
+            Remote::~Remote()
             {
-                this->username = username;
-                this->key = key;
-
-                fsm.ChangeState(fsm.States.CONNECTING);
-
-                // Enter the master loop...
-                loop();
+                delete connection;
             }
 
-            void Remote::loop()
+            const game::World & Remote::getWorld()
+            {
+                return connection->_world;
+            }
+
+            const game::player::Local & Remote::getSelf()
+            {
+                return connection->_self;
+            }
+
+            const session::Info & Remote::getInfo()
+            {
+                return connection->_server;
+            }
+
+            void Remote::connect()
+            {
+                run();
+            }
+
+            void Remote::run()
             {
                 try
                 {
                     while(true)
-                        fsm.Update();
+                        connection->Update();
                 }
                 catch (libminecraft::Exception ex)
                 {
                     listener().onNetworkError(ex.message);
-                    disconnect(); // Kill the game.
                 }
-            }
-
-            void Remote::disconnect()
-            {
-                fsm.ChangeState(fsm.States.DISCONNECTED);
             }
 
             void Remote::look(game::Player::t_pitch pitch, game::Player::t_yaw yaw)
             {
-                moveAndLook(_self.x, _self.y, _self.z, pitch, yaw);
+                moveAndLook(connection->_self.x, connection->_self.y, connection->_self.z, pitch, yaw);
             }
 
             void Remote::move(game::Map::size_plot x, game::Map::size_plot y, game::Map::size_plot z)
             {
-                moveAndLook(x, y, z, _self.pitch, _self.yaw);
+                moveAndLook(x, y, z, connection->_self.pitch, connection->_self.yaw);
             }
 
             void Remote::moveAndLook(game::Map::size_plot x, game::Map::size_plot y, game::Map::size_plot z, game::Player::t_pitch pitch, game::Player::t_yaw yaw)
             {
                 protocol::client::packet::PosDir pkt;
-                _self.x = pkt.x = x;
-                _self.y = pkt.y = y;
-                _self.z = pkt.z = z;
-                _self.pitch = pkt.pitch = pitch;
-                _self.yaw = pkt.yaw = yaw;
+                connection->_self.x = pkt.x = x;
+                connection->_self.y = pkt.y = y;
+                connection->_self.z = pkt.z = z;
+                connection->_self.pitch = pkt.pitch = pitch;
+                connection->_self.yaw = pkt.yaw = yaw;
                 // Bug: Have to write twice for some reason.
-                proto.write(pkt);
-                proto.write(pkt);
+                connection->proto.write(pkt);
+                connection->proto.write(pkt);
             }
 
             void Remote::sendMessage(const std::string & message)
@@ -103,28 +113,28 @@ namespace libminecraft
                 {
                     protocol::client::packet::Message msgpkt;
                     msgpkt.message = message.substr(offset, 64);
-                    proto.write(msgpkt);
+                    connection->proto.write(msgpkt);
                 }
             }
 
             void Remote::setBlock(game::Map::size_block x, game::Map::size_block y, game::Map::size_block z, game::map::Cell::BlockType type)
             {
-                assert(world.map.isValidBlock(x, y, z));
+                assert(connection->_world.map.isValidBlock(x, y, z));
                 assert(type >= game::map::Cell::BLANK && type <= game::map::Cell::OBSIDIAN);
                 
                 protocol::client::packet::SetBlock blkpkt;
-                _world.map.grid[x][y][z].type = type;
+                connection->_world.map.grid[x][y][z].type = type;
                 blkpkt.type = type;
                 blkpkt.x = x;
                 blkpkt.y = y;
                 blkpkt.z = z;
                 blkpkt.mode = 0x01;
-                proto.write(blkpkt);
+                connection->proto.write(blkpkt);
             }
 
             void Remote::clearBlock(game::Map::size_block x, game::Map::size_block y, game::Map::size_block z)
             {
-                assert(world.map.isValidBlock(x, y, z));
+                assert(connection->_world.map.isValidBlock(x, y, z));
 
                 protocol::client::packet::SetBlock blkpkt;
                 blkpkt.x = x;
@@ -132,8 +142,8 @@ namespace libminecraft
                 blkpkt.z = z;
                 blkpkt.mode = 0x00;
                 blkpkt.type = game::map::Cell::DIRT;
-                _world.map.grid[x][y][z].type = game::map::Cell::BLANK;
-                proto.write(blkpkt);
+                connection->_world.map.grid[x][y][z].type = game::map::Cell::BLANK;
+                connection->proto.write(blkpkt);
             }
         }
     }

@@ -1,9 +1,9 @@
 /*
- * state.hpp
+ * info.cpp
  * This file is part of LibMinecraft.
  *
- * Created by Yuri Sevatz on 11/2010.
- * Copyright (c) 2010 Yuri Sevatz. All rights reserved
+ * Created by Yuri Sevatz on 10/2011.
+ * Copyright (c) 2011 Yuri Sevatz. All rights reserved
  *
  * LibMinecraft is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,29 +19,19 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_CLASSIC_SESSION_REMOTE_STATE_HPP
-#define LIBMINECRAFT_CLASSIC_SESSION_REMOTE_STATE_HPP
-
-#include "../../../support/fsm/actionstate.hpp"
+#include "info.hpp"
 
 namespace libminecraft
 {
-    namespace classic
-    {
-        namespace session
-        {
-            namespace remote
-            {
-                // Forward-declare the owner.  We only need pointers to this.
-                class Connection;
+namespace mainline
+{
+namespace session
+{
 
-                class State : public ActionState<Connection>
-                {
-
-                };
-            }
-        }
-    }
+Info::Info()
+{
 }
 
-#endif // LIBMINECRAFT_CLASSIC_SESSION_REMOTE_STATE_HPP
+}
+}
+}

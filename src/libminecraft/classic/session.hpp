@@ -23,6 +23,8 @@
 #ifndef LIBMINECRAFT_CLASSIC_SESSION_HPP
 #define LIBMINECRAFT_CLASSIC_SESSION_HPP
 
+#include "session/info.hpp"
+
 #include "game/world.hpp"
 #include "game/player/local.hpp"
 #include "game/map.hpp"
@@ -40,15 +42,12 @@ namespace libminecraft
         // Note: This means we can make things like local/remote clients, client AND server-side NPC's, etc.
         class Session
         {
-        public:
-            // Read-only access to the world.
-            const game::World & world;
-            
-            // The client's gamepiece.
-            const game::player::Local & self;
+            friend class Client;
 
+        public:
             // Only the Client can set this.
             // To get the client, just call client().
+            // This is used for passing events.
             class
             {
                 friend class Client;
@@ -61,11 +60,16 @@ namespace libminecraft
             } listener;
 
         protected:
-            // A session can only be created with the needed information for playabel game.
-            // This requires:
-            //  A World.
-            //  A Self.
-            Session(const game::World & world, const game::player::Local & self);
+            Session();
+
+            // Session object returns the world
+            virtual const game::World & getWorld() = 0;
+
+            // Session object returns the self
+            virtual const game::player::Local & getSelf() = 0;
+
+            // Session object returns the server info
+            virtual const session::Info & getInfo() = 0;
 
         public:
             // Set a block.
@@ -87,7 +91,9 @@ namespace libminecraft
             virtual void sendMessage(const std::string & message) = 0;
 
             // End the session.
-            virtual void disconnect() = 0;
+            // XXX: Not implemented.  Depends on having a proper threading model (use of connection object between functions and shielding thread objects from external linkage in remote.hpp <= external session class)
+            //      What this actually does/means in the whole "gist" of things for various threaded/non-threaded uses needs to be reevaluated.
+            // virtual void disconnect() = 0;
         };
     }
 }

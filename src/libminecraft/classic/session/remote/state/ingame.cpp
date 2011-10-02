@@ -21,7 +21,7 @@
 
 #include "ingame.hpp"
 
-#include "../statemachine.hpp"
+#include "../connection.hpp"
 #include "../../remote.hpp"
 #include "../../../client.hpp"
 
@@ -82,20 +82,20 @@ namespace libminecraft
                     {
                         // Read the next packet...
                         // TODO: Replace with a map.
-                        switch(owner.session.proto.next())
+                        switch(owner.proto.next())
                         {
                         case protocol::server::Packet::PING:
                             {
                                 protocol::server::packet::Ping pingpkt;
-                                owner.session.proto.read(pingpkt);
+                                owner.proto.read(pingpkt);
                             }
                             break;
                         case protocol::server::Packet::POS:
                             {
                                 protocol::server::packet::PlayerPos pos;
-                                owner.session.proto.read(pos);
+                                owner.proto.read(pos);
 
-                                Player * const plr = owner.session._world.getPlayer(pos.player_id);
+                                Player * const plr = owner._world.getPlayer(pos.player_id);
 
                                 if (plr != NULL)
                                 {
@@ -112,9 +112,9 @@ namespace libminecraft
                         case protocol::server::Packet::POSDIR:
                             {
                                 protocol::server::packet::PlayerPosDir posdir;
-                                owner.session.proto.read(posdir);
+                                owner.proto.read(posdir);
 
-                                Player * const plr = owner.session._world.getPlayer(posdir.player_id);
+                                Player * const plr = owner._world.getPlayer(posdir.player_id);
 
                                 if (plr != NULL)
                                 {
@@ -141,9 +141,9 @@ namespace libminecraft
                         case protocol::server::Packet::DIR:
                             {
                                 protocol::server::packet::PlayerDir dir;
-                                owner.session.proto.read(dir);
+                                owner.proto.read(dir);
 
-                                Player * const plr = owner.session._world.getPlayer(dir.player_id);
+                                Player * const plr = owner._world.getPlayer(dir.player_id);
 
                                 if (plr != NULL)
                                 {
@@ -162,14 +162,14 @@ namespace libminecraft
                         case protocol::server::Packet::BLOCK:
                             {
                                 protocol::server::packet::SetBlock blockpkt;
-                                owner.session.proto.read(blockpkt);
+                                owner.proto.read(blockpkt);
                                 // Check the x, y, and z ccordinates:
                                 if (blockpkt.x < 0 ||
                                     blockpkt.y < 0 ||
                                     blockpkt.z < 0 ||
-                                    blockpkt.x >= owner.session._world.map.x_blocks ||
-                                    blockpkt.y >= owner.session._world.map.y_blocks ||
-                                    blockpkt.z >= owner.session._world.map.z_blocks)
+                                    blockpkt.x >= owner._world.map.x_blocks ||
+                                    blockpkt.y >= owner._world.map.y_blocks ||
+                                    blockpkt.z >= owner._world.map.z_blocks)
                                 {
                                     owner.session.listener().onProtocolWarning("Invalid grid coordinates referenced during block update");
                                     break;
@@ -180,9 +180,9 @@ namespace libminecraft
                                     owner.session.listener().onProtocolWarning("Invalid block type requested during block update");
                                     break;
                                 }
-                                map::Cell::BlockType old_type = owner.session._world.map.grid.at(blockpkt.x).at(blockpkt.y).at(blockpkt.z).type;
+                                map::Cell::BlockType old_type = owner._world.map.grid.at(blockpkt.x).at(blockpkt.y).at(blockpkt.z).type;
                                 map::Cell::BlockType type = map::Cell::GetCellType(blockpkt.type);
-                                owner.session._world.map.grid.at(blockpkt.x).at(blockpkt.y).at(blockpkt.z).type = type;
+                                owner._world.map.grid.at(blockpkt.x).at(blockpkt.y).at(blockpkt.z).type = type;
 
                                 owner.session.listener().onBlockUpdate(type, old_type, blockpkt.x, blockpkt.y, blockpkt.z);
                             }
@@ -190,15 +190,15 @@ namespace libminecraft
                         case protocol::server::Packet::TELEPORT:
                             {
                                 protocol::server::packet::PlayerTeleport tele;
-                                owner.session.proto.read(tele);
+                                owner.proto.read(tele);
 
                                 Player * plr;
 
                                 if (tele.player_id < 0)
-                                    plr = &owner.session._self;
+                                    plr = &owner._self;
                                 else
                                 {
-                                    plr = owner.session._world.getPlayer(tele.player_id);
+                                    plr = owner._world.getPlayer(tele.player_id);
                                     if (plr == NULL)
                                     {
                                         owner.session.listener().onProtocolWarning("Unknown player id used in teleport packet");
@@ -227,7 +227,7 @@ namespace libminecraft
                         case protocol::server::Packet::MESSAGE:
                             {
                                 protocol::server::packet::Message msgpkt;
-                                owner.session.proto.read(msgpkt);
+                                owner.proto.read(msgpkt);
 
                                 // Most opensource servers BUTCHERD this with multiworld.
                                 // We'll leave the lookup to the client.
@@ -237,11 +237,11 @@ namespace libminecraft
                         case protocol::server::Packet::SPAWN:
                             {
                                 protocol::server::packet::PlayerSpawn spawnpkt;
-                                owner.session.proto.read(spawnpkt);
+                                owner.proto.read(spawnpkt);
 
                                 if (spawnpkt.player_id == -1)
                                 {
-                                    configurePlayerFromSpawnPacket(owner, owner.session._self, spawnpkt);
+                                    configurePlayerFromSpawnPacket(owner, owner._self, spawnpkt);
                                     owner.session.listener().onClientSpawn();
                                 }
                                 else
@@ -250,7 +250,7 @@ namespace libminecraft
                                     configurePlayerFromSpawnPacket(owner, entity, spawnpkt);
 
                                     // Omit the player if it is already in the entity database.
-                                    Player * const addedPlayer = owner.session._world.addPlayer(entity);
+                                    Player * const addedPlayer = owner._world.addPlayer(entity);
                                     if (!addedPlayer)
                                     {
                                         owner.session.listener().onProtocolWarning("Attempted to spawn player that was already spawned");
@@ -263,14 +263,14 @@ namespace libminecraft
                         case protocol::server::Packet::DESPAWN:
                             {
                                 protocol::server::packet::PlayerDespawn despawnpkt;
-                                owner.session.proto.read(despawnpkt);
+                                owner.proto.read(despawnpkt);
 
-                                Player * const plr = owner.session._world.getPlayer(despawnpkt.player_id);
+                                Player * const plr = owner._world.getPlayer(despawnpkt.player_id);
 
                                 if (plr != NULL)
                                 {
                                     owner.session.listener().onPlayerDespawn(*plr);
-                                    owner.session._world.removePlayer(*plr);
+                                    owner._world.removePlayer(*plr);
                                 }
                                 else
                                     owner.session.listener().onProtocolWarning("Attempted to despawn a player that wasn't spawned");
@@ -282,7 +282,7 @@ namespace libminecraft
                         case protocol::server::Packet::DISCONNECT:
                             {
                                 protocol::server::packet::Disconnect kconn;
-                                owner.session.proto.read(kconn);
+                                owner.proto.read(kconn);
 
                                 owner.session.listener().onClientKick(kconn.reason);
                             }
@@ -290,10 +290,10 @@ namespace libminecraft
                         case protocol::server::Packet::USEROP:
                             {
                                 protocol::server::packet::PlayerOp op;
-                                owner.session.proto.read(op);
+                                owner.proto.read(op);
 
-                                player::Local::t_optype old_optype = owner.session._self.optype;
-                                owner.session._self.optype = op.type;
+                                player::Local::t_optype old_optype = owner._self.optype;
+                                owner._self.optype = op.type;
 
                                 owner.session.listener().onClientOp(old_optype);
                             }

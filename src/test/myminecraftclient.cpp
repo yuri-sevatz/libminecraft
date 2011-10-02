@@ -50,7 +50,8 @@ void MyMinecraftClient::onMessage(Player::t_id id, const std::string & message)
 
     if (pos != std::string::npos)
     {
-        const Player * player = world().getPlayer(cleaned.substr(0, pos));
+        const Player * player = world.getPlayer(cleaned.substr(0, pos));
+
         if (player && cleaned.length() > pos + 2)
             onPlayerMessage(*player, cleaned.substr(pos + 2, std::string::npos));
     }
@@ -236,7 +237,7 @@ void MyMinecraftClient::processCommand(const Player & player, const std::string 
         Map::size_block y = Map::toBlock(player.y - Map::EYE_HEIGHT) - 1;
         Map::size_block z = Map::toBlock(player.z);
 
-        if (!world().map.isValidBlock(x, y, z))
+        if (!world.map.isValidBlock(x, y, z))
             return;
 
         ret << "Flagging: (" << x << ","
@@ -249,7 +250,7 @@ void MyMinecraftClient::processCommand(const Player & player, const std::string 
 
         move(player.x, player.y, player.z);
 
-        const map::Cell::BlockType t_type = world().map.grid[x][y][z].type;
+        const map::Cell::BlockType t_type = world.map.grid[x][y][z].type;
 
         if (t_type != map::Cell::BLANK && t_type != map::Cell::WATER && t_type != map::Cell::LAVA)
         {
@@ -263,20 +264,22 @@ void MyMinecraftClient::processCommand(const Player & player, const std::string 
     {
         std::stringstream ret;
 
-        ret << "Blocks: (" << world().map.x_blocks << ","
-                << world().map.y_blocks << ","
-                << world().map.z_blocks << ")";
+        ret << "Blocks: (" << world.map.x_blocks << ","
+                << world.map.y_blocks << ","
+                << world.map.z_blocks << ")";
 
         std::cout << ret.str() << std::endl;
         sendMessage(ret.str());
         ret.flush();
-        ret << "Plot: (" << world().map.x_plot << ","
-                << world().map.y_plot << ","
-                << world().map.z_plot << ")";
+        ret << "Plot: (" << world.map.x_plot << ","
+                << world.map.y_plot << ","
+                << world.map.z_plot << ")";
 
     }
+    /* Awaiting API AVAILABILITY - Internal blocking issue
     else if (message == ".exit")
     {
         disconnect();
     }
+    */
 }

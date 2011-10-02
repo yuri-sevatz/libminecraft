@@ -12,9 +12,9 @@ namespace libminecraft
             namespace remote
             {
                 // Forward-declare the owner.  We only need pointers to this.
-                class StateMachine;
+                class Connection;
 
-                class State : public ActionState<StateMachine>
+                class State : public ActionState<Connection>
                 {
 
                 };

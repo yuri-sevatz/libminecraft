@@ -45,18 +45,18 @@ int main(int argc, char * argv[])
     std::string hostname(argv[1]);
     std::string port(argv[2]);
 
-    // Create the session.
-    libminecraft::classic::session::Remote session(hostname, port);
-
-    // Instantiate our client, give it the session.
-    MyMinecraftClient client(session);
-
     // get the username and key.
     std::string username(argv[3]);
     std::string key(argv[4]);
 
+    // Create the session.
+    libminecraft::classic::session::Remote session(hostname, port, username, key);
+
+    // Instantiate our client, give it the session.
+    MyMinecraftClient client(session);
+
     // Connect... (blocks)
-    session.connect(username, key);
+    session.connect();
 
     return EXIT_SUCCESS;
 }

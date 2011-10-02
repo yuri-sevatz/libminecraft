@@ -49,7 +49,15 @@ namespace libminecraft
         // This allows our client interaction abstraction, so that it can become an "actor" and a listener to any session interface.
             Session & _session;
         public:
+
+            // Yourself
             const player::Local & self;
+
+            // Your world
+            const game::World & world;
+
+            // Information pertaining to the server.
+            const session::Info & server;
             
         /*
          * Constructors
@@ -91,7 +99,7 @@ namespace libminecraft
             virtual void onClientKick(const std::string & reason) = 0;
 
         /*
-         * Global FunctionsLIBMINECRAFT_CLASSIC_GAME_PLAYER_LOCAL_HPP
+         * Global Functions
          */
 
             // A block is updated on the map
@@ -178,10 +186,8 @@ namespace libminecraft
             void sendMessage(const std::string & message);
 
             // Terminate the connetion.
-            void disconnect();
-            
-            // Access the active game
-            const World & world() const;
+            // XXX: Disabled until internal threading/socketing design is reevaluated under various use cases.
+            //void disconnect();
         };
         
         inline void Client::setBlock(Map::size_block x, Map::size_block y, Map::size_block z, map::Cell::BlockType type)
@@ -209,15 +215,12 @@ namespace libminecraft
             return _session.sendMessage(message);
         }
         
+        /*
         inline void Client::disconnect()
         {
             return _session.disconnect();
         }
-        
-        inline const World & Client::world() const
-        {
-            return _session.world;
-        }
+        */
     }
 }
 

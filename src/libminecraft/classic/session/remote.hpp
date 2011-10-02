@@ -19,18 +19,15 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #ifndef LIBMINECRAFT_CLASSIC_SESSION_REMOTE_HPP
 #define LIBMINECRAFT_CLASSIC_SESSION_REMOTE_HPP
 
 #include "../session.hpp"
 
-// FSM
-#include "remote/statemachine.hpp"
-#include "../protocol/client.hpp"
-
-#include <sstream>
-#include <boost/asio.hpp>
+// Include states that need private access
+#include "remote/state/ingame.hpp"
+#include "remote/state/loadingmap.hpp"
+#include "remote/state/negotiating.hpp"
 
 namespace libminecraft
 {
@@ -38,44 +35,26 @@ namespace libminecraft
     {
         namespace session
         {
+            namespace remote
+            {
+            // Forward-declare connection d-pointer.
+            class Connection;
+            }
+
             // Defines a local session.
             class Remote : public Session
             {
-                friend class remote::state::InGame;
-                friend class remote::state::LoadingMap;
-                friend class remote::state::Negotiating;
-            private:
-                // The credentials used for the session.
-                std::string username;
-                std::string key;
+                remote::Connection * const connection;
 
-                // Once connected...
-                std::string server_name;
-                std::string server_motd;
-
-                // Map tmp data...
-                std::stringstream gz_data;
-
-                // The "self" in the game, private, writable.
-                game::player::Local _self;
-                // The actual world, private, writable.
-                game::World _world;
-
-                remote::StateMachine fsm;
-
-                // The connection
-                boost::asio::ip::tcp::iostream stream;
-                
             public:
-                // The remote session uses the client protocol.
-                protocol::Client proto;
-
-                Remote(const std::string &hostname,
-                       const std::string &service);
+                Remote(const std::string & hostname,
+                       const std::string & service,
+                       const std::string & username,
+                       const std::string & key);
+                ~Remote();
 
                 // Connect to the target server
-                void connect(const std::string &username,
-                             const std::string &key);
+                void connect();
 
                 // Set a block.
                 virtual void setBlock(game::Map::size_block x, game::Map::size_block y, game::Map::size_block z, game::map::Cell::BlockType type);
@@ -96,11 +75,18 @@ namespace libminecraft
                 virtual void sendMessage(const std::string & message);
 
                 // End the session.
-                virtual void disconnect();
+                // virtual void disconnect();
+
+            protected:
+                virtual const game::World & getWorld();
+
+                virtual const game::player::Local & getSelf();
+
+                virtual const session::Info & getInfo();
 
             private:
-                // The master loop, used for FSM update() calls.
-                void loop();
+                // The master listener.  Blocks until complete.
+                void run();
             };
         }
     }

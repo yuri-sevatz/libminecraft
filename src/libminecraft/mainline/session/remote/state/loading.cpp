@@ -35,50 +35,50 @@ namespace libminecraft
                     }
                     void Loading::Update(t_owner &owner) const
                     {
-                        std::cout << (int) owner.session.proto.next() << std::endl;
+                        std::cout << (int) owner.proto.next() << std::endl;
 
-                        switch(owner.session.proto.next())
+                        switch(owner.proto.next())
                         {
                         case protocol::server::Packet::SPAWNPOINT:
                             {
                                 protocol::server::packet::SpawnPoint spawnpoint;
-                                owner.session.proto.read(spawnpoint);
+                                owner.proto.read(spawnpoint);
                             break;
                             }
                         case protocol::server::Packet::TIME:
                             {
                                 protocol::server::packet::Time timeupdate;
-                                owner.session.proto.read(timeupdate);
+                                owner.proto.read(timeupdate);
                             break;
                             }
                         case protocol::server::Packet::MOBSPAWN:
                             {
                                 protocol::server::packet::MobSpawn mobspawn;
-                                owner.session.proto.read(mobspawn);
+                                owner.proto.read(mobspawn);
                             break;
                             }
                         case protocol::server::Packet::MOVINGOBJECTSPAWN:
                             {
                                 protocol::server::packet::MovingObjectSpawn movingobjectspawn;
-                                owner.session.proto.read(movingobjectspawn);
+                                owner.proto.read(movingobjectspawn);
                             break;
                             }
                         case protocol::server::Packet::ENTITYVELOCITY:
                             {
                                 protocol::server::packet::EntityVelocity entityvelocity;
-                                owner.session.proto.read(entityvelocity);
+                                owner.proto.read(entityvelocity);
                             break;
                             }
                         case protocol::server::Packet::PRECHUNK:
                             {
                                 protocol::server::packet::PreChunk prechunk;
-                                owner.session.proto.read(prechunk);
+                                owner.proto.read(prechunk);
                             break;
                             }
                         case protocol::server::Packet::PLAYERPOSDIR:
                             {
                                 protocol::server::packet::PlayerPosDir playerposdir;
-                                owner.session.proto.read(playerposdir);
+                                owner.proto.read(playerposdir);
                             break;
                             }
                         default:
