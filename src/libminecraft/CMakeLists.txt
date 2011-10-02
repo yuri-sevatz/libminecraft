@@ -444,7 +444,7 @@ message(${Boost_LIBRARY_DIRS})
 # ---------------
 add_library(${PROJECT_NAME} SHARED ${${PROJECT_NAME}_headers} ${${PROJECT_NAME}_sources})
 
-target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES} )
+target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
 
 # Install
 # ---------------
@@ -452,3 +452,8 @@ install(TARGETS ${PROJECT_NAME}
                 RUNTIME DESTINATION bin
                 LIBRARY DESTINATION lib
                 ARCHIVE DESTINATION lib/static)
+
+OPTION(INSTALL_HEADERS "Copy headers to target" OFF)
+IF(DEFINED INSTALL_HEADERS)
+install(DIRECTORY . DESTINATION include/lib${PROJECT_NAME} FILES_MATCHING PATTERN "*.hpp")
+ENDIF(DEFINED INSTALL_HEADERS)
