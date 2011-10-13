@@ -74,6 +74,12 @@ namespace libminecraft
                 // Send a message.
                 virtual void sendMessage(const std::string & message);
 
+                // Enable ticks.
+                virtual void enableTicks();
+
+                // Disable ticks.
+                virtual void disableTicks();
+
                 // End the session.
                 // virtual void disconnect();
 
@@ -87,6 +93,8 @@ namespace libminecraft
             private:
                 // The master listener.  Blocks until complete.
                 void run();
+
+                static void tickNotifier(void * client);
             };
         }
     }

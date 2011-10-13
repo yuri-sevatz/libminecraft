@@ -79,6 +79,14 @@ public:
            Use previous function instead */
         // virtual void onPlayerMessage(const Player & player, std::string message);
 
+        // A recurring update takes place.
+        // These take place only while you are still in a game world.  They stop when exiting the world.
+        // Can be used for anything from rendering to movement to concurrent work.
+        //
+        // TODO: Add time since last update
+        //
+        virtual void onTick();
+
     /*
      * Other Player Functions
      */

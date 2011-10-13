@@ -43,6 +43,7 @@
 #include "state/negotiating.hpp"
 
 #include <boost/asio.hpp>
+#include <boost/thread.hpp>
 #include <sstream>
 
 namespace libminecraft
@@ -83,7 +84,11 @@ namespace libminecraft
                     // The game world, private, writable.
                     game::World _world;
 
+                    // Server information.
                     session::Info _server;
+
+                    // The worker thread, if requested.
+                    boost::thread worker;
 
                 private:
                     // Map tmp data...

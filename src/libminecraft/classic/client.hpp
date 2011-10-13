@@ -49,7 +49,6 @@ namespace libminecraft
         // This allows our client interaction abstraction, so that it can become an "actor" and a listener to any session interface.
             Session & _session;
         public:
-
             // Yourself
             const player::Local & self;
 
@@ -116,6 +115,14 @@ namespace libminecraft
                Use previous function instead */
             // virtual void onPlayerMessage(const Player & player, std::string message) = 0;
 
+            // A recurring update takes place.
+            // These take place only while you are still in a game world.  They stop when exiting the world.
+            // Can be used for anything from rendering to movement to concurrent work.
+            //
+            // TODO: Add time since last update
+            //
+            virtual void onTick() = 0;
+
         /*
          * Other Player Functions
          */
@@ -167,6 +174,12 @@ namespace libminecraft
             virtual void onProtocolWarning(const char * reason) = 0;
             
         protected:
+            // Enable game world ticks
+            void enableTicks();
+
+            // Disable game world ticks
+            void disableTicks();
+
             // Set a block.
             void setBlock(Map::size_block x, Map::size_block y, Map::size_block z, map::Cell::BlockType type);
 
@@ -189,6 +202,16 @@ namespace libminecraft
             // XXX: Disabled until internal threading/socketing design is reevaluated under various use cases.
             //void disconnect();
         };
+
+        inline void Client::enableTicks()
+        {
+            return _session.enableTicks();
+        }
+
+        inline void Client::disableTicks()
+        {
+            return _session.disableTicks();
+        }
         
         inline void Client::setBlock(Map::size_block x, Map::size_block y, Map::size_block z, map::Cell::BlockType type)
         {

@@ -59,7 +59,7 @@ void MyMinecraftClient::onMessage(Player::t_id id, const std::string & message)
 
 void MyMinecraftClient::onPlayerMove(const Player & player, Map::size_plot delta_x, Map::size_plot delta_y, Map::size_plot delta_z)
 {
-    if (followtarget != NULL && &player == followtarget)
+    if (&player == followtarget)
     {
         move(self.x + delta_x, self.y + delta_y, self.z + delta_z);
     }
@@ -79,7 +79,7 @@ void MyMinecraftClient::onPlayerDespawn(const Player & player)
 
 void MyMinecraftClient::onPlayerTeleport(const Player & player, Map::size_plot old_x, Map::size_plot old_y, Map::size_plot old_z, Player::t_yaw old_yaw, Player::t_pitch old_pitch)
 {
-    if (followtarget != NULL && &player == followtarget)
+    if (&player == followtarget)
         onPlayerMove(player, player.x - old_x, player.y - old_y, player.z - old_z);
 }
 
@@ -132,6 +132,8 @@ void MyMinecraftClient::onClientTeleport(Map::size_plot old_x, Map::size_plot ol
 void MyMinecraftClient::onClientWorldEnter()
 {
     std::cout << "onClientWorldEnter()" << std::endl;
+
+    enableTicks();
 }
 
 void MyMinecraftClient::onClientWorldExit()
@@ -282,4 +284,9 @@ void MyMinecraftClient::processCommand(const Player & player, const std::string 
         disconnect();
     }
     */
+}
+
+void MyMinecraftClient::onTick()
+{
+    std::cout << "Tick " << std::endl;
 }

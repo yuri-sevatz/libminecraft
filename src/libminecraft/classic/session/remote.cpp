@@ -145,6 +145,30 @@ namespace libminecraft
                 connection->_world.map.grid[x][y][z].type = game::map::Cell::BLANK;
                 connection->proto.write(blkpkt);
             }
+
+            void Remote::enableTicks()
+            {
+                connection->worker = boost::thread(boost::bind(&Remote::tickNotifier, &listener()));
+            }
+
+            void Remote::disableTicks()
+            {
+                connection->worker.interrupt();
+            }
+
+            void Remote::tickNotifier(void *client)
+            {
+                // Todo: Limit the number of calls, space them evenly per second (as a suggestion)
+                for(;;)
+                {
+                    // Allow interruption at this point.
+                    // Todo: Can be replaced with this_thread::sleep()... etc to allow interruption
+                    boost::this_thread::interruption_point();
+
+                    // Create a tick event in the client
+                    ((Client *) client)->onTick();
+                }
+            }
         }
     }
 }   

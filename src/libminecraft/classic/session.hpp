@@ -90,6 +90,15 @@ namespace libminecraft
             // Send a message.
             virtual void sendMessage(const std::string & message) = 0;
 
+            // Enable session ticks from the session's work handler.
+            virtual void enableTicks() = 0;
+
+            // Disable session ticks from the session's work handler.
+            virtual void disableTicks() = 0;
+
+
+
+
             // End the session.
             // XXX: Not implemented.  Depends on having a proper threading model (use of connection object between functions and shielding thread objects from external linkage in remote.hpp <= external session class)
             //      What this actually does/means in the whole "gist" of things for various threaded/non-threaded uses needs to be reevaluated.
