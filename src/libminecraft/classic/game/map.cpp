@@ -105,6 +105,12 @@ namespace libminecraft
             {
                 return (isValidBlockX(x) && isValidBlockY(y) && isValidBlockZ(z));
             }
+
+            bool Map::isSetableBlock(size_block x, size_block y, size_block z) const
+            {
+                const map::Cell::BlockType t_type = grid[x][y][z].type;
+                return  (t_type == map::Cell::BLANK || t_type == map::Cell::WATER || t_type == map::Cell::LAVA);
+            }
         }
     }
 }

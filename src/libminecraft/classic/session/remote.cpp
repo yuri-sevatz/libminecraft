@@ -161,12 +161,13 @@ namespace libminecraft
                 // Todo: Limit the number of calls, space them evenly per second (as a suggestion)
                 for(;;)
                 {
-                    // Allow interruption at this point.
-                    // Todo: Can be replaced with this_thread::sleep()... etc to allow interruption
-                    boost::this_thread::interruption_point();
-
                     // Create a tick event in the client
                     ((Client *) client)->onTick();
+
+                    // Allow interruption at this point.
+                    // Todo: Can be replaced with this_thread::sleep()... etc to allow interruption
+                    //boost::this_thread::interruption_point();
+                    boost::this_thread::sleep(boost::posix_time::milliseconds(100));
                 }
             }
         }

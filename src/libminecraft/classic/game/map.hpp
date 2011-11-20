@@ -78,6 +78,9 @@ namespace libminecraft
                 bool isValidBlockZ(size_block z) const;
 
                 bool isValidBlock(size_block x, size_block y, size_block z) const;
+
+                bool isSetableBlock(size_block x, size_block y, size_block z) const;
+                bool isClearableBlock(size_block x, size_block y, size_block z) const;
             };
 
             inline Map::size_block Map::toBlock(size_plot pos)
@@ -103,6 +106,11 @@ namespace libminecraft
             inline bool Map::isValidBlockZ(Map::size_block z) const
             {
                 return (z >= 0 && z <= z_blocks);
+            }
+
+            inline bool Map::isClearableBlock(size_block x, size_block y, size_block z) const
+            {
+                return !isSetableBlock(x, y, z);
             }
         }
     }

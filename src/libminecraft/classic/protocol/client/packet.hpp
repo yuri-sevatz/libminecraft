@@ -38,10 +38,10 @@ namespace libminecraft
                 public:
                     enum PacketID
                     {
-                        IDENT = 0x00,
-                        BLOCK = 0x05,
-                        POSDIR = 0x08,
-                        MESSAGE = 0x0D,
+                        IDENT = (MCTypes::Byte) 0x00,
+                        BLOCK = (MCTypes::Byte) 0x05,
+                        POSDIR = (MCTypes::Byte) 0x08,
+                        MESSAGE = (MCTypes::Byte) 0x0D,
                     };
                 };
             }

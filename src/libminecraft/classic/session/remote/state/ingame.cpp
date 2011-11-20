@@ -26,7 +26,6 @@
 #include "../../../client.hpp"
 
 #include "../../../protocol/server/packet/ping.hpp"
-#include "../../../protocol/server/packet/levelbegin.hpp"
 #include "../../../protocol/server/packet/message.hpp"
 #include "../../../protocol/server/packet/playerdespawn.hpp"
 #include "../../../protocol/server/packet/disconnect.hpp"
@@ -41,6 +40,8 @@
 #include "../../../game/world.hpp"
 
 #include "../../../../utils/mcstring.hpp"
+
+#include <iostream>
 
 namespace libminecraft
 {
@@ -276,9 +277,6 @@ namespace libminecraft
                                     owner.session.listener().onProtocolWarning("Attempted to despawn a player that wasn't spawned");
                             }
                             break;
-
-                            // SERVERLEVELBEGINPKT.
-
                         case protocol::server::Packet::DISCONNECT:
                             {
                                 protocol::server::packet::Disconnect kconn;
@@ -298,11 +296,24 @@ namespace libminecraft
                                 owner.session.listener().onClientOp(old_optype);
                             }
                             break;
+                        case protocol::server::Packet::LEVELBEGIN:
+                                owner.ChangeState(owner.States.LOADINGMAP);
+                            break;
+                        case protocol::server::Packet::IDENT:
+                                owner.ChangeState(owner.States.NEGOTIATING);
+                                owner.session.listener().onProtocolWarning("Requested reauth when already authenticated.  Doing it anyways.");
+                            break;
+                        default:
+                            std::cerr << (int) owner.proto.next() << std::endl;
+                            throw exception::Protocol("Unrecognized Packet Type");
                         }
+
                     }
                     void InGame::Exit(t_owner &owner) const
                     {
                         owner.session.listener().onClientWorldExit();
+
+                        // XXX: Kill off the worker thread.
                     }
                 }
             }

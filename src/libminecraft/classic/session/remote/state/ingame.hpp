@@ -42,9 +42,9 @@ namespace libminecraft
                     {
                     public:
                         InGame();
-                        virtual void Enter(t_owner &owner) const;
-                        virtual void Update(t_owner &owner) const;
-                        virtual void Exit(t_owner &owner) const;
+                        void Enter(t_owner &owner) const;
+                        void Update(t_owner &owner) const;
+                        void Exit(t_owner &owner) const;
 
                     private:
                         static void configurePlayerFromSpawnPacket(t_owner & owner, game::Player & player, const protocol::server::packet::PlayerSpawn & spawnpkt);

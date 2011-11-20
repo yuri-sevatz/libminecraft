@@ -37,21 +37,21 @@ namespace libminecraft
                 public:
                     enum PacketID
                     {
-                        IDENT = 0x00,
-                        PING = 0x01,
-                        LEVELBEGIN = 0x02,
-                        LEVELCHUNK = 0x03,
-                        LEVELDONE = 0x04,
-                        BLOCK = 0x06,
-                        SPAWN = 0x07,
-                        TELEPORT = 0x08,
-                        POSDIR = 0x09,
-                        POS = 0x0a,
-                        DIR = 0x0b,
-                        DESPAWN = 0x0c,
-                        MESSAGE = 0x0d,
-                        DISCONNECT = 0x0e,
-                        USEROP = 0x0f,
+                        IDENT = (MCTypes::Byte) 0x00,
+                        PING = (MCTypes::Byte) 0x01,
+                        LEVELBEGIN = (MCTypes::Byte) 0x02,
+                        LEVELCHUNK = (MCTypes::Byte) 0x03,
+                        LEVELDONE = (MCTypes::Byte) 0x04,
+                        BLOCK = (MCTypes::Byte) 0x06,
+                        SPAWN = (MCTypes::Byte) 0x07,
+                        TELEPORT = (MCTypes::Byte) 0x08,
+                        POSDIR = (MCTypes::Byte) 0x09,
+                        POS = (MCTypes::Byte) 0x0a,
+                        DIR = (MCTypes::Byte) 0x0b,
+                        DESPAWN = (MCTypes::Byte) 0x0c,
+                        MESSAGE = (MCTypes::Byte) 0x0d,
+                        DISCONNECT = (MCTypes::Byte) 0x0e,
+                        USEROP = (MCTypes::Byte) 0x0f,
                     };
                 };
             }

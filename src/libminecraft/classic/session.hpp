@@ -42,7 +42,6 @@ namespace libminecraft
         // Note: This means we can make things like local/remote clients, client AND server-side NPC's, etc.
         class Session
         {
-            friend class Client;
 
         public:
             // Only the Client can set this.
@@ -59,9 +58,6 @@ namespace libminecraft
                 }
             } listener;
 
-        protected:
-            Session();
-
             // Session object returns the world
             virtual const game::World & getWorld() = 0;
 
@@ -71,7 +67,6 @@ namespace libminecraft
             // Session object returns the server info
             virtual const session::Info & getInfo() = 0;
 
-        public:
             // Set a block.
             virtual void setBlock(game::Map::size_block x, game::Map::size_block y, game::Map::size_block z, game::map::Cell::BlockType type) = 0;
 
@@ -96,13 +91,13 @@ namespace libminecraft
             // Disable session ticks from the session's work handler.
             virtual void disableTicks() = 0;
 
-
-
-
             // End the session.
             // XXX: Not implemented.  Depends on having a proper threading model (use of connection object between functions and shielding thread objects from external linkage in remote.hpp <= external session class)
             //      What this actually does/means in the whole "gist" of things for various threaded/non-threaded uses needs to be reevaluated.
             // virtual void disconnect() = 0;
+
+        protected:
+            Session();
         };
     }
 }
