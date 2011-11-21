@@ -1,4 +1,5 @@
 #Ignore QtCreator Files
+CMakeLists.txt.user
 libminecraft.creator
 libminecraft.creator.user*
 libminecraft.files
