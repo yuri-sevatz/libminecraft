@@ -2,7 +2,7 @@
  * login.hpp
  * This file is part of LibMinecraft.
  *
- * Created by Yuri Sevatz on 04/2011.
+ * Created by Yuri Sevatz on 11/2011.
  * Copyright (c) 2011 Yuri Sevatz. All rights reserved
  *
  * LibMinecraft is free software: you can redistribute it and/or modify
@@ -23,6 +23,7 @@
 #define LIBMINECRAFT_MAINLINE_PROTOCOL_CLIENT_PACKET_LOGIN_HPP
 
 #include "../packet.hpp"
+#include "../../packet/login.hpp"
 
 namespace libminecraft
 {
@@ -34,18 +35,10 @@ namespace libminecraft
             {
                 namespace packet
                 {
-                    class Login : public Packet
+                    class Login : public client::Packet, public protocol::packet::Login
                     {
                     public:
-                        MCTypes::Int version;
-                        MCTypes::UCS2String username;
-                        MCTypes::Long seed;
-                        MCTypes::Byte dimension;
-
                         Login();
-                        virtual void read(std::istream &is);
-                        virtual void write(std::ostream &os) const;
-                        virtual void toReadable(std::ostream &os) const;
                     };
                 }
             }

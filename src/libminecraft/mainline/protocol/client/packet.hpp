@@ -32,16 +32,16 @@ namespace libminecraft
         {
             namespace client
             {
-                class Packet : public protocol::Packet
+                class Packet : public virtual protocol::Packet
                 {
                 public:
                     enum PacketID
                     {
-                        LOGIN = 0x01,
-                        IDENT = 0x02,
-                        MESSAGE = 0x03,
-                        USE = 0x07,
-                        PLAYER = 0x0A,
+                        LOGIN = (MCTypes::Byte) 0x01,
+                        IDENT = (MCTypes::Byte) 0x02,
+                        MESSAGE = (MCTypes::Byte) 0x03,
+                        USE = (MCTypes::Byte) 0x07,
+                        PLAYER = (MCTypes::Byte) 0x0A,
                     };
                 };
             }

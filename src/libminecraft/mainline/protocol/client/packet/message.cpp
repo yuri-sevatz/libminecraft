@@ -21,8 +21,6 @@
 
 #include "message.hpp"
 
-#include "../../stream.hpp"
-
 namespace libminecraft
 {
     namespace mainline

@@ -37,36 +37,61 @@ namespace libminecraft
                             if (md_type == 127)
                                 break;
 
-                            std::cerr << "MD_TYPE = " << (int) ((md_type) >> 5) << "(" << (int) (md_type & 0x1f) << ")" << std::endl;
+                            //std::cerr << "MD_TYPE = " << (int) ((md_type) >> 5) << "(" << (int) (md_type & 0x1f) << ")" << std::endl;
 
                             switch(md_type >> 5)
                             {
                             case 0:
-                                std::cerr << "Byte" << " => " << (int) Stream::getByte(stream) << std::endl;
+                            {
+                                MCTypes::Byte byte = Stream::getByte(stream);
+                                //std::cerr << "Byte" << " => " << (int) byte  << std::endl;
+                            }
                                 break;
                             case 1:
-                                std::cerr << "Short" << " => " << (int) Stream::getShort(stream) << std::endl;
+                            {
+                                MCTypes::Short shrt = Stream::getShort(stream);
+                                //std::cerr << "Short" << " => " << (int) shrt << std::endl;
+                            }
                                 break;
                             case 2:
-                                std::cerr << "Int" << " => " << Stream::getInt(stream) << std::endl;
+                            {
+                                MCTypes::Int integer = Stream::getInt(stream);
+                                //std::cerr << "Int" << " => " << integer << std::endl;
+                            }
                                 break;
                             case 3:
-                                std::cerr << "Float" << " => " << Stream::getFloat(stream) << std::endl;
+                            {
+                                MCTypes::Float flt = Stream::getFloat(stream);
+                                //std::cerr << "Float" << " => " << flt << std::endl;
+                            }
                                 break;
                             case 4:
-                                std::wcerr << "String" << " => " << Stream::getUCS2String(stream) << std::endl;
+                            {
+                                MCTypes::UCS2String string = Stream::getUCS2String(stream);
+                                //std::wcerr << "String" << " => " << string << std::endl;
+                            }
                                 break;
                             case 5:
-                                std::cerr << "Short, Byte, Short:" << std::endl;
-                                std::cerr << "\t" << " => " << (int) Stream::getShort(stream) << std::endl;
-                                std::cerr << "\t" << " => " << (int) Stream::getByte(stream) << std::endl;
-                                std::cerr << "\t" << " => " << (int) Stream::getShort(stream) << std::endl;
+                            {
+                                //std::cerr << "Short, Byte, Short:" << std::endl;
+                                MCTypes::Short shortA = Stream::getShort(stream);
+                                //std::cerr << "\t" << " => " << (int) shortA << std::endl;
+                                MCTypes::Byte byte = Stream::getByte(stream);
+                                //std::cerr << "\t" << " => " << (int) byte << std::endl;
+                                MCTypes::Short shortB = Stream::getShort(stream);
+                                //std::cerr << "\t" << " => " << (int) shortB << std::endl;
+                            }
                                 break;
                             case 6:
-                                std::cerr << "Int, Int, Int:" << std::endl;
-                                std::cerr << "\t" << " => " << Stream::getInt(stream) << std::endl;
-                                std::cerr << "\t" << " => " << Stream::getInt(stream) << std::endl;
-                                std::cerr << "\t" << " => " << Stream::getInt(stream) << std::endl;
+                            {
+                                //std::cerr << "Int, Int, Int:" << std::endl;
+                                MCTypes::Int intA = Stream::getInt(stream);
+                                //std::cerr << "\t" << " => " << intA << std::endl;
+                                MCTypes::Int intB = Stream::getInt(stream);
+                                //std::cerr << "\t" << " => " << intB << std::endl;
+                                MCTypes::Int intC = Stream::getInt(stream);
+                                //std::cerr << "\t" << " => " << intC << std::endl;
+                            }
                                 break;
                             default:
                                 throw exception::Protocol("Unrecognized Metadata Type");

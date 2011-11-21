@@ -2,7 +2,7 @@
  * login.cpp
  * This file is part of LibMinecraft.
  *
- * Created by Yuri Sevatz on 04/2011.
+ * Created by Yuri Sevatz on 11/2011.
  * Copyright (c) 2011 Yuri Sevatz. All rights reserved
  *
  * LibMinecraft is free software: you can redistribute it and/or modify
@@ -21,10 +21,6 @@
 
 #include "login.hpp"
 
-#include "../../stream.hpp"
-
-#include <iostream>
-
 namespace libminecraft
 {
     namespace mainline
@@ -37,31 +33,6 @@ namespace libminecraft
                 {
                     Login::Login()
                     {
-                    }
-
-                    void Login::read(std::istream &stream)
-                    {
-                        Stream::getInt(stream, player_id);
-                        Stream::getUCS2String(stream, unknown_a);
-                        Stream::getLong(stream, seed);
-                        Stream::getByte(stream, dimension);
-                    }
-
-                    void Login::write(std::ostream &stream) const
-                    {
-                        Stream::putInt(stream, player_id);
-                        Stream::putUCS2String(stream, unknown_a);
-                        Stream::putLong(stream, seed);
-                        Stream::putByte(stream, dimension);
-                    }
-
-                    void Login::toReadable(std::ostream &os) const
-                    {
-                        os << "Player ID: " << player_id << "\n";
-                        // TODO : Remove Hardcoded Streams
-                        std::wcout << "Unknown A: " << unknown_a << "\n";
-                        os << "Seed: " << seed << "\n";
-                        os << "Dimension: " << (int) dimension << std::endl;
                     }
                 }
             }

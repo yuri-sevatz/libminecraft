@@ -54,7 +54,6 @@ namespace libminecraft
             inline void Client::write(const client::Packet &src)
             {
                 client::Protocol::write(stream, src);
-                stream.flush();
 
                 if (!stream.good())
                     throw exception::Network("Client connection closed while writing outbound minecraft packet");

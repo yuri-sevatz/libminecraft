@@ -32,9 +32,9 @@ namespace libminecraft
         namespace session
         {
             Remote::Remote(const std::string &hostname, const std::string &service, const std::string &username) :
+                Session(),
                 // Connection object: This provides protocol, parsing, world, etc.
-                connection(new remote::Connection(*this, hostname, service, username)),
-                Session()
+                connection(new remote::Connection(*this, hostname, service, username))
             {
 
             }

@@ -1,8 +1,8 @@
 /*
- * login.hpp
+ * client.cpp
  * This file is part of LibMinecraft.
  *
- * Created by Yuri Sevatz on 04/2011.
+ * Created by Yuri Sevatz on 11/2011.
  * Copyright (c) 2011 Yuri Sevatz. All rights reserved
  *
  * LibMinecraft is free software: you can redistribute it and/or modify
@@ -19,31 +19,15 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_MAINLINE_PROTOCOL_SERVER_PACKET_LOGIN_HPP
-#define LIBMINECRAFT_MAINLINE_PROTOCOL_SERVER_PACKET_LOGIN_HPP
-
-#include "../packet.hpp"
-#include "../../packet/login.hpp"
+#include "client.hpp"
 
 namespace libminecraft
 {
     namespace mainline
     {
-        namespace protocol
+    Client::Client(Session & session) : _session(session), self(session.getSelf())
         {
-            namespace server
-            {
-                namespace packet
-                {
-                    class Login : public server::Packet, public protocol::packet::Login
-                    {
-                    public:
-                        Login();
-                    };
-                }
-            }
+            session.listener.address = this;
         }
     }
 }
-
-#endif // LIBMINECRAFT_MAINLINE_PROTOCOL_SERVER_PACKET_LOGIN_HPP

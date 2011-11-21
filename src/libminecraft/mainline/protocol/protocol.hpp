@@ -32,7 +32,7 @@ namespace libminecraft
         class Protocol : public libminecraft::Protocol<TProtocol, TPacket, TPacketID>
         {
         public:
-            static const MCTypes::Byte version = 0x0E;
+            static const MCTypes::Byte version = 0x16;
         };
     }
 }

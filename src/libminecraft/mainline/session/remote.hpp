@@ -46,7 +46,7 @@ public:
     void connect();
 
 protected:
-    virtual const game::Player & getSelf();
+    const game::Player & getSelf();
 
 private:
     // The master loop, used for FSM update() calls.

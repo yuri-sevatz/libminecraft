@@ -1,5 +1,5 @@
 /*
- * login.hpp
+ * message.hpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 04/2011.
@@ -19,11 +19,10 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_MAINLINE_PROTOCOL_SERVER_PACKET_LOGIN_HPP
-#define LIBMINECRAFT_MAINLINE_PROTOCOL_SERVER_PACKET_LOGIN_HPP
+#ifndef LIBMINECRAFT_MAINLINE_PROTOCOL_PACKET_LOGIN_HPP
+#define LIBMINECRAFT_MAINLINE_PROTOCOL_PACKET_LOGIN_HPP
 
 #include "../packet.hpp"
-#include "../../packet/login.hpp"
 
 namespace libminecraft
 {
@@ -31,19 +30,27 @@ namespace libminecraft
     {
         namespace protocol
         {
-            namespace server
+            namespace packet
             {
-                namespace packet
+                class Login : public virtual Packet
                 {
-                    class Login : public server::Packet, public protocol::packet::Login
-                    {
-                    public:
-                        Login();
-                    };
-                }
+                public:
+                    MCTypes::Int id; // Note: used as version_id AND entity_id.
+                    MCTypes::UCS2String username;
+                    MCTypes::Long seed;
+                    MCTypes::Int mode;
+                    MCTypes::Byte dimension;
+                    MCTypes::Byte difficulty;
+                    MCTypes::Byte maxPlayers;
+                    MCTypes::Byte worldHeight;
+
+                    void read(std::istream &is);
+                    void write(std::ostream &os) const;
+                    void toReadable(std::ostream &os) const;
+                };
             }
         }
     }
 }
 
-#endif // LIBMINECRAFT_MAINLINE_PROTOCOL_SERVER_PACKET_LOGIN_HPP
+#endif // LIBMINECRAFT_MAINLINE_PROTOCOL_PACKET_LOGIN_HPP

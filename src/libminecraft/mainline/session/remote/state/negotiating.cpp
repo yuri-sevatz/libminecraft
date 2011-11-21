@@ -51,7 +51,7 @@ namespace libminecraft
 
                         protocol::client::packet::Login mylogin;
 
-                        mylogin.version = protocol::client::Protocol::version;
+                        mylogin.id = protocol::client::Protocol::version;
 
                         static const MCTypes::UCS2Char AUTH_NONE [] = {'-', NULL};
                         static const MCTypes::UCS2Char AUTH_PASSOWRD [] = {'+', NULL};

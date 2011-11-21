@@ -12,6 +12,8 @@ set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 # required dependencies
 set(Boost_USE_STATIC_LIBS OFF)
 find_package(Boost COMPONENTS iostreams thread system REQUIRED)
+set(QT_USE_QTWEBKIT TRUE)
+find_package(Qt4 REQUIRED)
 
 # add your headers and source files here
 # ---------------
@@ -217,10 +219,12 @@ set(${PROJECT_NAME}_sources_mainline_protocol_client
 )
 
 set(${PROJECT_NAME}_headers_mainline_protocol_packet
+    mainline/protocol/packet/login.hpp
     mainline/protocol/packet/message.cpp
     mainline/protocol/packet/playerposdir.cpp
 )
 set(${PROJECT_NAME}_sources_mainline_protocol_packet
+    mainline/protocol/packet/login.cpp
     mainline/protocol/packet/message.hpp
     mainline/protocol/packet/playerposdir.hpp
 )
@@ -228,32 +232,40 @@ set(${PROJECT_NAME}_sources_mainline_protocol_packet
 set(${PROJECT_NAME}_headers_mainline_protocol_server_packet
     mainline/protocol/server/packet/entityvelocity.hpp
     mainline/protocol/server/packet/equipment.hpp
+    mainline/protocol/server/packet/gamestate.hpp
     mainline/protocol/server/packet/health.hpp
     mainline/protocol/server/packet/ident.hpp
+    mainline/protocol/server/packet/itemspawn.hpp
     mainline/protocol/server/packet/login.hpp
     mainline/protocol/server/packet/message.hpp
     mainline/protocol/server/packet/mobspawn.hpp
     mainline/protocol/server/packet/movingobjectspawn.hpp
     mainline/protocol/server/packet/ping.hpp
+    mainline/protocol/server/packet/playerlistitem.hpp
     mainline/protocol/server/packet/playerposdir.hpp
     mainline/protocol/server/packet/prechunk.hpp
     mainline/protocol/server/packet/spawnpoint.hpp
     mainline/protocol/server/packet/time.hpp
+    mainline/protocol/server/packet/windowitems.hpp
 )
 set(${PROJECT_NAME}_sources_mainline_protocol_server_packet
     mainline/protocol/server/packet/entityvelocity.cpp
     mainline/protocol/server/packet/equipment.cpp
+    mainline/protocol/server/packet/gamestate.cpp
     mainline/protocol/server/packet/health.cpp
     mainline/protocol/server/packet/ident.cpp
+    mainline/protocol/server/packet/itemspawn.cpp
     mainline/protocol/server/packet/login.cpp
     mainline/protocol/server/packet/message.cpp
     mainline/protocol/server/packet/mobspawn.cpp
     mainline/protocol/server/packet/movingobjectspawn.cpp
     mainline/protocol/server/packet/ping.cpp
+    mainline/protocol/server/packet/playerlistitem.cpp
     mainline/protocol/server/packet/playerposdir.cpp
     mainline/protocol/server/packet/prechunk.cpp
     mainline/protocol/server/packet/spawnpoint.cpp
     mainline/protocol/server/packet/time.cpp
+    mainline/protocol/server/packet/windowitems.cpp
 )
 
 set(${PROJECT_NAME}_headers_mainline_protocol_server
@@ -318,6 +330,7 @@ set(${PROJECT_NAME}_headers_mainline
     ${${PROJECT_NAME}_headers_mainline_game}
     ${${PROJECT_NAME}_headers_mainline_protocol}
     ${${PROJECT_NAME}_headers_mainline_session}
+    mainline/client.hpp
     mainline/mctypes.hpp
     mainline/session.hpp
 )
@@ -325,6 +338,7 @@ set(${PROJECT_NAME}_sources_mainline
     ${${PROJECT_NAME}_sources_mainline_game}
     ${${PROJECT_NAME}_sources_mainline_protocol}
     ${${PROJECT_NAME}_sources_mainline_session}
+    mainline/client.cpp
     mainline/session.cpp
 )
 
@@ -434,17 +448,23 @@ message("Boost_INCLUDE_DIR")
 message(${Boost_INCLUDE_DIR})
 include_directories(${Boost_INCLUDE_DIR})
 
+# Pre-linkage Qt
+# ---------------
+INCLUDE(${QT_USE_FILE})
+
 # Linked Libraries
 # ---------------
 message("Boost_LIBRARY_DIRS")
 message(${Boost_LIBRARY_DIRS})
+## For MSVS2010 - has issues with target_link_libraries
+## Still looking for a way to turn this on pragmatically
 #link_directories(${Boost_LIBRARY_DIRS})
 
 # Create the library
 # ---------------
 add_library(${PROJECT_NAME} SHARED ${${PROJECT_NAME}_headers} ${${PROJECT_NAME}_sources})
 
-target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES} ${QT_LIBRARIES})
 
 # Install
 # ---------------

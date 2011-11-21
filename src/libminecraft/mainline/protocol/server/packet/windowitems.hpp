@@ -1,8 +1,8 @@
 /*
- * login.hpp
+ * windowitems.hpp
  * This file is part of LibMinecraft.
  *
- * Created by Yuri Sevatz on 04/2011.
+ * Created by Yuri Sevatz on 11/2011.
  * Copyright (c) 2011 Yuri Sevatz. All rights reserved
  *
  * LibMinecraft is free software: you can redistribute it and/or modify
@@ -19,11 +19,10 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_MAINLINE_PROTOCOL_SERVER_PACKET_LOGIN_HPP
-#define LIBMINECRAFT_MAINLINE_PROTOCOL_SERVER_PACKET_LOGIN_HPP
+#ifndef LIBMINECRAFT_MAINLINE_PROTOCOL_SERVER_PACKET_WINDOWITEMS_HPP
+#define LIBMINECRAFT_MAINLINE_PROTOCOL_SERVER_PACKET_WINDOWITEMS_HPP
 
 #include "../packet.hpp"
-#include "../../packet/login.hpp"
 
 namespace libminecraft
 {
@@ -35,10 +34,16 @@ namespace libminecraft
             {
                 namespace packet
                 {
-                    class Login : public server::Packet, public protocol::packet::Login
+                    class WindowItems : public Packet
                     {
                     public:
-                        Login();
+                        MCTypes::Byte windowId;
+                        MCTypes::Short count;
+
+                        WindowItems();
+                        virtual void read(std::istream &is);
+                        virtual void write(std::ostream &os) const;
+                        virtual void toReadable(std::ostream &os) const;
                     };
                 }
             }
@@ -46,4 +51,4 @@ namespace libminecraft
     }
 }
 
-#endif // LIBMINECRAFT_MAINLINE_PROTOCOL_SERVER_PACKET_LOGIN_HPP
+#endif // LIBMINECRAFT_MAINLINE_PROTOCOL_SERVER_PACKET_WINDOWITEMS_HPP

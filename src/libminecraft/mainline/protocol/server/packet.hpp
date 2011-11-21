@@ -37,19 +37,23 @@ namespace libminecraft
                 public:
                     enum PacketID
                     {
-                        PING = 0x00,
-                        LOGIN = 0x01,
-                        IDENT = 0x02,
-                        MESSAGE = 0x03,
-                        TIME = 0x04,
-                        EQUIPMENT = 0x05,
-                        SPAWNPOINT = 0x06,
-                        HEALTH = 0x08,
-                        PLAYERPOSDIR = 0x0D,
-                        MOVINGOBJECTSPAWN = 0x17,
-                        MOBSPAWN = 0x18,
-                        ENTITYVELOCITY = 0x1C,
-                        PRECHUNK = 0x32,
+                        PING = (MCTypes::Byte)0x00,
+                        LOGIN = (MCTypes::Byte) 0x01,
+                        IDENT = (MCTypes::Byte) 0x02,
+                        MESSAGE = (MCTypes::Byte) 0x03,
+                        TIME = (MCTypes::Byte) 0x04,
+                        EQUIPMENT = (MCTypes::Byte) 0x05,
+                        SPAWNPOINT = (MCTypes::Byte) 0x06,
+                        HEALTH = (MCTypes::Byte) 0x08,
+                        PLAYERPOSDIR = (MCTypes::Byte) 0x0D,
+                        ITEMSPAWN = (MCTypes::Byte) 0x15,
+                        MOVINGOBJECTSPAWN = (MCTypes::Byte) 0x17,
+                        MOBSPAWN = (MCTypes::Byte) 0x18,
+                        ENTITYVELOCITY = (MCTypes::Byte) 0x1C,
+                        PRECHUNK = (MCTypes::Byte) 0x32,
+                        GAMESTATE = (MCTypes::Byte) 0x46,
+                        WINDOWITEMS = (MCTypes::Byte) 0x68,
+                        PLAYERLISTITEM = (MCTypes::Byte) 0xC9
                     };
                 };
             }

@@ -3,8 +3,11 @@
 #include "../../remote.hpp"
 
 #include "../../../protocol/server/packet/entityvelocity.hpp"
+#include "../../../protocol/server/packet/gamestate.hpp"
+#include "../../../protocol/server/packet/itemspawn.hpp"
 #include "../../../protocol/server/packet/mobspawn.hpp"
 #include "../../../protocol/server/packet/movingobjectspawn.hpp"
+#include "../../../protocol/server/packet/playerlistitem.hpp"
 #include "../../../protocol/server/packet/playerposdir.hpp"
 #include "../../../protocol/server/packet/prechunk.hpp"
 #include "../../../protocol/server/packet/spawnpoint.hpp"
@@ -35,7 +38,7 @@ namespace libminecraft
                     }
                     void Loading::Update(t_owner &owner) const
                     {
-                        std::cout << (int) owner.proto.next() << std::endl;
+                        std::cout << "Next Packet: 0x" << std::hex << (short) (owner.proto.next() & 0x00ff) << std::endl;
 
                         switch(owner.proto.next())
                         {
@@ -79,6 +82,24 @@ namespace libminecraft
                             {
                                 protocol::server::packet::PlayerPosDir playerposdir;
                                 owner.proto.read(playerposdir);
+                            break;
+                            }
+                        case protocol::server::Packet::ITEMSPAWN:
+                            {
+                                protocol::server::packet::ItemSpawn itemSpawn;
+                                owner.proto.read(itemSpawn);
+                            break;
+                            }
+                        case protocol::server::Packet::GAMESTATE:
+                            {
+                                protocol::server::packet::GameState gameState;
+                                owner.proto.read(gameState);
+                            break;
+                            }
+                        case protocol::server::Packet::PLAYERLISTITEM:
+                            {
+                                protocol::server::packet::PlayerListItem playerListItem;
+                                owner.proto.read(playerListItem);
                             break;
                             }
                         default:

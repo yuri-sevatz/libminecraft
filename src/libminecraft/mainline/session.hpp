@@ -11,6 +11,7 @@ namespace libminecraft
 
         class Session
         {
+        public:
             // Only the Client can set this.
             // To get the client, just call client().
             class
@@ -24,15 +25,16 @@ namespace libminecraft
                 }
             } listener;
 
-        protected:
-            Session();
-
+            // Session object returns the self
             virtual const game::Player & getSelf() = 0;
 
             // End the session.
             // XXX: Not implemented.  Depends on having a proper threading model (use of connection object between functions and shielding thread objects from external linkage in remote.hpp <= external session class)
             //      What this actually does/means in the whole "gist" of things for various threaded/non-threaded uses needs to be reevaluated.
             // virtual void disconnect() = 0;
+
+        protected:
+            Session();
         };
     }
 }
