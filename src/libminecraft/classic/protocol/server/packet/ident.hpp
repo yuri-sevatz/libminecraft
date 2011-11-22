@@ -43,9 +43,9 @@ namespace libminecraft
                         MCTypes::Byte user_type;
                     public:
                         Ident();
-                        virtual void read(std::istream &stream);
-                        virtual void write(std::ostream &stream) const;
-                        virtual void toReadable(std::ostream &os) const;
+                        void read(std::istream &stream);
+                        void write(std::ostream &stream) const;
+                        void toReadable(std::ostream &os) const;
                         MCTypes::Byte cmpVersion() const;
                     };
                 }

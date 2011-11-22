@@ -38,9 +38,9 @@ namespace libminecraft
                     {
                     public:
                         LevelBegin();
-                        virtual void read(std::istream &stream);
-                        virtual void write(std::ostream &os) const;
-                        virtual void toReadable(std::ostream &os) const;
+                        void read(std::istream &stream);
+                        void write(std::ostream &os) const;
+                        void toReadable(std::ostream &os) const;
                     };
                 }
             }

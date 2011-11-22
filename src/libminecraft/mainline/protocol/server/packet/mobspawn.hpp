@@ -27,9 +27,9 @@ namespace libminecraft
                         // Metadata type
 
                         MobSpawn();
-                        virtual void read(std::istream &is);
-                        virtual void write(std::ostream &os) const;
-                        virtual void toReadable(std::ostream &os) const;
+                        void read(std::istream &is);
+                        void write(std::ostream &os) const;
+                        void toReadable(std::ostream &os) const;
                     };
                 }
             }
