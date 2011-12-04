@@ -1,9 +1,9 @@
 /*
- * mctypes.hpp
+ * point.cpp
  * This file is part of LibMinecraft.
  *
- * Created by Yuri Sevatz on 04/2011.
- * Copyright (c) 2011 Yuri Sevatz. All rights reserved
+ * Created by Yuri Sevatz on 11/2011.
+ * Copyright (c) 2010 Yuri Sevatz. All rights reserved
  *
  * LibMinecraft is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,23 +19,28 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_CLASSIC_MCTYPES_HPP
-#define LIBMINECRAFT_CLASSIC_MCTYPES_HPP
-
-#include "../shared/mctypes.hpp"
-#include <string>
+#include "point.hpp"
+#include "cell.hpp"
+#include "../map.hpp"
 
 namespace libminecraft
 {
-    namespace classic
-    {
-        class MCTypes : public libminecraft::MCTypes
-        {
-        public:
-            static const size_t String64_Max_Length = 64;
-            typedef std::string String64;
-        };
-    }
+namespace classic
+{
+namespace game
+{
+namespace map
+{
+
+Point::Point(const Cell &c) :
+    x(Map::toSizePlot(c.x)),
+    y(Map::toSizePlot(c.y)),
+    z(Map::toSizePlot(c.z))
+{
+
 }
 
-#endif // LIBMINECRAFT_CLASSIC_MCTYPES_HPP
+}
+}
+}
+}

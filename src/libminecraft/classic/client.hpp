@@ -29,6 +29,11 @@
 #include "game/map.hpp"
 #include "game/map/cell.hpp"
 
+#include "../shared/exception/login.hpp"
+#include "../shared/exception/map.hpp"
+#include "../shared/exception/network.hpp"
+#include "../shared/exception/protocol.hpp"
+
 #include <string>
 
 namespace libminecraft
@@ -82,12 +87,11 @@ namespace libminecraft
             virtual void onClientSpawn() = 0;
 
             // Your op status is updated.
-            // Old playertype provided for convenience.
-            virtual void onClientOp(player::Local::t_optype old_playertype) = 0;
+            virtual void onClientOp(player::Local::t_optype old) = 0;
 
             // You are teleported.
             // Old position and old direction provided for convenience.
-            virtual void onClientTeleport(Map::size_plot old_x, Map::size_plot old_y, Map::size_plot old_z, Player::t_yaw old_yaw, Player::t_pitch old_pitch) = 0;
+            virtual void onClientTeleport(const map::Point & old_pos, Player::t_yaw old_yaw, Player::t_pitch old_pitch) = 0;
 
             // You are leaving the world.
             // Note: The world will be destroyed after execution of this function.
@@ -102,13 +106,13 @@ namespace libminecraft
          */
 
             // A block is updated on the map
-            virtual void onBlockUpdate(map::Cell::BlockType type, map::Cell::BlockType old_type, Map::size_block x, Map::size_block y, Map::size_block z) = 0;
+            virtual void onBlockUpdate(const map::Cell & cell, map::Block::Type type, map::Block::Type old_type) = 0;
 
             // When an message is received.
             // Note: You can do player lookup manually based on the id if you so choose.
             //       Also consider parsing for a [name:] field, since 90% of opensource
             //       servers fail at setting the sending player's id properly.
-            virtual void onMessage(Player::t_id id, const std::string & message) = 0;
+            virtual void onMessage(Player::t_id id, const MCTypes::String64 & message) = 0;
 
             /* Because some of the opensource servers out there are actually so bad
                that we actually can't depend on using the id to provide the correct sender.
@@ -136,15 +140,15 @@ namespace libminecraft
 
             // Another player moves
             // Deltas provided for convenience.
-            virtual void onPlayerMove(const Player & player, Map::size_plot delta_x, Map::size_plot delta_y, Map::size_plot delta_z) = 0;
+            virtual void onPlayerMove(const Player & player, const map::Point & delta_pos) = 0;
 
             // Another player moves and looks
             // Deltas and old direction provided for convenience.
-            virtual void onPlayerMoveAndLook(const Player & player, Map::size_plot delta_x, Map::size_plot delta_y, Map::size_plot delta_z, Player::t_yaw delta_yaw, Player::t_pitch deltas_pitch) = 0;
+            virtual void onPlayerMoveAndLook(const Player & player, const map::Point & delta_pos, Player::t_yaw delta_yaw, Player::t_pitch delta_pitch) = 0;
 
             // Another player teleports.
             // Old position and old direction provided for convenience.
-            virtual void onPlayerTeleport(const Player & player, Map::size_plot old_x, Map::size_plot old_y, Map::size_plot old_z, Player::t_yaw old_yaw, Player::t_pitch old_pitch) = 0;
+            virtual void onPlayerTeleport(const Player & player, const map::Point & old_pos, Player::t_yaw old_yaw, Player::t_pitch old_pitch) = 0;
 
             // Another player despawns
             virtual void onPlayerDespawn(const Player & player) = 0;
@@ -153,27 +157,35 @@ namespace libminecraft
          * Error Functions
          */
 
-            // When the network connection is terminated for unknown reasons.
-            // This can occur at any time.
-            // Note: The world will be destroyed after execution of this function.
-            virtual void onNetworkError(const char * reason) = 0;
+            /**
+              * An error occurs while libminecraft is running
+              *
+              * Types of errors:
+              *     -Login:     When you have not been authorized to login.  This can only occur between worlds.
+              *                 Possible reasons include invalid login credentials and incomplete 3rd party verification.
+              *                 Note: You will never receive this error while your client is in a game World.
+              *
+              *     -Map:       The map was compressed or transferred incorrectly.  This can only occur between worlds.
+              *                 Note: You will never receive this error while your client is in a game World.
+              *
+              *     -Network:   Connection is terminated for unknown network-related reasons.  This can occur at any time.
+              *
+              *     -Protocol:  Error in the minecraft protocol communicated by the server occurs.  Can occur at any time.
+              *
+              * *CAUTION*:  The world will be deallocated after completion of this function, and control will return to
+              *             the session's owner.
+              */
+            virtual void onError(const libminecraft::Exception & ex) = 0;
 
-            // When an error in the protocol communicated by the server occurs
-            // This can occur at any time - usually due to updates or improper client/server protocol.
-            // Note: The world will be destroyed after execution of this function.
-            virtual void onProtocolError(const char * reason) = 0;
+            /**
+              * A warning has occured.
+              *
+              * This is provided for diagnostic purposes.  The reason for the warning is provided.
+              * Usually this is due to non-standard server protocol/logic/state implementation.
+              */
+            virtual void onWarning(const char * reason) = 0;
 
-            // When a login error occues.
-            // This will only occur when first connecting to a server,
-            // possibly due to invalid login credentials.
-            virtual void onLoginError(const char * reason) = 0;
-
-            // When a warning is provided.
-            // This can occur at any time.  The explanation for the warning is provided.
-            // Usually this is due to opensource server software incorrect implementation.
-            virtual void onProtocolWarning(const char * reason) = 0;
-            
-        protected:
+        public:
             // Enable game world ticks
             void enableTicks();
 
@@ -181,19 +193,19 @@ namespace libminecraft
             void disableTicks();
 
             // Set a block.
-            void setBlock(Map::size_block x, Map::size_block y, Map::size_block z, map::Cell::BlockType type);
+            void setBlock(const map::Cell & cell, map::Block::Type type);
 
             // Clear a block.
-            void clearBlock(Map::size_block x, Map::size_block y, Map::size_block z);
+            void clearBlock(const map::Cell & cell);
 
             // Move.
-            void move(Map::size_plot x, Map::size_plot y, Map::size_plot z);
+            void move(const map::Point & position);
 
             // Look.
             void look(Player::t_pitch pitch, Player::t_yaw yaw);
 
             // Move and look.
-            void moveAndLook(Map::size_plot x, Map::size_plot y, Map::size_plot z, Player::t_pitch pitch, Player::t_yaw yaw);
+            void moveAndLook(const map::Point & p, Player::t_pitch pitch, Player::t_yaw yaw);
 
             // Send a message.
             void sendMessage(const std::string & message);
@@ -213,19 +225,24 @@ namespace libminecraft
             return _session.disableTicks();
         }
         
-        inline void Client::setBlock(Map::size_block x, Map::size_block y, Map::size_block z, map::Cell::BlockType type)
+        inline void Client::setBlock(const map::Cell & cell, map::Block::Type type)
         {
-            return _session.setBlock(x, y, z, type);
+            return _session.setBlock(cell, type);
         }
         
-        inline void Client::clearBlock(Map::size_block x, Map::size_block y, Map::size_block z)
+        inline void Client::clearBlock(const map::Cell & cell)
         {
-            return _session.clearBlock(x, y, z);
+            return _session.clearBlock(cell);
         }
         
-        inline void Client::move(Map::size_plot x, Map::size_plot y, Map::size_plot z)
+        inline void Client::move(const map::Point & pos)
         {
-            return _session.move(x, y, z);
+            return _session.move(pos);
+        }
+
+        inline void Client::moveAndLook(const map::Point & pos, Player::t_pitch pitch, Player::t_yaw yaw)
+        {
+            return _session.moveAndLook(pos, pitch, yaw);
         }
         
         inline void Client::look(Player::t_pitch pitch, Player::t_yaw yaw)

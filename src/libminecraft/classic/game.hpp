@@ -25,7 +25,6 @@
 #include "mctypes.hpp"
 #include "game/world.hpp"
 #include "game/map.hpp"
-#include "game/map/cell.hpp"
  
 namespace libminecraft
 {
@@ -56,12 +55,12 @@ namespace libminecraft
             void addPlayer(Player & player);
             
             // Set a world block
-            void setBlock(Map::size_block x, Map::size_block y, Map::size_block z, map::Cell::BlockType type);
+            void setBlock(Map::size_block x, Map::size_block y, Map::size_block z, map::Block::Type type);
             
             // Set a world block as a client
             // Note: This hides the event from the client you're invoking it as.  You should only send this if you're
             // Forwarding a request from onPlayerSetBlock.
-            void setBlock(Client & client, Map::size_block x, Map::size_block y, Map::size_block z, map::Cell::BlockType type);
+            void setBlock(Client & client, Map::size_block x, Map::size_block y, Map::size_block z, map::Block::Type type);
             
             // Send a global message
             void sendMessage(MCTypes::String64 message);

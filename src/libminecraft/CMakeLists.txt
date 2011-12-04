@@ -138,10 +138,14 @@ set(${PROJECT_NAME}_sources_classic_protocol
 
 
 set(${PROJECT_NAME}_headers_classic_game_map
+    classic/game/map/block.hpp
     classic/game/map/cell.hpp
+    classic/game/map/point.hpp
 )
 set(${PROJECT_NAME}_sources_classic_game_map
+    classic/game/map/block.cpp
     classic/game/map/cell.cpp
+    classic/game/map/point.cpp
 )
 
 set(${PROJECT_NAME}_headers_classic_game_player

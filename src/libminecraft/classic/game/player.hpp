@@ -22,8 +22,8 @@
 #ifndef LIBMINECRAFT_CLASSIC_GAME_PLAYER_HPP
 #define LIBMINECRAFT_CLASSIC_GAME_PLAYER_HPP
 
-#include "map.hpp"
 #include "base.hpp"
+#include "map.hpp"
 
 #include <string>
 
@@ -60,12 +60,18 @@ namespace libminecraft
                 t_pitch pitch;
                 t_yaw yaw;
 
-                Map::size_plot x;
-                Map::size_plot y;
-                Map::size_plot z;
+                Map::point position;
 
                 Player();
+
+                // Get the point that the player is standing on
+                Map::point getBasePoint() const;
             };
+
+            inline Map::point Player::getBasePoint() const
+            {
+                return Map::point(position.x, position.y - 51, position.z);
+            }
         }
     }
 }

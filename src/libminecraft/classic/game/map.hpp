@@ -23,8 +23,9 @@
 #define LIBMINECRAFT_CLASSIC_GAME_MAP_HPP
 
 #include "base.hpp"
+#include "map/block.hpp"
 #include "map/cell.hpp"
-#include "../../shared/exception/map.hpp"
+#include "map/point.hpp"
 
 #include <vector>
 #include <istream>
@@ -40,13 +41,16 @@ namespace libminecraft
             {
             public:
                 // The 3D grid breakdown.
-                typedef std::vector<map::Cell> Map1D;
+                typedef std::vector<map::Block> Map1D;
                 typedef std::vector<Map1D> Map2D;
                 typedef std::vector<Map2D> Map3D;
 
                 // The types used in the grid
-                typedef MCTypes::Short size_block;
-                typedef MCTypes::Short size_plot;
+                typedef map::Cell::size_block size_block;
+                typedef map::Point::size_plot size_plot;
+
+                typedef map::Point point;
+                typedef map::Cell cell;
 
                 static const size_plot CELL_SIZE;
                 static const size_plot CELL_CENTER;
@@ -70,26 +74,39 @@ namespace libminecraft
                 // Build a Map...
                 Map(size_block x, size_block y, size_block z, std::istream &stream);
 
-                static size_block toBlock(size_plot pos);
-                static size_plot toPlot(size_block pos);
+                static size_block toSizeBlock(size_plot distance);
+                static size_plot toSizePlot(size_block count);
+
+                map::Block & at(const map::Cell & c);
+                const map::Block & at(const map::Cell & c) const;
+
+                map::Block & at(const map::Point & p);
+                const map::Block & at(const map::Point & p) const;
 
                 bool isValidBlockX(size_block x) const;
                 bool isValidBlockY(size_block y) const;
                 bool isValidBlockZ(size_block z) const;
 
-                bool isValidBlock(size_block x, size_block y, size_block z) const;
+                bool isValidPointX(size_plot x) const;
+                bool isValidPointY(size_plot y) const;
+                bool isValidPointZ(size_plot z) const;
 
-                bool isSetableBlock(size_block x, size_block y, size_block z) const;
-                bool isClearableBlock(size_block x, size_block y, size_block z) const;
+                bool isValidBlock(const map::Cell & c) const;
+                bool isValidPoint(const map::Point & p) const;
+
+                bool isSetableBlock(const map::Cell & c) const;
+                bool isClearableBlock(const map::Cell & c) const;
             };
 
-            inline Map::size_block Map::toBlock(size_plot pos)
+            inline Map::size_block Map::toSizeBlock(size_plot pos)
             {
+                 // 5 bits.
                 return pos >> 5;
             }
 
-            inline Map::size_plot Map::toPlot(size_block pos)
+            inline Map::size_plot Map::toSizePlot(size_block pos)
             {
+                // 5 bits.
                 return pos << 5;
             }
 
@@ -108,9 +125,29 @@ namespace libminecraft
                 return (z >= 0 && z <= z_blocks);
             }
 
-            inline bool Map::isClearableBlock(size_block x, size_block y, size_block z) const
+            inline bool Map::isValidPointX(size_plot x) const
             {
-                return !isSetableBlock(x, y, z);
+                return isValidBlockX(toSizeBlock(x));
+            }
+
+            inline bool Map::isValidPointY(size_plot y) const
+            {
+                return isValidBlockY(toSizeBlock(y));
+            }
+
+            inline bool Map::isValidPointZ(size_plot z) const
+            {
+                return isValidBlockZ(toSizeBlock(z));
+            }
+
+            inline map::Block & Map::at(const map::Point & p)
+            {
+                return at(map::Cell(p));
+            }
+
+            inline const map::Block & Map::at(const map::Point & p) const
+            {
+                return at(map::Cell(p));
             }
         }
     }

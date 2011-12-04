@@ -24,8 +24,6 @@
 
 #include "../support/java/jtypes.hpp"
 
-#include <string>
-
 namespace libminecraft
 {
     class MCTypes

@@ -23,6 +23,7 @@
 #define LIBMINECRAFT_CLASSIC_PROTOCOL_CLIENT_HPP
 
 #include <iostream>
+#include <boost/thread/mutex.hpp>
 #include "client/protocol.hpp"
 #include "server/protocol.hpp"
 
@@ -36,6 +37,10 @@ namespace libminecraft
             {
             private:
                 std::iostream & stream;
+
+                // TODO: Replace with io_service or a better way.
+                boost::mutex ioLock;
+
             public:
                 Client(std::iostream & stream);
                 void read(server::Packet & dest);
@@ -45,6 +50,7 @@ namespace libminecraft
 
             inline void Client::read(server::Packet &dest)
             {
+                boost::mutex::scoped_lock scopeLock(ioLock);
                 server::Protocol::read(stream, dest);
 
                 if (!stream.good())
@@ -53,6 +59,7 @@ namespace libminecraft
 
             inline void Client::write(const client::Packet &src)
             {
+                boost::mutex::scoped_lock scopeLock(ioLock);
                 client::Protocol::write(stream, src);
                 stream.flush();
 
@@ -62,6 +69,7 @@ namespace libminecraft
 
             inline MCTypes::Byte Client::next()
             {
+                boost::mutex::scoped_lock scopeLock(ioLock);
                 MCTypes::Byte id = client::Protocol::next(stream);
                 if (!stream.good())
                     throw exception::Network("Client connection closed while awaiting next packet");

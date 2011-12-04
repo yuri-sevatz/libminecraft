@@ -24,7 +24,10 @@
 #include <iterator>
 #include <iostream>
 
+#include <cassert>
+
 #include <boost/detail/endian.hpp>
+#include "../../shared/exception/map.hpp"
 
 namespace libminecraft
 {
@@ -32,18 +35,18 @@ namespace libminecraft
     {
         namespace game
         {
-            const Map::size_plot Map::CELL_SIZE = 1 << 5; // cell portion is 5 bits.
+            const Map::size_plot Map::CELL_SIZE = Map::toSizePlot(1);
             const Map::size_plot Map::CELL_CENTER = CELL_SIZE >> 1; // Half a cell.
             const Map::size_plot Map::EYE_HEIGHT = CELL_SIZE + 19; // 51 units above the feet.
 
-            Map::Map() : x_blocks(0), y_blocks(0), z_blocks(0), grid(0, Map2D(0, Map1D(0, map::Cell(map::Cell::BLANK))))
+            Map::Map() : x_blocks(0), y_blocks(0), z_blocks(0), grid(0, Map2D(0, Map1D(0, map::Block(map::Block::BLANK))))
             {
 
             }
 
             Map::Map(size_block x, size_block y, size_block z, std::istream &stream) :
                     x_blocks(x), y_blocks(y), z_blocks(z),
-                    grid(x, Map2D(y, Map1D(z,map::Cell(map::Cell::BLANK))))
+                    grid(x, Map2D(y, Map1D(z,map::Block(map::Block::BLANK))))
             {
                 // Parse an integer... (raw size of map)
                 int raw_size;
@@ -95,21 +98,42 @@ namespace libminecraft
 
                             char type;
                             stream.get(type);
-                            grid[x_i][y_i][z_i].type = map::Cell::GetCellType(type);
+                            grid[x_i][y_i][z_i].type = map::Block::getBlockType(type);
                         }
                     }
                 }
             }
 
-            bool Map::isValidBlock(size_block x, size_block y, size_block z) const
+            bool Map::isValidBlock(const map::Cell &c) const
             {
-                return (isValidBlockX(x) && isValidBlockY(y) && isValidBlockZ(z));
+                return isValidBlockX(c.x) & isValidBlockY(c.y) & isValidBlockZ(c.z);
             }
 
-            bool Map::isSetableBlock(size_block x, size_block y, size_block z) const
+            bool Map::isValidPoint(const map::Point &p) const
             {
-                const map::Cell::BlockType t_type = grid[x][y][z].type;
-                return  (t_type == map::Cell::BLANK || t_type == map::Cell::WATER || t_type == map::Cell::LAVA);
+                return isValidPointX(p.x) & isValidPointY(p.y) & isValidPointZ(p.z);
+            }
+
+            bool Map::isSetableBlock(const map::Cell & c) const
+            {
+                return  map::Block::isSetableBlockType(at(c).type);
+            }
+
+            bool Map::isClearableBlock(const map::Cell & c) const
+            {
+                return map::Block::isClearableBlockType(at(c).type);
+            }
+
+            map::Block & Map::at(const map::Cell & c)
+            {
+                assert(isValidBlock(c));
+                return grid[c.x][c.y][c.z];
+            }
+
+            const map::Block & Map::at(const map::Cell & c) const
+            {
+                assert(isValidBlock(c));
+                return grid[c.x][c.y][c.z];
             }
         }
     }

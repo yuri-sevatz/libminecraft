@@ -80,26 +80,26 @@ namespace libminecraft
                 }
                 catch (libminecraft::Exception ex)
                 {
-                    listener().onNetworkError(ex.message);
+                    listener().onError(ex);
                 }
             }
 
             void Remote::look(game::Player::t_pitch pitch, game::Player::t_yaw yaw)
             {
-                moveAndLook(connection->_self.x, connection->_self.y, connection->_self.z, pitch, yaw);
+                moveAndLook(connection->_self.position, pitch, yaw);
             }
 
-            void Remote::move(game::Map::size_plot x, game::Map::size_plot y, game::Map::size_plot z)
+            void Remote::move(const game::map::Point & pos)
             {
-                moveAndLook(x, y, z, connection->_self.pitch, connection->_self.yaw);
+                moveAndLook(pos, connection->_self.pitch, connection->_self.yaw);
             }
 
-            void Remote::moveAndLook(game::Map::size_plot x, game::Map::size_plot y, game::Map::size_plot z, game::Player::t_pitch pitch, game::Player::t_yaw yaw)
+            void Remote::moveAndLook(const game::map::Point & pos, game::Player::t_pitch pitch, game::Player::t_yaw yaw)
             {
                 protocol::client::packet::PosDir pkt;
-                connection->_self.x = pkt.x = x;
-                connection->_self.y = pkt.y = y;
-                connection->_self.z = pkt.z = z;
+                connection->_self.position.x = pkt.x = pos.x;
+                connection->_self.position.y = pkt.y = pos.y;
+                connection->_self.position.z = pkt.z = pos.z;
                 connection->_self.pitch = pkt.pitch = pitch;
                 connection->_self.yaw = pkt.yaw = yaw;
                 // Bug: Have to write twice for some reason.
@@ -117,32 +117,31 @@ namespace libminecraft
                 }
             }
 
-            void Remote::setBlock(game::Map::size_block x, game::Map::size_block y, game::Map::size_block z, game::map::Cell::BlockType type)
+            void Remote::setBlock(const game::map::Cell & cell, game::map::Block::Type type)
             {
-                assert(connection->_world.map.isValidBlock(x, y, z));
-                assert(type >= game::map::Cell::BLANK && type <= game::map::Cell::OBSIDIAN);
+                assert(connection->_world.map.isSetableBlock(cell));
                 
                 protocol::client::packet::SetBlock blkpkt;
-                connection->_world.map.grid[x][y][z].type = type;
+                connection->_world.map.at(cell).type = type;
                 blkpkt.type = type;
-                blkpkt.x = x;
-                blkpkt.y = y;
-                blkpkt.z = z;
+                blkpkt.x = cell.x;
+                blkpkt.y = cell.y;
+                blkpkt.z = cell.z;
                 blkpkt.mode = 0x01;
                 connection->proto.write(blkpkt);
             }
 
-            void Remote::clearBlock(game::Map::size_block x, game::Map::size_block y, game::Map::size_block z)
+            void Remote::clearBlock(const game::map::Cell & cell)
             {
-                assert(connection->_world.map.isValidBlock(x, y, z));
+                assert(connection->_world.map.isClearableBlock(cell));
 
                 protocol::client::packet::SetBlock blkpkt;
-                blkpkt.x = x;
-                blkpkt.y = y;
-                blkpkt.z = z;
+                blkpkt.x = cell.x;
+                blkpkt.y = cell.y;
+                blkpkt.z = cell.z;
                 blkpkt.mode = 0x00;
-                blkpkt.type = game::map::Cell::DIRT;
-                connection->_world.map.grid[x][y][z].type = game::map::Cell::BLANK;
+                blkpkt.type = game::map::Block::DIRT;
+                connection->_world.map.at(cell).type = game::map::Block::BLANK;
                 connection->proto.write(blkpkt);
             }
 
@@ -159,15 +158,21 @@ namespace libminecraft
             void Remote::tickNotifier(void *client)
             {
                 // Todo: Limit the number of calls, space them evenly per second (as a suggestion)
-                for(;;)
+                try
                 {
-                    // Create a tick event in the client
-                    ((Client *) client)->onTick();
+                    for(;;)
+                    {
+                        // Create a tick event in the client
+                        ((Client *) client)->onTick();
 
-                    // Allow interruption at this point.
-                    // Todo: Can be replaced with this_thread::sleep()... etc to allow interruption
-                    //boost::this_thread::interruption_point();
-                    boost::this_thread::sleep(boost::posix_time::milliseconds(100));
+                        // Allow interruption at this point.
+                        boost::this_thread::sleep(boost::posix_time::milliseconds(10));
+                    }
+                }
+                catch (libminecraft::Exception ex)
+                {
+                    ((Client *)client)->onError(ex);
+                    // XXX: Do pre-emptive termination of connection
                 }
             }
         }

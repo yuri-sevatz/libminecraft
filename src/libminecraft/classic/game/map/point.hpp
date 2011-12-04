@@ -1,5 +1,5 @@
 /*
- * cell.hpp
+ * point.hpp
  * This file is part of LibMinecraft.
  *
  * Created by Yuri Sevatz on 11/2011.
@@ -19,8 +19,8 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBMINECRAFT_CLASSIC_GAME_MAP_CELL_HPP
-#define LIBMINECRAFT_CLASSIC_GAME_MAP_CELL_HPP
+#ifndef LIBMINECRAFT_CLASSIC_GAME_MAP_POINT_HPP
+#define LIBMINECRAFT_CLASSIC_GAME_MAP_POINT_HPP
 
 #include "../base.hpp"
 #include <ostream>
@@ -34,25 +34,25 @@ namespace game
 namespace map
 {
 
-class Point;
+class Cell;
 
-class Cell
+class Point
 {
 public:
-    typedef MCTypes::Short size_block;
+    typedef MCTypes::Short size_plot;
 
-    size_block x;
-    size_block y;
-    size_block z;
+    size_plot x;
+    size_plot y;
+    size_plot z;
 
-    Cell() : x(0), y(0), z(0) {}
-    Cell(const Point & p);
-    Cell(size_block x, size_block y, size_block z) : x(x), y(y), z(z) {}
+    Point() : x(0), y(0), z(0) {}
+    Point(const Cell & c);
+    Point(size_plot x, size_plot y, size_plot z) : x(x), y(y), z(z) {}
 };
 
-inline std::ostream &operator<<(std::ostream &os, const Cell &c)
+inline std::ostream &operator<<(std::ostream &os, const Point &p)
 {
-    return (os << "(" << c.x << ", " << c.y << ", " << c.z << ")");
+    return (os << "(" << p.x << ", " << p.y << ", " << p.z << ")");
 }
 
 }
@@ -60,4 +60,4 @@ inline std::ostream &operator<<(std::ostream &os, const Cell &c)
 }
 }
 
-#endif // LIBMINECRAFT_CLASSIC_GAME_MAP_CELL_HPP
+#endif // LIBMINECRAFT_CLASSIC_GAME_MAP_POINT_HPP

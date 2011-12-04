@@ -60,14 +60,14 @@ namespace libminecraft
                     {
                         player.id = spawnpkt.player_id;
                         player.name = MCString::plainMessage(spawnpkt.player_name);
-                        player.x = spawnpkt.x;
-                        player.y = spawnpkt.y;
-                        player.z = spawnpkt.z;
+                        player.position.x = spawnpkt.x;
+                        player.position.y = spawnpkt.y;
+                        player.position.z = spawnpkt.z;
                         player.pitch = spawnpkt.pitch;
                         player.yaw = spawnpkt.yaw;
 
                         if (player.name.length() != spawnpkt.player_name.length())
-                            owner.session.listener().onProtocolWarning("Spawned player name contained invalid characters - Fixed");
+                            owner.session.listener().onWarning("Spawned player name contained invalid characters - Fixed");
                     }
 
                     InGame::InGame()
@@ -100,14 +100,14 @@ namespace libminecraft
 
                                 if (plr != NULL)
                                 {
-                                    plr->x += pos.delta_x;
-                                    plr->y += pos.delta_y;
-                                    plr->z += pos.delta_z;
+                                    plr->position.x += pos.delta_x;
+                                    plr->position.y += pos.delta_y;
+                                    plr->position.z += pos.delta_z;
 
-                                    owner.session.listener().onPlayerMove(*plr, pos.delta_x, pos.delta_y, pos.delta_z);
+                                    owner.session.listener().onPlayerMove(*plr, game::map::Point(pos.delta_x, pos.delta_y, pos.delta_z));
                                 }
                                 else
-                                    owner.session.listener().onProtocolWarning("Unknown player id used in move packet");
+                                    owner.session.listener().onWarning("Unknown player id used in move packet");
                             }
                             break;
                         case protocol::server::Packet::POSDIR:
@@ -119,24 +119,18 @@ namespace libminecraft
 
                                 if (plr != NULL)
                                 {
-                                    plr->x += posdir.delta_x;
-                                    plr->y += posdir.delta_y;
-                                    plr->z += posdir.delta_z;
+                                    plr->position.x += posdir.delta_x;
+                                    plr->position.y += posdir.delta_y;
+                                    plr->position.z += posdir.delta_z;
                                     Player::t_pitch delta_pitch = posdir.pitch - plr->pitch;
                                     Player::t_yaw delta_yaw = posdir.yaw - plr->yaw;
                                     plr->pitch = posdir.pitch;
                                     plr->yaw = posdir.yaw;
 
-                                    owner.session.listener().onPlayerMoveAndLook(
-                                            *plr,
-                                            posdir.delta_x,
-                                            posdir.delta_y,
-                                            posdir.delta_z,
-                                            delta_pitch,
-                                            delta_yaw);
+                                    owner.session.listener().onPlayerMoveAndLook(*plr, game::map::Point(posdir.delta_x, posdir.delta_y, posdir.delta_z), delta_pitch, delta_yaw);
                                 }
                                 else
-                                    owner.session.listener().onProtocolWarning("Unknown player id used in move-look packet");
+                                    owner.session.listener().onWarning("Unknown player id used in move-look packet");
                             }
                             break;
                         case protocol::server::Packet::DIR:
@@ -157,7 +151,7 @@ namespace libminecraft
                                     owner.session.listener().onPlayerLook(*plr, delta_pitch, delta_yaw);
                                 }
                                 else
-                                    owner.session.listener().onProtocolWarning("Unknown player id used in look packet");
+                                    owner.session.listener().onWarning("Unknown player id used in look packet");
                             }
                             break;
                         case protocol::server::Packet::BLOCK:
@@ -172,20 +166,20 @@ namespace libminecraft
                                     blockpkt.y >= owner._world.map.y_blocks ||
                                     blockpkt.z >= owner._world.map.z_blocks)
                                 {
-                                    owner.session.listener().onProtocolWarning("Invalid grid coordinates referenced during block update");
+                                    owner.session.listener().onWarning("Invalid grid coordinates referenced during block update");
                                     break;
                                 }
 
-                                if (blockpkt.type < map::Cell::BLANK || blockpkt.type > map::Cell::OBSIDIAN)
+                                if (blockpkt.type < map::Block::BLANK || blockpkt.type > map::Block::OBSIDIAN)
                                 {
-                                    owner.session.listener().onProtocolWarning("Invalid block type requested during block update");
+                                    owner.session.listener().onWarning("Invalid block type requested during block update");
                                     break;
                                 }
-                                map::Cell::BlockType old_type = owner._world.map.grid.at(blockpkt.x).at(blockpkt.y).at(blockpkt.z).type;
-                                map::Cell::BlockType type = map::Cell::GetCellType(blockpkt.type);
+                                map::Block::Type old_type = owner._world.map.grid.at(blockpkt.x).at(blockpkt.y).at(blockpkt.z).type;
+                                map::Block::Type type = map::Block::getBlockType(blockpkt.type);
                                 owner._world.map.grid.at(blockpkt.x).at(blockpkt.y).at(blockpkt.z).type = type;
 
-                                owner.session.listener().onBlockUpdate(type, old_type, blockpkt.x, blockpkt.y, blockpkt.z);
+                                owner.session.listener().onBlockUpdate(game::map::Cell(blockpkt.x, blockpkt.y, blockpkt.z), type, old_type);
                             }
                             break;
                         case protocol::server::Packet::TELEPORT:
@@ -202,27 +196,26 @@ namespace libminecraft
                                     plr = owner._world.getPlayer(tele.player_id);
                                     if (plr == NULL)
                                     {
-                                        owner.session.listener().onProtocolWarning("Unknown player id used in teleport packet");
+                                        owner.session.listener().onWarning("Unknown player id used in teleport packet");
                                         break;
                                     }
                                 }
 
-                                Map::size_plot old_x = plr->x;
-                                Map::size_plot old_y = plr->y;
-                                Map::size_plot old_z = plr->z;
+                                const map::Point old_pos(plr->position.x, plr->position.y, plr->position.z);
+
                                 Player::t_pitch old_pitch = plr->pitch;
                                 Player::t_yaw old_yaw = plr->yaw;
 
-                                plr->x = tele.x;
-                                plr->y = tele.y;
-                                plr->z = tele.z;
+                                plr->position.x = tele.x;
+                                plr->position.y = tele.y;
+                                plr->position.z = tele.z;
                                 plr->yaw = tele.yaw;
                                 plr->pitch = tele.pitch;
 
                                 if (tele.player_id < 0)
-                                    owner.session.listener().onClientTeleport(old_x, old_y, old_z, old_pitch, old_yaw);
+                                    owner.session.listener().onClientTeleport(old_pos, old_pitch, old_yaw);
                                 else
-                                    owner.session.listener().onPlayerTeleport(*plr, old_x, old_y, old_z, old_pitch, old_yaw);
+                                    owner.session.listener().onPlayerTeleport(*plr, old_pos, old_pitch, old_yaw);
                             }
                             break;
                         case protocol::server::Packet::MESSAGE:
@@ -254,7 +247,7 @@ namespace libminecraft
                                     Player * const addedPlayer = owner._world.addPlayer(entity);
                                     if (!addedPlayer)
                                     {
-                                        owner.session.listener().onProtocolWarning("Attempted to spawn player that was already spawned");
+                                        owner.session.listener().onWarning("Attempted to spawn player that was already spawned");
                                         break;
                                     }
                                     owner.session.listener().onPlayerSpawn(*addedPlayer);
@@ -274,7 +267,7 @@ namespace libminecraft
                                     owner._world.removePlayer(*plr);
                                 }
                                 else
-                                    owner.session.listener().onProtocolWarning("Attempted to despawn a player that wasn't spawned");
+                                    owner.session.listener().onWarning("Attempted to despawn a player that wasn't spawned");
                             }
                             break;
                         case protocol::server::Packet::DISCONNECT:
@@ -301,7 +294,7 @@ namespace libminecraft
                             break;
                         case protocol::server::Packet::IDENT:
                                 owner.ChangeState(owner.States.NEGOTIATING);
-                                owner.session.listener().onProtocolWarning("Requested reauth when already authenticated.  Doing it anyways.");
+                                owner.session.listener().onWarning("Requested reauth when already authenticated.  Doing it anyways.");
                             break;
                         default:
                             std::cerr << (int) owner.proto.next() << std::endl;

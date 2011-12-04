@@ -70,7 +70,7 @@ namespace libminecraft
                         if (ver_diff < 0)
                             throw exception::Protocol("Unable to negotiate protocol version");
                         else if (ver_diff > 0)
-                            owner.session.listener().onProtocolWarning("Invalid Server Version Detected - Attempting anyway.");
+                            owner.session.listener().onWarning("Invalid Server Version Detected - Attempting anyway.");
 
                         // Read the facts of life...
                         owner._server.name = srvident.srv_name;

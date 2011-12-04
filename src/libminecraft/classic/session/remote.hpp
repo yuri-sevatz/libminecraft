@@ -57,38 +57,38 @@ namespace libminecraft
                 void connect();
 
                 // Set a block.
-                virtual void setBlock(game::Map::size_block x, game::Map::size_block y, game::Map::size_block z, game::map::Cell::BlockType type);
+                void setBlock(const game::map::Cell & cell, game::map::Block::Type type);
 
                 // Clear a block
-                virtual void clearBlock(game::Map::size_block x, game::Map::size_block y, game::Map::size_block z);
+                void clearBlock(const game::map::Cell & cell);
 
                 // Move.
-                virtual void move(game::Map::size_plot x, game::Map::size_plot y, game::Map::size_plot z);
+                void move(const game::map::Point & pos);
 
                 // Look.
-                virtual void look(game::Player::t_pitch pitch, game::Player::t_yaw yaw);
+                void look(game::Player::t_pitch pitch, game::Player::t_yaw yaw);
 
                 // Move and look.
-                virtual void moveAndLook(game::Map::size_plot x, game::Map::size_plot y, game::Map::size_plot z, game::Player::t_pitch pitch, game::Player::t_yaw yaw);
+                void moveAndLook(const game::map::Point & pos, game::Player::t_pitch pitch, game::Player::t_yaw yaw);
 
                 // Send a message.
-                virtual void sendMessage(const std::string & message);
+                void sendMessage(const std::string & message);
 
                 // Enable ticks.
-                virtual void enableTicks();
+                void enableTicks();
 
                 // Disable ticks.
-                virtual void disableTicks();
+                void disableTicks();
 
                 // End the session.
-                // virtual void disconnect();
+                // void disconnect();
 
             protected:
-                virtual const game::World & getWorld();
+                const game::World & getWorld();
 
-                virtual const game::player::Local & getSelf();
+                const game::player::Local & getSelf();
 
-                virtual const session::Info & getInfo();
+                const session::Info & getInfo();
 
             private:
                 // The master listener.  Blocks until complete.

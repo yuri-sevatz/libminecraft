@@ -28,7 +28,6 @@
 #include "game/world.hpp"
 #include "game/player/local.hpp"
 #include "game/map.hpp"
-#include "game/map/cell.hpp"
 
 namespace libminecraft
 {
@@ -68,19 +67,19 @@ namespace libminecraft
             virtual const session::Info & getInfo() = 0;
 
             // Set a block.
-            virtual void setBlock(game::Map::size_block x, game::Map::size_block y, game::Map::size_block z, game::map::Cell::BlockType type) = 0;
+            virtual void setBlock(const game::map::Cell & cell, game::map::Block::Type type) = 0;
 
             // Clear a block.
-            virtual void clearBlock(game::Map::size_block x, game::Map::size_block y, game::Map::size_block z) = 0;
+            virtual void clearBlock(const game::map::Cell & cell) = 0;
 
             // Move.
-            virtual void move(game::Map::size_plot x, game::Map::size_plot y, game::Map::size_plot z) = 0;
+            virtual void move(const game::map::Point & pos) = 0;
 
             // Look.
             virtual void look(game::Player::t_pitch pitch, game::Player::t_yaw yaw) = 0;
 
             // Move and look.
-            virtual void moveAndLook(game::Map::size_plot x, game::Map::size_plot y, game::Map::size_plot z, game::Player::t_pitch pitch, game::Player::t_yaw yaw) = 0;
+            virtual void moveAndLook(const game::map::Point & pos, game::Player::t_pitch pitch, game::Player::t_yaw yaw) = 0;
 
             // Send a message.
             virtual void sendMessage(const std::string & message) = 0;
