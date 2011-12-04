@@ -5,7 +5,8 @@ project(mine)
 include_directories(./)
 
 add_subdirectory(libminecraft)
-add_subdirectory(test)
+add_subdirectory(test/classic)
+add_subdirectory(test/mainline)
 
 
 

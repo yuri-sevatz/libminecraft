@@ -24,12 +24,13 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include <ctime>
 
-#include "myminecraftclient.hpp"
+#include "myclassicclient.hpp"
 
 void print_usage(char * my_name)
 {
-    std::cerr << "Minecraft Test\n";
+    std::cerr << "Minecraft Classic Test\n";
     std::cerr << "\tUsage:\t";
     std::cerr << my_name << " [hostname|ip] [port] [username] [key]" << std::endl;
 }
@@ -42,6 +43,8 @@ int main(int argc, char * argv[])
         return EXIT_FAILURE;
     }
 
+    srand(time(NULL));
+
     std::string hostname(argv[1]);
     std::string port(argv[2]);
 
@@ -53,7 +56,7 @@ int main(int argc, char * argv[])
     libminecraft::classic::session::Remote session(hostname, port, username, key);
 
     // Instantiate our client, give it the session.
-    MyMinecraftClient client(session);
+    MyClassicClient client(session);
 
     // Connect... (blocks)
     session.connect();

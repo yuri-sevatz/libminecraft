@@ -1,11 +1,11 @@
-project(testmine)
+project(mc-mainline)
 
 set(${PROJECT_NAME}_headers
-   	myminecraftclient.hpp
+    mymainlineclient.hpp
 )
 set(${PROJECT_NAME}_sources
     main.cpp
-   	myminecraftclient.cpp
+    mymainlineclient.cpp
 )
 
 add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_headers} ${${PROJECT_NAME}_sources} )
