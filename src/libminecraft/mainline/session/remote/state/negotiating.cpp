@@ -53,8 +53,8 @@ namespace libminecraft
 
                         mylogin.id = protocol::client::Protocol::version;
 
-                        static const MCTypes::UCS2Char AUTH_NONE [] = {'-', NULL};
-                        static const MCTypes::UCS2Char AUTH_PASSOWRD [] = {'+', NULL};
+                        static const MCTypes::UCS2Char AUTH_NONE [] = {'-', '\0'};
+                        static const MCTypes::UCS2Char AUTH_PASSOWRD [] = {'+', '\0'};
 
                         if (srvident.hash == AUTH_NONE)
                             mylogin.username.assign(owner.username.begin(), owner.username.end());
