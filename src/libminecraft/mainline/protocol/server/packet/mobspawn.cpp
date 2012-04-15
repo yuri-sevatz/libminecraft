@@ -29,6 +29,7 @@ namespace libminecraft
                         Stream::getInt(stream, z);
                         Stream::getByte(stream, yaw);
                         Stream::getByte(stream, pitch);
+                        Stream::getByte(stream, head);
 
                         while(true)
                         {
@@ -108,6 +109,7 @@ namespace libminecraft
                         Stream::putInt(stream, z);
                         Stream::putByte(stream, yaw);
                         Stream::putByte(stream, pitch);
+                        Stream::putByte(stream, head);
 
                         throw exception::Protocol("Can't Write Metadata");
                     }

@@ -23,6 +23,7 @@ namespace libminecraft
                         MCTypes::Int z;
                         MCTypes::Byte yaw;
                         MCTypes::Byte pitch;
+                        MCTypes::Byte head;
 
                         // Metadata type
 
