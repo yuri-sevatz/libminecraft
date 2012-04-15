@@ -12,8 +12,8 @@ set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 # required dependencies
 set(Boost_USE_STATIC_LIBS OFF)
 find_package(Boost COMPONENTS iostreams thread system REQUIRED)
-set(QT_USE_QTWEBKIT TRUE)
-find_package(Qt4 REQUIRED)
+#set(QT_USE_QTWEBKIT TRUE)
+#find_package(Qt4 REQUIRED)
 
 # add your headers and source files here
 # ---------------
@@ -454,7 +454,7 @@ include_directories(${Boost_INCLUDE_DIR})
 
 # Pre-linkage Qt
 # ---------------
-INCLUDE(${QT_USE_FILE})
+#INCLUDE(${QT_USE_FILE})
 
 # Linked Libraries
 # ---------------
@@ -468,7 +468,7 @@ message(${Boost_LIBRARY_DIRS})
 # ---------------
 add_library(${PROJECT_NAME} SHARED ${${PROJECT_NAME}_headers} ${${PROJECT_NAME}_sources})
 
-target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES} ${QT_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
 
 # Install
 # ---------------
