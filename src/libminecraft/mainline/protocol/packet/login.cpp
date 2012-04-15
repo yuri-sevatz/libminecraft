@@ -37,9 +37,9 @@ namespace libminecraft
                 {
                     Stream::getInt(stream, id);
                     Stream::getUCS2String(stream, username);
-                    Stream::getLong(stream, seed);
+                    Stream::getUCS2String(stream, levelType);
                     Stream::getInt(stream, mode);
-                    Stream::getByte(stream, dimension);
+                    Stream::getInt(stream, dimension);
                     Stream::getByte(stream, difficulty);
                     Stream::getByte(stream, maxPlayers);
                     Stream::getByte(stream, worldHeight);
@@ -49,9 +49,9 @@ namespace libminecraft
                 {
                     Stream::putInt(stream, id);
                     Stream::putUCS2String(stream, username);
-                    Stream::putLong(stream, seed);
+                    Stream::putUCS2String(stream, levelType);
                     Stream::putInt(stream, mode);
-                    Stream::putByte(stream, dimension);
+                    Stream::putInt(stream, dimension);
                     Stream::putByte(stream, difficulty);
                     Stream::putByte(stream, maxPlayers);
                     Stream::putByte(stream, worldHeight);
@@ -62,9 +62,9 @@ namespace libminecraft
                     os << "Version/Player ID: " << id << "\n";
                     // TODO : Remove Hardcoded Streams
                     std::wcout << "Username: " << username << "\n";
-                    os << "Seed: " << seed << "\n";
+                    std::wcout << "LevelType: " << levelType << "\n";
                     os << "Mode: " << mode << "\n";
-                    os << "Dimension: " << (int) dimension << std::endl;
+                    os << "Dimension: " << dimension << std::endl;
                     os << "Difficulty: " << (int) difficulty << std::endl;
                     os << "Max Players: " << (int) maxPlayers << std::endl;
                     os << "World Height: " << (int) worldHeight << std::endl;

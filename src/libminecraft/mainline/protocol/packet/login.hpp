@@ -37,9 +37,9 @@ namespace libminecraft
                 public:
                     MCTypes::Int id; // Note: used as version_id AND entity_id.
                     MCTypes::UCS2String username;
-                    MCTypes::Long seed;
+                    MCTypes::UCS2String levelType;
                     MCTypes::Int mode;
-                    MCTypes::Byte dimension;
+                    MCTypes::Int dimension;
                     MCTypes::Byte difficulty;
                     MCTypes::Byte maxPlayers;
                     MCTypes::Byte worldHeight;
