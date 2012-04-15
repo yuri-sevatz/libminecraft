@@ -2,6 +2,7 @@
 
 #include "../../remote.hpp"
 
+#include "../../../protocol/server/packet/abilities.hpp"
 #include "../../../protocol/server/packet/entityvelocity.hpp"
 #include "../../../protocol/server/packet/gamestate.hpp"
 #include "../../../protocol/server/packet/itemspawn.hpp"
@@ -94,6 +95,12 @@ namespace libminecraft
                             {
                                 protocol::server::packet::GameState gameState;
                                 owner.proto.read(gameState);
+                            break;
+                            }
+                        case protocol::server::Packet::ABILITIES:
+                            {
+                                protocol::server::packet::Abilities abilities;
+                                owner.proto.read(abilities);
                             break;
                             }
                         case protocol::server::Packet::PLAYERLISTITEM:

@@ -53,7 +53,8 @@ namespace libminecraft
                         PRECHUNK = (MCTypes::Byte) 0x32,
                         GAMESTATE = (MCTypes::Byte) 0x46,
                         WINDOWITEMS = (MCTypes::Byte) 0x68,
-                        PLAYERLISTITEM = (MCTypes::Byte) 0xC9
+                        PLAYERLISTITEM = (MCTypes::Byte) 0xC9,
+                        ABILITIES = (MCTypes::Byte) 0xCA
                     };
                 };
             }

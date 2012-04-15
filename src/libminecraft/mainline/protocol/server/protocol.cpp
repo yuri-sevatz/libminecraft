@@ -21,6 +21,7 @@
 
 #include "protocol.hpp"
 
+#include "packet/abilities.hpp"
 #include "packet/entityvelocity.hpp"
 #include "packet/equipment.hpp"
 #include "packet/gamestate.hpp"
@@ -46,6 +47,7 @@ namespace libminecraft
     template<> const std::map<const std::type_info *, mainline::protocol::server::Packet::PacketID>
             Protocol<mainline::protocol::server::Protocol, mainline::protocol::server::Packet, mainline::protocol::server::Packet::PacketID>::msgmap =
                 boost::assign::map_list_of
+                    (&typeid(mainline::protocol::server::packet::Abilities), mainline::protocol::server::Packet::ABILITIES)
                     (&typeid(mainline::protocol::server::packet::EntityVelocity), mainline::protocol::server::Packet::ENTITYVELOCITY)
                     (&typeid(mainline::protocol::server::packet::Equipment), mainline::protocol::server::Packet::EQUIPMENT)
                     (&typeid(mainline::protocol::server::packet::GameState), mainline::protocol::server::Packet::GAMESTATE)
