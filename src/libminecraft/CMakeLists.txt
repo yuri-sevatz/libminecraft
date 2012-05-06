@@ -234,6 +234,7 @@ set(${PROJECT_NAME}_sources_mainline_protocol_packet
 )
 
 set(${PROJECT_NAME}_headers_mainline_protocol_server_packet
+    mainline/protocol/server/packet/abilities.hpp
     mainline/protocol/server/packet/entityvelocity.hpp
     mainline/protocol/server/packet/equipment.hpp
     mainline/protocol/server/packet/gamestate.hpp
@@ -253,6 +254,7 @@ set(${PROJECT_NAME}_headers_mainline_protocol_server_packet
     mainline/protocol/server/packet/windowitems.hpp
 )
 set(${PROJECT_NAME}_sources_mainline_protocol_server_packet
+    mainline/protocol/server/packet/abilities.cpp
     mainline/protocol/server/packet/entityvelocity.cpp
     mainline/protocol/server/packet/equipment.cpp
     mainline/protocol/server/packet/gamestate.cpp
