@@ -27,7 +27,7 @@ namespace libminecraft
     {
         namespace protocol
         {
-            Client::Client(std::iostream & stream) : stream(stream)
+            Client::Client(boost::asio::ip::tcp::socket & socket) : socket(socket)
             {
 
             }

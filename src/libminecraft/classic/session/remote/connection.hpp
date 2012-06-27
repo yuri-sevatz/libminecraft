@@ -97,17 +97,21 @@ namespace libminecraft
                     // The session object
                     Remote & session;
 
+                    const std::string hostname;
+                    const std::string port;
+
                     // Server properties
                     std::string username;
                     std::string key;
 
                     // The connection itself.
-                    boost::asio::ip::tcp::iostream stream;
+                    boost::asio::io_service service;
+                    boost::asio::ip::tcp::socket socket;
 
                 public:
                     Connection(Remote & session,
                                const std::string & hostname,
-                               const std::string & service,
+                               const std::string & port,
                                const std::string & username,
                                const std::string & key);
                 };

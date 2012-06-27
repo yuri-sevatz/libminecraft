@@ -23,7 +23,7 @@
 #define LIBMINECRAFT_CLASSIC_PROTOCOL_CLIENT_HPP
 
 #include <iostream>
-#include <boost/thread/mutex.hpp>
+#include <boost/asio.hpp>
 #include "client/protocol.hpp"
 #include "server/protocol.hpp"
 
@@ -36,13 +36,10 @@ namespace libminecraft
             class Client
             {
             private:
-                std::iostream & stream;
-
-                // TODO: Replace with io_service or a better way.
-                boost::mutex ioLock;
+                boost::asio::ip::tcp::socket & socket;
 
             public:
-                Client(std::iostream & stream);
+                Client(boost::asio::ip::tcp::socket & socket);
                 void read(server::Packet & dest);
                 void write(const client::Packet & src);
                 MCTypes::Byte next();
@@ -50,30 +47,34 @@ namespace libminecraft
 
             inline void Client::read(server::Packet &dest)
             {
-                boost::mutex::scoped_lock scopeLock(ioLock);
+                /*
                 server::Protocol::read(stream, dest);
 
                 if (!stream.good())
                     throw exception::Network("Client connection closed while reading inbound minecraft packet");
+                */
             }
 
             inline void Client::write(const client::Packet &src)
             {
-                boost::mutex::scoped_lock scopeLock(ioLock);
+                /*
                 client::Protocol::write(stream, src);
                 stream.flush();
 
                 if (!stream.good())
                     throw exception::Network("Client connection closed while writing outbound minecraft packet");
+                */
             }
 
             inline MCTypes::Byte Client::next()
             {
-                boost::mutex::scoped_lock scopeLock(ioLock);
+                /*
                 MCTypes::Byte id = client::Protocol::next(stream);
                 if (!stream.good())
                     throw exception::Network("Client connection closed while awaiting next packet");
                 return id;
+                */
+                return 0;
             }
         }
     }

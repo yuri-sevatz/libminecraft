@@ -48,7 +48,7 @@ namespace libminecraft
 
             public:
                 Remote(const std::string & hostname,
-                       const std::string & service,
+                       const std::string & port,
                        const std::string & username,
                        const std::string & key);
                 ~Remote();
