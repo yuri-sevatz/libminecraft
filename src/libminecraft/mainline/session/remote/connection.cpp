@@ -21,14 +21,10 @@
 
 #include "connection.hpp"
 
-namespace libminecraft
-{
-namespace mainline
-{
-namespace session
-{
-namespace remote
-{
+namespace libminecraft {
+namespace mainline {
+namespace session {
+namespace remote {
 // Declare/Initialize the Default States
 const Connection::StatesDefs Connection::States;
 
@@ -40,8 +36,7 @@ Connection::Connection(Remote & session, const std::string & hostname, const std
     // Ready the protocol
     proto(stream),
     // Credentials
-    username(username)
-{
+    username(username) {
 
 }
 

@@ -28,13 +28,12 @@
 
 #include <boost/assign/list_of.hpp>
 
-namespace libminecraft
-{
-    template<> const std::map<const std::type_info *, classic::protocol::client::Packet::PacketID>
-            Protocol<classic::protocol::client::Protocol, classic::protocol::client::Packet, classic::protocol::client::Packet::PacketID>::msgmap =
-                boost::assign::map_list_of
-                    (&typeid(classic::protocol::client::packet::Ident), classic::protocol::client::Packet::IDENT)
-                    (&typeid(classic::protocol::client::packet::Message), classic::protocol::client::Packet::MESSAGE)
-                    (&typeid(classic::protocol::client::packet::PosDir), classic::protocol::client::Packet::POSDIR)
-                    (&typeid(classic::protocol::client::packet::SetBlock), classic::protocol::client::Packet::BLOCK);
+namespace libminecraft {
+template<> const std::map<const std::type_info *, classic::protocol::client::Packet::PacketID>
+Protocol<classic::protocol::client::Protocol, classic::protocol::client::Packet, classic::protocol::client::Packet::PacketID>::msgmap =
+    boost::assign::map_list_of
+    (&typeid(classic::protocol::client::packet::Ident), classic::protocol::client::Packet::IDENT)
+    (&typeid(classic::protocol::client::packet::Message), classic::protocol::client::Packet::MESSAGE)
+    (&typeid(classic::protocol::client::packet::PosDir), classic::protocol::client::Packet::POSDIR)
+    (&typeid(classic::protocol::client::packet::SetBlock), classic::protocol::client::Packet::BLOCK);
 }

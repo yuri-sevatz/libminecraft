@@ -29,14 +29,13 @@
 
 #include <boost/assign/list_of.hpp>
 
-namespace libminecraft
-{
-    template<> const std::map<const std::type_info *, mainline::protocol::client::Packet::PacketID>
-            Protocol<mainline::protocol::client::Protocol, mainline::protocol::client::Packet, mainline::protocol::client::Packet::PacketID>::msgmap =
-                boost::assign::map_list_of
-                    (&typeid(mainline::protocol::client::packet::Ident), mainline::protocol::client::Packet::IDENT)
-                    (&typeid(mainline::protocol::client::packet::Login), mainline::protocol::client::Packet::LOGIN)
-                    (&typeid(mainline::protocol::client::packet::Message), mainline::protocol::client::Packet::MESSAGE)
-                    (&typeid(mainline::protocol::client::packet::Player), mainline::protocol::client::Packet::PLAYER)
-                    (&typeid(mainline::protocol::client::packet::Use), mainline::protocol::client::Packet::USE);
+namespace libminecraft {
+template<> const std::map<const std::type_info *, mainline::protocol::client::Packet::PacketID>
+Protocol<mainline::protocol::client::Protocol, mainline::protocol::client::Packet, mainline::protocol::client::Packet::PacketID>::msgmap =
+    boost::assign::map_list_of
+    (&typeid(mainline::protocol::client::packet::Ident), mainline::protocol::client::Packet::IDENT)
+    (&typeid(mainline::protocol::client::packet::Login), mainline::protocol::client::Packet::LOGIN)
+    (&typeid(mainline::protocol::client::packet::Message), mainline::protocol::client::Packet::MESSAGE)
+    (&typeid(mainline::protocol::client::packet::Player), mainline::protocol::client::Packet::PLAYER)
+    (&typeid(mainline::protocol::client::packet::Use), mainline::protocol::client::Packet::USE);
 }

@@ -24,32 +24,26 @@
 
 #include "../packet.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    class PlayerDir : public Packet
-                    {
-                    public:
-                        MCTypes::Byte player_id;
-                        MCTypes::Byte yaw;
-                        MCTypes::Byte pitch;
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace server {
+namespace packet {
+class PlayerDir : public Packet {
+public:
+    MCTypes::Byte player_id;
+    MCTypes::Byte yaw;
+    MCTypes::Byte pitch;
 
-                        PlayerDir();
-                        void read(std::istream &is);
-                        void write(std::ostream &os) const;
-                        void toReadable(std::ostream &os) const;
-                    };
-                }
-            }
-        }
-    }
+    PlayerDir();
+    void read(std::istream & is);
+    void write(std::ostream & os) const;
+    void toReadable(std::ostream & os) const;
+};
+}
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_CLASSIC_PROTOCOL_SERVER_PACKET_PLAYERDIR_HPP

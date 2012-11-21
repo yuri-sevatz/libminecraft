@@ -19,20 +19,16 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "map.hpp"
+#include <libminecraft/shared/exception/map.hpp>
 
-namespace libminecraft
-{
-    namespace exception
-    {
-        Map::Map(const char * message) : libminecraft::Exception(message)
-        {
+namespace libminecraft {
+namespace exception {
+Map::Map(const char * message) : libminecraft::Exception(message) {
 
-        }
+}
 
-        Map::~Map() throw()
-        {
+Map::~Map() throw() {
 
-        }
-    }
+}
+}
 }

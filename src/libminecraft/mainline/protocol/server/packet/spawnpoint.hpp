@@ -24,32 +24,26 @@
 
 #include "../packet.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    class SpawnPoint : public Packet
-                    {
-                    public:
-                        MCTypes::Int block_x;
-                        MCTypes::Int block_y;
-                        MCTypes::Int block_z;
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace server {
+namespace packet {
+class SpawnPoint : public Packet {
+public:
+    MCTypes::Int block_x;
+    MCTypes::Int block_y;
+    MCTypes::Int block_z;
 
-                        SpawnPoint();
-                        void read(std::istream &is);
-                        void write(std::ostream &os) const;
-                        void toReadable(std::ostream &os) const;
-                    };
-                }
-            }
-        }
-    }
+    SpawnPoint();
+    void read(std::istream & is);
+    void write(std::ostream & os) const;
+    void toReadable(std::ostream & os) const;
+};
+}
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_MAINLINE_PROTOCOL_SERVER_PACKET_SPAWNPOINT_HPP

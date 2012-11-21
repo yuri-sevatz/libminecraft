@@ -19,17 +19,13 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "info.hpp"
+#include <libminecraft/classic/session/info.hpp>
 
-namespace libminecraft
-{
-namespace classic
-{
-namespace session
-{
+namespace libminecraft {
+namespace classic {
+namespace session {
 
-Info::Info()
-{
+Info::Info() {
 }
 
 }

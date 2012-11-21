@@ -26,45 +26,38 @@
 #include "client/protocol.hpp"
 #include "server/protocol.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            class Client
-            {
-            private:
-                std::iostream & stream;
-            public:
-                Client(std::iostream & stream);
-                void read(server::Packet & dest);
-                void write(const client::Packet & src);
-                MCTypes::Byte next();
-            };
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+class Client {
+private:
+    std::iostream & stream;
+public:
+    Client(std::iostream & stream);
+    void read(server::Packet & dest);
+    void write(const client::Packet & src);
+    MCTypes::Byte next();
+};
 
-            inline void Client::read(server::Packet &dest)
-            {
-                server::Protocol::read(stream, dest);
+inline void Client::read(server::Packet & dest) {
+    server::Protocol::read(stream, dest);
 
-                if (!stream.good())
-                    throw exception::Network("Client connection closed while reading inbound minecraft packet");
-            }
+    if (!stream.good())
+        throw exception::Network("Client connection closed while reading inbound minecraft packet");
+}
 
-            inline void Client::write(const client::Packet &src)
-            {
-                client::Protocol::write(stream, src);
+inline void Client::write(const client::Packet & src) {
+    client::Protocol::write(stream, src);
 
-                if (!stream.good())
-                    throw exception::Network("Client connection closed while writing outbound minecraft packet");
-            }
+    if (!stream.good())
+        throw exception::Network("Client connection closed while writing outbound minecraft packet");
+}
 
-            inline MCTypes::Byte Client::next()
-            {
-                return client::Protocol::next(stream);
-            }
-        }
-    }
+inline MCTypes::Byte Client::next() {
+    return client::Protocol::next(stream);
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_MAINLINE_PROTOCOL_CLIENT_HPP

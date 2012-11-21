@@ -23,20 +23,16 @@
 #define LIBMINECRAFT_CLASSIC_PROTOCOL_PACKET_HPP
 
 #include "../../shared/protocol/packet.hpp"
-#include "../mctypes.hpp"
+#include <libminecraft/classic/mctypes.hpp>
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            class Packet : public libminecraft::protocol::Packet
-            {
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+class Packet : public libminecraft::protocol::Packet {
 
-            };
-        }
-    }
+};
+}
+}
 }
 
 #endif // LIBMINECRAFT_CLASSIC_PROTOCOL_PACKET_HPP

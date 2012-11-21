@@ -23,22 +23,18 @@
 #define LIBMINECRAFT_CLASSIC_PROTOCOL_STREAM_HPP
 
 #include "../../shared/protocol/stream.hpp"
-#include "../mctypes.hpp"
+#include <libminecraft/classic/mctypes.hpp>
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            class Stream : public libminecraft::protocol::Stream
-            {
-            public:
-                static void getString64(std::istream & stream, MCTypes::String64 & str);
-                static void putString64(std::ostream & stream, const MCTypes::String64 & str);
-            };
-        }
-    }
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+class Stream : public libminecraft::protocol::Stream {
+public:
+    static void getString64(std::istream & stream, MCTypes::String64 & str);
+    static void putString64(std::ostream & stream, const MCTypes::String64 & str);
+};
+}
+}
 }
 
 #endif // LIBMINECRAFT_CLASSIC_PROTOCOL_STREAM_HPP

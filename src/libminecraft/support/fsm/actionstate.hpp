@@ -25,8 +25,7 @@
 #include "abstractstate.hpp"
 
 template <class O>
-class ActionState : public AbstractState<O>
-{
+class ActionState : public AbstractState<O> {
 public:
     virtual void Update(O & owner) const = 0;
 };

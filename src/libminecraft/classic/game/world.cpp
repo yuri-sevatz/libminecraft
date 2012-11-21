@@ -19,74 +19,63 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "world.hpp"
+#include <libminecraft/classic/game/world.hpp>
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace game
-        {
-            World::World()
-            {
+namespace libminecraft {
+namespace classic {
+namespace game {
+World::World() {
 
-            }
+}
 
-            Player * const World::addPlayer(Player & player)
-            {
-                const std::pair<t_entity_index::iterator,bool> ret =
-                        entities.insert(std::make_pair(player.id, player));
-                // Return the newly allocated player if it worked, null otherwise.
-                return (ret.second ? &ret.first->second : NULL);
-            }
+Player * const World::addPlayer(Player & player) {
+    const std::pair<t_entity_index::iterator,bool> ret =
+        entities.insert(std::make_pair(player.id, player));
+    // Return the newly allocated player if it worked, null otherwise.
+    return (ret.second ? &ret.first->second : NULL);
+}
 
-            bool World::hasPlayer(const Player::t_id player_id) const
-            {
-                return (entities.find(player_id) != entities.end());
-            }
+bool World::hasPlayer(const Player::t_id player_id) const {
+    return (entities.find(player_id) != entities.end());
+}
 
-            bool World::removePlayer(const Player::t_id player_id)
-            {
-                t_entity_index::iterator p_player = entities.find(player_id);
+bool World::removePlayer(const Player::t_id player_id) {
+    t_entity_index::iterator p_player = entities.find(player_id);
 
-                if (p_player == entities.end())
-                    return false;
+    if (p_player == entities.end())
+        return false;
 
-                entities.erase(p_player);
-                return true;
-            }
+    entities.erase(p_player);
+    return true;
+}
 
-            Player * const World::getPlayer(const Player::t_id player_id)
-            {
-                t_entity_index::iterator p_player = entities.find(player_id);
+Player * const World::getPlayer(const Player::t_id player_id) {
+    t_entity_index::iterator p_player = entities.find(player_id);
 
-                if (p_player != entities.end())
-                    return &p_player->second;
+    if (p_player != entities.end())
+        return &p_player->second;
 
-                return NULL;
-            }
+    return NULL;
+}
 
-            const Player * const World::getPlayer(const Player::t_id player_id) const
-            {
-                t_entity_index::const_iterator p_player = entities.find(player_id);
+const Player * const World::getPlayer(const Player::t_id player_id) const {
+    t_entity_index::const_iterator p_player = entities.find(player_id);
 
-                if (p_player != entities.end())
-                    return &p_player->second;
+    if (p_player != entities.end())
+        return &p_player->second;
 
-                return NULL;
-            }
+    return NULL;
+}
 
-            const Player * const World::getPlayer(const std::string &name) const
-            {
-                for (t_entity_index::const_iterator p_player = entities.begin();
-                        p_player != entities.end(); p_player++)
-                {
-                    if (name == p_player->second.name)
-                        return &p_player->second;
-                }
-
-                return NULL;
-            }
-        }
+const Player * const World::getPlayer(const std::string & name) const {
+    for (t_entity_index::const_iterator p_player = entities.begin();
+            p_player != entities.end(); p_player++) {
+        if (name == p_player->second.name)
+            return &p_player->second;
     }
+
+    return NULL;
+}
+}
+}
 }

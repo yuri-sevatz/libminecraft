@@ -24,34 +24,28 @@
 
 #include "../packet.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    class Ident : public Packet
-                    {
-                    public:
-                        MCTypes::Byte srv_version;
-                        MCTypes::String64 srv_name;
-                        MCTypes::String64 srv_motd;
-                        MCTypes::Byte user_type;
-                    public:
-                        Ident();
-                        void read(std::istream &stream);
-                        void write(std::ostream &stream) const;
-                        void toReadable(std::ostream &os) const;
-                        MCTypes::Byte cmpVersion() const;
-                    };
-                }
-            }
-        }
-    }
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace server {
+namespace packet {
+class Ident : public Packet {
+public:
+    MCTypes::Byte srv_version;
+    MCTypes::String64 srv_name;
+    MCTypes::String64 srv_motd;
+    MCTypes::Byte user_type;
+public:
+    Ident();
+    void read(std::istream & stream);
+    void write(std::ostream & stream) const;
+    void toReadable(std::ostream & os) const;
+    MCTypes::Byte cmpVersion() const;
+};
+}
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_CLASSIC_PROTOCOL_SERVER_PACKET_IDENT_HPP

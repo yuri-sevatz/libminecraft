@@ -24,56 +24,46 @@
 #include "../../stream.hpp"
 #include "../protocol.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace client
-            {
-                namespace packet
-                {
-                    Ident::Ident()
-                    {
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace client {
+namespace packet {
+Ident::Ident() {
 
-                    }
+}
 
-                    void Ident::read(std::istream &stream)
-                    {
-                        Stream::getByte(stream, version);
-                        Stream::getString64(stream, username);
-                        Stream::getString64(stream, key);
-                        Stream::getByte(stream, unused);
-                    }
+void Ident::read(std::istream & stream) {
+    Stream::getByte(stream, version);
+    Stream::getString64(stream, username);
+    Stream::getString64(stream, key);
+    Stream::getByte(stream, unused);
+}
 
-                    void Ident::write(std::ostream &stream) const
-                    {
-                        Stream::putByte(stream, version);
-                        Stream::putString64(stream, username);
-                        Stream::putString64(stream, key);
-                        Stream::putByte(stream, unused);
-                    }
+void Ident::write(std::ostream & stream) const {
+    Stream::putByte(stream, version);
+    Stream::putString64(stream, username);
+    Stream::putString64(stream, key);
+    Stream::putByte(stream, unused);
+}
 
-                    void Ident::toReadable(std::ostream &os) const
-                    {
-                        os << "Version: " << (int) version << "\n";
-                        os << "Username: " << username << "\n";
-                        os << "Key: " << key << "\n";
-                        os << "Unused: " << (int) unused << std::endl;
-                    }
+void Ident::toReadable(std::ostream & os) const {
+    os << "Version: " << (int) version << "\n";
+    os << "Username: " << username << "\n";
+    os << "Key: " << key << "\n";
+    os << "Unused: " << (int) unused << std::endl;
+}
 
-                    MCTypes::Byte Ident::cmpVersion() const
-                    {
-                        if (version > Protocol::version)
-                            return 1;
-                        else if (version < Protocol::version)
-                            return -1;
-                        else
-                            return 0;
-                    }
-                }
-            }
-        }
-    }
+MCTypes::Byte Ident::cmpVersion() const {
+    if (version > Protocol::version)
+        return 1;
+    else if (version < Protocol::version)
+        return -1;
+    else
+        return 0;
+}
+}
+}
+}
+}
 }

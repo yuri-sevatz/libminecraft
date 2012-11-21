@@ -23,37 +23,28 @@
 
 #include "../../stream.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    Ping::Ping()
-                    {
-                    }
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace server {
+namespace packet {
+Ping::Ping() {
+}
 
-                    void Ping::read(std::istream &stream)
-                    {
+void Ping::read(std::istream & stream) {
 
-                    }
+}
 
-                    void Ping::write(std::ostream &stream) const
-                    {
+void Ping::write(std::ostream & stream) const {
 
-                    }
+}
 
-                    void Ping::toReadable(std::ostream &os) const
-                    {
+void Ping::toReadable(std::ostream & os) const {
 
-                    }
-                }
-            }
-        }
-    }
+}
+}
+}
+}
+}
 }
 

@@ -24,17 +24,14 @@
 
 #include "../../shared/protocol/protocol.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        template<class TProtocol, class TPacket, typename TPacketID>
-        class Protocol : public libminecraft::Protocol<TProtocol, TPacket, TPacketID>
-        {
-        public:
-            static const MCTypes::Byte version = 0x07;
-        };
-    }
+namespace libminecraft {
+namespace classic {
+template<class TProtocol, class TPacket, typename TPacketID>
+class Protocol : public libminecraft::Protocol<TProtocol, TPacket, TPacketID> {
+public:
+    static const MCTypes::Byte version = 0x07;
+};
+}
 }
 
 #endif // LIBMINECRAFT_CLASSIC_PROTOCOL_HPP

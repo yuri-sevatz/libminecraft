@@ -23,36 +23,27 @@
 
 #include "../../stream.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    Health::Health()
-                    {
-                    }
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace server {
+namespace packet {
+Health::Health() {
+}
 
-                    void Health::read(std::istream &stream)
-                    {
-                        Stream::getShort(stream, hp);
-                    }
+void Health::read(std::istream & stream) {
+    Stream::getShort(stream, hp);
+}
 
-                    void Health::write(std::ostream &stream) const
-                    {
-                        Stream::putShort(stream, hp);
-                    }
+void Health::write(std::ostream & stream) const {
+    Stream::putShort(stream, hp);
+}
 
-                    void Health::toReadable(std::ostream &os) const
-                    {
-                        os << "Hp: " << hp << std::endl;
-                    }
-                }
-            }
-        }
-    }
+void Health::toReadable(std::ostream & os) const {
+    os << "Hp: " << hp << std::endl;
+}
+}
+}
+}
+}
 }

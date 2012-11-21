@@ -23,20 +23,16 @@
 #define LIBMINECRAFT_MAINLINE_PACKET_HPP
 
 #include "../../shared/protocol/packet.hpp"
-#include "../mctypes.hpp"
+#include <libminecraft/mainline/mctypes.hpp>
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            class Packet : public libminecraft::protocol::Packet
-            {
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+class Packet : public libminecraft::protocol::Packet {
 
-            };
-        }
-    }
+};
+}
+}
 }
 
 #endif // LIBMINECRAFT_MAINLINE_PACKET_HPP

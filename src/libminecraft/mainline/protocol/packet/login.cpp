@@ -25,51 +25,44 @@
 
 #include <iostream>
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace packet
-            {
-                void Login::read(std::istream &stream)
-                {
-                    Stream::getInt(stream, id);
-                    Stream::getUCS2String(stream, username);
-                    Stream::getUCS2String(stream, levelType);
-                    Stream::getInt(stream, mode);
-                    Stream::getInt(stream, dimension);
-                    Stream::getByte(stream, difficulty);
-                    Stream::getByte(stream, maxPlayers);
-                    Stream::getByte(stream, worldHeight);
-                }
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace packet {
+void Login::read(std::istream & stream) {
+    Stream::getInt(stream, id);
+    Stream::getUCS2String(stream, username);
+    Stream::getUCS2String(stream, levelType);
+    Stream::getInt(stream, mode);
+    Stream::getInt(stream, dimension);
+    Stream::getByte(stream, difficulty);
+    Stream::getByte(stream, maxPlayers);
+    Stream::getByte(stream, worldHeight);
+}
 
-                void Login::write(std::ostream &stream) const
-                {
-                    Stream::putInt(stream, id);
-                    Stream::putUCS2String(stream, username);
-                    Stream::putUCS2String(stream, levelType);
-                    Stream::putInt(stream, mode);
-                    Stream::putInt(stream, dimension);
-                    Stream::putByte(stream, difficulty);
-                    Stream::putByte(stream, maxPlayers);
-                    Stream::putByte(stream, worldHeight);
-                }
+void Login::write(std::ostream & stream) const {
+    Stream::putInt(stream, id);
+    Stream::putUCS2String(stream, username);
+    Stream::putUCS2String(stream, levelType);
+    Stream::putInt(stream, mode);
+    Stream::putInt(stream, dimension);
+    Stream::putByte(stream, difficulty);
+    Stream::putByte(stream, maxPlayers);
+    Stream::putByte(stream, worldHeight);
+}
 
-                void Login::toReadable(std::ostream &os) const
-                {
-                    os << "Version/Player ID: " << id << "\n";
-                    // TODO : Remove Hardcoded Streams
-                    std::wcout << "Username: " << username << "\n";
-                    std::wcout << "LevelType: " << levelType << "\n";
-                    os << "Mode: " << mode << "\n";
-                    os << "Dimension: " << dimension << std::endl;
-                    os << "Difficulty: " << (int) difficulty << std::endl;
-                    os << "Max Players: " << (int) maxPlayers << std::endl;
-                    os << "World Height: " << (int) worldHeight << std::endl;
-                }
-            }
-        }
-    }
+void Login::toReadable(std::ostream & os) const {
+    os << "Version/Player ID: " << id << "\n";
+    // TODO : Remove Hardcoded Streams
+    std::wcout << "Username: " << username << "\n";
+    std::wcout << "LevelType: " << levelType << "\n";
+    os << "Mode: " << mode << "\n";
+    os << "Dimension: " << dimension << std::endl;
+    os << "Difficulty: " << (int) difficulty << std::endl;
+    os << "Max Players: " << (int) maxPlayers << std::endl;
+    os << "World Height: " << (int) worldHeight << std::endl;
+}
+}
+}
+}
 }

@@ -24,32 +24,26 @@
 
 #include "../packet.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace client
-            {
-                namespace packet
-                {
-                    class Use : public Packet
-                    {
-                    public:
-                        MCTypes::Int user_entity_id;
-                        MCTypes::Int target_entity_id;
-                        MCTypes::Bool click;
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace client {
+namespace packet {
+class Use : public Packet {
+public:
+    MCTypes::Int user_entity_id;
+    MCTypes::Int target_entity_id;
+    MCTypes::Bool click;
 
-                        Use();
-                        void read(std::istream &is);
-                        void write(std::ostream &os) const;
-                        void toReadable(std::ostream &os) const;
-                    };
-                }
-            }
-        }
-    }
+    Use();
+    void read(std::istream & is);
+    void write(std::ostream & os) const;
+    void toReadable(std::ostream & os) const;
+};
+}
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_MAINLINE_PROTOCOL_CLIENT_PACKET_USE_HPP

@@ -23,56 +23,47 @@
 
 #include "../../stream.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    PlayerSpawn::PlayerSpawn()
-                    {
-                    }
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace server {
+namespace packet {
+PlayerSpawn::PlayerSpawn() {
+}
 
-                    void PlayerSpawn::read(std::istream &stream)
-                    {
-                        Stream::getByte(stream, player_id);
-                        Stream::getString64(stream, player_name);
-                        Stream::getShort(stream, x);
-                        Stream::getShort(stream, y);
-                        Stream::getShort(stream, z);
-                        Stream::getByte(stream, yaw);
-                        Stream::getByte(stream, pitch);
-                    }
+void PlayerSpawn::read(std::istream & stream) {
+    Stream::getByte(stream, player_id);
+    Stream::getString64(stream, player_name);
+    Stream::getShort(stream, x);
+    Stream::getShort(stream, y);
+    Stream::getShort(stream, z);
+    Stream::getByte(stream, yaw);
+    Stream::getByte(stream, pitch);
+}
 
-                    void PlayerSpawn::write(std::ostream &stream) const
-                    {
-                        Stream::putByte(stream, player_id);
-                        Stream::putString64(stream, player_name);
-                        Stream::putShort(stream, x);
-                        Stream::putShort(stream, y);
-                        Stream::putShort(stream, z);
-                        Stream::putByte(stream, yaw);
-                        Stream::putByte(stream, pitch);
+void PlayerSpawn::write(std::ostream & stream) const {
+    Stream::putByte(stream, player_id);
+    Stream::putString64(stream, player_name);
+    Stream::putShort(stream, x);
+    Stream::putShort(stream, y);
+    Stream::putShort(stream, z);
+    Stream::putByte(stream, yaw);
+    Stream::putByte(stream, pitch);
 
-                    }
+}
 
-                    void PlayerSpawn::toReadable(std::ostream &os) const
-                    {
-                        os << "Player ID: " << (int) player_id << "\n";
-                        os << "Player Name: " << player_name << "\n";
-                        os << "Spawn X: " << x << "\n";
-                        os << "Spawn Y: " << y << "\n";
-                        os << "Spawn Z: " << z << "\n";
-                        os << "Yaw: " << (int) yaw << "\n";
-                        os << "Pitch: " << (int) pitch << std::endl;
-                    }
-                }
-            }
-        }
-    }
+void PlayerSpawn::toReadable(std::ostream & os) const {
+    os << "Player ID: " << (int) player_id << "\n";
+    os << "Player Name: " << player_name << "\n";
+    os << "Spawn X: " << x << "\n";
+    os << "Spawn Y: " << y << "\n";
+    os << "Spawn Z: " << z << "\n";
+    os << "Yaw: " << (int) yaw << "\n";
+    os << "Pitch: " << (int) pitch << std::endl;
+}
+}
+}
+}
+}
 }
 

@@ -19,20 +19,16 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "login.hpp"
+#include <libminecraft/shared/exception/login.hpp>
 
-namespace libminecraft
-{
-    namespace exception
-    {
-        Login::Login(const char * message) : libminecraft::Exception(message)
-        {
+namespace libminecraft {
+namespace exception {
+Login::Login(const char * message) : libminecraft::Exception(message) {
 
-        }
+}
 
-        Login::~Login() throw()
-        {
+Login::~Login() throw() {
 
-        }
-    }
+}
+}
 }

@@ -24,29 +24,23 @@
 
 #include "../packet.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace client
-            {
-                class Packet : public virtual protocol::Packet
-                {
-                public:
-                    enum PacketID
-                    {
-                        LOGIN = (MCTypes::Byte) 0x01,
-                        IDENT = (MCTypes::Byte) 0x02,
-                        MESSAGE = (MCTypes::Byte) 0x03,
-                        USE = (MCTypes::Byte) 0x07,
-                        PLAYER = (MCTypes::Byte) 0x0A,
-                    };
-                };
-            }
-        }
-    }
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace client {
+class Packet : public virtual protocol::Packet {
+public:
+    enum PacketID {
+        LOGIN = (MCTypes::Byte) 0x01,
+        IDENT = (MCTypes::Byte) 0x02,
+        MESSAGE = (MCTypes::Byte) 0x03,
+        USE = (MCTypes::Byte) 0x07,
+        PLAYER = (MCTypes::Byte) 0x0A,
+    };
+};
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_MAINLINE_PROTOCOL_CLIENT_PACKET_HPP

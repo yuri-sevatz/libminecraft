@@ -23,39 +23,30 @@
 
 #include "../../stream.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    PlayerOp::PlayerOp()
-                    {
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace server {
+namespace packet {
+PlayerOp::PlayerOp() {
 
-                    }
+}
 
-                    void PlayerOp::read(std::istream &stream)
-                    {
-                        Stream::getByte(stream, type);
-                    }
+void PlayerOp::read(std::istream & stream) {
+    Stream::getByte(stream, type);
+}
 
-                    void PlayerOp::write(std::ostream &stream) const
-                    {
-                        Stream::putByte(stream, type);
-                    }
+void PlayerOp::write(std::ostream & stream) const {
+    Stream::putByte(stream, type);
+}
 
-                    void PlayerOp::toReadable(std::ostream &os) const
-                    {
-                        os << "Op Type: " << (int) type << std::endl;
-                    }
-                }
-            }
-        }
-    }
+void PlayerOp::toReadable(std::ostream & os) const {
+    os << "Op Type: " << (int) type << std::endl;
+}
+}
+}
+}
+}
 }
 
 

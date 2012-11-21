@@ -24,63 +24,51 @@
 
 #include "../connection.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace session
-        {
-            namespace remote
-            {
-                namespace state
-                {
-                    Connecting::Connecting()
-                    {
-                    }
+namespace libminecraft {
+namespace classic {
+namespace session {
+namespace remote {
+namespace state {
+Connecting::Connecting() {
+}
 
-                    void Connecting::Enter(t_owner &owner) const
-                    {
-                        std::cerr << "Connecting..." << std::endl;
-                    }
-                    void Connecting::Update(t_owner &owner) const
-                    {
-                        boost::asio::ip::tcp::resolver resolver(owner.service);
-                        boost::asio::ip::tcp::resolver::query query(owner.hostname, owner.port);
+void Connecting::Enter(t_owner & owner) const {
+    std::cerr << "Connecting..." << std::endl;
+}
+void Connecting::Update(t_owner & owner) const {
+    boost::asio::ip::tcp::resolver resolver(owner.service);
+    boost::asio::ip::tcp::resolver::query query(owner.hostname, owner.port);
 
-                        boost::asio::ip::tcp::resolver::iterator endpoint = resolver.resolve(query);
-                        const boost::asio::ip::tcp::resolver::iterator end;
+    boost::asio::ip::tcp::resolver::iterator endpoint = resolver.resolve(query);
+    const boost::asio::ip::tcp::resolver::iterator end;
 
-                        // Check if any endpoints were resolved at all...
-                        if (endpoint == end) {
-                            throw exception::Network("Unable to resolve target hostname");
-                        }
-
-                        do
-                        {
-                            boost::system::error_code error;
-
-                            owner.socket.connect(*endpoint++, error);
-
-                            if(error)
-                            {
-                                owner.socket.close();
-                            }
-                            else {
-                                owner.ChangeState(owner.States.NEGOTIATING);
-                                return;
-                            }
-                        } while (endpoint != end);
-
-                        // Throw an exception, all connections failed...
-                        throw exception::Network("Unable to connect to target hostname");
-
-                    }
-                    void Connecting::Exit(t_owner &owner) const
-                    {
-                        std::cerr << "Successfully Connected!" << std::endl;
-                    }
-                }
-            }
-        }
+    // Check if any endpoints were resolved at all...
+    if (endpoint == end) {
+        throw exception::Network("Unable to resolve target hostname");
     }
+
+    do {
+        boost::system::error_code error;
+
+        owner.socket.connect(*endpoint++, error);
+
+        if(error) {
+            owner.socket.close();
+        } else {
+            owner.ChangeState(owner.States.NEGOTIATING);
+            return;
+        }
+    } while (endpoint != end);
+
+    // Throw an exception, all connections failed...
+    throw exception::Network("Unable to connect to target hostname");
+
+}
+void Connecting::Exit(t_owner & owner) const {
+    std::cerr << "Successfully Connected!" << std::endl;
+}
+}
+}
+}
+}
 }

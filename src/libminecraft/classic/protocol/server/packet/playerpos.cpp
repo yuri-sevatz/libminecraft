@@ -23,46 +23,37 @@
 
 #include "../../stream.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    PlayerPos::PlayerPos()
-                    {
-                    }
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace server {
+namespace packet {
+PlayerPos::PlayerPos() {
+}
 
-                    void PlayerPos::read(std::istream &stream)
-                    {
-                        Stream::getByte(stream, player_id);
-                        Stream::getByte(stream, delta_x);
-                        Stream::getByte(stream, delta_y);
-                        Stream::getByte(stream, delta_z);
-                    }
+void PlayerPos::read(std::istream & stream) {
+    Stream::getByte(stream, player_id);
+    Stream::getByte(stream, delta_x);
+    Stream::getByte(stream, delta_y);
+    Stream::getByte(stream, delta_z);
+}
 
-                    void PlayerPos::write(std::ostream &stream) const
-                    {
-                        Stream::putByte(stream, player_id);
-                        Stream::putByte(stream, delta_x);
-                        Stream::putByte(stream, delta_y);
-                        Stream::putByte(stream, delta_z);
-                    }
+void PlayerPos::write(std::ostream & stream) const {
+    Stream::putByte(stream, player_id);
+    Stream::putByte(stream, delta_x);
+    Stream::putByte(stream, delta_y);
+    Stream::putByte(stream, delta_z);
+}
 
-                    void PlayerPos::toReadable(std::ostream &os) const
-                    {
-                        os << "Player ID: " << (int) player_id << "\n";
-                        os << "Delta X: " << (int) delta_x << "\n";
-                        os << "Delta Y: " << (int) delta_y << "\n";
-                        os << "Delta Z: " << (int) delta_z << std::endl;
-                    }
-                }
-            }
-        }
-    }
+void PlayerPos::toReadable(std::ostream & os) const {
+    os << "Player ID: " << (int) player_id << "\n";
+    os << "Delta X: " << (int) delta_x << "\n";
+    os << "Delta Y: " << (int) delta_y << "\n";
+    os << "Delta Z: " << (int) delta_z << std::endl;
+}
+}
+}
+}
+}
 }
 

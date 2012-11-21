@@ -21,21 +21,15 @@
 
 #include "login.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    Login::Login()
-                    {
-                    }
-                }
-            }
-        }
-    }
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace server {
+namespace packet {
+Login::Login() {
+}
+}
+}
+}
+}
 }

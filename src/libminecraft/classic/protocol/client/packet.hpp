@@ -24,29 +24,23 @@
 
 #include "../packet.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace client
-            {
-                // Categorization of MinecraftPacket - packets moving from the client.
-                class Packet : public classic::protocol::Packet
-                {
-                public:
-                    enum PacketID
-                    {
-                        IDENT = (MCTypes::Byte) 0x00,
-                        BLOCK = (MCTypes::Byte) 0x05,
-                        POSDIR = (MCTypes::Byte) 0x08,
-                        MESSAGE = (MCTypes::Byte) 0x0D,
-                    };
-                };
-            }
-        }
-    }
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace client {
+// Categorization of MinecraftPacket - packets moving from the client.
+class Packet : public classic::protocol::Packet {
+public:
+    enum PacketID {
+        IDENT = (MCTypes::Byte) 0x00,
+        BLOCK = (MCTypes::Byte) 0x05,
+        POSDIR = (MCTypes::Byte) 0x08,
+        MESSAGE = (MCTypes::Byte) 0x0D,
+    };
+};
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_CLASSIC_PROTOCOL_CLIENT_PACKET_HPP

@@ -23,39 +23,30 @@
 
 #include "../../stream.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    GameState::GameState()
-                    {
-                    }
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace server {
+namespace packet {
+GameState::GameState() {
+}
 
-                    void GameState::read(std::istream &stream)
-                    {
-                        Stream::getByte(stream, reason);
-                        Stream::getByte(stream, mode);
-                    }
+void GameState::read(std::istream & stream) {
+    Stream::getByte(stream, reason);
+    Stream::getByte(stream, mode);
+}
 
-                    void GameState::write(std::ostream &stream) const
-                    {
-                        Stream::putByte(stream, reason);
-                        Stream::putByte(stream, mode);
-                    }
+void GameState::write(std::ostream & stream) const {
+    Stream::putByte(stream, reason);
+    Stream::putByte(stream, mode);
+}
 
-                    void GameState::toReadable(std::ostream &os) const
-                    {
-                        os << "Reason: " << (int) reason << std::endl;
-                        os << "Mode: " << (int) mode << std::endl;
-                    }
-                }
-            }
-        }
-    }
+void GameState::toReadable(std::ostream & os) const {
+    os << "Reason: " << (int) reason << std::endl;
+    os << "Mode: " << (int) mode << std::endl;
+}
+}
+}
+}
+}
 }

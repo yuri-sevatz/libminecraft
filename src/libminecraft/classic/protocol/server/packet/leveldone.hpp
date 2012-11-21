@@ -24,32 +24,26 @@
 
 #include "../packet.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    class LevelDone : public Packet
-                    {
-                    public:
-                        MCTypes::Short size_x;
-                        MCTypes::Short size_y;
-                        MCTypes::Short size_z;
-                    public:
-                        LevelDone();
-                        void read(std::istream &stream);
-                        void write(std::ostream &os) const;
-                        void toReadable(std::ostream &os) const;
-                    };
-                }
-            }
-        }
-    }
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace server {
+namespace packet {
+class LevelDone : public Packet {
+public:
+    MCTypes::Short size_x;
+    MCTypes::Short size_y;
+    MCTypes::Short size_z;
+public:
+    LevelDone();
+    void read(std::istream & stream);
+    void write(std::ostream & os) const;
+    void toReadable(std::ostream & os) const;
+};
+}
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_CLASSIC_PROTOCOL_SERVER_PACKET_LEVELDONE_HPP

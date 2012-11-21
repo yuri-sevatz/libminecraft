@@ -23,45 +23,36 @@
 
 #include "../../stream.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    Equipment::Equipment()
-                    {
-                    }
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace server {
+namespace packet {
+Equipment::Equipment() {
+}
 
-                    void Equipment::read(std::istream &stream)
-                    {
-                        Stream::getInt(stream, entity_id);
-                        Stream::getShort(stream, slot);
-                        Stream::getShort(stream, item_id);
-                        Stream::getShort(stream, health);
-                    }
+void Equipment::read(std::istream & stream) {
+    Stream::getInt(stream, entity_id);
+    Stream::getShort(stream, slot);
+    Stream::getShort(stream, item_id);
+    Stream::getShort(stream, health);
+}
 
-                    void Equipment::write(std::ostream &stream) const
-                    {
-                        Stream::putInt(stream, entity_id);
-                        Stream::putShort(stream, slot);
-                        Stream::putShort(stream, item_id);
-                        Stream::putShort(stream, health);
-                    }
+void Equipment::write(std::ostream & stream) const {
+    Stream::putInt(stream, entity_id);
+    Stream::putShort(stream, slot);
+    Stream::putShort(stream, item_id);
+    Stream::putShort(stream, health);
+}
 
-                    void Equipment::toReadable(std::ostream &os) const
-                    {
-                        os << "Entity_Id: " << entity_id << "\n";
-                        os << "Slot: " << slot << "\n";
-                        os << "Item_Id: " << item_id << "\n";
-                        os << "Health?: " << health << std::endl;
-                    }
-                }
-            }
-        }
-    }
+void Equipment::toReadable(std::ostream & os) const {
+    os << "Entity_Id: " << entity_id << "\n";
+    os << "Slot: " << slot << "\n";
+    os << "Item_Id: " << item_id << "\n";
+    os << "Health?: " << health << std::endl;
+}
+}
+}
+}
+}
 }

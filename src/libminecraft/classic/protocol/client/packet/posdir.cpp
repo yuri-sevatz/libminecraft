@@ -23,52 +23,43 @@
 
 #include "../../stream.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace client
-            {
-                namespace packet
-                {
-                    PosDir::PosDir()
-                    {
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace client {
+namespace packet {
+PosDir::PosDir() {
 
-                    }
+}
 
-                    void PosDir::read(std::istream &stream)
-                    {
-                        Stream::getByte(stream, player_id);
-                        Stream::getShort(stream, x);
-                        Stream::getShort(stream, y);
-                        Stream::getShort(stream, z);
-                        Stream::getByte(stream, yaw);
-                        Stream::getByte(stream, pitch);
-                    }
+void PosDir::read(std::istream & stream) {
+    Stream::getByte(stream, player_id);
+    Stream::getShort(stream, x);
+    Stream::getShort(stream, y);
+    Stream::getShort(stream, z);
+    Stream::getByte(stream, yaw);
+    Stream::getByte(stream, pitch);
+}
 
-                    void PosDir::write(std::ostream &stream) const
-                    {
-                        Stream::putByte(stream, player_id);
-                        Stream::putShort(stream, x);
-                        Stream::putShort(stream, y);
-                        Stream::putShort(stream, z);
-                        Stream::putByte(stream, yaw);
-                        Stream::putByte(stream, pitch);
-                    }
+void PosDir::write(std::ostream & stream) const {
+    Stream::putByte(stream, player_id);
+    Stream::putShort(stream, x);
+    Stream::putShort(stream, y);
+    Stream::putShort(stream, z);
+    Stream::putByte(stream, yaw);
+    Stream::putByte(stream, pitch);
+}
 
-                    void PosDir::toReadable(std::ostream &os) const
-                    {
-                        os << "Player ID: " << (int) player_id << "\n";
-                        os << "X: " << x << "\n";
-                        os << "Y: " << y << "\n";
-                        os << "Z: " << z << "\n";
-                        os << "Yaw: " << (int) yaw << "\n";
-                        os << "Pitch: " << (int) pitch << std::endl;
-                    }
-                }
-            }
-        }
-    }
+void PosDir::toReadable(std::ostream & os) const {
+    os << "Player ID: " << (int) player_id << "\n";
+    os << "X: " << x << "\n";
+    os << "Y: " << y << "\n";
+    os << "Z: " << z << "\n";
+    os << "Yaw: " << (int) yaw << "\n";
+    os << "Pitch: " << (int) pitch << std::endl;
+}
+}
+}
+}
+}
 }

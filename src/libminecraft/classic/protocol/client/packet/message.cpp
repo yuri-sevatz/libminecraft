@@ -23,40 +23,31 @@
 
 #include "../../stream.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace client
-            {
-                namespace packet
-                {
-                    Message::Message()
-                    {
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace client {
+namespace packet {
+Message::Message() {
 
-                    }
+}
 
-                    void Message::read(std::istream &stream)
-                    {
-                        Stream::getByte(stream, unused);
-                        Stream::getString64(stream, message);
-                    }
+void Message::read(std::istream & stream) {
+    Stream::getByte(stream, unused);
+    Stream::getString64(stream, message);
+}
 
-                    void Message::write(std::ostream &stream) const
-                    {
-                        Stream::putByte(stream, unused);
-                        Stream::putString64(stream, message);
-                    }
+void Message::write(std::ostream & stream) const {
+    Stream::putByte(stream, unused);
+    Stream::putString64(stream, message);
+}
 
-                    void Message::toReadable(std::ostream &os) const
-                    {
-                        os << "Unused: " << (int) unused << "\n";
-                        os << "Message: " << message << "\n";
-                    }
-                }
-            }
-        }
-    }
+void Message::toReadable(std::ostream & os) const {
+    os << "Unused: " << (int) unused << "\n";
+    os << "Message: " << message << "\n";
+}
+}
+}
+}
+}
 }

@@ -19,24 +19,19 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "point.hpp"
-#include "cell.hpp"
-#include "../map.hpp"
+#include <libminecraft/classic/game/map/point.hpp>
+#include <libminecraft/classic/game/map/cell.hpp>
+#include <libminecraft/classic/game/map.hpp>
 
-namespace libminecraft
-{
-namespace classic
-{
-namespace game
-{
-namespace map
-{
+namespace libminecraft {
+namespace classic {
+namespace game {
+namespace map {
 
-Point::Point(const Cell &c) :
+Point::Point(const Cell & c) :
     x(Map::toSizePlot(c.x)),
     y(Map::toSizePlot(c.y)),
-    z(Map::toSizePlot(c.z))
-{
+    z(Map::toSizePlot(c.z)) {
 
 }
 

@@ -24,35 +24,29 @@
 
 #include "../packet.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace client
-            {
-                namespace packet
-                {
-                    class SetBlock : public Packet
-                    {
-                    public:
-                        MCTypes::Short x;
-                        MCTypes::Short y;
-                        MCTypes::Short z;
-                        MCTypes::Byte mode;
-                        MCTypes::Byte type;
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace client {
+namespace packet {
+class SetBlock : public Packet {
+public:
+    MCTypes::Short x;
+    MCTypes::Short y;
+    MCTypes::Short z;
+    MCTypes::Byte mode;
+    MCTypes::Byte type;
 
-                    public:
-                        SetBlock();
-                        void read(std::istream &stream);
-                        void write(std::ostream &os) const;
-                        void toReadable(std::ostream &os) const;
-                    };
-                }
-            }
-        }
-    }
+public:
+    SetBlock();
+    void read(std::istream & stream);
+    void write(std::ostream & os) const;
+    void toReadable(std::ostream & os) const;
+};
+}
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_CLASSIC_PROTOCOL_CLIENT_PACKET_SETBLOCK_HPP

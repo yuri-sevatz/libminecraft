@@ -24,30 +24,24 @@
 
 #include "../packet.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace client
-            {
-                namespace packet
-                {
-                    class Ident : public Packet
-                    {
-                    public:
-                        MCTypes::UCS2String username;
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace client {
+namespace packet {
+class Ident : public Packet {
+public:
+    MCTypes::UCS2String username;
 
-                        Ident();
-                        void read(std::istream &is);
-                        void write(std::ostream &os) const;
-                        void toReadable(std::ostream &os) const;
-                    };
-                }
-            }
-        }
-    }
+    Ident();
+    void read(std::istream & is);
+    void write(std::ostream & os) const;
+    void toReadable(std::ostream & os) const;
+};
+}
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_MAINLINE_PROTOCOL_CLIENT_PACKET_IDENT_HPP

@@ -25,30 +25,23 @@
 
 #include <iostream>
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace packet
-            {
-                void Message::read(std::istream &stream)
-                {
-                    Stream::getUCS2String(stream, message);
-                }
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace packet {
+void Message::read(std::istream & stream) {
+    Stream::getUCS2String(stream, message);
+}
 
-                void Message::write(std::ostream &stream) const
-                {
-                    Stream::putUCS2String(stream, message);
-                }
+void Message::write(std::ostream & stream) const {
+    Stream::putUCS2String(stream, message);
+}
 
-                void Message::toReadable(std::ostream &os) const
-                {
-                    // TODO: Add os stream support for UCS2String
-                    std::wcout << "Message: " << message << std::endl;
-                }
-            }
-        }
-    }
+void Message::toReadable(std::ostream & os) const {
+    // TODO: Add os stream support for UCS2String
+    std::wcout << "Message: " << message << std::endl;
+}
+}
+}
+}
 }

@@ -19,29 +19,25 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "mcstring.hpp"
+#include <libminecraft/utils/mcstring.hpp>
 
-namespace libminecraft
-{
-    std::string MCString::plainMessage(const std::string & msg)
-    {
-        bool escaped = false;
-        std::string res;
+namespace libminecraft {
+std::string MCString::plainMessage(const std::string & msg) {
+    bool escaped = false;
+    std::string res;
 
-        for (std::string::const_iterator iter = msg.begin();
-        iter != msg.end(); iter++)
-        {
-            if (escaped)
-                escaped = false;
-            else if (*iter == '&')
-                escaped = true;
-            else
-            {
-                escaped = false;
-                res += *iter;
-            }
+    for (std::string::const_iterator iter = msg.begin();
+            iter != msg.end(); iter++) {
+        if (escaped)
+            escaped = false;
+        else if (*iter == '&')
+            escaped = true;
+        else {
+            escaped = false;
+            res += *iter;
         }
-
-        return res;
     }
+
+    return res;
+}
 }

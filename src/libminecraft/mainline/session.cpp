@@ -1,12 +1,9 @@
-#include "session.hpp"
+#include <libminecraft/mainline/session.hpp>
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        Session::Session()
-        {
+namespace libminecraft {
+namespace mainline {
+Session::Session() {
 
-        }
-    }
+}
+}
 }

@@ -24,28 +24,22 @@
 
 #include "../packet.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    class LevelBegin : public Packet
-                    {
-                    public:
-                        LevelBegin();
-                        void read(std::istream &stream);
-                        void write(std::ostream &os) const;
-                        void toReadable(std::ostream &os) const;
-                    };
-                }
-            }
-        }
-    }
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace server {
+namespace packet {
+class LevelBegin : public Packet {
+public:
+    LevelBegin();
+    void read(std::istream & stream);
+    void write(std::ostream & os) const;
+    void toReadable(std::ostream & os) const;
+};
+}
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_CLASSIC_PROTOCOL_SERVER_PACKET_LEVELBEGIN_HPP

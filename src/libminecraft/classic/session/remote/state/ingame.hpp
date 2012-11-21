@@ -24,35 +24,37 @@
 
 #include "../state.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        // Forward-declare classes for private methods.
-        namespace game { class Player; }
-        namespace protocol { namespace server { namespace packet { class PlayerSpawn; } } }
+namespace libminecraft {
+namespace classic {
+// Forward-declare classes for private methods.
+namespace game {
+class Player;
+}
+namespace protocol {
+namespace server {
+namespace packet {
+class PlayerSpawn;
+}
+}
+}
 
-        namespace session
-        {
-            namespace remote
-            {
-                namespace state
-                {
-                    class InGame : public State
-                    {
-                    public:
-                        InGame();
-                        void Enter(t_owner &owner) const;
-                        void Update(t_owner &owner) const;
-                        void Exit(t_owner &owner) const;
+namespace session {
+namespace remote {
+namespace state {
+class InGame : public State {
+public:
+    InGame();
+    void Enter(t_owner & owner) const;
+    void Update(t_owner & owner) const;
+    void Exit(t_owner & owner) const;
 
-                    private:
-                        static void configurePlayerFromSpawnPacket(t_owner & owner, game::Player & player, const protocol::server::packet::PlayerSpawn & spawnpkt);
-                    };
-                }
-            }
-        }
-    }
+private:
+    static void configurePlayerFromSpawnPacket(t_owner & owner, game::Player & player, const protocol::server::packet::PlayerSpawn & spawnpkt);
+};
+}
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_CLASSIC_SESSION_REMOTE_STATE_INGAME_HPP

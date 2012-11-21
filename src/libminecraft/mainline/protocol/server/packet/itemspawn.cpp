@@ -23,63 +23,54 @@
 
 #include "../../stream.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    ItemSpawn::ItemSpawn()
-                    {
-                    }
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace server {
+namespace packet {
+ItemSpawn::ItemSpawn() {
+}
 
-                    void ItemSpawn::read(std::istream &stream)
-                    {
-                        Stream::getInt(stream, entityId);
-                        Stream::getShort(stream, itemId);
-                        Stream::getByte(stream, count);
-                        Stream::getShort(stream, data);
-                        Stream::getInt(stream, x);
-                        Stream::getInt(stream, y);
-                        Stream::getInt(stream, z);
-                        Stream::getByte(stream, rotation);
-                        Stream::getByte(stream, pitch);
-                        Stream::getByte(stream, roll);
-                    }
+void ItemSpawn::read(std::istream & stream) {
+    Stream::getInt(stream, entityId);
+    Stream::getShort(stream, itemId);
+    Stream::getByte(stream, count);
+    Stream::getShort(stream, data);
+    Stream::getInt(stream, x);
+    Stream::getInt(stream, y);
+    Stream::getInt(stream, z);
+    Stream::getByte(stream, rotation);
+    Stream::getByte(stream, pitch);
+    Stream::getByte(stream, roll);
+}
 
-                    void ItemSpawn::write(std::ostream &stream) const
-                    {
-                        Stream::putInt(stream, entityId);
-                        Stream::putShort(stream, itemId);
-                        Stream::putByte(stream, count);
-                        Stream::putShort(stream, data);
-                        Stream::putInt(stream, x);
-                        Stream::putInt(stream, y);
-                        Stream::putInt(stream, z);
-                        Stream::putByte(stream, rotation);
-                        Stream::putByte(stream, pitch);
-                        Stream::putByte(stream, roll);
-                    }
+void ItemSpawn::write(std::ostream & stream) const {
+    Stream::putInt(stream, entityId);
+    Stream::putShort(stream, itemId);
+    Stream::putByte(stream, count);
+    Stream::putShort(stream, data);
+    Stream::putInt(stream, x);
+    Stream::putInt(stream, y);
+    Stream::putInt(stream, z);
+    Stream::putByte(stream, rotation);
+    Stream::putByte(stream, pitch);
+    Stream::putByte(stream, roll);
+}
 
-                    void ItemSpawn::toReadable(std::ostream &os) const
-                    {
-                        os << "Entity Id: " << entityId << std::endl;
-                        os << "Item Id: " << itemId << std::endl;
-                        os << "Count: " << (int) count << std::endl;
-                        os << "Data: " << data << std::endl;
-                        os << "X: " << x << std::endl;
-                        os << "Y: " << y << std::endl;
-                        os << "Z: " << z << std::endl;
-                        os << "Rotation: " << (int) rotation << std::endl;
-                        os << "Pitch: " << (int) pitch << std::endl;
-                        os << "Roll: " << (int) roll << std::endl;
-                    }
-                }
-            }
-        }
-    }
+void ItemSpawn::toReadable(std::ostream & os) const {
+    os << "Entity Id: " << entityId << std::endl;
+    os << "Item Id: " << itemId << std::endl;
+    os << "Count: " << (int) count << std::endl;
+    os << "Data: " << data << std::endl;
+    os << "X: " << x << std::endl;
+    os << "Y: " << y << std::endl;
+    os << "Z: " << z << std::endl;
+    os << "Rotation: " << (int) rotation << std::endl;
+    os << "Pitch: " << (int) pitch << std::endl;
+    os << "Roll: " << (int) roll << std::endl;
+}
+}
+}
+}
+}
 }

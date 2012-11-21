@@ -25,21 +25,16 @@
 #include "../protocol.hpp"
 #include "packet.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace client
-            {
-                class Protocol : public mainline::Protocol<Protocol,Packet,Packet::PacketID>
-                {
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace client {
+class Protocol : public mainline::Protocol<Protocol,Packet,Packet::PacketID> {
 
-                };
-            }
-        }
-    }
+};
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_MAINLINE_PROTOCOL_CLIENT_PROTOCOL_HPP

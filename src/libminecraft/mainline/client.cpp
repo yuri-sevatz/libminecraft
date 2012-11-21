@@ -19,15 +19,12 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "client.hpp"
+#include <libminecraft/mainline/client.hpp>
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-    Client::Client(Session & session) : _session(session), self(session.getSelf())
-        {
-            session.listener.address = this;
-        }
-    }
+namespace libminecraft {
+namespace mainline {
+Client::Client(Session & session) : _session(session), self(session.getSelf()) {
+    session.listener.address = this;
+}
+}
 }

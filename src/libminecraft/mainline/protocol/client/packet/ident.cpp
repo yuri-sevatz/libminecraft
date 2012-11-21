@@ -25,37 +25,28 @@
 
 #include <iostream>
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace client
-            {
-                namespace packet
-                {
-                    Ident::Ident()
-                    {
-                    }
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace client {
+namespace packet {
+Ident::Ident() {
+}
 
-                    void Ident::read(std::istream &stream)
-                    {
-                        Stream::getUCS2String(stream, username);
-                    }
+void Ident::read(std::istream & stream) {
+    Stream::getUCS2String(stream, username);
+}
 
-                    void Ident::write(std::ostream &stream) const
-                    {
-                        Stream::putUCS2String(stream, username);
-                    }
+void Ident::write(std::ostream & stream) const {
+    Stream::putUCS2String(stream, username);
+}
 
-                    void Ident::toReadable(std::ostream &os) const
-                    {
-                        // TODO : Removed Hardcoded Streams
-                        std::wcout << "Username: " << username << std::endl;
-                    }
-                }
-            }
-        }
-    }
+void Ident::toReadable(std::ostream & os) const {
+    // TODO : Removed Hardcoded Streams
+    std::wcout << "Username: " << username << std::endl;
+}
+}
+}
+}
+}
 }

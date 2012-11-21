@@ -25,21 +25,16 @@
 #include "../protocol.hpp"
 #include "packet.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                class Protocol : public classic::Protocol<Protocol,Packet, Packet::PacketID>
-                {
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace server {
+class Protocol : public classic::Protocol<Protocol,Packet, Packet::PacketID> {
 
-                };
-            }
-        }
-    }
+};
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_CLASSIC_PROTOCOL_SERVER_PROTOCOL_HPP

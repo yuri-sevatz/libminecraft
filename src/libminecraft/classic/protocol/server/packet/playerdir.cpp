@@ -23,43 +23,34 @@
 
 #include "../../stream.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    PlayerDir::PlayerDir()
-                    {
-                    }
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace server {
+namespace packet {
+PlayerDir::PlayerDir() {
+}
 
-                    void PlayerDir::read(std::istream &stream)
-                    {
-                        Stream::getByte(stream, player_id);
-                        Stream::getByte(stream, yaw);
-                        Stream::getByte(stream, pitch);
-                    }
+void PlayerDir::read(std::istream & stream) {
+    Stream::getByte(stream, player_id);
+    Stream::getByte(stream, yaw);
+    Stream::getByte(stream, pitch);
+}
 
-                    void PlayerDir::write(std::ostream &stream) const
-                    {
-                        Stream::putByte(stream, player_id);
-                        Stream::putByte(stream, yaw);
-                        Stream::putByte(stream, pitch);
-                    }
+void PlayerDir::write(std::ostream & stream) const {
+    Stream::putByte(stream, player_id);
+    Stream::putByte(stream, yaw);
+    Stream::putByte(stream, pitch);
+}
 
-                    void PlayerDir::toReadable(std::ostream &os) const
-                    {
-                        os << "Player ID: " << (int) player_id << "\n";
-                        os << "Yaw: " << (int) yaw << "\n";
-                        os << "Pitch: " << (int) pitch << "\n";
-                    }
-                }
-            }
-        }
-    }
+void PlayerDir::toReadable(std::ostream & os) const {
+    os << "Player ID: " << (int) player_id << "\n";
+    os << "Yaw: " << (int) yaw << "\n";
+    os << "Pitch: " << (int) pitch << "\n";
+}
+}
+}
+}
+}
 }
 

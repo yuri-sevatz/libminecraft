@@ -30,17 +30,14 @@
 // ** Include all template requirements from AbstractStateMachine
 // S now requires an Update() method be defined, accepting O as a parameter.
 template<class O, class S>
-class ActionStateMachine : public AbstractStateMachine<O,S>
-{
-    public:
+class ActionStateMachine : public AbstractStateMachine<O,S> {
+public:
     ActionStateMachine(O & owner, S & state, bool enterFirst = true) :
-        AbstractStateMachine<O,S>(owner, state, enterFirst)
-    {
+        AbstractStateMachine<O,S>(owner, state, enterFirst) {
 
     }
 
-    void Update()
-    {
+    void Update() {
         this->current->Update(this->owner);
     }
 };

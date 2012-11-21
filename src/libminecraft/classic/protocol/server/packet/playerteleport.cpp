@@ -23,52 +23,43 @@
 
 #include "../../stream.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    PlayerTeleport::PlayerTeleport()
-                    {
-                    }
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace server {
+namespace packet {
+PlayerTeleport::PlayerTeleport() {
+}
 
-                    void PlayerTeleport::read(std::istream &stream)
-                    {
-                        Stream::getByte(stream, player_id);
-                        Stream::getShort(stream, x);
-                        Stream::getShort(stream, y);
-                        Stream::getShort(stream, z);
-                        Stream::getByte(stream, yaw);
-                        Stream::getByte(stream, pitch);
-                    }
+void PlayerTeleport::read(std::istream & stream) {
+    Stream::getByte(stream, player_id);
+    Stream::getShort(stream, x);
+    Stream::getShort(stream, y);
+    Stream::getShort(stream, z);
+    Stream::getByte(stream, yaw);
+    Stream::getByte(stream, pitch);
+}
 
-                    void PlayerTeleport::write(std::ostream &stream) const
-                    {
-                        Stream::putByte(stream, player_id);
-                        Stream::putShort(stream, x);
-                        Stream::putShort(stream, y);
-                        Stream::putShort(stream, z);
-                        Stream::putByte(stream, yaw);
-                        Stream::putByte(stream, pitch);
-                    }
+void PlayerTeleport::write(std::ostream & stream) const {
+    Stream::putByte(stream, player_id);
+    Stream::putShort(stream, x);
+    Stream::putShort(stream, y);
+    Stream::putShort(stream, z);
+    Stream::putByte(stream, yaw);
+    Stream::putByte(stream, pitch);
+}
 
-                    void PlayerTeleport::toReadable(std::ostream &os) const
-                    {
-                        os << "Player ID: " << (int) player_id << "\n";
-                        os << "Delta X: " << x << "\n";
-                        os << "Delta Y: " << y << "\n";
-                        os << "Delta Z: " << z << "\n";
-                        os << "Yaw: " << (int) yaw << "\n";
-                        os << "Pitch: " << (int) pitch << "\n";
-                    }
-                }
-            }
-        }
-    }
+void PlayerTeleport::toReadable(std::ostream & os) const {
+    os << "Player ID: " << (int) player_id << "\n";
+    os << "Delta X: " << x << "\n";
+    os << "Delta Y: " << y << "\n";
+    os << "Delta Z: " << z << "\n";
+    os << "Yaw: " << (int) yaw << "\n";
+    os << "Pitch: " << (int) pitch << "\n";
+}
+}
+}
+}
+}
 }
 

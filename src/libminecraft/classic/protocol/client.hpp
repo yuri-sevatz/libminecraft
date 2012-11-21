@@ -27,57 +27,50 @@
 #include "client/protocol.hpp"
 #include "server/protocol.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            class Client
-            {
-            private:
-                boost::asio::ip::tcp::socket & socket;
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+class Client {
+private:
+    boost::asio::ip::tcp::socket & socket;
 
-            public:
-                Client(boost::asio::ip::tcp::socket & socket);
-                void read(server::Packet & dest);
-                void write(const client::Packet & src);
-                MCTypes::Byte next();
-            };
+public:
+    Client(boost::asio::ip::tcp::socket & socket);
+    void read(server::Packet & dest);
+    void write(const client::Packet & src);
+    MCTypes::Byte next();
+};
 
-            inline void Client::read(server::Packet &dest)
-            {
-                /*
-                server::Protocol::read(stream, dest);
+inline void Client::read(server::Packet & dest) {
+    /*
+    server::Protocol::read(stream, dest);
 
-                if (!stream.good())
-                    throw exception::Network("Client connection closed while reading inbound minecraft packet");
-                */
-            }
+    if (!stream.good())
+    throw exception::Network("Client connection closed while reading inbound minecraft packet");
+    */
+}
 
-            inline void Client::write(const client::Packet &src)
-            {
-                /*
-                client::Protocol::write(stream, src);
-                stream.flush();
+inline void Client::write(const client::Packet & src) {
+    /*
+    client::Protocol::write(stream, src);
+    stream.flush();
 
-                if (!stream.good())
-                    throw exception::Network("Client connection closed while writing outbound minecraft packet");
-                */
-            }
+    if (!stream.good())
+    throw exception::Network("Client connection closed while writing outbound minecraft packet");
+    */
+}
 
-            inline MCTypes::Byte Client::next()
-            {
-                /*
-                MCTypes::Byte id = client::Protocol::next(stream);
-                if (!stream.good())
-                    throw exception::Network("Client connection closed while awaiting next packet");
-                return id;
-                */
-                return 0;
-            }
-        }
-    }
+inline MCTypes::Byte Client::next() {
+    /*
+    MCTypes::Byte id = client::Protocol::next(stream);
+    if (!stream.good())
+    throw exception::Network("Client connection closed while awaiting next packet");
+    return id;
+    */
+    return 0;
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_CLASSIC_PROTOCOL_CLIENT_HPP

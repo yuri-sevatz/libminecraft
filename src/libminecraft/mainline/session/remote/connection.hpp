@@ -30,7 +30,7 @@
 #include "state.hpp"
 
 // Include game necessities
-#include "../../game/player.hpp"
+#include <libminecraft/mainline/game/player.hpp>
 
 // Include all the states...
 #include "state/connecting.hpp"
@@ -39,20 +39,15 @@
 
 #include <boost/asio.hpp>
 
-namespace libminecraft
-{
-namespace mainline
-{
-namespace session
-{
+namespace libminecraft {
+namespace mainline {
+namespace session {
 // Forward-declare remote session.
 class Remote;
 
-namespace remote
-{
+namespace remote {
 
-class Connection : public ActionStateMachine<Connection, const State>
-{
+class Connection : public ActionStateMachine<Connection, const State> {
     friend class state::Connecting;
     friend class state::Negotiating;
     friend class state::Loading;
@@ -60,8 +55,7 @@ class Connection : public ActionStateMachine<Connection, const State>
 public:
     // Create a container for all states statically for const references.
     // This way, all the states have access to protected/private content.
-    static const struct StatesDefs
-    {
+    static const struct StatesDefs {
         state::Connecting CONNECTING;
         state::Negotiating NEGOTIATING;
         state::Loading LOADING;

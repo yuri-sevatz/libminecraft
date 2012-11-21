@@ -9,8 +9,7 @@ namespace protocol {
 namespace server {
 namespace packet {
 
-class Abilities  : public Packet
-{
+class Abilities  : public Packet {
 public:
     MCTypes::Bool isInvulnerable;
     MCTypes::Bool isFlying;
@@ -18,9 +17,9 @@ public:
     MCTypes::Bool canInstantDig;
 
     Abilities();
-    void read(std::istream &is);
-    void write(std::ostream &os) const;
-    void toReadable(std::ostream &os) const;
+    void read(std::istream & is);
+    void write(std::ostream & os) const;
+    void toReadable(std::ostream & os) const;
 };
 
 }

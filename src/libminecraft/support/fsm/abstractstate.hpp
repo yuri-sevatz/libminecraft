@@ -23,8 +23,7 @@
 #define SUPPORT_ABSTRACTSTATE_HPP
 
 template <class O>
-class AbstractState
-{
+class AbstractState {
 protected:
     typedef O t_owner;
 public:

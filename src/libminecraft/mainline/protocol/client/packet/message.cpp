@@ -21,21 +21,15 @@
 
 #include "message.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace client
-            {
-                namespace packet
-                {
-                    Message::Message()
-                    {
-                    }
-                }
-            }
-        }
-    }
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace client {
+namespace packet {
+Message::Message() {
+}
+}
+}
+}
+}
 }

@@ -23,36 +23,27 @@
 
 #include "../../stream.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace client
-            {
-                namespace packet
-                {
-                    Player::Player()
-                    {
-                    }
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace client {
+namespace packet {
+Player::Player() {
+}
 
-                    void Player::read(std::istream &stream)
-                    {
-                        Stream::getBool(stream, on_ground);
-                    }
+void Player::read(std::istream & stream) {
+    Stream::getBool(stream, on_ground);
+}
 
-                    void Player::write(std::ostream &stream) const
-                    {
-                        Stream::putBool(stream, on_ground);
-                    }
+void Player::write(std::ostream & stream) const {
+    Stream::putBool(stream, on_ground);
+}
 
-                    void Player::toReadable(std::ostream &os) const
-                    {
-                        os << "On Ground: " << on_ground << std::endl;
-                    }
-                }
-            }
-        }
-    }
+void Player::toReadable(std::ostream & os) const {
+    os << "On Ground: " << on_ground << std::endl;
+}
+}
+}
+}
+}
 }

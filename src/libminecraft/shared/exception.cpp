@@ -19,16 +19,13 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "exception.hpp"
+#include <libminecraft/shared/exception.hpp>
 
-namespace libminecraft
-{
-    Exception::Exception(const char * message) : message(message)
-    {
+namespace libminecraft {
+Exception::Exception(const char * message) : message(message) {
 
-    }
-    const char* Exception::what() const throw()
-    {
-        return message;
-    }
+}
+const char * Exception::what() const throw() {
+    return message;
+}
 }

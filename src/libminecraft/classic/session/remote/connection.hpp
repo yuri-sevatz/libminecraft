@@ -30,11 +30,11 @@
 #include "state.hpp"
 
 // Include game necessities
-#include "../../game/world.hpp"
-#include "../../game/player/local.hpp"
+#include <libminecraft/classic/game/world.hpp>
+#include <libminecraft/classic/game/player/local.hpp>
 
 // Include server properties
-#include "../info.hpp"
+#include <libminecraft/classic/session/info.hpp>
 
 // Include all the states...
 #include "state/connecting.hpp"
@@ -46,78 +46,72 @@
 #include <boost/thread.hpp>
 #include <sstream>
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace session
-        {
-            // Forward-declare remote session.
-            class Remote;
+namespace libminecraft {
+namespace classic {
+namespace session {
+// Forward-declare remote session.
+class Remote;
 
-            namespace remote
-            {
-                class Connection : public ActionStateMachine<Connection, const State>
-                {
-                    friend class state::Connecting;
-                    friend class state::Negotiating;
-                    friend class state::LoadingMap;
-                    friend class state::InGame;
+namespace remote {
+class Connection : public ActionStateMachine<Connection, const State> {
+    friend class state::Connecting;
+    friend class state::Negotiating;
+    friend class state::LoadingMap;
+    friend class state::InGame;
 
-                public:
-                    // Create a container for all states statically for const references.
-                    // This way, all the states have access to protected/private content.
-                    static const struct StatesDefs
-                    {
-                        state::Connecting CONNECTING;
-                        state::Negotiating NEGOTIATING;
-                        state::LoadingMap LOADINGMAP;
-                        state::InGame INGAME;
-                    } States;
+public:
+    // Create a container for all states statically for const references.
+    // This way, all the states have access to protected/private content.
+    static const struct StatesDefs {
+        state::Connecting CONNECTING;
+        state::Negotiating NEGOTIATING;
+        state::LoadingMap LOADINGMAP;
+        state::InGame INGAME;
+    } States;
 
-                    // The remote session's connection uses the client protocol.
-                    protocol::Client proto;
+    // The remote session's connection uses the client protocol.
+    protocol::Client proto;
 
-                    // The "self" in the game, private, writable.
-                    game::player::Local _self;
+    // The "self" in the game, private, writable.
+    game::player::Local _self;
 
-                    // The game world, private, writable.
-                    game::World _world;
+    // The game world, private, writable.
+    game::World _world;
 
-                    // Server information.
-                    session::Info _server;
+    // Server information.
+    session::Info _server;
 
-                    // The worker thread, if requested.
-                    boost::thread worker;
+    // The worker thread, if requested.
+    boost::thread worker;
 
-                private:
-                    // Map tmp data...
-                    std::stringstream gz_data;
+private:
+    // Map tmp data...
+    std::stringstream gz_data;
 
-                    // The session object
-                    Remote & session;
+    // The session object
+    Remote & session;
 
-                    const std::string hostname;
-                    const std::string port;
+    const std::string hostname;
+    const std::string port;
 
-                    // Server properties
-                    std::string username;
-                    std::string key;
+    // Server properties
+    std::string username;
+    std::string key;
 
-                    // The connection itself.
-                    boost::asio::io_service service;
-                    boost::asio::ip::tcp::socket socket;
+    // The connection itself.
+    boost::asio::io_service service;
+    boost::asio::ip::tcp::socket socket;
 
-                public:
-                    Connection(Remote & session,
-                               const std::string & hostname,
-                               const std::string & port,
-                               const std::string & username,
-                               const std::string & key);
-                };
-            }
-        }
-    }
+public:
+    Connection(Remote & session,
+               const std::string & hostname,
+               const std::string & port,
+               const std::string & username,
+               const std::string & key);
+};
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_CLASSIC_SESSION_REMOTE_CONNECTION_HPP

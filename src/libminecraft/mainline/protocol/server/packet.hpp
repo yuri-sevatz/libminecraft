@@ -24,42 +24,36 @@
 
 #include "../packet.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                class Packet : public virtual protocol::Packet
-                {
-                public:
-                    enum PacketID
-                    {
-                        PING = (MCTypes::Byte)0x00,
-                        LOGIN = (MCTypes::Byte) 0x01,
-                        IDENT = (MCTypes::Byte) 0x02,
-                        MESSAGE = (MCTypes::Byte) 0x03,
-                        TIME = (MCTypes::Byte) 0x04,
-                        EQUIPMENT = (MCTypes::Byte) 0x05,
-                        SPAWNPOINT = (MCTypes::Byte) 0x06,
-                        HEALTH = (MCTypes::Byte) 0x08,
-                        PLAYERPOSDIR = (MCTypes::Byte) 0x0D,
-                        ITEMSPAWN = (MCTypes::Byte) 0x15,
-                        MOVINGOBJECTSPAWN = (MCTypes::Byte) 0x17,
-                        MOBSPAWN = (MCTypes::Byte) 0x18,
-                        ENTITYVELOCITY = (MCTypes::Byte) 0x1C,
-                        PRECHUNK = (MCTypes::Byte) 0x32,
-                        GAMESTATE = (MCTypes::Byte) 0x46,
-                        WINDOWITEMS = (MCTypes::Byte) 0x68,
-                        PLAYERLISTITEM = (MCTypes::Byte) 0xC9,
-                        ABILITIES = (MCTypes::Byte) 0xCA
-                    };
-                };
-            }
-        }
-    }
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace server {
+class Packet : public virtual protocol::Packet {
+public:
+    enum PacketID {
+        PING = (MCTypes::Byte)0x00,
+        LOGIN = (MCTypes::Byte) 0x01,
+        IDENT = (MCTypes::Byte) 0x02,
+        MESSAGE = (MCTypes::Byte) 0x03,
+        TIME = (MCTypes::Byte) 0x04,
+        EQUIPMENT = (MCTypes::Byte) 0x05,
+        SPAWNPOINT = (MCTypes::Byte) 0x06,
+        HEALTH = (MCTypes::Byte) 0x08,
+        PLAYERPOSDIR = (MCTypes::Byte) 0x0D,
+        ITEMSPAWN = (MCTypes::Byte) 0x15,
+        MOVINGOBJECTSPAWN = (MCTypes::Byte) 0x17,
+        MOBSPAWN = (MCTypes::Byte) 0x18,
+        ENTITYVELOCITY = (MCTypes::Byte) 0x1C,
+        PRECHUNK = (MCTypes::Byte) 0x32,
+        GAMESTATE = (MCTypes::Byte) 0x46,
+        WINDOWITEMS = (MCTypes::Byte) 0x68,
+        PLAYERLISTITEM = (MCTypes::Byte) 0xC9,
+        ABILITIES = (MCTypes::Byte) 0xCA
+    };
+};
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_MAINLINE_PROTOCOL_SERVER_PACKET_HPP

@@ -24,17 +24,14 @@
 
 #include "../../shared/protocol/protocol.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        template<class TProtocol, class TPacket, typename TPacketID>
-        class Protocol : public libminecraft::Protocol<TProtocol, TPacket, TPacketID>
-        {
-        public:
-            static const MCTypes::Byte version = 0x1D;
-        };
-    }
+namespace libminecraft {
+namespace mainline {
+template<class TProtocol, class TPacket, typename TPacketID>
+class Protocol : public libminecraft::Protocol<TProtocol, TPacket, TPacketID> {
+public:
+    static const MCTypes::Byte version = 0x1D;
+};
+}
 }
 
 #endif // LIBMINECRAFT_MAINLINE_PROTOCOL_HPP

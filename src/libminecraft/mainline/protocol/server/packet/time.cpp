@@ -23,36 +23,27 @@
 
 #include "../../stream.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    Time::Time()
-                    {
-                    }
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace server {
+namespace packet {
+Time::Time() {
+}
 
-                    void Time::read(std::istream &stream)
-                    {
-                        Stream::getLong(stream, time);
-                    }
+void Time::read(std::istream & stream) {
+    Stream::getLong(stream, time);
+}
 
-                    void Time::write(std::ostream &stream) const
-                    {
-                        Stream::putLong(stream, time);
-                    }
+void Time::write(std::ostream & stream) const {
+    Stream::putLong(stream, time);
+}
 
-                    void Time::toReadable(std::ostream &os) const
-                    {
-                        os << "Time: " << time << std::endl;
-                    }
-                }
-            }
-        }
-    }
+void Time::toReadable(std::ostream & os) const {
+    os << "Time: " << time << std::endl;
+}
+}
+}
+}
+}
 }

@@ -23,43 +23,34 @@
 
 #include "../../stream.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace client
-            {
-                namespace packet
-                {
-                    Use::Use()
-                    {
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace client {
+namespace packet {
+Use::Use() {
 
-                    }
+}
 
-                    void Use::read(std::istream &stream)
-                    {
-                        Stream::getInt(stream, user_entity_id);
-                        Stream::getInt(stream, target_entity_id);
-                        Stream::getBool(stream, click);
-                    }
+void Use::read(std::istream & stream) {
+    Stream::getInt(stream, user_entity_id);
+    Stream::getInt(stream, target_entity_id);
+    Stream::getBool(stream, click);
+}
 
-                    void Use::write(std::ostream &stream) const
-                    {
-                        Stream::putInt(stream, user_entity_id);
-                        Stream::putInt(stream, target_entity_id);
-                        Stream::putBool(stream, click);
-                    }
+void Use::write(std::ostream & stream) const {
+    Stream::putInt(stream, user_entity_id);
+    Stream::putInt(stream, target_entity_id);
+    Stream::putBool(stream, click);
+}
 
-                    void Use::toReadable(std::ostream &os) const
-                    {
-                        os << "User Id: " << user_entity_id << "\n";
-                        os << "Target Id " << target_entity_id << "\n";
-                        os << "Left Click?: " << click << std::endl;
-                    }
-                }
-            }
-        }
-    }
+void Use::toReadable(std::ostream & os) const {
+    os << "User Id: " << user_entity_id << "\n";
+    os << "Target Id " << target_entity_id << "\n";
+    os << "Left Click?: " << click << std::endl;
+}
+}
+}
+}
+}
 }

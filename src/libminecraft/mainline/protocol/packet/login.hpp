@@ -24,33 +24,28 @@
 
 #include "../packet.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace packet
-            {
-                class Login : public virtual Packet
-                {
-                public:
-                    MCTypes::Int id; // Note: used as version_id AND entity_id.
-                    MCTypes::UCS2String username;
-                    MCTypes::UCS2String levelType;
-                    MCTypes::Int mode;
-                    MCTypes::Int dimension;
-                    MCTypes::Byte difficulty;
-                    MCTypes::Byte maxPlayers;
-                    MCTypes::Byte worldHeight;
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace packet {
+class Login : public virtual Packet {
+public:
+    MCTypes::Int id; // Note: used as version_id AND entity_id.
+    MCTypes::UCS2String username;
+    MCTypes::UCS2String levelType;
+    MCTypes::Int mode;
+    MCTypes::Int dimension;
+    MCTypes::Byte difficulty;
+    MCTypes::Byte maxPlayers;
+    MCTypes::Byte worldHeight;
 
-                    void read(std::istream &is);
-                    void write(std::ostream &os) const;
-                    void toReadable(std::ostream &os) const;
-                };
-            }
-        }
-    }
+    void read(std::istream & is);
+    void write(std::ostream & os) const;
+    void toReadable(std::ostream & os) const;
+};
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_MAINLINE_PROTOCOL_PACKET_LOGIN_HPP

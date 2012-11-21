@@ -1,9 +1,3 @@
-#Ignore QtCreator Files
-CMakeLists.txt.user
-libminecraft.creator
-libminecraft.creator.user*
-libminecraft.files
-libminecraft.config
-libminecraft.includes
+libminecraft.*
 .*
 !.gitignore

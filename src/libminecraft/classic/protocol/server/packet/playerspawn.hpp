@@ -24,36 +24,30 @@
 
 #include "../packet.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    class PlayerSpawn : public Packet
-                    {
-                    public:
-                        MCTypes::Byte player_id;
-                        MCTypes::String64 player_name;
-                        MCTypes::Short x;
-                        MCTypes::Short y;
-                        MCTypes::Short z;
-                        MCTypes::Byte yaw;
-                        MCTypes::Byte pitch;
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace server {
+namespace packet {
+class PlayerSpawn : public Packet {
+public:
+    MCTypes::Byte player_id;
+    MCTypes::String64 player_name;
+    MCTypes::Short x;
+    MCTypes::Short y;
+    MCTypes::Short z;
+    MCTypes::Byte yaw;
+    MCTypes::Byte pitch;
 
-                        PlayerSpawn();
-                        void read(std::istream &is);
-                        void write(std::ostream &os) const;
-                        void toReadable(std::ostream &os) const;
-                    };
-                }
-            }
-        }
-    }
+    PlayerSpawn();
+    void read(std::istream & is);
+    void write(std::ostream & os) const;
+    void toReadable(std::ostream & os) const;
+};
+}
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_CLASSIC_PROTOCOL_SERVER_PACKET_PLAYERSPAWN_HPP

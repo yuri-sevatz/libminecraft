@@ -39,25 +39,24 @@
 
 #include <boost/assign/list_of.hpp>
 
-namespace libminecraft
-{
-    template<> const std::map<const std::type_info *, classic::protocol::server::Packet::PacketID>
-            Protocol<classic::protocol::server::Protocol, classic::protocol::server::Packet, classic::protocol::server::Packet::PacketID>::msgmap =
-                boost::assign::map_list_of                    
-                    (&typeid(classic::protocol::server::packet::Disconnect), classic::protocol::server::Packet::DISCONNECT)
-                    (&typeid(classic::protocol::server::packet::Ident), classic::protocol::server::Packet::IDENT)
-                    (&typeid(classic::protocol::server::packet::Ping), classic::protocol::server::Packet::PING)
-                    (&typeid(classic::protocol::server::packet::LevelBegin), classic::protocol::server::Packet::LEVELBEGIN)
-                    (&typeid(classic::protocol::server::packet::LevelChunk), classic::protocol::server::Packet::LEVELCHUNK)
-                    (&typeid(classic::protocol::server::packet::LevelDone), classic::protocol::server::Packet::LEVELDONE)
-                    (&typeid(classic::protocol::server::packet::Message), classic::protocol::server::Packet::MESSAGE)
-                    (&typeid(classic::protocol::server::packet::PlayerDespawn), classic::protocol::server::Packet::DESPAWN)
-                    (&typeid(classic::protocol::server::packet::PlayerDir), classic::protocol::server::Packet::DIR)
-                    (&typeid(classic::protocol::server::packet::PlayerOp), classic::protocol::server::Packet::USEROP)
-                    (&typeid(classic::protocol::server::packet::PlayerPosDir), classic::protocol::server::Packet::POSDIR)
-                    (&typeid(classic::protocol::server::packet::PlayerPos), classic::protocol::server::Packet::POS)
-                    (&typeid(classic::protocol::server::packet::PlayerSpawn), classic::protocol::server::Packet::SPAWN)
-                    (&typeid(classic::protocol::server::packet::PlayerTeleport), classic::protocol::server::Packet::TELEPORT)
-                    (&typeid(classic::protocol::server::packet::SetBlock), classic::protocol::server::Packet::BLOCK);
+namespace libminecraft {
+template<> const std::map<const std::type_info *, classic::protocol::server::Packet::PacketID>
+Protocol<classic::protocol::server::Protocol, classic::protocol::server::Packet, classic::protocol::server::Packet::PacketID>::msgmap =
+    boost::assign::map_list_of
+    (&typeid(classic::protocol::server::packet::Disconnect), classic::protocol::server::Packet::DISCONNECT)
+    (&typeid(classic::protocol::server::packet::Ident), classic::protocol::server::Packet::IDENT)
+    (&typeid(classic::protocol::server::packet::Ping), classic::protocol::server::Packet::PING)
+    (&typeid(classic::protocol::server::packet::LevelBegin), classic::protocol::server::Packet::LEVELBEGIN)
+    (&typeid(classic::protocol::server::packet::LevelChunk), classic::protocol::server::Packet::LEVELCHUNK)
+    (&typeid(classic::protocol::server::packet::LevelDone), classic::protocol::server::Packet::LEVELDONE)
+    (&typeid(classic::protocol::server::packet::Message), classic::protocol::server::Packet::MESSAGE)
+    (&typeid(classic::protocol::server::packet::PlayerDespawn), classic::protocol::server::Packet::DESPAWN)
+    (&typeid(classic::protocol::server::packet::PlayerDir), classic::protocol::server::Packet::DIR)
+    (&typeid(classic::protocol::server::packet::PlayerOp), classic::protocol::server::Packet::USEROP)
+    (&typeid(classic::protocol::server::packet::PlayerPosDir), classic::protocol::server::Packet::POSDIR)
+    (&typeid(classic::protocol::server::packet::PlayerPos), classic::protocol::server::Packet::POS)
+    (&typeid(classic::protocol::server::packet::PlayerSpawn), classic::protocol::server::Packet::SPAWN)
+    (&typeid(classic::protocol::server::packet::PlayerTeleport), classic::protocol::server::Packet::TELEPORT)
+    (&typeid(classic::protocol::server::packet::SetBlock), classic::protocol::server::Packet::BLOCK);
 }
 

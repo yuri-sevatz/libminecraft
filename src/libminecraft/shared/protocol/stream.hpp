@@ -26,57 +26,48 @@
 #include <ostream>
 
 #include "../../support/io/bigendian/stream.hpp"
-#include "../mctypes.hpp"
+#include <libminecraft/shared/mctypes.hpp>
 
-namespace libminecraft
-{
-    namespace protocol
-    {
-        class Stream
-        {
-        public:
-            static void getByte(std::istream & stream, MCTypes::Byte & sbyte);
-            static MCTypes::Byte getByte(std::istream &stream);
-            static void putByte(std::ostream & stream, const MCTypes::Byte & sbyte);
-            static void getShort(std::istream & stream, MCTypes::Short & sshort);
-            static MCTypes::Short getShort(std::istream &stream);
-            static void putShort(std::ostream & stream, const MCTypes::Short & sshort);
-        };
+namespace libminecraft {
+namespace protocol {
+class Stream {
+public:
+    static void getByte(std::istream & stream, MCTypes::Byte & sbyte);
+    static MCTypes::Byte getByte(std::istream & stream);
+    static void putByte(std::ostream & stream, const MCTypes::Byte & sbyte);
+    static void getShort(std::istream & stream, MCTypes::Short & sshort);
+    static MCTypes::Short getShort(std::istream & stream);
+    static void putShort(std::ostream & stream, const MCTypes::Short & sshort);
+};
 
-        inline void Stream::getByte(std::istream &stream, MCTypes::Byte &sbyte)
-        {
-            io::bigendian::stream::getByte(stream, sbyte);
-        }
+inline void Stream::getByte(std::istream & stream, MCTypes::Byte & sbyte) {
+    io::bigendian::stream::getByte(stream, sbyte);
+}
 
-        inline MCTypes::Byte Stream::getByte(std::istream &stream)
-        {
-            MCTypes::Byte ret;
-            getByte(stream, ret);
-            return ret;
-        }
+inline MCTypes::Byte Stream::getByte(std::istream & stream) {
+    MCTypes::Byte ret;
+    getByte(stream, ret);
+    return ret;
+}
 
-        inline void Stream::putByte(std::ostream &stream, const MCTypes::Byte &sbyte)
-        {
-            io::bigendian::stream::putByte(stream, sbyte);
-        }
+inline void Stream::putByte(std::ostream & stream, const MCTypes::Byte & sbyte) {
+    io::bigendian::stream::putByte(stream, sbyte);
+}
 
-        inline void Stream::getShort(std::istream &stream, MCTypes::Short &sshort)
-        {
-            io::bigendian::stream::getShort(stream, sshort);
-        }
+inline void Stream::getShort(std::istream & stream, MCTypes::Short & sshort) {
+    io::bigendian::stream::getShort(stream, sshort);
+}
 
-        inline MCTypes::Short Stream::getShort(std::istream &stream)
-        {
-            MCTypes::Short ret;
-            getShort(stream, ret);
-            return ret;
-        }
+inline MCTypes::Short Stream::getShort(std::istream & stream) {
+    MCTypes::Short ret;
+    getShort(stream, ret);
+    return ret;
+}
 
-        inline void Stream::putShort(std::ostream &stream, const MCTypes::Short &sshort)
-        {
-            io::bigendian::stream::putShort(stream, sshort);
-        }
-    }
+inline void Stream::putShort(std::ostream & stream, const MCTypes::Short & sshort) {
+    io::bigendian::stream::putShort(stream, sshort);
+}
+}
 }
 
 #endif // LIBMINECRAFT_PROTOCOL_STREAM_HPP

@@ -24,33 +24,27 @@
 
 #include "../packet.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    class PlayerPos : public Packet
-                    {
-                    public:
-                        MCTypes::Byte player_id;
-                        MCTypes::Byte delta_x;
-                        MCTypes::Byte delta_y;
-                        MCTypes::Byte delta_z;
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace server {
+namespace packet {
+class PlayerPos : public Packet {
+public:
+    MCTypes::Byte player_id;
+    MCTypes::Byte delta_x;
+    MCTypes::Byte delta_y;
+    MCTypes::Byte delta_z;
 
-                        PlayerPos();
-                        void read(std::istream &is);
-                        void write(std::ostream &os) const;
-                        void toReadable(std::ostream &os) const;
-                    };
-                }
-            }
-        }
-    }
+    PlayerPos();
+    void read(std::istream & is);
+    void write(std::ostream & os) const;
+    void toReadable(std::ostream & os) const;
+};
+}
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_CLASSIC_PROTOCOL_SERVER_PACKET_PLAYERPOS_HPP

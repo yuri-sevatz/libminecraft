@@ -25,25 +25,19 @@
 #include "../packet.hpp"
 #include "../../packet/login.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    class Login : public server::Packet, public protocol::packet::Login
-                    {
-                    public:
-                        Login();
-                    };
-                }
-            }
-        }
-    }
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace server {
+namespace packet {
+class Login : public server::Packet, public protocol::packet::Login {
+public:
+    Login();
+};
+}
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_MAINLINE_PROTOCOL_SERVER_PACKET_LOGIN_HPP

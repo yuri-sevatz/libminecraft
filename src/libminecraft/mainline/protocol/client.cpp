@@ -21,17 +21,13 @@
 
 #include "client.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            Client::Client(std::iostream & stream) : stream(stream)
-            {
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+Client::Client(std::iostream & stream) : stream(stream) {
 
-            }
-        }
-    }
+}
+}
+}
 }
 

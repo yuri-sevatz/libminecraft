@@ -25,43 +25,34 @@
 
 #include <iostream>
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    PlayerListItem::PlayerListItem()
-                    {
-                    }
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace server {
+namespace packet {
+PlayerListItem::PlayerListItem() {
+}
 
-                    void PlayerListItem::read(std::istream &stream)
-                    {
-                        Stream::getUCS2String(stream, name);
-                        Stream::getBool(stream, online);
-                        Stream::getShort(stream, ping);
-                    }
+void PlayerListItem::read(std::istream & stream) {
+    Stream::getUCS2String(stream, name);
+    Stream::getBool(stream, online);
+    Stream::getShort(stream, ping);
+}
 
-                    void PlayerListItem::write(std::ostream &stream) const
-                    {
-                        Stream::putUCS2String(stream, name);
-                        Stream::putBool(stream, online);
-                        Stream::putShort(stream, ping);
-                    }
+void PlayerListItem::write(std::ostream & stream) const {
+    Stream::putUCS2String(stream, name);
+    Stream::putBool(stream, online);
+    Stream::putShort(stream, ping);
+}
 
-                    void PlayerListItem::toReadable(std::ostream &os) const
-                    {
-                        // TODO : Remove Hardcoded Streams
-                        std::wcout << "Name: " << name << std::endl;
-                        os << "Online: " << online << std::endl;
-                        os << "Ping: " << ping << std::endl;
-                    }
-                }
-            }
-        }
-    }
+void PlayerListItem::toReadable(std::ostream & os) const {
+    // TODO : Remove Hardcoded Streams
+    std::wcout << "Name: " << name << std::endl;
+    os << "Online: " << online << std::endl;
+    os << "Ping: " << ping << std::endl;
+}
+}
+}
+}
+}
 }

@@ -24,32 +24,26 @@
 
 #include "../packet.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace client
-            {
-                namespace packet
-                {
-                    class Message : public Packet
-                    {
-                    public:
-                        MCTypes::Byte unused;
-                        MCTypes::String64 message;
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace client {
+namespace packet {
+class Message : public Packet {
+public:
+    MCTypes::Byte unused;
+    MCTypes::String64 message;
 
-                    public:
-                        Message();
-                        void read(std::istream &stream);
-                        void write(std::ostream &os) const;
-                        void toReadable(std::ostream &os) const;
-                    };
-                }
-            }
-        }
-    }
+public:
+    Message();
+    void read(std::istream & stream);
+    void write(std::ostream & os) const;
+    void toReadable(std::ostream & os) const;
+};
+}
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_CLASSIC_PROTOCOL_CLIENT_PACKET_MESSAGE_HPP

@@ -19,17 +19,13 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "player.hpp"
+#include <libminecraft/mainline/game/player.hpp>
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace game
-        {
-            Player::Player()
-            {
-            }
-        }
-    }
+namespace libminecraft {
+namespace mainline {
+namespace game {
+Player::Player() {
+}
+}
+}
 }

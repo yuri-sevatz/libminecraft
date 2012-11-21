@@ -23,47 +23,38 @@
 
 #include "../../stream.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    SetBlock::SetBlock()
-                    {
-                    }
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace server {
+namespace packet {
+SetBlock::SetBlock() {
+}
 
-                    void SetBlock::read(std::istream &stream)
-                    {
-                        Stream::getShort(stream, x);
-                        Stream::getShort(stream, y);
-                        Stream::getShort(stream, z);
-                        Stream::getByte(stream, type);
-                    }
+void SetBlock::read(std::istream & stream) {
+    Stream::getShort(stream, x);
+    Stream::getShort(stream, y);
+    Stream::getShort(stream, z);
+    Stream::getByte(stream, type);
+}
 
-                    void SetBlock::write(std::ostream &stream) const
-                    {
-                        Stream::putShort(stream, x);
-                        Stream::putShort(stream, y);
-                        Stream::putShort(stream, z);
-                        Stream::putByte(stream, type);
-                    }
+void SetBlock::write(std::ostream & stream) const {
+    Stream::putShort(stream, x);
+    Stream::putShort(stream, y);
+    Stream::putShort(stream, z);
+    Stream::putByte(stream, type);
+}
 
-                    void SetBlock::toReadable(std::ostream &os) const
-                    {
-                        os << "X: " << x << "\n";
-                        os << "Y: " << y << "\n";
-                        os << "Z: " << z << "\n";
-                        os << "Type: " << (int) type << std::endl;
-                    }
-                }
-            }
-        }
-    }
+void SetBlock::toReadable(std::ostream & os) const {
+    os << "X: " << x << "\n";
+    os << "Y: " << y << "\n";
+    os << "Z: " << z << "\n";
+    os << "Type: " << (int) type << std::endl;
+}
+}
+}
+}
+}
 }
 
 

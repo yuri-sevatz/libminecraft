@@ -23,37 +23,28 @@
 
 #include "../../stream.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    PlayerDespawn::PlayerDespawn()
-                    {
-                    }
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace server {
+namespace packet {
+PlayerDespawn::PlayerDespawn() {
+}
 
-                    void PlayerDespawn::read(std::istream &stream)
-                    {
-                        Stream::getByte(stream, player_id);
-                    }
+void PlayerDespawn::read(std::istream & stream) {
+    Stream::getByte(stream, player_id);
+}
 
-                    void PlayerDespawn::write(std::ostream &stream) const
-                    {
-                        Stream::putByte(stream, player_id);
-                    }
+void PlayerDespawn::write(std::ostream & stream) const {
+    Stream::putByte(stream, player_id);
+}
 
-                    void PlayerDespawn::toReadable(std::ostream &os) const
-                    {
-                        os << "Player ID: " << (int) player_id << std::endl;
-                    }
-                }
-            }
-        }
-    }
+void PlayerDespawn::toReadable(std::ostream & os) const {
+    os << "Player ID: " << (int) player_id << std::endl;
+}
+}
+}
+}
+}
 }
 

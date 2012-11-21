@@ -24,26 +24,21 @@
 
 #include "../packet.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace packet
-            {
-                class Message : public virtual Packet
-                {
-                public:
-                    MCTypes::UCS2String message;
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace packet {
+class Message : public virtual Packet {
+public:
+    MCTypes::UCS2String message;
 
-                    void read(std::istream &is);
-                    void write(std::ostream &os) const;
-                    void toReadable(std::ostream &os) const;
-                };
-            }
-        }
-    }
+    void read(std::istream & is);
+    void write(std::ostream & os) const;
+    void toReadable(std::ostream & os) const;
+};
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_MAINLINE_PROTOCOL_PACKET_MESSAGE_HPP

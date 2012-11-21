@@ -27,8 +27,7 @@
 // o has no requirements.
 // s only requires and Enter() and Exit() method, accepting O as a parameter.
 template<class O, class S>
-class AbstractStateMachine
-{
+class AbstractStateMachine {
 protected:
     O & owner;
     S * current;
@@ -37,29 +36,25 @@ protected:
 
 public:
     AbstractStateMachine(O & owner, S & state, bool enterFirst = true) :
-    owner(owner), current(&state)
-    {
+        owner(owner), current(&state) {
         if (enterFirst)
             current->Enter(owner);
     }
 
     // Get the current state.
-    S & GetState()
-    {
+    S & GetState() {
         return *current;
     }
 
     // Change current state, progress through transitions.
-    void ChangeState(S & state)
-    {
+    void ChangeState(S & state) {
         current->Exit(owner);
         current = &state;
         current->Enter(owner);
     }
 
     // Sets the current state, and skips all state transitions.
-    void SetState(S & state)
-    {
+    void SetState(S & state) {
         current = &state;
     }
 };

@@ -23,38 +23,29 @@
 
 #include "../../stream.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    Disconnect::Disconnect()
-                    {
-                    
-                    }
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace server {
+namespace packet {
+Disconnect::Disconnect() {
 
-                    void Disconnect::read(std::istream &stream)
-                    {
-                        Stream::getString64(stream, reason);
-                    }
+}
 
-                    void Disconnect::write(std::ostream &stream) const
-                    {
-                        Stream::putString64(stream, reason);
-                    }
+void Disconnect::read(std::istream & stream) {
+    Stream::getString64(stream, reason);
+}
 
-                    void Disconnect::toReadable(std::ostream &os) const
-                    {
-                        os << "Reason: " << reason << std::endl;
-                    }
-                }
-            }
-        }
-    }
+void Disconnect::write(std::ostream & stream) const {
+    Stream::putString64(stream, reason);
+}
+
+void Disconnect::toReadable(std::ostream & os) const {
+    os << "Reason: " << reason << std::endl;
+}
+}
+}
+}
+}
 }
 

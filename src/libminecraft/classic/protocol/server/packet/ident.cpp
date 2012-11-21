@@ -24,56 +24,46 @@
 #include "../../stream.hpp"
 #include "../protocol.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    Ident::Ident()
-                    {
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace server {
+namespace packet {
+Ident::Ident() {
 
-                    }
+}
 
-                    void Ident::read(std::istream & stream)
-                    {
-                        Stream::getByte(stream, srv_version);
-                        Stream::getString64(stream, srv_name);
-                        Stream::getString64(stream, srv_motd);
-                        Stream::getByte(stream, user_type);
-                    }
+void Ident::read(std::istream & stream) {
+    Stream::getByte(stream, srv_version);
+    Stream::getString64(stream, srv_name);
+    Stream::getString64(stream, srv_motd);
+    Stream::getByte(stream, user_type);
+}
 
-                    void Ident::write(std::ostream &stream) const
-                    {
-                        Stream::putByte(stream, srv_version);
-                        Stream::putString64(stream, srv_name);
-                        Stream::putString64(stream, srv_motd);
-                        Stream::putByte(stream, user_type);
-                    }
+void Ident::write(std::ostream & stream) const {
+    Stream::putByte(stream, srv_version);
+    Stream::putString64(stream, srv_name);
+    Stream::putString64(stream, srv_motd);
+    Stream::putByte(stream, user_type);
+}
 
-                    void Ident::toReadable(std::ostream &os) const
-                    {
-                        os << "Version: " << (int) srv_version << "\n";
-                        os << "Name: " << srv_name << "\n";
-                        os << "Motd: " << srv_motd << "\n";
-                        os << "User Type: " << (int) user_type << std::endl;
-                    }
+void Ident::toReadable(std::ostream & os) const {
+    os << "Version: " << (int) srv_version << "\n";
+    os << "Name: " << srv_name << "\n";
+    os << "Motd: " << srv_motd << "\n";
+    os << "User Type: " << (int) user_type << std::endl;
+}
 
-                    MCTypes::Byte Ident::cmpVersion() const
-                    {
-                        if (srv_version > Protocol::version)
-                            return 1;
-                        else if (srv_version < Protocol::version)
-                            return -1;
-                        else
-                            return 0;
-                    }
-                }
-            }
-        }
-    }
+MCTypes::Byte Ident::cmpVersion() const {
+    if (srv_version > Protocol::version)
+        return 1;
+    else if (srv_version < Protocol::version)
+        return -1;
+    else
+        return 0;
+}
+}
+}
+}
+}
 }

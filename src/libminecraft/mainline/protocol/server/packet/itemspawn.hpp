@@ -24,39 +24,33 @@
 
 #include "../packet.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    class ItemSpawn : public Packet
-                    {
-                    public:
-                        MCTypes::Int entityId;
-                        MCTypes::Short itemId;
-                        MCTypes::Byte count;
-                        MCTypes::Short data;
-                        MCTypes::Int x;
-                        MCTypes::Int y;
-                        MCTypes::Int z;
-                        MCTypes::Byte rotation;
-                        MCTypes::Byte pitch;
-                        MCTypes::Byte roll;
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace server {
+namespace packet {
+class ItemSpawn : public Packet {
+public:
+    MCTypes::Int entityId;
+    MCTypes::Short itemId;
+    MCTypes::Byte count;
+    MCTypes::Short data;
+    MCTypes::Int x;
+    MCTypes::Int y;
+    MCTypes::Int z;
+    MCTypes::Byte rotation;
+    MCTypes::Byte pitch;
+    MCTypes::Byte roll;
 
-                        ItemSpawn();
-                        void read(std::istream &is);
-                        void write(std::ostream &os) const;
-                        void toReadable(std::ostream &os) const;
-                    };
-                }
-            }
-        }
-    }
+    ItemSpawn();
+    void read(std::istream & is);
+    void write(std::ostream & os) const;
+    void toReadable(std::ostream & os) const;
+};
+}
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_MAINLINE_PROTOCOL_SERVER_PACKET_ITEMSPAWN_HPP

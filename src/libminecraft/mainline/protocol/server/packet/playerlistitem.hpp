@@ -24,32 +24,26 @@
 
 #include "../packet.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    class PlayerListItem : public Packet
-                    {
-                        MCTypes::UCS2String name;
-                        MCTypes::Bool online;
-                        MCTypes::Short ping;
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace server {
+namespace packet {
+class PlayerListItem : public Packet {
+    MCTypes::UCS2String name;
+    MCTypes::Bool online;
+    MCTypes::Short ping;
 
-                    public:
-                        PlayerListItem();
-                        void read(std::istream &is);
-                        void write(std::ostream &os) const;
-                        void toReadable(std::ostream &os) const;
-                    };
-                }
-            }
-        }
-    }
+public:
+    PlayerListItem();
+    void read(std::istream & is);
+    void write(std::ostream & os) const;
+    void toReadable(std::ostream & os) const;
+};
+}
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_MAINLINE_PROTOCOL_SERVER_PACKET_PLAYERLISTITEM_HPP

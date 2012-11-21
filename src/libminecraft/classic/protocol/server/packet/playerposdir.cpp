@@ -23,52 +23,43 @@
 
 #include "../../stream.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    PlayerPosDir::PlayerPosDir()
-                    {
-                    }
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace server {
+namespace packet {
+PlayerPosDir::PlayerPosDir() {
+}
 
-                    void PlayerPosDir::read(std::istream &stream)
-                    {
-                        Stream::getByte(stream, player_id);
-                        Stream::getByte(stream, delta_x);
-                        Stream::getByte(stream, delta_y);
-                        Stream::getByte(stream, delta_z);
-                        Stream::getByte(stream, yaw);
-                        Stream::getByte(stream, pitch);
-                    }
+void PlayerPosDir::read(std::istream & stream) {
+    Stream::getByte(stream, player_id);
+    Stream::getByte(stream, delta_x);
+    Stream::getByte(stream, delta_y);
+    Stream::getByte(stream, delta_z);
+    Stream::getByte(stream, yaw);
+    Stream::getByte(stream, pitch);
+}
 
-                    void PlayerPosDir::write(std::ostream &stream) const
-                    {
-                        Stream::putByte(stream, player_id);
-                        Stream::putByte(stream, delta_x);
-                        Stream::putByte(stream, delta_y);
-                        Stream::putByte(stream, delta_z);
-                        Stream::putByte(stream, yaw);
-                        Stream::putByte(stream, pitch);
-                    }
+void PlayerPosDir::write(std::ostream & stream) const {
+    Stream::putByte(stream, player_id);
+    Stream::putByte(stream, delta_x);
+    Stream::putByte(stream, delta_y);
+    Stream::putByte(stream, delta_z);
+    Stream::putByte(stream, yaw);
+    Stream::putByte(stream, pitch);
+}
 
-                    void PlayerPosDir::toReadable(std::ostream &os) const
-                    {
-                        os << "Player ID: " << (int) player_id << "\n";
-                        os << "Delta X: " << (int) delta_x << "\n";
-                        os << "Delta Y: " << (int) delta_y << "\n";
-                        os << "Delta Z: " << (int) delta_z << "\n";
-                        os << "Yaw: " << (int) yaw << "\n";
-                        os << "Pitch: " << (int) pitch << std::endl;
-                    }
-                }
-            }
-        }
-    }
+void PlayerPosDir::toReadable(std::ostream & os) const {
+    os << "Player ID: " << (int) player_id << "\n";
+    os << "Delta X: " << (int) delta_x << "\n";
+    os << "Delta Y: " << (int) delta_y << "\n";
+    os << "Delta Z: " << (int) delta_z << "\n";
+    os << "Yaw: " << (int) yaw << "\n";
+    os << "Pitch: " << (int) pitch << std::endl;
+}
+}
+}
+}
+}
 }
 

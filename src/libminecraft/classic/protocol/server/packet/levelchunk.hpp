@@ -26,33 +26,27 @@
 
 #include <vector>
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    class LevelChunk : public Packet
-                    {
-                    public:
-                        static const MCTypes::Short MAX_CHUNK_SIZE = 1024;
-                    
-                        std::vector<MCTypes::Byte> data;
-                        MCTypes::Byte percent;
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace server {
+namespace packet {
+class LevelChunk : public Packet {
+public:
+    static const MCTypes::Short MAX_CHUNK_SIZE = 1024;
 
-                        LevelChunk();
-                        void read(std::istream &stream);
-                        void write(std::ostream &os) const;
-                        void toReadable(std::ostream &os) const;
-                    };
-                }
-            }
-        }
-    }
+    std::vector<MCTypes::Byte> data;
+    MCTypes::Byte percent;
+
+    LevelChunk();
+    void read(std::istream & stream);
+    void write(std::ostream & os) const;
+    void toReadable(std::ostream & os) const;
+};
+}
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_CLASSIC_PROTOCOL_SERVER_LEVELCHUNKPKT_HPP

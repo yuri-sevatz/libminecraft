@@ -18,22 +18,17 @@
  * You should have received a copy of the GNU General Public License
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
-#include "local.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace game
-        {
-            namespace player
-            {
-                Local::Local() : Player()
-                {
-                
-                }
-            }
-        }
-    }
+#include <libminecraft/classic/game/player/local.hpp>
+
+namespace libminecraft {
+namespace classic {
+namespace game {
+namespace player {
+Local::Local() : Player() {
+
+}
+}
+}
+}
 }

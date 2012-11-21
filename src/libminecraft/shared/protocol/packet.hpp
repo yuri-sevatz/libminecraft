@@ -25,23 +25,20 @@
 #include <istream>
 #include <ostream>
 
-#include "../mctypes.hpp"
+#include <libminecraft/shared/mctypes.hpp>
 
-#include "../exception/network.hpp"
-#include "../exception/protocol.hpp"
+#include <libminecraft/shared/exception/network.hpp>
+#include <libminecraft/shared/exception/protocol.hpp>
 
-namespace libminecraft
-{
-    namespace protocol
-    {
-        class Packet
-        {
-        public:
-            virtual void read(std::istream &is) = 0;
-            virtual void write(std::ostream &os) const = 0;
-            virtual void toReadable(std::ostream &os) const = 0;
-        };
-    }
+namespace libminecraft {
+namespace protocol {
+class Packet {
+public:
+    virtual void read(std::istream & is) = 0;
+    virtual void write(std::ostream & os) const = 0;
+    virtual void toReadable(std::ostream & os) const = 0;
+};
+}
 }
 
 #endif // LIBMINECRAFT_PROTOCOL_PACKET_HPP

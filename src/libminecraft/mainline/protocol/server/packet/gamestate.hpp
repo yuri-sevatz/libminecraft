@@ -24,40 +24,33 @@
 
 #include "../packet.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    class GameState : public Packet
-                    {
-                    public:
-                        MCTypes::Byte reason;
-                        MCTypes::Byte mode;
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace server {
+namespace packet {
+class GameState : public Packet {
+public:
+    MCTypes::Byte reason;
+    MCTypes::Byte mode;
 
-                        enum Reason
-                        {
-                            INVALID_BED = 0,
-                            START_RAIN = 1,
-                            STOP_RAIN = 2,
-                            CHANGE_MODE = 3,
-                            SHOW_CREDITS = 4,
-                        };
+    enum Reason {
+        INVALID_BED = 0,
+        START_RAIN = 1,
+        STOP_RAIN = 2,
+        CHANGE_MODE = 3,
+        SHOW_CREDITS = 4,
+    };
 
-                        GameState();
-                        void read(std::istream &is);
-                        void write(std::ostream &os) const;
-                        void toReadable(std::ostream &os) const;
-                    };
-                }
-            }
-        }
-    }
+    GameState();
+    void read(std::istream & is);
+    void write(std::ostream & os) const;
+    void toReadable(std::ostream & os) const;
+};
+}
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_MAINLINE_PROTOCOL_SERVER_PACKET_GAMESTATE_HPP

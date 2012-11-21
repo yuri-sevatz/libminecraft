@@ -21,36 +21,31 @@
 
 #include "connection.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace session
-        {
-            namespace remote
-            {
-                // Instantiate the static state definitions
-                const Connection::StatesDefs Connection::States;
+namespace libminecraft {
+namespace classic {
+namespace session {
+namespace remote {
+// Instantiate the static state definitions
+const Connection::StatesDefs Connection::States;
 
-                Connection::Connection(Remote & session, const std::string & hostname, const std::string & port, const std::string & username, const std::string & key) :
-                    // Prepare the state machine.
-                    ActionStateMachine<Connection, const State>(*this, States.CONNECTING),
-                    session(session),
-                    // Create the asynchronous connection
-                    socket(service),
-                    // Ready the protocol
-                    proto(socket),
-                    // Prepare the map decompression stream.
-                    gz_data(std::ios_base::out | std::ios_base::in | std::ios_base::binary),
-                    // Remember the info for DNS
-                    hostname(hostname),
-                    port(port),
-                    // Credentials
-                    username(username),
-                    key(key)
-                {
-                }
-            }
-        }
-    }
+Connection::Connection(Remote & session, const std::string & hostname, const std::string & port, const std::string & username, const std::string & key) :
+    // Prepare the state machine.
+    ActionStateMachine<Connection, const State>(*this, States.CONNECTING),
+    session(session),
+    // Create the asynchronous connection
+    socket(service),
+    // Ready the protocol
+    proto(socket),
+    // Prepare the map decompression stream.
+    gz_data(std::ios_base::out | std::ios_base::in | std::ios_base::binary),
+    // Remember the info for DNS
+    hostname(hostname),
+    port(port),
+    // Credentials
+    username(username),
+    key(key) {
+}
+}
+}
+}
 }

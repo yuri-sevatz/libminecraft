@@ -19,55 +19,44 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "remote.hpp"
+#include <libminecraft/mainline/session/remote.hpp>
 
 #include <boost/asio.hpp>
 
 #include "remote/connection.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace session
-        {
-            Remote::Remote(const std::string &hostname, const std::string &service, const std::string &username) :
-                Session(),
-                // Connection object: This provides protocol, parsing, world, etc.
-                connection(new remote::Connection(*this, hostname, service, username))
-            {
+namespace libminecraft {
+namespace mainline {
+namespace session {
+Remote::Remote(const std::string & hostname, const std::string & service, const std::string & username) :
+    Session(),
+    // Connection object: This provides protocol, parsing, world, etc.
+    connection(new remote::Connection(*this, hostname, service, username)) {
 
-            }
+}
 
-            Remote::~Remote()
-            {
-                delete connection;
-            }
+Remote::~Remote() {
+    delete connection;
+}
 
-            const game::Player & Remote::getSelf()
-            {
-                return connection->_self;
-            }
+const game::Player & Remote::getSelf() {
+    return connection->_self;
+}
 
-            void Remote::connect()
-            {
-                run();
-            }
+void Remote::connect() {
+    run();
+}
 
-            void Remote::run()
-            {
-                try
-                {
-                    while(true)
-                        connection->Update();
-                }
-                catch (libminecraft::Exception ex)
-                {
-                    /* listener().onNetworkError(ex.message); */
-                    std::cerr << ex.what() << std::endl;
-                    //disconnect(); // Kill the game.
-                }
-            }
-        }
+void Remote::run() {
+    try {
+        while(true)
+            connection->Update();
+    } catch (libminecraft::Exception ex) {
+        /* listener().onNetworkError(ex.message); */
+        std::cerr << ex.what() << std::endl;
+        //disconnect(); // Kill the game.
     }
+}
+}
+}
 }

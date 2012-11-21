@@ -20,15 +20,12 @@
  */
 
 
-#include "session.hpp"
+#include <libminecraft/classic/session.hpp>
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        Session::Session()
-        {
-            
-        }
-    }
+namespace libminecraft {
+namespace classic {
+Session::Session() {
+
+}
+}
 }

@@ -19,17 +19,13 @@
  * along with LibMinecraft.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "player.hpp"
+#include <libminecraft/classic/game/player.hpp>
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace game
-        {
-            Player::Player() : pitch(0), yaw(0)
-            {
-            }
-        }
-    }
+namespace libminecraft {
+namespace classic {
+namespace game {
+Player::Player() : pitch(0), yaw(0) {
+}
+}
+}
 }

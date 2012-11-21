@@ -24,35 +24,29 @@
 
 #include "../packet.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    class PlayerTeleport : public Packet
-                    {
-                    public:
-                        MCTypes::Byte player_id;
-                        MCTypes::Short x;
-                        MCTypes::Short y;
-                        MCTypes::Short z;
-                        MCTypes::Byte yaw;
-                        MCTypes::Byte pitch;
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace server {
+namespace packet {
+class PlayerTeleport : public Packet {
+public:
+    MCTypes::Byte player_id;
+    MCTypes::Short x;
+    MCTypes::Short y;
+    MCTypes::Short z;
+    MCTypes::Byte yaw;
+    MCTypes::Byte pitch;
 
-                        PlayerTeleport();
-                        void read(std::istream &is);
-                        void write(std::ostream &os) const;
-                        void toReadable(std::ostream &os) const;
-                    };
-                }
-            }
-        }
-    }
+    PlayerTeleport();
+    void read(std::istream & is);
+    void write(std::ostream & os) const;
+    void toReadable(std::ostream & os) const;
+};
+}
+}
+}
+}
 }
 
 #endif // LIBMINECRAFT_CLASSIC_PROTOCOL_SERVER_PACKET_PLAYERTELEPORT_HPP

@@ -23,45 +23,36 @@
 
 #include "../../stream.hpp"
 
-namespace libminecraft
-{
-    namespace mainline
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    WindowItems::WindowItems()
-                    {
-                    }
+namespace libminecraft {
+namespace mainline {
+namespace protocol {
+namespace server {
+namespace packet {
+WindowItems::WindowItems() {
+}
 
-                    void WindowItems::read(std::istream &stream)
-                    {
-                        Stream::getByte(stream, windowId);
-                        Stream::getShort(stream, count);
+void WindowItems::read(std::istream & stream) {
+    Stream::getByte(stream, windowId);
+    Stream::getShort(stream, count);
 
-                        // XXX: Add Slot Array
-                    }
+    // XXX: Add Slot Array
+}
 
-                    void WindowItems::write(std::ostream &stream) const
-                    {
-                        Stream::putByte(stream, windowId);
-                        Stream::putShort(stream, count);
+void WindowItems::write(std::ostream & stream) const {
+    Stream::putByte(stream, windowId);
+    Stream::putShort(stream, count);
 
-                        // XXX: Add Slot Array
-                    }
+    // XXX: Add Slot Array
+}
 
-                    void WindowItems::toReadable(std::ostream &os) const
-                    {
-                        os << "Window Id: " << (int) windowId << std::endl;
-                        os << "Count: " << count << std::endl;
+void WindowItems::toReadable(std::ostream & os) const {
+    os << "Window Id: " << (int) windowId << std::endl;
+    os << "Count: " << count << std::endl;
 
-                        // XXX: Add Slot Array
-                    }
-                }
-            }
-        }
-    }
+    // XXX: Add Slot Array
+}
+}
+}
+}
+}
 }

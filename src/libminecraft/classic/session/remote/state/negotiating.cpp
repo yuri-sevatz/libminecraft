@@ -23,76 +23,67 @@
 #include <iostream>
 
 #include "../connection.hpp"
-#include "../../remote.hpp"
-#include "../../../client.hpp"
+#include <libminecraft/classic/session/remote.hpp>
+#include <libminecraft/classic/client.hpp>
 
 #include "../../../protocol/client/packet/ident.hpp"
 #include "../../../protocol/server/packet/ident.hpp"
 
-#include "../../../../shared/exception/login.hpp"
+#include <libminecraft/shared/exception/login.hpp>
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace session
-        {
-            namespace remote
-            {
-                namespace state
-                {
-                    Negotiating::Negotiating()
-                    {
-                    }
+namespace libminecraft {
+namespace classic {
+namespace session {
+namespace remote {
+namespace state {
+Negotiating::Negotiating() {
+}
 
-                    void Negotiating::Enter(t_owner &owner) const
-                    {
-                        std::cerr << "Negotiating..." << std::endl;
-                    }
-                    void Negotiating::Update(t_owner &owner) const
-                    {
-                        protocol::client::packet::Ident myident;
-                        myident.username = owner.username;
-                        myident.key = owner.key;
-                        myident.version = protocol::client::Protocol::version;
-                        owner.proto.write(myident);
+void Negotiating::Enter(t_owner & owner) const {
+    std::cerr << "Negotiating..." << std::endl;
+}
+void Negotiating::Update(t_owner & owner) const {
+    protocol::client::packet::Ident myident;
+    myident.username = owner.username;
+    myident.key = owner.key;
+    myident.version = protocol::client::Protocol::version;
+    owner.proto.write(myident);
 
-                        std::cerr << "Awaiting Response..." << std::endl;
+    std::cerr << "Awaiting Response..." << std::endl;
 
-                        if (owner.proto.next() != protocol::server::Packet::IDENT)
-                            throw exception::Login("Login Error - did not receive Ident from server");
+    if (owner.proto.next() != protocol::server::Packet::IDENT)
+        throw exception::Login("Login Error - did not receive Ident from server");
 
-                        protocol::server::packet::Ident srvident;
-                        owner.proto.read(srvident);
+    protocol::server::packet::Ident srvident;
+    owner.proto.read(srvident);
 
-                        const MCTypes::Byte ver_diff = srvident.cmpVersion();
+    const MCTypes::Byte ver_diff = srvident.cmpVersion();
 
-                        if (ver_diff < 0)
-                            throw exception::Protocol("Unable to negotiate protocol version");
-                        else if (ver_diff > 0)
-                            owner.session.listener().onWarning("Invalid Server Version Detected - Attempting anyway.");
+    if (ver_diff < 0)
+        throw exception::Protocol("Unable to negotiate protocol version");
+    else if (ver_diff > 0)
+        owner.session.listener().onWarning("Invalid Server Version Detected - Attempting anyway.");
 
-                        // Read the facts of life...
-                        owner._server.name = srvident.srv_name;
-                        owner._server.motd = srvident.srv_motd;
-                        owner._self.optype = srvident.user_type;
+    // Read the facts of life...
+    owner._server.name = srvident.srv_name;
+    owner._server.motd = srvident.srv_motd;
+    owner._self.optype = srvident.user_type;
 
-                        // Await map data...
-                        std::cerr << "Awaiting Map Data..." << std::endl;
+    // Await map data...
+    std::cerr << "Awaiting Map Data..." << std::endl;
 
-                        if (owner.proto.next() != protocol::server::Packet::LEVELBEGIN)
-                            throw exception::Protocol("Unexpected data while waiting for world");
+    if (owner.proto.next() != protocol::server::Packet::LEVELBEGIN)
+        throw exception::Protocol("Unexpected data while waiting for world");
 
-                        // The packet type was a levelbegin... start loading the map.
-                        owner.ChangeState(owner.States.LOADINGMAP);
-                    }
-                    void Negotiating::Exit(t_owner &owner) const
-                    {
+    // The packet type was a levelbegin... start loading the map.
+    owner.ChangeState(owner.States.LOADINGMAP);
+}
+void Negotiating::Exit(t_owner & owner) const {
 
-                    }
-                }
-            }
-        }
-    }
+}
+}
+}
+}
+}
 }
 

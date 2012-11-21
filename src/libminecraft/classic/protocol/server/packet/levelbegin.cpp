@@ -23,36 +23,27 @@
 
 #include "../../stream.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    LevelBegin::LevelBegin()
-                    {
-                    }
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace server {
+namespace packet {
+LevelBegin::LevelBegin() {
+}
 
-                    void LevelBegin::read(std::istream &stream)
-                    {
+void LevelBegin::read(std::istream & stream) {
 
-                    }
+}
 
-                    void LevelBegin::write(std::ostream &stream) const
-                    {
-                        
-                    }
+void LevelBegin::write(std::ostream & stream) const {
 
-                    void LevelBegin::toReadable(std::ostream &os) const
-                    {
+}
 
-                    }
-                }
-            }
-        }
-    }
+void LevelBegin::toReadable(std::ostream & os) const {
+
+}
+}
+}
+}
+}
 }

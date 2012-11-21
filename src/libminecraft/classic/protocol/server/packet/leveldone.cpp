@@ -23,43 +23,34 @@
 
 #include "../../stream.hpp"
 
-namespace libminecraft
-{
-    namespace classic
-    {
-        namespace protocol
-        {
-            namespace server
-            {
-                namespace packet
-                {
-                    LevelDone::LevelDone()
-                    {
-                    }
+namespace libminecraft {
+namespace classic {
+namespace protocol {
+namespace server {
+namespace packet {
+LevelDone::LevelDone() {
+}
 
-                    void LevelDone::read(std::istream &stream)
-                    {
-                        // Read final size
-                        Stream::getShort(stream, size_x);
-                        Stream::getShort(stream, size_y);
-                        Stream::getShort(stream, size_z);
-                    }
+void LevelDone::read(std::istream & stream) {
+    // Read final size
+    Stream::getShort(stream, size_x);
+    Stream::getShort(stream, size_y);
+    Stream::getShort(stream, size_z);
+}
 
-                    void LevelDone::write(std::ostream &stream) const
-                    {
-                        Stream::putShort(stream, size_x);
-                        Stream::putShort(stream, size_y);
-                        Stream::putShort(stream, size_z);
-                    }
+void LevelDone::write(std::ostream & stream) const {
+    Stream::putShort(stream, size_x);
+    Stream::putShort(stream, size_y);
+    Stream::putShort(stream, size_z);
+}
 
-                    void LevelDone::toReadable(std::ostream &os) const
-                    {
-                        os << "Size X: " << size_x << "\n";
-                        os << "Size Y: " << size_y << "\n";
-                        os << "Size Z: " << size_z << std::endl;
-                    }
-                }
-            }
-        }
-    }
+void LevelDone::toReadable(std::ostream & os) const {
+    os << "Size X: " << size_x << "\n";
+    os << "Size Y: " << size_y << "\n";
+    os << "Size Z: " << size_z << std::endl;
+}
+}
+}
+}
+}
 }
