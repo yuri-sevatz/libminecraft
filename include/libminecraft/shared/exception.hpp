@@ -22,10 +22,12 @@
 #ifndef LIBMINECRAFT_EXCEPTION_HPP
 #define LIBMINECRAFT_EXCEPTION_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include <exception>
 
 namespace libminecraft {
-class Exception : public std::exception {
+class MINECRAFT_EXPORT Exception : public std::exception {
 public:
     const char * message;
     Exception(const char * message);

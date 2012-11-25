@@ -1,5 +1,6 @@
 project(mc-classic)
 
+find_package(Boost REQUIRED)
 
 set(${PROJECT_NAME}_command_headers
     command/cuboid.hpp
@@ -20,6 +21,10 @@ set(${PROJECT_NAME}_sources
     command.cpp
     myclassicclient.cpp
 )
+
+message("Boost_INCLUDE_DIR")
+message(${Boost_INCLUDE_DIR})
+include_directories(${Boost_INCLUDE_DIR})
 
 add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_headers} ${${PROJECT_NAME}_sources} )
 

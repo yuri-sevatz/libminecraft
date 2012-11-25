@@ -22,13 +22,15 @@
 #ifndef LIBMINECRAFT_CLASSIC_GAME_PLAYER_LOCAL_HPP
 #define LIBMINECRAFT_CLASSIC_GAME_PLAYER_LOCAL_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include "../player.hpp"
 
 namespace libminecraft {
 namespace classic {
 namespace game {
 namespace player {
-class Local : public Player {
+class MINECRAFT_EXPORT Local : public Player {
 public:
     typedef MCTypes::Byte t_optype;
     t_optype optype;

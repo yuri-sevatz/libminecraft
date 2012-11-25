@@ -22,13 +22,15 @@
 #ifndef LIBMINECRAFT_CLASSIC_GAME_MAP_BLOCK_HPP
 #define LIBMINECRAFT_CLASSIC_GAME_MAP_BLOCK_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include "../base.hpp"
 
 namespace libminecraft {
 namespace classic {
 namespace game {
 namespace map {
-class Block {
+class MINECRAFT_EXPORT Block {
 public:
     enum Type {
         BLANK = 0,

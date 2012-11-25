@@ -22,6 +22,8 @@
 #ifndef LIBMINECRAFT_CLASSIC_GAME_WORLD_HPP
 #define LIBMINECRAFT_CLASSIC_GAME_WORLD_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include "base.hpp"
 #include "player.hpp"
 #include "map.hpp"
@@ -35,7 +37,7 @@ namespace game {
  * A minecraft gamestate.
  * For all intents and purposes, this describes everything a client can possibly be aware of about a game in progress.
  */
-class World {
+class MINECRAFT_EXPORT World {
 public:
     // Has a Map
     Map map;

@@ -22,6 +22,8 @@
 #ifndef LIBMINECRAFT_MAINLINE_CLIENT_HPP
 #define LIBMINECRAFT_MAINLINE_CLIENT_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include "session.hpp"
 #include "game/player.hpp"
 
@@ -32,7 +34,7 @@ namespace mainline {
 using namespace game;
 
 // The main client interface.  Implement this to respond to events in the minecraft world.
-class Client {
+class MINECRAFT_EXPORT Client {
 
     /*
      * Local Variables

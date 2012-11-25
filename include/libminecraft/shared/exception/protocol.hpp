@@ -22,11 +22,13 @@
 #ifndef LIBMINECRAFT_EXCEPTION_PROTOCOL_HPP
 #define LIBMINECRAFT_EXCEPTION_PROTOCOL_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include "../exception.hpp"
 
 namespace libminecraft {
 namespace exception {
-class Protocol : public libminecraft::Exception {
+class MINECRAFT_EXPORT Protocol : public libminecraft::Exception {
 public:
     Protocol(const char * message);
     ~Protocol() throw();

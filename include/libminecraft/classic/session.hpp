@@ -23,6 +23,8 @@
 #ifndef LIBMINECRAFT_CLASSIC_SESSION_HPP
 #define LIBMINECRAFT_CLASSIC_SESSION_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include "session/info.hpp"
 
 #include "game/world.hpp"
@@ -37,7 +39,7 @@ class Client;
 // Abstract session class.
 // Allows us to define actions without defining context, or really "what happens after".
 // Note: This means we can make things like local/remote clients, client AND server-side NPC's, etc.
-class Session {
+class MINECRAFT_EXPORT Session {
 
 public:
     // Only the Client can set this.

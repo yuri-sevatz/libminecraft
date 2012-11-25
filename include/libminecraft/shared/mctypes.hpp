@@ -22,10 +22,12 @@
 #ifndef LIBMINECRAFT_MCTYPES_HPP
 #define LIBMINECRAFT_MCTYPES_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include "../support/java/jtypes.hpp"
 
 namespace libminecraft {
-class MCTypes {
+class MINECRAFT_EXPORT MCTypes {
 public:
     typedef JTypes::jbool Bool;
     typedef JTypes::jbyte Byte;

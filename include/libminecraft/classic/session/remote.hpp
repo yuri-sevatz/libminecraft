@@ -22,6 +22,8 @@
 #ifndef LIBMINECRAFT_CLASSIC_SESSION_REMOTE_HPP
 #define LIBMINECRAFT_CLASSIC_SESSION_REMOTE_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include "../session.hpp"
 
 namespace libminecraft {
@@ -33,7 +35,7 @@ class Connection;
 }
 
 // Defines a local session.
-class Remote : public Session {
+class MINECRAFT_EXPORT Remote : public Session {
     remote::Connection * const connection;
 
 public:

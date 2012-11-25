@@ -22,11 +22,13 @@
 #ifndef LIBMINECRAFT_MAINLINE_MCTYPES_HPP
 #define LIBMINECRAFT_MAINLINE_MCTYPES_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include "../shared/mctypes.hpp"
 
 namespace libminecraft {
 namespace mainline {
-class MCTypes : public libminecraft::MCTypes {
+class MINECRAFT_EXPORT MCTypes : public libminecraft::MCTypes {
 public:
     static const size_t UCS2String_Max_Length = Short_Max;
 

@@ -22,12 +22,14 @@
 #ifndef LIBMINECRAFT_MAINLINE_GAME_PLAYER_HPP
 #define LIBMINECRAFT_MAINLINE_GAME_PLAYER_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include "base.hpp"
 
 namespace libminecraft {
 namespace mainline {
 namespace game {
-class Player {
+class MINECRAFT_EXPORT Player {
 public:
     Player();
 };

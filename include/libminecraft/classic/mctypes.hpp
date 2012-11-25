@@ -22,12 +22,14 @@
 #ifndef LIBMINECRAFT_CLASSIC_MCTYPES_HPP
 #define LIBMINECRAFT_CLASSIC_MCTYPES_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include "../shared/mctypes.hpp"
 #include <string>
 
 namespace libminecraft {
 namespace classic {
-class MCTypes : public libminecraft::MCTypes {
+class MINECRAFT_EXPORT MCTypes : public libminecraft::MCTypes {
 public:
     static const size_t String64_Max_Length = 64;
     typedef std::string String64;

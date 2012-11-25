@@ -22,6 +22,8 @@
 #ifndef LIBMINECRAFT_CLASSIC_GAME_PLAYER_HPP
 #define LIBMINECRAFT_CLASSIC_GAME_PLAYER_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include "base.hpp"
 #include "map.hpp"
 
@@ -30,7 +32,7 @@
 namespace libminecraft {
 namespace classic {
 namespace game {
-class Player {
+class MINECRAFT_EXPORT Player {
 public:
     typedef MCTypes::Byte t_id;
     typedef MCTypes::Byte t_pitch;

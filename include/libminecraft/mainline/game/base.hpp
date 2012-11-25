@@ -22,6 +22,8 @@
 #ifndef LIBMINECRAFT_MAINLINE_GAME_BASE_HPP
 #define LIBMINECRAFT_MAINLINE_GAME_BASE_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include "../mctypes.hpp"
 
 namespace libminecraft {

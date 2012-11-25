@@ -22,13 +22,15 @@
 #ifndef LIBMINECRAFT_CLASSIC_SESSION_INFO_HPP
 #define LIBMINECRAFT_CLASSIC_SESSION_INFO_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include "../mctypes.hpp"
 
 namespace libminecraft {
 namespace classic {
 namespace session {
 
-class Info {
+class MINECRAFT_EXPORT Info {
 public:
     // Once connected...
     MCTypes::String64 name;

@@ -22,6 +22,8 @@
 #ifndef LIBMINECRAFT_CLASSIC_GAME_MAP_CELL_HPP
 #define LIBMINECRAFT_CLASSIC_GAME_MAP_CELL_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include "../base.hpp"
 
 #include <ostream>
@@ -33,7 +35,7 @@ namespace map {
 
 class Point;
 
-class Cell {
+class MINECRAFT_EXPORT Cell {
 public:
     typedef MCTypes::Short size_block;
 

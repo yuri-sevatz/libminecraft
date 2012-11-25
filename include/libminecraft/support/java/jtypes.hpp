@@ -22,13 +22,15 @@
 #ifndef SUPPORT_JAVA_JTYPES_HPP
 #define SUPPORT_JAVA_JTYPES_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include <stdint.h>
 #include <string>
 
 // C++ compatible Java types
 // Based on the recommendation from:
 // http://gcc.gnu.org/java/papers/native++.html
-class JTypes {
+class MINECRAFT_EXPORT JTypes {
 public:
     typedef bool jbool;
     typedef int8_t jbyte;

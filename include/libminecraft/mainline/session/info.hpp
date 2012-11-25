@@ -22,13 +22,15 @@
 #ifndef LIBMINECRAFT_MAINLINE_SESSION_INFO_HPP
 #define LIBMINECRAFT_MAINLINE_SESSION_INFO_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include "../mctypes.hpp"
 
 namespace libminecraft {
 namespace mainline {
 namespace session {
 
-class Info {
+class MINECRAFT_EXPORT Info {
 public:
     // Once connected...
     MCTypes::UCS2String name;

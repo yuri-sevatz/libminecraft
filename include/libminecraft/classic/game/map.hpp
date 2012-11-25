@@ -22,6 +22,8 @@
 #ifndef LIBMINECRAFT_CLASSIC_GAME_MAP_HPP
 #define LIBMINECRAFT_CLASSIC_GAME_MAP_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include "base.hpp"
 #include "map/block.hpp"
 #include "map/cell.hpp"
@@ -34,7 +36,7 @@ namespace libminecraft {
 namespace classic {
 namespace game {
 // Describes an instance of a map.
-class Map {
+class MINECRAFT_EXPORT Map {
 public:
     // The 3D grid breakdown.
     typedef std::vector<map::Block> Map1D;

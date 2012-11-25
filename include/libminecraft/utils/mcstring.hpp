@@ -22,10 +22,12 @@
 #ifndef LIBMINECRAFT_MCSTRING_HPP
 #define LIBMINECRAFT_MCSTRING_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include <string>
 
 namespace libminecraft {
-class MCString {
+class MINECRAFT_EXPORT MCString {
 public:
     // Returns the plain version of a minecraft message.
     static std::string plainMessage(const std::string & msg);

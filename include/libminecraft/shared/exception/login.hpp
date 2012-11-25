@@ -22,11 +22,13 @@
 #ifndef LIBMINECRAFT_EXCEPTION_LOGIN_HPP
 #define LIBMINECRAFT_EXCEPTION_LOGIN_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include "../exception.hpp"
 
 namespace libminecraft {
 namespace exception {
-class Login : public libminecraft::Exception {
+class MINECRAFT_EXPORT Login : public libminecraft::Exception {
 public:
     Login(const char * message);
     ~Login() throw();

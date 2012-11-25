@@ -22,11 +22,13 @@
 #ifndef LIBMINECRAFT_EXCEPTION_MAP_HPP
 #define LIBMINECRAFT_EXCEPTION_MAP_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include "../exception.hpp"
 
 namespace libminecraft {
 namespace exception {
-class Map : public libminecraft::Exception {
+class MINECRAFT_EXPORT Map : public libminecraft::Exception {
 public:
     Map(const char * message);
     ~Map() throw();

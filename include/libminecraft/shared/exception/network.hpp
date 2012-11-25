@@ -22,11 +22,13 @@
 #ifndef LIBMINECRAFT_EXCEPTION_NETWORK_HPP
 #define LIBMINECRAFT_EXCEPTION_NETWORK_HPP
 
+#include <libminecraft/minecraft_export.h>
+
 #include "../exception.hpp"
 
 namespace libminecraft {
 namespace exception {
-class Network : public libminecraft::Exception {
+class MINECRAFT_EXPORT Network : public libminecraft::Exception {
 public:
     Network(const char * message);
     ~Network() throw();
