@@ -2,25 +2,8 @@ project(mc-classic)
 
 find_package(Boost REQUIRED)
 
-set(${PROJECT_NAME}_command_headers
-    command/cuboid.hpp
-)
-
-set(${PROJECT_NAME}_command_sources
-    command/cuboid.cpp
-)
-
-set(${PROJECT_NAME}_headers
-    ${${PROJECT_NAME}_command_sources}
-    command.hpp
-    myclassicclient.hpp
-)
-set(${PROJECT_NAME}_sources
-    ${${PROJECT_NAME}_command_sources}
-    main.cpp
-    command.cpp
-    myclassicclient.cpp
-)
+file(GLOB_RECURSE ${PROJECT_NAME}_headers "*.hpp")
+file(GLOB_RECURSE ${PROJECT_NAME}_sources "*.cpp")
 
 message("Boost_INCLUDE_DIR")
 message(${Boost_INCLUDE_DIR})

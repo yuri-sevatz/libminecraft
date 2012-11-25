@@ -1,12 +1,7 @@
 project(mc-mainline)
 
-set(${PROJECT_NAME}_headers
-    mymainlineclient.hpp
-)
-set(${PROJECT_NAME}_sources
-    main.cpp
-    mymainlineclient.cpp
-)
+file(GLOB_RECURSE ${PROJECT_NAME}_headers "*.hpp")
+file(GLOB_RECURSE ${PROJECT_NAME}_sources "*.cpp")
 
 add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_headers} ${${PROJECT_NAME}_sources} )
 
