@@ -1,3 +1,8 @@
-libminecraft.*
 .*
 !.gitignore
+
+*.config
+*.creator*
+*.files
+*.includes
+*.kdev4
